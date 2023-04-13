@@ -1,17 +1,20 @@
 {
-	"name": "tree-sitter-blade",
-	"version": "0.0.1",
-	"description": "",
-	"main": "bindings/node",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "",
-	"license": "MIT",
-	"dependencies": {
-		"nan": "^2.17.0"
-	},
-	"devDependencies": {
-		"tree-sitter-cli": "^0.20.7"
-	}
+    "name": "tree-sitter-blade",
+    "version": "0.0.1",
+    "description": "",
+    "main": "bindings/node",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prebuild": "tree-sitter generate",
+        "build": "./TreeSitterParserBuild/compile_parser.sh ${PWD} /Applications/Nova.app/",
+        "postbuild": "cp libtree-sitter-blade.dylib ../Syntaxes/"
+    },
+    "author": "Emran M Ramezan",
+    "license": "MIT",
+    "dependencies": {
+        "nan": "^2.17.0"
+    },
+    "devDependencies": {
+        "tree-sitter-cli": "^0.20.7"
+    }
 }

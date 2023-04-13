@@ -1,5 +1,9 @@
 module.exports = grammar({
-	name: 'blade',
+    name: 'blade',
 
-	rules: {},
+    rules: {
+        program: ($) => repeat($._definition),
+        _definition: ($) => choice($.body),
+        body: ($) => /[a-z]+/,
+    },
 })
