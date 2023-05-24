@@ -4,7 +4,7 @@
     "description": "",
     "main": "bindings/node",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "tree-sitter parse example-file",
         "prebuild": "tree-sitter generate",
         "build": "./TreeSitterParserBuild/compile_parser.sh ${PWD} /Applications/Nova.app/",
         "postbuild": "cp libtree-sitter-blade.dylib ../Syntaxes/"
