@@ -1,5 +1,20 @@
 [
   {
+    "type": "attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "directive_parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "blade",
     "named": true,
     "fields": {},
@@ -8,7 +23,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -20,10 +43,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -32,7 +51,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -67,7 +94,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -83,10 +118,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -95,7 +126,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -116,21 +155,6 @@
         },
         {
           "type": "yield",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "classic_raw",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "text",
           "named": true
         }
       ]
@@ -156,55 +180,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "component",
+          "type": "parent_component",
           "named": true
         },
         {
-          "type": "extends",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "html_statement",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "subview",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
+          "type": "self_closing_component",
           "named": true
         }
       ]
@@ -253,7 +237,15 @@
       "required": false,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -269,10 +261,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -281,7 +269,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -346,7 +342,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -362,10 +366,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -374,7 +374,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -401,25 +409,6 @@
     }
   },
   {
-    "type": "html_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "conditional",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -428,7 +417,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -448,10 +445,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -460,7 +453,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -577,21 +578,6 @@
     }
   },
   {
-    "type": "inline_raw",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "keyword",
     "named": true,
     "fields": {},
@@ -627,7 +613,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -640,10 +634,6 @@
         },
         {
           "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "html_statement",
           "named": true
         },
         {
@@ -660,6 +650,10 @@
         },
         {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -716,76 +710,23 @@
     }
   },
   {
-    "type": "multi_line_raw",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "php_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "classic_raw",
-          "named": true
-        },
-        {
-          "type": "inline_raw",
-          "named": true
-        },
-        {
-          "type": "multi_line_raw",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "props",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "section",
+    "type": "parent_component",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
         {
           "type": "component",
           "named": true
         },
         {
-          "type": "directive_parameter",
+          "type": "conditional",
           "named": true
         },
         {
@@ -797,10 +738,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -809,7 +746,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -836,7 +781,41 @@
     }
   },
   {
-    "type": "stack",
+    "type": "php_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "php_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "props",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "directive_parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "section",
     "named": true,
     "fields": {},
     "children": {
@@ -844,7 +823,15 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -860,7 +847,93 @@
           "named": true
         },
         {
-          "type": "html_statement",
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "subview",
+          "named": true
+        },
+        {
+          "type": "switch_statements",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "yield",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "self_closing_component",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stack",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "extends",
+          "named": true
+        },
+        {
+          "type": "fragment",
           "named": true
         },
         {
@@ -872,7 +945,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -938,11 +1019,19 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "case",
           "named": true
         },
         {
           "type": "component",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -958,10 +1047,6 @@
           "named": true
         },
         {
-          "type": "html_statement",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -970,7 +1055,15 @@
           "named": true
         },
         {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -1016,15 +1109,19 @@
     "named": false
   },
   {
-    "type": ")",
-    "named": false
-  },
-  {
     "type": "--}}",
     "named": false
   },
   {
+    "type": "/>",
+    "named": false
+  },
+  {
     "type": "<?php",
+    "named": false
+  },
+  {
+    "type": ">",
     "named": false
   },
   {
@@ -1045,10 +1142,6 @@
   },
   {
     "type": "@each",
-    "named": false
-  },
-  {
-    "type": "@empty",
     "named": false
   },
   {
@@ -1116,7 +1209,7 @@
     "named": false
   },
   {
-    "type": "@props(",
+    "type": "@props",
     "named": false
   },
   {
@@ -1133,6 +1226,10 @@
   },
   {
     "type": "csrf",
+    "named": true
+  },
+  {
+    "type": "php_text",
     "named": true
   },
   {

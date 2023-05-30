@@ -1,12 +1,4 @@
-@switch($i)
-    @case(1)
-        First case...
-        @break
+<li>
+    {{<?php echo 'hello world'}}
 
-    @case(2)
-        Second case...
-        @break
-
-    @default
-        Default case...
-@endswitch
+</li>
