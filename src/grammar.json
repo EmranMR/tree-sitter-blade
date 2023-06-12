@@ -41,10 +41,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "component"
-        },
-        {
-          "type": "SYMBOL",
           "name": "subview"
         },
         {
@@ -70,6 +66,10 @@
         {
           "type": "SYMBOL",
           "name": "text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "each"
         }
       ]
     },
@@ -84,8 +84,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -311,8 +314,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "php_text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -336,8 +342,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "php_text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -367,6 +376,19 @@
         }
       ]
     },
+    "_inline_raw": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@php"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "directive_parameter"
+        }
+      ]
+    },
     "_multi_line_raw": {
       "type": "SEQ",
       "members": [
@@ -378,8 +400,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "php_text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -389,19 +414,6 @@
         {
           "type": "STRING",
           "value": "@endphp"
-        }
-      ]
-    },
-    "_inline_raw": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@php"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
         }
       ]
     },
@@ -416,8 +428,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "php_text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -571,8 +586,11 @@
                   "value": "@default"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "_definition"
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_definition"
+                  }
                 }
               ]
             },
@@ -599,8 +617,19 @@
           "name": "directive_parameter"
         },
         {
-          "type": "SYMBOL",
-          "name": "_definition"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_definition"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -685,83 +714,6 @@
         }
       ]
     },
-    "component": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "self_closing_component"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "parent_component"
-        }
-      ]
-    },
-    "self_closing_component": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "<x-[a-zA-Z\\-\\.:]+"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "text"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "/>"
-        }
-      ]
-    },
-    "parent_component": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "<x-[a-zA-Z\\-\\.:]+"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "text"
-              }
-            },
-            {
-              "type": "STRING",
-              "value": ">"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_definition"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "<\\/x-[a-zA-Z\\-\\.:]+>"
-        }
-      ]
-    },
     "keyword": {
       "type": "CHOICE",
       "members": [
@@ -827,12 +779,26 @@
       ]
     },
     "_open_parenthesis": {
-      "type": "PATTERN",
-      "value": "\\([\\'\\\"]?"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\("
+        }
+      }
     },
     "_close_parenthesis": {
-      "type": "PATTERN",
-      "value": "[\\'\\\"]?\\)"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\)"
+        }
+      }
     },
     "directive_parameter": {
       "type": "SEQ",
@@ -845,8 +811,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "text"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              }
             },
             {
               "type": "BLANK"
@@ -860,12 +829,24 @@
       ]
     },
     "text": {
-      "type": "PATTERN",
-      "value": "[^\\s(){!}@]([^(){!}@]*[^\\s{!}()@])?"
-    },
-    "php_text": {
-      "type": "PATTERN",
-      "value": "[^\\s{!}@]([^{!}@]*[^\\s{!}@])?"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": -1,
+            "content": {
+              "type": "PATTERN",
+              "value": "[{!(@-]"
+            }
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\s({!@-]([^({!@]*[^\\s{!(@-])?"
+        }
+      ]
     }
   },
   "extras": [

@@ -13,7 +13,6 @@ module.exports = grammar({
                 $.keyword,
                 $.fragment,
                 $.attribute,
-                $.component,
                 $.subview,
                 $.stack,
                 $.switch_statements,
@@ -21,10 +20,11 @@ module.exports = grammar({
                 $.loop_operator,
                 $.php_statement,
                 $.text,
-                // $.html_element
+                $.each,
+                // $.component,
             ),
 
-        comment: ($) => seq('{{--', optional($.text), '--}}'),
+        comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
         extends: ($) => seq('@extends', $.directive_parameter),
         yield: ($) => seq('@yield', $.directive_parameter),
 
@@ -69,16 +69,18 @@ module.exports = grammar({
         // ! php Blocks
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
-        _escaped: ($) => seq('{{', optional($.php_text), '}}'),
-        _unescaped: ($) => seq('{!!', optional($.php_text), '!!}'),
+        _escaped: ($) => seq('{{', optional(repeat($.text)), '}}'),
+        _unescaped: ($) => seq('{!!', optional(repeat($.text)), '!!}'),
 
         // raw php
         _raw: ($) =>
             choice($._inline_raw, $._multi_line_raw, $._classic_raw),
-        _multi_line_raw: ($) =>
-            seq('@php', optional($.php_text), '@endphp'),
+
         _inline_raw: ($) => seq('@php', $.directive_parameter),
-        _classic_raw: ($) => seq('<?php', optional($.php_text), '?>'),
+
+        _multi_line_raw: ($) =>
+            seq('@php', optional(repeat($.text)), '@endphp'),
+        _classic_raw: ($) => seq('<?php', optional(repeat($.text)), '?>'),
 
         // ! Javascript Blocks
         // TODO:Stuff that need JS injection such as alpineJS?
@@ -125,14 +127,14 @@ module.exports = grammar({
                 '@switch',
                 $.directive_parameter,
                 repeat1($.case),
-                optional(seq('@default', $._definition)),
+                optional(seq('@default', repeat($._definition))),
                 '@endswitch'
             ),
         case: ($) =>
             seq(
                 '@case',
                 $.directive_parameter,
-                $._definition,
+                optional(repeat($._definition)),
                 '@break'
             ),
 
@@ -171,8 +173,15 @@ module.exports = grammar({
         // Could possibly mix self and parent into one
         // by making the end tag optional and changing the start tag to <x-[a-zA-Z\-\.:\s]+\/?>
         // but the syntax highlighting will pick the error better in <x-test/>error</x-test>
-        component: ($) =>
-            choice($.self_closing_component, $.parent_component),
+
+        //!REFACTOR
+        //----------
+        // Component is not necessary atm. focus on the special attributes like alpinejs etc.
+        // injecting javascript.
+        // better autocompletion with HTML injection in the text!
+
+         // component: ($) =>
+            /* choice($.self_closing_component, $.parent_component),
 
         self_closing_component: ($) =>
             seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '/>'),
@@ -182,6 +191,7 @@ module.exports = grammar({
                 optional(repeat($._definition)),
                 /<\/x-[a-zA-Z\-\.:]+>/
             ),
+*/
 
         // !keywords
         keyword: ($) => choice($.props, $.csrf, $.method, $.inject),
@@ -191,42 +201,18 @@ module.exports = grammar({
         inject: ($) => seq('@inject', $.directive_parameter),
 
         //! Misc
-        _open_parenthesis: ($) => /\([\'\"]?/,
-        _close_parenthesis: ($) => /[\'\"]?\)/,
+        _open_parenthesis: ($) => token(prec(1,/\(/)),
+        _close_parenthesis: ($) => token(prec(-1,/\)/)),
         // REVIEW: optional or not optional statement?
         directive_parameter: ($) =>
             seq(
                 $._open_parenthesis,
-                optional($.text),
+                optional(repeat($.text)),
                 $._close_parenthesis
             ),
 
-        // !HTML Element
-        // This will be a dirty fix to sort components being parsed as
-        // html due to injection
-        // html_start_tag: ($) =>
-        //     seq(
-        //         '<',
-        //         $._tag_name,
-        //         optional(repeat($.php_statement)),
-        //         '>'
-        //     ),
-        // html_end_tag: ($) =>
-        //     seq(
-        //         '</',
-        //         $._tag_name,
-        //         optional(repeat($.php_statement)),
-        //         '>'
-        //     ),
-        // html_element: ($) =>
-        //     seq(
-        //         $.html_start_tag,
-        //         optional(repeat($._definition)),
-        //         $.html_end_tag
-        //     ),
-        // _tag_name: ($) => /[^<>:!{}@]*/,
-
-        text: ($) => /[^\s(){!}@]([^(){!}@]*[^\s{!}()@])?/,
-        php_text: $ => /[^\s{!}@]([^{!}@]*[^\s{!}@])?/
+        text: ($) => choice(
+            token(prec(-1,/[{!(@-]/)),
+            /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/),
     },
 })

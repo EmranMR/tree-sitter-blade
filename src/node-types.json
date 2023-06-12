@@ -27,11 +27,11 @@
           "named": true
         },
         {
-          "type": "component",
+          "type": "conditional",
           "named": true
         },
         {
-          "type": "conditional",
+          "type": "each",
           "named": true
         },
         {
@@ -98,15 +98,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -165,30 +165,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "component",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "parent_component",
-          "named": true
-        },
-        {
-          "type": "self_closing_component",
           "named": true
         }
       ]
@@ -241,15 +222,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -308,11 +289,26 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "each",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "directive_parameter",
           "named": true
         }
       ]
@@ -346,15 +342,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -421,10 +417,6 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
@@ -434,6 +426,10 @@
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -617,15 +613,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -710,7 +706,7 @@
     }
   },
   {
-    "type": "parent_component",
+    "type": "php_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -718,82 +714,11 @@
       "required": false,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "component",
-          "named": true
-        },
-        {
-          "type": "conditional",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "subview",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "php_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
           "type": "directive_parameter",
           "named": true
         },
         {
-          "type": "php_text",
+          "type": "text",
           "named": true
         }
       ]
@@ -827,15 +752,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -890,21 +815,6 @@
     }
   },
   {
-    "type": "self_closing_component",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "stack",
     "named": true,
     "fields": {},
@@ -917,15 +827,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -1027,15 +937,15 @@
           "named": true
         },
         {
-          "type": "component",
-          "named": true
-        },
-        {
           "type": "conditional",
           "named": true
         },
         {
           "type": "directive_parameter",
+          "named": true
+        },
+        {
+          "type": "each",
           "named": true
         },
         {
@@ -1090,6 +1000,11 @@
     }
   },
   {
+    "type": "text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "yield",
     "named": true,
     "fields": {},
@@ -1113,15 +1028,7 @@
     "named": false
   },
   {
-    "type": "/>",
-    "named": false
-  },
-  {
     "type": "<?php",
-    "named": false
-  },
-  {
-    "type": ">",
     "named": false
   },
   {
@@ -1226,14 +1133,6 @@
   },
   {
     "type": "csrf",
-    "named": true
-  },
-  {
-    "type": "php_text",
-    "named": true
-  },
-  {
-    "type": "text",
     "named": true
   },
   {

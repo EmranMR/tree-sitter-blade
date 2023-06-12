@@ -1,4 +1,3 @@
-<li>
-    {{<?php echo 'hello world'}}
+@php (fsfdss()->test())
 
-</li>
+testing
