@@ -201,18 +201,32 @@ module.exports = grammar({
         inject: ($) => seq('@inject', $.directive_parameter),
 
         //! Misc
-        _open_parenthesis: ($) => token(prec(1,/\(/)),
-        _close_parenthesis: ($) => token(prec(-1,/\)/)),
-        // REVIEW: optional or not optional statement?
+        _open_parenthesis: ($) => token(prec(1,'(')),
+        _close_parenthesis: ($) => token(prec(1,')')),
+
+        // TODO: alias($parameters, $.text)
         directive_parameter: ($) =>
             seq(
                 $._open_parenthesis,
-                optional(repeat($.text)),
+                optional(repeat($.parameters)),
                 $._close_parenthesis
             ),
+        // parenthesis balancing
+        // TODO:make text_with_parameters hidden
+        parameters: $ => 
+            choice(
+                /[^()]+/,
+                $.text_with_parenthesis
+            ),
+        text_with_parenthesis: $ => seq(
+            /[^()]+/,
+            '(',
+            repeat($.parameters),
+            ')'
 
+        ),
         text: ($) => choice(
-            token(prec(-1,/[{!(@-]/)),
+            token(prec(-1,/[{}!@()-]/)),
             /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/),
     },
 })

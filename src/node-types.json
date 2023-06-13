@@ -293,7 +293,7 @@
       "required": false,
       "types": [
         {
-          "type": "text",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -706,6 +706,21 @@
     }
   },
   {
+    "type": "parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "text_with_parenthesis",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "php_statement",
     "named": true,
     "fields": {},
@@ -1005,6 +1020,21 @@
     "fields": {}
   },
   {
+    "type": "text_with_parenthesis",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameters",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "yield",
     "named": true,
     "fields": {},
@@ -1021,6 +1051,14 @@
   },
   {
     "type": "!!}",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
     "named": false
   },
   {
