@@ -6,15 +6,11 @@ module.exports = grammar({
         blade: ($) => repeat($._definition),
         _definition: ($) =>
             choice(
-                $.section,
-                $.inline_directives,
+                $.inline_directive,
+                $.nested_directive,
                 $.keyword,
-                $.conditional,
-                $.fragment,
                 $.attribute,
-                $.stack,
                 $.switch_statements,
-                $.loop,
                 $.loop_operator,
                 $.php_statement,
                 $.text,
@@ -23,34 +19,102 @@ module.exports = grammar({
 
         comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
 
-        // !section
-        section: ($) =>
-            seq(
-                '@section',
-                $._directive_parameter,
-                optional(repeat($._definition)),
-                '@endsection'
-            ),
-
-        // !inline directives
-        inline_directives: $ =>
-            seq(
-                /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/,
-                $._directive_parameter,
-            ),
-
         // !keywords
         keyword: ($) => choice($.csrf),
         csrf: ($) => '@csrf',
 
-        // ! once
-        stack: ($) =>
+
+        // !inline directives
+        inline_directive: $ =>
             seq(
-                /@(push|pushOnce|pushIf|prepend)/,
+                alias(
+                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/,
+                    $.directive
+                ),
                 $._directive_parameter,
-                repeat($._definition),
-                /@(endpush|endPushOnce|endPushIf|endprepend)/
             ),
+        // !nested directives
+        nested_directive: $ =>
+            choice(
+                $.conditional,
+                $.fragment,
+                $.section,
+                $.stack,
+                $.loop
+            ),
+
+        // !fragment
+        fragment: ($) =>
+            seq(
+                alias('@fragment', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endfragment', $.endDirective)
+            ),
+
+        // !section
+        section: ($) =>
+            seq(
+                alias('@section', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endsection', $.endDirective)
+            ),
+
+        // once
+        once: ($) =>
+            seq(
+                alias('@once', $.directive),
+                optional($._directive_body),
+                alias('@endonce', $.endDirective)
+            ),
+
+        // !verbatim
+        verbatim: ($) =>
+            seq(
+                alias('@verbatim', $.directive),
+                optional($._directive_body),
+                alias('@endverbatim', $.endDirective)
+            ),
+
+
+
+        // ! stacks
+        stack: ($) =>
+            choice(
+                $.push,
+                $.pushOnce,
+                $.pushIf,
+                $.prepend
+            ),
+
+        push: $ =>
+            seq(
+                alias('@push', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endpush', $.endDirective),
+            ),
+
+        pushOnce: $ =>
+            seq(
+                alias('@pushOnce', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endPushOnce', $.endDirective),
+            ),
+
+        pushIf: $ =>
+            seq(
+                alias('@pushIf', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endPushIf', $.endDirective),
+            ),
+
+        prepend: $ =>
+            seq(
+                alias('@prepend', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endprepend', $.endDirective),
+            ),
+
+
 
 
         // ! php Blocks
@@ -69,80 +133,221 @@ module.exports = grammar({
             seq('@php', optional(repeat($.text)), '@endphp'),
         _classic_raw: ($) => seq('<?php', optional(repeat($.text)), '?>'),
 
-        // ! Javascript Blocks
-        // TODO:Stuff that need JS injection such as alpineJS?
-
         // !Conditionals
-        conditional: ($) => choice($.if_statement, $.directive),
-        directive: ($) =>
-            seq(
-                /@(auth|guest|env|production|unless|isset|empty|hasSection|sectionMissing|verbatim|error|disk|unlessdisk|once)/,
-                optional($._directive_parameter),
-                repeat($._definition),
-                /@(endauth|endguest|endenv|endproduction|endunless|endisset|endempty|endverbatim|enderror|enddisk|endonce|endif)/
-            ),
-        if_statement: ($) =>
-            seq(
-                '@if',
-                $._directive_parameter,
-                repeat(choice($._definition, $.conditional_keyword)),
-                '@endif'
+        conditional: ($) =>
+            choice(
+                $.if,
+                $.unless,
+                $.isset,
+                $.empty,
+                $.auth,
+                $.guest,
+                $.production,
+                $.env,
+                $.hasSection,
+                $.sectionMissing
             ),
         conditional_keyword: ($) =>
             seq(
-                /@(else|elseif|elsedisk)/,
+                alias(/@(else|elseif|elsedisk)/, $.directive),
                 optional($._directive_parameter)
             ),
 
+        if: ($) =>
+            seq(
+                alias('@if', $.directive),
+                $._if_statement_directive_body,
+                alias('@endif', $.endDirective),
+            ),
+
+        unless: ($) =>
+            seq(
+                alias('@unless', $.directive),
+                $._if_statement_directive_body,
+                alias('@endunless', $.endDirective),
+            ),
+
+        isset: ($) =>
+            seq(
+                alias('@isset', $.directive),
+                $._if_statement_directive_body,
+                alias('@endisset', $.endDirective),
+            ),
+
+        empty: ($) =>
+            seq(
+                alias('@empty', $.directive),
+                $._if_statement_directive_body,
+                alias('@endempty', $.endDirective),
+            ),
+
+        auth: ($) =>
+            seq(
+                alias('@auth', $.directive),
+                $._if_statement_directive_body_with_optional_parameter,
+                alias('@endauth', $.endDirective),
+            ),
+
+        guest: ($) =>
+            seq(
+                alias('@guest', $.directive),
+                $._if_statement_directive_body_with_optional_parameter,
+                alias('@endguest', $.endDirective),
+            ),
+
+        production: ($) =>
+            seq(
+                alias('@production', $.directive),
+                $._if_statement_directive_body_with_no_parameter,
+                alias('@endproduction', $.endDirective),
+            ),
+
+        env: ($) =>
+            seq(
+                alias('@env', $.directive),
+                $._if_statement_directive_body,
+                alias('@endenv', $.endDirective),
+            ),
+
+        hasSection: ($) =>
+            seq(
+                alias('@hasSection', $.directive),
+                $._if_statement_directive_body,
+                alias('@endif', $.endDirective),
+            ),
+
+        sectionMissing: ($) =>
+            seq(
+                alias('@sectionMissing', $.directive),
+                $._if_statement_directive_body,
+                alias('@endif', $.endDirective),
+            ),
+
+        error: ($) =>
+            seq(
+                alias('@error', $.directive),
+                $._if_statement_directive_body,
+                alias('@enderror', $.endDirective),
+            ),
+
+
+
+
         // ! Conditional Attributes
-        // TODO: @class @style @checked @selected @disabled @readonly @required
-        // check this out in regards to injections
-        // check out the hrml treesitter for attribute position
-        // or just make these universal stand_alone like loop_operators
-        // use directive parameter, and inject php. see if it works
-        //  with html injection if set as general directive in _definition
         attribute: ($) =>
             seq(
                 /@(class|style|checked|selected|disabled|readonly|required|)/,
                 $._directive_parameter
             ),
 
-        // !switch //
+        // !switch
         // REVIEW: injection for param as PHP for case as HTML
         switch_statements: ($) =>
             seq(
-                '@switch',
+                alias('@switch', $.directive),
                 $._directive_parameter,
-                repeat1($.case),
-                optional(seq('@default', repeat($._definition))),
-                '@endswitch'
+                repeat($.case),
+                optional(
+                    seq(
+                        alias('@default', $.directive),
+                        repeat($._definition)
+                    )
+                ),
+                alias('@endswitch', $.endDirective)
             ),
         case: ($) =>
             seq(
-                '@case',
-                $._directive_parameter,
-                optional(repeat($._definition)),
-                '@break'
+                alias('@case', $.directive),
+                $._directive_body_with_parameter,
+                alias('@break', $.directive)
             ),
 
-        // ! Loops
+        // !Loops
         loop: ($) =>
-            seq(
-                /@(for|foreach|forelse|while)/,
-                $._directive_parameter,
-                repeat($._definition),
-                /@(endfor|endforeach|endforelse|endwhile)/
+            choice(
+                $.for,
+                $.foreach,
+                $.forelse,
+                $.while
             ),
         loop_operator: ($) =>
             seq(/@(continue|break)/, optional($._directive_parameter)),
 
-        // !fragment
-        fragment: ($) =>
+        for: ($) =>
             seq(
-                '@fragment',
+                alias('@for', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endfor', $.endDirective),
+            ),
+
+        foreach: ($) =>
+            seq(
+                alias('@foreach', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endforeach', $.endDirective),
+            ),
+
+        forelse: ($) =>
+            seq(
+                alias('@forelse', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endforelse', $.endDirective),
+            ),
+
+        while: ($) =>
+            seq(
+                alias('@while', $.directive),
+                $._directive_body_with_parameter,
+                alias('@endwhile', $.endDirective),
+            ),
+
+        /*----------------------------------
+        /  Do NOT change below this line    
+        /  without running tests            
+        /  This is basically the engine     
+        /-----------------------------------*/
+
+        // !directive body
+        _directive_body: $ => repeat1($._definition),
+        _directive_body_with_parameter: $ =>
+            seq(
                 $._directive_parameter,
-                optional(repeat($._definition)),
-                '@endfragment'
+                optional($._directive_body)
+            ),
+        _directive_body_with_optional_parameter: $ =>
+            seq(
+                optional($._directive_parameter),
+                optional($._directive_body),
+            ),
+        //!if statements body
+        _if_statement_directive_body: $ =>
+            seq(
+                $._directive_parameter,
+                optional(
+                    repeat(
+                        choice(
+                            $._definition,
+                            $.conditional_keyword
+                        )
+                    )
+                )
+            ),
+        _if_statement_directive_body_with_optional_parameter: $ =>
+            seq(
+                optional($._directive_parameter),
+                repeat1(
+                    choice(
+                        $._definition,
+                        $.conditional_keyword
+                    )
+                )
+            ),
+        _if_statement_directive_body_with_no_parameter: $ =>
+            repeat1(
+                choice(
+                    $._definition,
+                    $.conditional_keyword
+                )
             ),
 
         //! Misc
