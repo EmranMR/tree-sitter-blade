@@ -6,65 +6,52 @@ module.exports = grammar({
         blade: ($) => repeat($._definition),
         _definition: ($) =>
             choice(
-                $.extends,
                 $.section,
-                $.conditional,
-                $.yield,
+                $.inline_directives,
                 $.keyword,
+                $.conditional,
                 $.fragment,
                 $.attribute,
-                $.subview,
                 $.stack,
                 $.switch_statements,
                 $.loop,
                 $.loop_operator,
                 $.php_statement,
                 $.text,
-                $.each,
                 // $.component,
             ),
 
         comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
-        extends: ($) => seq('@extends', $.directive_parameter),
-        yield: ($) => seq('@yield', $.directive_parameter),
 
         // !section
         section: ($) =>
             seq(
                 '@section',
-                $.directive_parameter,
+                $._directive_parameter,
                 optional(repeat($._definition)),
                 '@endsection'
             ),
-        subview: ($) =>
-            choice(
-                $.include,
-                $.includeIf,
-                $.includeWhen,
-                $.includeUnless,
-                $.includeFirst
+
+        // !inline directives
+        inline_directives: $ =>
+            seq(
+                /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/,
+                $._directive_parameter,
             ),
 
-        // !subview
-        include: ($) => seq('@include', $.directive_parameter),
-        includeIf: ($) => seq('@includeIf', $.directive_parameter),
-        includeWhen: ($) =>
-            seq('@includeWhen', $.directive_parameter),
-        includeUnless: ($) =>
-            seq('@includeUnless', $.directive_parameter),
-        includeFirst: ($) =>
-            seq('@includeFirst', $.directive_parameter),
+        // !keywords
+        keyword: ($) => choice($.csrf),
+        csrf: ($) => '@csrf',
 
         // ! once
         stack: ($) =>
             seq(
                 /@(push|pushOnce|pushIf|prepend)/,
-                $.directive_parameter,
+                $._directive_parameter,
                 repeat($._definition),
                 /@(endpush|endPushOnce|endPushIf|endprepend)/
             ),
 
-        each: ($) => seq('@each', $.directive_parameter),
 
         // ! php Blocks
         php_statement: ($) =>
@@ -72,11 +59,11 @@ module.exports = grammar({
         _escaped: ($) => seq('{{', optional(repeat($.text)), '}}'),
         _unescaped: ($) => seq('{!!', optional(repeat($.text)), '!!}'),
 
-        // raw php
+        //! raw php
         _raw: ($) =>
             choice($._inline_raw, $._multi_line_raw, $._classic_raw),
 
-        _inline_raw: ($) => seq('@php', $.directive_parameter),
+        _inline_raw: ($) => seq('@php', $._directive_parameter),
 
         _multi_line_raw: ($) =>
             seq('@php', optional(repeat($.text)), '@endphp'),
@@ -90,21 +77,21 @@ module.exports = grammar({
         directive: ($) =>
             seq(
                 /@(auth|guest|env|production|unless|isset|empty|hasSection|sectionMissing|verbatim|error|disk|unlessdisk|once)/,
-                optional($.directive_parameter),
+                optional($._directive_parameter),
                 repeat($._definition),
                 /@(endauth|endguest|endenv|endproduction|endunless|endisset|endempty|endverbatim|enderror|enddisk|endonce|endif)/
             ),
         if_statement: ($) =>
             seq(
                 '@if',
-                $.directive_parameter,
+                $._directive_parameter,
                 repeat(choice($._definition, $.conditional_keyword)),
                 '@endif'
             ),
         conditional_keyword: ($) =>
             seq(
                 /@(else|elseif|elsedisk)/,
-                optional($.directive_parameter)
+                optional($._directive_parameter)
             ),
 
         // ! Conditional Attributes
@@ -117,7 +104,7 @@ module.exports = grammar({
         attribute: ($) =>
             seq(
                 /@(class|style|checked|selected|disabled|readonly|required|)/,
-                $.directive_parameter
+                $._directive_parameter
             ),
 
         // !switch //
@@ -125,7 +112,7 @@ module.exports = grammar({
         switch_statements: ($) =>
             seq(
                 '@switch',
-                $.directive_parameter,
+                $._directive_parameter,
                 repeat1($.case),
                 optional(seq('@default', repeat($._definition))),
                 '@endswitch'
@@ -133,7 +120,7 @@ module.exports = grammar({
         case: ($) =>
             seq(
                 '@case',
-                $.directive_parameter,
+                $._directive_parameter,
                 optional(repeat($._definition)),
                 '@break'
             ),
@@ -142,32 +129,60 @@ module.exports = grammar({
         loop: ($) =>
             seq(
                 /@(for|foreach|forelse|while)/,
-                $.directive_parameter,
+                $._directive_parameter,
                 repeat($._definition),
                 /@(endfor|endforeach|endforelse|endwhile)/
             ),
         loop_operator: ($) =>
-            seq(/@(continue|break)/, optional($.directive_parameter)),
+            seq(/@(continue|break)/, optional($._directive_parameter)),
+
+        // !fragment
+        fragment: ($) =>
+            seq(
+                '@fragment',
+                $._directive_parameter,
+                optional(repeat($._definition)),
+                '@endfragment'
+            ),
+
+        //! Misc
+        _directive_parameter: ($) =>
+            seq(
+                token(prec(1, '(')),
+                optional(repeat($.parameters)),
+                token(prec(1, ')'))
+            ),
+        // parenthesis balancing
+        parameters: $ =>
+            choice(
+                /[^()]+/,
+                $._text_with_parenthesis
+            ),
+        _text_with_parenthesis: $ => seq(
+            /[^()]+/,
+            '(',
+            repeat($.parameters),
+            ')'
+
+        ),
+        text: ($) => choice(
+            token(prec(-1, /[{}!@()-]/)),
+            /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/),
 
         // ! Javascript Statement //
         // ------------------------
+        /*
         // REVIEW: This needs investigation with experienced users
         // create an issue when live
         // This is for Verbatim, @@blade_directives and @{{}} JS escapes
         // @verbatim currently defined in conditional rule
         //
         // js_statement: ($) => x ,
+        */
 
-        // !fragment
-        fragment: ($) =>
-            seq(
-                '@fragment',
-                $.directive_parameter,
-                optional(repeat($._definition)),
-                '@endfragment'
-            ),
 
         // !component
+        /*
         // TODO: make sure the attributes work
         // <x-alert type="error" :message="$message"/>
         // Could possibly mix self and parent into one
@@ -180,53 +195,17 @@ module.exports = grammar({
         // injecting javascript.
         // better autocompletion with HTML injection in the text!
 
-         // component: ($) =>
-            /* choice($.self_closing_component, $.parent_component),
+        // component: ($) =>
+        /* choice($.self_closing_component, $.parent_component),
 
-        self_closing_component: ($) =>
-            seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '/>'),
-        parent_component: ($) =>
-            seq(
-                seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '>'),
-                optional(repeat($._definition)),
-                /<\/x-[a-zA-Z\-\.:]+>/
-            ),
-*/
-
-        // !keywords
-        keyword: ($) => choice($.props, $.csrf, $.method, $.inject),
-        props: ($) => seq('@props', $.directive_parameter),
-        csrf: ($) => '@csrf',
-        method: ($) => seq('@method', $.directive_parameter),
-        inject: ($) => seq('@inject', $.directive_parameter),
-
-        //! Misc
-        _open_parenthesis: ($) => token(prec(1,'(')),
-        _close_parenthesis: ($) => token(prec(1,')')),
-
-        // TODO: alias($parameters, $.text)
-        directive_parameter: ($) =>
-            seq(
-                $._open_parenthesis,
-                optional(repeat($.parameters)),
-                $._close_parenthesis
-            ),
-        // parenthesis balancing
-        // TODO:make text_with_parameters hidden
-        parameters: $ => 
-            choice(
-                /[^()]+/,
-                $.text_with_parenthesis
-            ),
-        text_with_parenthesis: $ => seq(
-            /[^()]+/,
-            '(',
-            repeat($.parameters),
-            ')'
-
+    self_closing_component: ($) =>
+        seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '/>'),
+    parent_component: ($) =>
+        seq(
+            seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '>'),
+            optional(repeat($._definition)),
+            /<\/x-[a-zA-Z\-\.:]+>/
         ),
-        text: ($) => choice(
-            token(prec(-1,/[{}!@()-]/)),
-            /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/),
+*/
     },
 })

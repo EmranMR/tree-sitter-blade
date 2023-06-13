@@ -4,11 +4,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "directive_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -31,15 +31,11 @@
           "named": true
         },
         {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -67,19 +63,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -91,7 +79,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -102,19 +90,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -130,6 +110,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -142,19 +126,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -199,11 +175,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "directive_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -226,19 +202,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -254,6 +222,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -266,64 +238,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "directive_parameter",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "each",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "extends",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
           "named": true
         }
       ]
@@ -335,7 +254,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -346,19 +265,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -374,6 +285,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -386,19 +301,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -410,7 +317,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -425,19 +332,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -453,6 +352,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -465,109 +368,26 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
           "named": true
-        },
-        {
-          "type": "yield",
-          "named": true
         }
       ]
     }
   },
   {
-    "type": "include",
+    "type": "inline_directives",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "includeFirst",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "includeIf",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "includeUnless",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "includeWhen",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "inject",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -584,18 +404,6 @@
         {
           "type": "csrf",
           "named": true
-        },
-        {
-          "type": "inject",
-          "named": true
-        },
-        {
-          "type": "method",
-          "named": true
-        },
-        {
-          "type": "props",
-          "named": true
         }
       ]
     }
@@ -606,7 +414,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -617,19 +425,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -645,6 +445,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -657,19 +461,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -680,26 +476,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "method",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -710,11 +491,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "text_with_parenthesis",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -729,26 +510,11 @@
       "required": false,
       "types": [
         {
-          "type": "directive_parameter",
+          "type": "parameters",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "props",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
           "named": true
         }
       ]
@@ -760,7 +526,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -771,19 +537,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -799,6 +557,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -811,19 +573,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -835,7 +589,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "attribute",
@@ -846,19 +600,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -874,6 +620,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -886,50 +636,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "subview",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "includeFirst",
-          "named": true
-        },
-        {
-          "type": "includeIf",
-          "named": true
-        },
-        {
-          "type": "includeUnless",
-          "named": true
-        },
-        {
-          "type": "includeWhen",
           "named": true
         }
       ]
@@ -956,19 +667,11 @@
           "named": true
         },
         {
-          "type": "directive_parameter",
-          "named": true
-        },
-        {
-          "type": "each",
-          "named": true
-        },
-        {
-          "type": "extends",
-          "named": true
-        },
-        {
           "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inline_directives",
           "named": true
         },
         {
@@ -984,6 +687,10 @@
           "named": true
         },
         {
+          "type": "parameters",
+          "named": true
+        },
+        {
           "type": "php_statement",
           "named": true
         },
@@ -996,19 +703,11 @@
           "named": true
         },
         {
-          "type": "subview",
-          "named": true
-        },
-        {
           "type": "switch_statements",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "yield",
           "named": true
         }
       ]
@@ -1018,36 +717,6 @@
     "type": "text",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "text_with_parenthesis",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "yield",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "directive_parameter",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "!!}",
@@ -1086,10 +755,6 @@
     "named": false
   },
   {
-    "type": "@each",
-    "named": false
-  },
-  {
     "type": "@endfragment",
     "named": false
   },
@@ -1110,10 +775,6 @@
     "named": false
   },
   {
-    "type": "@extends",
-    "named": false
-  },
-  {
     "type": "@fragment",
     "named": false
   },
@@ -1122,39 +783,7 @@
     "named": false
   },
   {
-    "type": "@include",
-    "named": false
-  },
-  {
-    "type": "@includeFirst",
-    "named": false
-  },
-  {
-    "type": "@includeIf",
-    "named": false
-  },
-  {
-    "type": "@includeUnless",
-    "named": false
-  },
-  {
-    "type": "@includeWhen",
-    "named": false
-  },
-  {
-    "type": "@inject",
-    "named": false
-  },
-  {
-    "type": "@method",
-    "named": false
-  },
-  {
     "type": "@php",
-    "named": false
-  },
-  {
-    "type": "@props",
     "named": false
   },
   {
@@ -1163,10 +792,6 @@
   },
   {
     "type": "@switch",
-    "named": false
-  },
-  {
-    "type": "@yield",
     "named": false
   },
   {

@@ -13,23 +13,19 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "extends"
-        },
-        {
-          "type": "SYMBOL",
           "name": "section"
         },
         {
           "type": "SYMBOL",
-          "name": "conditional"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "yield"
+          "name": "inline_directives"
         },
         {
           "type": "SYMBOL",
           "name": "keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional"
         },
         {
           "type": "SYMBOL",
@@ -38,10 +34,6 @@
         {
           "type": "SYMBOL",
           "name": "attribute"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "subview"
         },
         {
           "type": "SYMBOL",
@@ -66,10 +58,6 @@
         {
           "type": "SYMBOL",
           "name": "text"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "each"
         }
       ]
     },
@@ -101,32 +89,6 @@
         }
       ]
     },
-    "extends": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@extends"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "yield": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@yield"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
     "section": {
       "type": "SEQ",
       "members": [
@@ -136,7 +98,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "CHOICE",
@@ -159,95 +121,31 @@
         }
       ]
     },
-    "subview": {
+    "inline_directives": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_parameter"
+        }
+      ]
+    },
+    "keyword": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "include"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "includeIf"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "includeWhen"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "includeUnless"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "includeFirst"
+          "name": "csrf"
         }
       ]
     },
-    "include": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@include"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "includeIf": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@includeIf"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "includeWhen": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@includeWhen"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "includeUnless": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@includeUnless"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "includeFirst": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@includeFirst"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
+    "csrf": {
+      "type": "STRING",
+      "value": "@csrf"
     },
     "stack": {
       "type": "SEQ",
@@ -258,7 +156,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "REPEAT",
@@ -270,19 +168,6 @@
         {
           "type": "PATTERN",
           "value": "@(endpush|endPushOnce|endPushIf|endprepend)"
-        }
-      ]
-    },
-    "each": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@each"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
         }
       ]
     },
@@ -385,7 +270,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         }
       ]
     },
@@ -470,7 +355,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "directive_parameter"
+              "name": "_directive_parameter"
             },
             {
               "type": "BLANK"
@@ -499,7 +384,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "REPEAT",
@@ -535,7 +420,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "directive_parameter"
+              "name": "_directive_parameter"
             },
             {
               "type": "BLANK"
@@ -553,7 +438,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         }
       ]
     },
@@ -566,7 +451,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "REPEAT1",
@@ -614,7 +499,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "CHOICE",
@@ -646,7 +531,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "REPEAT",
@@ -673,7 +558,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "directive_parameter"
+              "name": "_directive_parameter"
             },
             {
               "type": "BLANK"
@@ -691,7 +576,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "directive_parameter"
+          "name": "_directive_parameter"
         },
         {
           "type": "CHOICE",
@@ -714,98 +599,19 @@
         }
       ]
     },
-    "keyword": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "props"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "csrf"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "method"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "inject"
-        }
-      ]
-    },
-    "props": {
+    "_directive_parameter": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "@props"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "csrf": {
-      "type": "STRING",
-      "value": "@csrf"
-    },
-    "method": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@method"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "inject": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "@inject"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "directive_parameter"
-        }
-      ]
-    },
-    "_open_parenthesis": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "STRING",
-          "value": "("
-        }
-      }
-    },
-    "_close_parenthesis": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "STRING",
-          "value": ")"
-        }
-      }
-    },
-    "directive_parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_open_parenthesis"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "STRING",
+              "value": "("
+            }
+          }
         },
         {
           "type": "CHOICE",
@@ -823,8 +629,15 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_close_parenthesis"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "STRING",
+              "value": ")"
+            }
+          }
         }
       ]
     },
@@ -837,11 +650,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "text_with_parenthesis"
+          "name": "_text_with_parenthesis"
         }
       ]
     },
-    "text_with_parenthesis": {
+    "_text_with_parenthesis": {
       "type": "SEQ",
       "members": [
         {
