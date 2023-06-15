@@ -1,3 +1,6 @@
-@if (count($records) === 1)
-    resres
-@endif
+@foreach(1)
+
+    <div>
+
+    </div>
+@endforeach

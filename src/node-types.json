@@ -5,69 +5,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "auth",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
         {
           "type": "directive",
           "named": true
         },
         {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
           "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
           "named": true
         }
       ]
@@ -86,46 +31,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "case",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
+          "type": "conditional",
           "named": true
         },
         {
@@ -133,7 +39,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
+          "type": "fragment",
           "named": true
         },
         {
@@ -141,11 +47,15 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
           "type": "loop_operator",
           "named": true
         },
         {
-          "type": "nested_directive",
+          "type": "once",
           "named": true
         },
         {
@@ -153,15 +63,27 @@
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "php",
           "named": true
         },
         {
-          "type": "switch_statements",
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
           "named": true
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -173,8 +95,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "bracket",
+          "named": true
+        },
         {
           "type": "text",
           "named": true
@@ -187,47 +113,75 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "auth",
+          "type": "attribute",
           "named": true
         },
         {
-          "type": "empty",
+          "type": "conditional",
           "named": true
         },
         {
-          "type": "env",
+          "type": "conditional_keyword",
           "named": true
         },
         {
-          "type": "guest",
+          "type": "directive",
           "named": true
         },
         {
-          "type": "hasSection",
+          "type": "endDirective",
           "named": true
         },
         {
-          "type": "if",
+          "type": "fragment",
           "named": true
         },
         {
-          "type": "isset",
+          "type": "keyword",
           "named": true
         },
         {
-          "type": "production",
+          "type": "loop",
           "named": true
         },
         {
-          "type": "sectionMissing",
+          "type": "loop_operator",
           "named": true
         },
         {
-          "type": "unless",
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameters",
+          "named": true
+        },
+        {
+          "type": "php",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -253,289 +207,6 @@
     }
   },
   {
-    "type": "empty",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "env",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "for",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "foreach",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "forelse",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "fragment",
     "named": true,
     "fields": {},
@@ -548,62 +219,7 @@
           "named": true
         },
         {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "guest",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
+          "type": "conditional",
           "named": true
         },
         {
@@ -615,7 +231,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
+          "type": "fragment",
           "named": true
         },
         {
@@ -623,62 +239,7 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "hasSection",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
+          "type": "loop",
           "named": true
         },
         {
@@ -686,7 +247,7 @@
           "named": true
         },
         {
-          "type": "nested_directive",
+          "type": "once",
           "named": true
         },
         {
@@ -694,152 +255,27 @@
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "php",
           "named": true
         },
         {
-          "type": "switch_statements",
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
           "named": true
         },
         {
           "type": "text",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "if",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
         },
         {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "inline_directive",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "isset",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -865,23 +301,71 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "for",
+          "type": "attribute",
           "named": true
         },
         {
-          "type": "foreach",
+          "type": "conditional",
           "named": true
         },
         {
-          "type": "forelse",
+          "type": "directive",
           "named": true
         },
         {
-          "type": "while",
+          "type": "endDirective",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameters",
+          "named": true
+        },
+        {
+          "type": "php",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -893,8 +377,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "directive",
+          "named": true
+        },
         {
           "type": "parameters",
           "named": true
@@ -903,15 +391,27 @@
     }
   },
   {
-    "type": "nested_directive",
+    "type": "once",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "endDirective",
           "named": true
         },
         {
@@ -919,7 +419,27 @@
           "named": true
         },
         {
+          "type": "keyword",
+          "named": true
+        },
+        {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameters",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -928,6 +448,18 @@
         },
         {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -949,7 +481,7 @@
     }
   },
   {
-    "type": "php_statement",
+    "type": "php",
     "named": true,
     "fields": {},
     "children": {
@@ -957,26 +489,7 @@
       "required": false,
       "types": [
         {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "prepend",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
+          "type": "bracket",
           "named": true
         },
         {
@@ -984,255 +497,7 @@
           "named": true
         },
         {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
           "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "production",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "push",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pushIf",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pushOnce",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
           "named": true
         },
         {
@@ -1255,62 +520,7 @@
           "named": true
         },
         {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sectionMissing",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
+          "type": "conditional",
           "named": true
         },
         {
@@ -1322,7 +532,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
+          "type": "fragment",
           "named": true
         },
         {
@@ -1330,11 +540,15 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
           "type": "loop_operator",
           "named": true
         },
         {
-          "type": "nested_directive",
+          "type": "once",
           "named": true
         },
         {
@@ -1342,15 +556,27 @@
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "php",
           "named": true
         },
         {
-          "type": "switch_statements",
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
           "named": true
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -1361,33 +587,6 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "prepend",
-          "named": true
-        },
-        {
-          "type": "push",
-          "named": true
-        },
-        {
-          "type": "pushIf",
-          "named": true
-        },
-        {
-          "type": "pushOnce",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "switch_statements",
-    "named": true,
-    "fields": {},
-    "children": {
       "multiple": true,
       "required": true,
       "types": [
@@ -1396,7 +595,7 @@
           "named": true
         },
         {
-          "type": "case",
+          "type": "conditional",
           "named": true
         },
         {
@@ -1408,7 +607,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
+          "type": "fragment",
           "named": true
         },
         {
@@ -1416,11 +615,15 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
           "type": "loop_operator",
           "named": true
         },
         {
-          "type": "nested_directive",
+          "type": "once",
           "named": true
         },
         {
@@ -1428,15 +631,102 @@
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "php",
           "named": true
         },
         {
-          "type": "switch_statements",
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
           "named": true
         },
         {
           "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "switch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "endDirective",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameters",
+          "named": true
+        },
+        {
+          "type": "php",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -1448,7 +738,7 @@
     "fields": {}
   },
   {
-    "type": "unless",
+    "type": "verbatim",
     "named": true,
     "fields": {},
     "children": {
@@ -1460,7 +750,7 @@
           "named": true
         },
         {
-          "type": "conditional_keyword",
+          "type": "conditional",
           "named": true
         },
         {
@@ -1472,7 +762,7 @@
           "named": true
         },
         {
-          "type": "inline_directive",
+          "type": "fragment",
           "named": true
         },
         {
@@ -1480,58 +770,7 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "nested_directive",
-          "named": true
-        },
-        {
-          "type": "parameters",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statements",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "while",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "endDirective",
-          "named": true
-        },
-        {
-          "type": "inline_directive",
-          "named": true
-        },
-        {
-          "type": "keyword",
+          "type": "loop",
           "named": true
         },
         {
@@ -1539,7 +778,7 @@
           "named": true
         },
         {
-          "type": "nested_directive",
+          "type": "once",
           "named": true
         },
         {
@@ -1547,23 +786,31 @@
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "php",
           "named": true
         },
         {
-          "type": "switch_statements",
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
           "named": true
         },
         {
           "type": "text",
           "named": true
+        },
+        {
+          "type": "verbatim",
+          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "!!}",
-    "named": false
   },
   {
     "type": "(",
@@ -1574,24 +821,8 @@
     "named": false
   },
   {
-    "type": "--}}",
-    "named": false
-  },
-  {
-    "type": "<?php",
-    "named": false
-  },
-  {
-    "type": "?>",
-    "named": false
-  },
-  {
-    "type": "@endphp",
-    "named": false
-  },
-  {
-    "type": "@php",
-    "named": false
+    "type": "bracket",
+    "named": true
   },
   {
     "type": "csrf",
@@ -1604,21 +835,5 @@
   {
     "type": "endDirective",
     "named": true
-  },
-  {
-    "type": "{!!",
-    "named": false
-  },
-  {
-    "type": "{{",
-    "named": false
-  },
-  {
-    "type": "{{--",
-    "named": false
-  },
-  {
-    "type": "}}",
-    "named": false
   }
 ]
