@@ -979,7 +979,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(class|style|checked|selected|disabled|readonly|required|)"
+            "value": "@(class|style|checked|selected|disabled|readonly|required)"
           },
           "named": true,
           "value": "directive"
@@ -1395,7 +1395,7 @@
               "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
-                "name": "parameters"
+                "name": "parameter"
               }
             },
             {
@@ -1416,7 +1416,7 @@
         }
       ]
     },
-    "parameters": {
+    "parameter": {
       "type": "CHOICE",
       "members": [
         {
@@ -1444,7 +1444,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "parameters"
+            "name": "parameter"
           }
         },
         {

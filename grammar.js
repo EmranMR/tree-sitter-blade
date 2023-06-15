@@ -249,7 +249,7 @@ module.exports = grammar({
         attribute: ($) =>
             seq(
                 alias(
-                    /@(class|style|checked|selected|disabled|readonly|required|)/,
+                    /@(class|style|checked|selected|disabled|readonly|required)/,
                     $.directive
                 ),
                 $._directive_parameter
@@ -350,13 +350,13 @@ module.exports = grammar({
         _directive_parameter: ($) =>
             seq(
                 token(prec(1, '(')),
-                optional(repeat($.parameters)),
+                optional(repeat($.parameter)),
                 token(prec(1, ')'))
             ),
         // parenthesis balancing
-        parameters: ($) => choice(/[^()]+/, $._text_with_parenthesis),
+        parameter: ($) => choice(/[^()]+/, $._text_with_parenthesis),
         _text_with_parenthesis: ($) =>
-            seq(/[^()]+/, '(', repeat($.parameters), ')'),
+            seq(/[^()]+/, '(', repeat($.parameter), ')'),
         text: ($) =>
             choice(
                 token(prec(-1, /[{}!@()-]/)),

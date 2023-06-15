@@ -12,7 +12,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -59,7 +59,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -157,7 +157,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -200,7 +200,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -251,7 +251,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -341,7 +341,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -384,7 +384,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -435,7 +435,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -466,7 +466,7 @@
     }
   },
   {
-    "type": "parameters",
+    "type": "parameter",
     "named": true,
     "fields": {},
     "children": {
@@ -474,7 +474,7 @@
       "required": false,
       "types": [
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -497,7 +497,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -552,7 +552,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -627,7 +627,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -702,7 +702,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
@@ -782,7 +782,7 @@
           "named": true
         },
         {
-          "type": "parameters",
+          "type": "parameter",
           "named": true
         },
         {
