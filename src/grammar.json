@@ -17,7 +17,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "php"
+          "name": "php_statement"
         },
         {
           "type": "SYMBOL",
@@ -36,8 +36,13 @@
           "name": "loop_operator"
         },
         {
-          "type": "SYMBOL",
-          "name": "text"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          "named": true,
+          "value": "html"
         }
       ]
     },
@@ -92,7 +97,7 @@
       "type": "STRING",
       "value": "@csrf"
     },
-    "php": {
+    "php_statement": {
       "type": "CHOICE",
       "members": [
         {
@@ -127,8 +132,13 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "text"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "text"
+                },
+                "named": true,
+                "value": "php"
               }
             },
             {
@@ -165,8 +175,13 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "text"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "text"
+                },
+                "named": true,
+                "value": "php"
               }
             },
             {
@@ -238,8 +253,13 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "text"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "text"
+                },
+                "named": true,
+                "value": "php"
               }
             },
             {
@@ -254,7 +274,7 @@
             "value": "@endphp"
           },
           "named": true,
-          "value": "directive"
+          "value": "endDirective"
         }
       ]
     },
@@ -276,8 +296,13 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "text"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "text"
+                },
+                "named": true,
+                "value": "php"
               }
             },
             {
@@ -1394,8 +1419,13 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "SYMBOL",
-                "name": "parameter"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "parameter"
+                },
+                "named": true,
+                "value": "php"
               }
             },
             {

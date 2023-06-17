@@ -7,12 +7,12 @@ module.exports = grammar({
         _definition: ($) =>
             choice(
                 $.keyword,
-                $.php,
+                $.php_statement,
                 $._inline_directive,
                 $._nested_directive,
                 $.attribute,
                 $.loop_operator,
-                $.text
+                alias($.text, $.html)
                 // $.component,
             ),
 
@@ -27,17 +27,18 @@ module.exports = grammar({
         keyword: ($) => choice($.csrf),
         csrf: ($) => '@csrf',
         // ! php Blocks
-        php: ($) => choice($._escaped, $._unescaped, $._raw),
+        php_statement: ($) =>
+            choice($._escaped, $._unescaped, $._raw),
         _escaped: ($) =>
             seq(
                 alias('{{', $.bracket),
-                optional(repeat($.text)),
+                optional(repeat(alias($.text, $.php))),
                 alias('}}', $.bracket)
             ),
         _unescaped: ($) =>
             seq(
                 alias('{!!', $.bracket),
-                optional(repeat($.text)),
+                optional(repeat(alias($.text, $.php))),
                 alias('!!}', $.bracket)
             ),
 
@@ -51,13 +52,13 @@ module.exports = grammar({
         _multi_line_raw: ($) =>
             seq(
                 alias('@php', $.directive),
-                optional(repeat($.text)),
-                alias('@endphp', $.directive)
+                optional(repeat(alias($.text, $.php))),
+                alias('@endphp', $.endDirective)
             ),
         _classic_raw: ($) =>
             seq(
                 alias('<?php', $.directive),
-                optional(repeat($.text)),
+                optional(repeat(alias($.text, $.php))),
                 alias('?>', $.directive)
             ),
 
@@ -346,11 +347,11 @@ module.exports = grammar({
         _if_statement_directive_body_with_no_parameter: ($) =>
             repeat1(choice($._definition, $.conditional_keyword)),
 
-        //! Misc
+        // !directive parameter
         _directive_parameter: ($) =>
             seq(
                 token(prec(1, '(')),
-                optional(repeat($.parameter)),
+                optional(repeat(alias($.parameter, $.php))),
                 token(prec(1, ')'))
             ),
         // parenthesis balancing
@@ -362,43 +363,5 @@ module.exports = grammar({
                 token(prec(-1, /[{}!@()-]/)),
                 /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/
             ),
-
-        // ! Javascript Statement //
-        // ------------------------
-        /*
-        // REVIEW: This needs investigation with experienced users
-        // create an issue when live
-        // This is for Verbatim, @@blade_directives and @{{}} JS escapes
-        // @verbatim currently defined in conditional rule
-        //
-        // js_statement: ($) => x ,
-        */
-
-        // !component
-        /*
-        // TODO: make sure the attributes work
-        // <x-alert type="error" :message="$message"/>
-        // Could possibly mix self and parent into one
-        // by making the end tag optional and changing the start tag to <x-[a-zA-Z\-\.:\s]+\/?>
-        // but the syntax highlighting will pick the error better in <x-test/>error</x-test>
-
-        //!REFACTOR
-        //----------
-        // Component is not necessary atm. focus on the special attributes like alpinejs etc.
-        // injecting javascript.
-        // better autocompletion with HTML injection in the text!
-
-        // component: ($) =>
-        /* choice($.self_closing_component, $.parent_component),
-
-    self_closing_component: ($) =>
-        seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '/>'),
-    parent_component: ($) =>
-        seq(
-            seq(/<x-[a-zA-Z\-\.:]+/, repeat($.text), '>'),
-            optional(repeat($._definition)),
-            /<\/x-[a-zA-Z\-\.:]+>/
-        ),
-*/
     },
 })

@@ -4,7 +4,7 @@
     "description": "",
     "main": "bindings/node",
     "scripts": {
-        "test": "tree-sitter parse example-file",
+        "test": "tree-sitter parse example-file.blade.php",
         "prebuild": "tree-sitter generate",
         "build": "./TreeSitterParserBuild/compile_parser.sh ${PWD} /Applications/Nova.app/",
         "postbuild": "cp libtree-sitter-blade.dylib ../Syntaxes/"
@@ -16,5 +16,16 @@
     },
     "devDependencies": {
         "tree-sitter-cli": "^0.20.7"
-    }
+    },
+    "tree-sitter": [
+        {
+            "scope": "source.blade.php",
+            "file-types": [
+                "blade",
+                "php"
+            ],
+            "injection-regex": "blade"
+        }
+
+    ]
 }
