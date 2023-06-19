@@ -133,7 +133,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -227,7 +231,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -322,7 +330,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -416,7 +428,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -517,7 +533,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -548,7 +568,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -623,7 +647,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -698,7 +726,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -778,7 +810,11 @@
           "named": true
         },
         {
-          "type": "endDirective",
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
@@ -853,7 +889,11 @@
     "named": true
   },
   {
-    "type": "endDirective",
+    "type": "directive_end",
+    "named": true
+  },
+  {
+    "type": "directive_start",
     "named": true
   }
 ]

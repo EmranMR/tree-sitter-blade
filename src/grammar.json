@@ -245,7 +245,7 @@
             "value": "@php"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "CHOICE",
@@ -274,7 +274,7 @@
             "value": "@endphp"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -288,7 +288,7 @@
             "value": "<?php"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "CHOICE",
@@ -317,7 +317,7 @@
             "value": "?>"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_end"
         }
       ]
     },
@@ -386,7 +386,7 @@
             "value": "@fragment"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -399,7 +399,7 @@
             "value": "@endfragment"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -413,7 +413,7 @@
             "value": "@section"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -426,7 +426,7 @@
             "value": "@endsection"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -440,7 +440,7 @@
             "value": "@once"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "CHOICE",
@@ -461,7 +461,7 @@
             "value": "@endonce"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -475,7 +475,7 @@
             "value": "@verbatim"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "CHOICE",
@@ -496,7 +496,7 @@
             "value": "@endverbatim"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -531,7 +531,7 @@
             "value": "@push"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -544,7 +544,7 @@
             "value": "@endpush"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -558,7 +558,7 @@
             "value": "@pushOnce"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -571,7 +571,7 @@
             "value": "@endPushOnce"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -585,7 +585,7 @@
             "value": "@pushIf"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -598,7 +598,7 @@
             "value": "@endPushIf"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -612,7 +612,7 @@
             "value": "@prepend"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -625,7 +625,7 @@
             "value": "@endprepend"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -681,7 +681,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(else|elseif|elsedisk)"
+            "value": "@(else|elseif)"
           },
           "named": true,
           "value": "directive"
@@ -710,7 +710,7 @@
             "value": "@if"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -723,7 +723,7 @@
             "value": "@endif"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -737,7 +737,7 @@
             "value": "@unless"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -750,7 +750,7 @@
             "value": "@endunless"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -764,7 +764,7 @@
             "value": "@isset"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -777,7 +777,7 @@
             "value": "@endisset"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -791,7 +791,7 @@
             "value": "@empty"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -804,7 +804,7 @@
             "value": "@endempty"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -818,7 +818,7 @@
             "value": "@auth"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -831,7 +831,7 @@
             "value": "@endauth"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -845,7 +845,7 @@
             "value": "@guest"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -858,7 +858,7 @@
             "value": "@endguest"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -872,7 +872,7 @@
             "value": "@production"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -885,7 +885,7 @@
             "value": "@endproduction"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -899,7 +899,7 @@
             "value": "@env"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -912,7 +912,7 @@
             "value": "@endenv"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -926,7 +926,7 @@
             "value": "@hasSection"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -939,7 +939,7 @@
             "value": "@endif"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -953,7 +953,7 @@
             "value": "@sectionMissing"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -966,7 +966,7 @@
             "value": "@endif"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -980,7 +980,7 @@
             "value": "@error"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -993,7 +993,7 @@
             "value": "@enderror"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -1025,7 +1025,7 @@
             "value": "@switch"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -1074,7 +1074,7 @@
             "value": "@endswitch"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -1162,7 +1162,7 @@
             "value": "@for"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -1175,7 +1175,7 @@
             "value": "@endfor"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -1189,7 +1189,7 @@
             "value": "@foreach"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -1202,7 +1202,7 @@
             "value": "@endforeach"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -1216,7 +1216,7 @@
             "value": "@forelse"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -1229,7 +1229,7 @@
             "value": "@endforelse"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },
@@ -1243,7 +1243,7 @@
             "value": "@while"
           },
           "named": true,
-          "value": "directive"
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -1256,7 +1256,7 @@
             "value": "@endwhile"
           },
           "named": true,
-          "value": "endDirective"
+          "value": "directive_end"
         }
       ]
     },

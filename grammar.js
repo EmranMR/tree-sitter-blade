@@ -51,15 +51,15 @@ module.exports = grammar({
 
         _multi_line_raw: ($) =>
             seq(
-                alias('@php', $.directive),
+                alias('@php', $.directive_start),
                 optional(repeat(alias($.text, $.php))),
-                alias('@endphp', $.endDirective)
+                alias('@endphp', $.directive_end)
             ),
         _classic_raw: ($) =>
             seq(
-                alias('<?php', $.directive),
+                alias('<?php', $.directive_start),
                 optional(repeat(alias($.text, $.php))),
-                alias('?>', $.directive)
+                alias('?>', $.directive_end)
             ),
 
         // !inline directives
@@ -87,33 +87,33 @@ module.exports = grammar({
         // !fragment
         fragment: ($) =>
             seq(
-                alias('@fragment', $.directive),
+                alias('@fragment', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endfragment', $.endDirective)
+                alias('@endfragment', $.directive_end)
             ),
 
         // !section
         section: ($) =>
             seq(
-                alias('@section', $.directive),
+                alias('@section', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endsection', $.endDirective)
+                alias('@endsection', $.directive_end)
             ),
 
         // once
         once: ($) =>
             seq(
-                alias('@once', $.directive),
+                alias('@once', $.directive_start),
                 optional($._directive_body),
-                alias('@endonce', $.endDirective)
+                alias('@endonce', $.directive_end)
             ),
 
         // !verbatim
         verbatim: ($) =>
             seq(
-                alias('@verbatim', $.directive),
+                alias('@verbatim', $.directive_start),
                 optional($._directive_body),
-                alias('@endverbatim', $.endDirective)
+                alias('@endverbatim', $.directive_end)
             ),
 
         // ! stacks
@@ -122,30 +122,30 @@ module.exports = grammar({
 
         _push: ($) =>
             seq(
-                alias('@push', $.directive),
+                alias('@push', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endpush', $.endDirective)
+                alias('@endpush', $.directive_end)
             ),
 
         _pushOnce: ($) =>
             seq(
-                alias('@pushOnce', $.directive),
+                alias('@pushOnce', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endPushOnce', $.endDirective)
+                alias('@endPushOnce', $.directive_end)
             ),
 
         _pushIf: ($) =>
             seq(
-                alias('@pushIf', $.directive),
+                alias('@pushIf', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endPushIf', $.endDirective)
+                alias('@endPushIf', $.directive_end)
             ),
 
         _prepend: ($) =>
             seq(
-                alias('@prepend', $.directive),
+                alias('@prepend', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endprepend', $.endDirective)
+                alias('@endprepend', $.directive_end)
             ),
 
         // !Conditionals
@@ -165,85 +165,85 @@ module.exports = grammar({
         // see if statement body bookmark
         conditional_keyword: ($) =>
             seq(
-                alias(/@(else|elseif|elsedisk)/, $.directive),
+                alias(/@(else|elseif)/, $.directive),
                 optional($._directive_parameter)
             ),
 
         _if: ($) =>
             seq(
-                alias('@if', $.directive),
+                alias('@if', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endif', $.endDirective)
+                alias('@endif', $.directive_end)
             ),
 
         _unless: ($) =>
             seq(
-                alias('@unless', $.directive),
+                alias('@unless', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endunless', $.endDirective)
+                alias('@endunless', $.directive_end)
             ),
 
         _isset: ($) =>
             seq(
-                alias('@isset', $.directive),
+                alias('@isset', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endisset', $.endDirective)
+                alias('@endisset', $.directive_end)
             ),
 
         _empty: ($) =>
             seq(
-                alias('@empty', $.directive),
+                alias('@empty', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endempty', $.endDirective)
+                alias('@endempty', $.directive_end)
             ),
 
         _auth: ($) =>
             seq(
-                alias('@auth', $.directive),
+                alias('@auth', $.directive_start),
                 $._if_statement_directive_body_with_optional_parameter,
-                alias('@endauth', $.endDirective)
+                alias('@endauth', $.directive_end)
             ),
 
         _guest: ($) =>
             seq(
-                alias('@guest', $.directive),
+                alias('@guest', $.directive_start),
                 $._if_statement_directive_body_with_optional_parameter,
-                alias('@endguest', $.endDirective)
+                alias('@endguest', $.directive_end)
             ),
 
         _production: ($) =>
             seq(
-                alias('@production', $.directive),
+                alias('@production', $.directive_start),
                 $._if_statement_directive_body_with_no_parameter,
-                alias('@endproduction', $.endDirective)
+                alias('@endproduction', $.directive_end)
             ),
 
         _env: ($) =>
             seq(
-                alias('@env', $.directive),
+                alias('@env', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endenv', $.endDirective)
+                alias('@endenv', $.directive_end)
             ),
 
         _hasSection: ($) =>
             seq(
-                alias('@hasSection', $.directive),
+                alias('@hasSection', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endif', $.endDirective)
+                alias('@endif', $.directive_end)
             ),
 
         _sectionMissing: ($) =>
             seq(
-                alias('@sectionMissing', $.directive),
+                alias('@sectionMissing', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@endif', $.endDirective)
+                alias('@endif', $.directive_end)
             ),
 
         _error: ($) =>
             seq(
-                alias('@error', $.directive),
+                alias('@error', $.directive_start),
                 $._if_statement_directive_body,
-                alias('@enderror', $.endDirective)
+                alias('@enderror', $.directive_end)
             ),
 
         // ! Conditional Attributes
@@ -260,7 +260,7 @@ module.exports = grammar({
         // REVIEW: injection for param as PHP for case as HTML
         switch: ($) =>
             seq(
-                alias('@switch', $.directive),
+                alias('@switch', $.directive_start),
                 $._directive_parameter,
                 repeat($._case),
                 optional(
@@ -269,7 +269,7 @@ module.exports = grammar({
                         repeat($._definition)
                     )
                 ),
-                alias('@endswitch', $.endDirective)
+                alias('@endswitch', $.directive_end)
             ),
         _case: ($) =>
             seq(
@@ -288,36 +288,36 @@ module.exports = grammar({
 
         _for: ($) =>
             seq(
-                alias('@for', $.directive),
+                alias('@for', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endfor', $.endDirective)
+                alias('@endfor', $.directive_end)
             ),
 
         _foreach: ($) =>
             seq(
-                alias('@foreach', $.directive),
+                alias('@foreach', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endforeach', $.endDirective)
+                alias('@endforeach', $.directive_end)
             ),
 
         _forelse: ($) =>
             seq(
-                alias('@forelse', $.directive),
+                alias('@forelse', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endforelse', $.endDirective)
+                alias('@endforelse', $.directive_end)
             ),
 
         _while: ($) =>
             seq(
-                alias('@while', $.directive),
+                alias('@while', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endwhile', $.endDirective)
+                alias('@endwhile', $.directive_end)
             ),
 
-        /*----------------------------------
-        /  Do NOT change below this line    
-        /  without running tests            
-        /  This is basically the engine     
+        /*------------------------------------
+        /  Do NOT change below this line   /
+        /  without running tests           /
+        /  This is basically the engine    /
         /-----------------------------------*/
 
         // !directive body
