@@ -1,5 +1,1 @@
-@php
-
-test
-
-@endphp
+@php('test')

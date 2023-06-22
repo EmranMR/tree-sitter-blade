@@ -12,7 +12,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -63,7 +63,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -165,7 +165,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -204,7 +204,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -263,7 +263,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -297,17 +297,7 @@
   {
     "type": "keyword",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "csrf",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "loop",
@@ -362,7 +352,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -401,7 +391,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         }
       ]
@@ -460,7 +450,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -504,17 +494,7 @@
   {
     "type": "php",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "php_statement",
@@ -538,6 +518,10 @@
         },
         {
           "type": "directive_start",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         },
         {
@@ -600,7 +584,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -679,7 +663,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -758,7 +742,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -842,7 +826,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "parameter",
           "named": true
         },
         {
@@ -878,10 +862,6 @@
   },
   {
     "type": "bracket",
-    "named": true
-  },
-  {
-    "type": "csrf",
     "named": true
   },
   {

@@ -1,6 +1,0 @@
-@foreach(1)
-
-    <div>
-
-    </div>
-@endforeach

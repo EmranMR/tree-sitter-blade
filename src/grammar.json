@@ -89,11 +89,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "csrf"
+          "name": "_csrf"
         }
       ]
     },
-    "csrf": {
+    "_csrf": {
       "type": "STRING",
       "value": "@csrf"
     },
@@ -1419,13 +1419,8 @@
             {
               "type": "REPEAT",
               "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "parameter"
-                },
-                "named": true,
-                "value": "php"
+                "type": "SYMBOL",
+                "name": "parameter"
               }
             },
             {

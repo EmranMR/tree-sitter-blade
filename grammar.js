@@ -24,8 +24,8 @@ module.exports = grammar({
             ),
 
         // !keywords
-        keyword: ($) => choice($.csrf),
-        csrf: ($) => '@csrf',
+        keyword: ($) => choice($._csrf),
+        _csrf: ($) => '@csrf',
         // ! php Blocks
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
@@ -351,7 +351,7 @@ module.exports = grammar({
         _directive_parameter: ($) =>
             seq(
                 token(prec(1, '(')),
-                optional(repeat(alias($.parameter, $.php))),
+                optional(repeat($.parameter)),
                 token(prec(1, ')'))
             ),
         // parenthesis balancing
