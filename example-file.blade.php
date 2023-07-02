@@ -1,5 +1,6 @@
 @for ($i = 0; $i < 10; $i++)
     The current value is {{ $i }}
+    <di
 @endfor
 
 @foreach ($users as $user)
@@ -8,6 +9,7 @@
 
 @forelse ($users as $user)
     <li>{{ $user->name }}</li>
+@empty
     <p>No users</p>
 @endforelse
 
