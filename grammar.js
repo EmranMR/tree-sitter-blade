@@ -13,7 +13,6 @@ module.exports = grammar({
                 $.attribute,
                 $.loop_operator,
                 alias($.text, $.html)
-                // $.component,
             ),
 
         comment: ($) =>
