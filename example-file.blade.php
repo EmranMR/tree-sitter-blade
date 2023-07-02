@@ -1,16 +1,11 @@
-@for ($i = 0; $i < 10; $i++)
-    The current value is {{ $i }}
-@endfor
+@disk('local')
+    <!-- The application is using the local disk... -->
+@elsedisk('s3')
+    <!-- The application is using the s3 disk... -->
+@else
+    <!-- The application is using some other disk... -->
+@enddisk
 
-@foreach ($users as $user)
-    <p>This is user {{ $user->id }}</p>
-@endforeach
-
-@forelse ($users as $user)
-    <li>{{ $user->name }}</li>
-    <p>No users</p>
-@endforelse
-
-@while (true)
-    <p>I'm looping forever.</p>
-@endwhile
+@unlessdisk('local')
+    <!-- The application is not using the local disk... -->
+@enddisk

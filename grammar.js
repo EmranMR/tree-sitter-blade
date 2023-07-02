@@ -160,13 +160,17 @@ module.exports = grammar({
                 $._production,
                 $._env,
                 $._hasSection,
-                $._sectionMissing
+                $._sectionMissing,
+                $.custom
             ),
         // see if statement body bookmark
         conditional_keyword: ($) =>
-            seq(
-                alias(/@(else|elseif)/, $.directive),
-                optional($._directive_parameter)
+            choice(
+                '@else',
+                seq(
+                    alias(/@(elseif|else[a-zA-Z]+)/, $.directive),
+                    optional($._directive_parameter)
+                )
             ),
 
         _if: ($) =>
@@ -244,6 +248,19 @@ module.exports = grammar({
                 alias('@error', $.directive_start),
                 $._if_statement_directive_body,
                 alias('@enderror', $.directive_end)
+            ),
+        // BUG: lookbehind is not supported so we can't /@(?!end)[a-z]+/
+        // This is the best that can be achieved without externals
+        // Only problem will be character "e" can not be used as the first character
+        // @exxx
+        custom: ($) =>
+            seq(
+                alias(/@[^e][a-zA-Z]+/, $.directive_start),
+                $._if_statement_directive_body,
+                alias(
+                    token(prec(1, /@end[a-zA-Z]+/)),
+                    $.directive_end
+                )
             ),
 
         // ! Conditional Attributes

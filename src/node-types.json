@@ -129,6 +129,10 @@
           "named": true
         },
         {
+          "type": "custom",
+          "named": true
+        },
+        {
           "type": "directive",
           "named": true
         },
@@ -197,7 +201,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "directive",
@@ -205,6 +209,89 @@
         },
         {
           "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "custom",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "conditional_keyword",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "html",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -858,6 +945,10 @@
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "@else",
     "named": false
   },
   {
