@@ -671,30 +671,43 @@
         {
           "type": "SYMBOL",
           "name": "_sectionMissing"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "custom"
         }
       ]
     },
     "conditional_keyword": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "@(else|elseif)"
-          },
-          "named": true,
-          "value": "directive"
+          "type": "STRING",
+          "value": "@else"
         },
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_directive_parameter"
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "@(elseif|else[a-zA-Z]+)"
+              },
+              "named": true,
+              "value": "directive"
             },
             {
-              "type": "BLANK"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_directive_parameter"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             }
           ]
         }
@@ -991,6 +1004,40 @@
           "content": {
             "type": "STRING",
             "value": "@enderror"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "custom": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "@[^e][a-zA-Z]+"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_if_statement_directive_body"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "@end[a-zA-Z]+"
+              }
+            }
           },
           "named": true,
           "value": "directive_end"
