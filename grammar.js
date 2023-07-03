@@ -161,7 +161,7 @@ module.exports = grammar({
                 $._env,
                 $._hasSection,
                 $._sectionMissing,
-                $.custom
+                $._custom
             ),
         // see if statement body bookmark
         conditional_keyword: ($) =>
@@ -253,7 +253,7 @@ module.exports = grammar({
         // This is the best that can be achieved without externals
         // Only problem will be character "e" can not be used as the first character
         // @exxx
-        custom: ($) =>
+        _custom: ($) =>
             seq(
                 alias(/@[^e][a-zA-Z]+/, $.directive_start),
                 $._if_statement_directive_body,
