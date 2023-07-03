@@ -1,0 +1,70 @@
+==================
+Escaped
+==================
+
+{{echo 'test'}}
+
+---
+
+(blade
+  (php_statement
+    (bracket)
+    (php)
+    (bracket)))
+
+==================
+Not Escaped
+==================
+
+{!!echo 'test'!!}
+
+---
+
+(blade
+  (php_statement
+    (bracket)
+    (php)
+    (bracket)))
+==================
+Inline Raw
+==================
+
+@php(echo 'test')
+
+---
+
+ (blade
+  (php_statement
+    (directive)
+    (parameter)))
+
+==================
+Multi Line Raw
+==================
+
+@php
+echo 'test'
+@endphp
+
+---
+
+ (blade
+  (php_statement
+    (directive_start)
+    (php)
+    (directive_end)))
+
+==================
+Classic Raw
+==================
+
+<?php
+echo 'test'
+?>
+---
+
+ (blade
+  (php_statement
+    (directive_start)
+    (php)
+    (directive_end)))

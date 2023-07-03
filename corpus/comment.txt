@@ -1,0 +1,13 @@
+==================
+Comment
+==================
+
+{{-- comment --}}
+
+---
+
+(blade
+  (comment
+    (bracket)
+    (text)
+    (bracket)))

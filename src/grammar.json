@@ -518,6 +518,10 @@
         {
           "type": "SYMBOL",
           "name": "_prepend"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_prependOnce"
         }
       ]
     },
@@ -569,6 +573,33 @@
           "content": {
             "type": "STRING",
             "value": "@endPushOnce"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_prependOnce": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@prependOnce"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_body_with_parameter"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endPrependOnce"
           },
           "named": true,
           "value": "directive_end"
@@ -1554,13 +1585,13 @@
             "value": -1,
             "content": {
               "type": "PATTERN",
-              "value": "[{}!@()-]"
+              "value": "[{}!@()?-]"
             }
           }
         },
         {
           "type": "PATTERN",
-          "value": "[^\\s(){!}@-]([^(){!}@]*[^\\s{!}()@-])?"
+          "value": "[^\\s(){!}@-]([^(){!}@?]*[^\\s{!}()@?-])?"
         }
       ]
     }

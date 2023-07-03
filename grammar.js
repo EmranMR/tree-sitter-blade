@@ -25,7 +25,7 @@ module.exports = grammar({
         // !keywords
         keyword: ($) => choice($._csrf),
         _csrf: ($) => '@csrf',
-        // ! php Blocks
+        // ! PHP Statements
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
         _escaped: ($) =>
@@ -117,7 +117,13 @@ module.exports = grammar({
 
         // ! stacks
         stack: ($) =>
-            choice($._push, $._pushOnce, $._pushIf, $._prepend),
+            choice(
+                $._push,
+                $._pushOnce,
+                $._pushIf,
+                $._prepend,
+                $._prependOnce
+            ),
 
         _push: ($) =>
             seq(
@@ -145,6 +151,13 @@ module.exports = grammar({
                 alias('@prepend', $.directive_start),
                 $._directive_body_with_parameter,
                 alias('@endprepend', $.directive_end)
+            ),
+
+        _prependOnce: ($) =>
+            seq(
+                alias('@prependOnce', $.directive_start),
+                $._directive_body_with_parameter,
+                alias('@endPrependOnce', $.directive_end)
             ),
 
         // !Conditionals
@@ -379,8 +392,8 @@ module.exports = grammar({
             seq(/[^()]+/, '(', repeat($.parameter), ')'),
         text: ($) =>
             choice(
-                token(prec(-1, /[{}!@()-]/)),
-                /[^\s(){!}@-]([^(){!}@]*[^\s{!}()@-])?/
+                token(prec(-1, /[{}!@()?-]/)),
+                /[^\s(){!}@-]([^(){!}@?]*[^\s{!}()@?-])?/
             ),
     },
 })

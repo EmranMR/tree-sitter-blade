@@ -1,0 +1,71 @@
+==================
+@fragment
+==================
+
+@fragment('test')
+        fragment
+@endfragment
+
+
+---
+
+(blade
+  (fragment
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@section
+==================
+
+@section('test')
+        section
+@endsection
+
+
+---
+
+(blade
+  (section
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@once
+==================
+
+@once
+        once
+@endonce
+
+
+---
+
+(blade
+  (once
+    (directive_start)
+    (html)
+    (directive_end)))
+
+
+==================
+@verbatim
+==================
+
+@verbatim
+        verbatim
+@endverbatim
+
+
+---
+
+(blade
+  (verbatim
+    (directive_start)
+    (html)
+    (directive_end)))
+

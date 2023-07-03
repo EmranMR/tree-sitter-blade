@@ -1,0 +1,84 @@
+==================
+@push
+==================
+
+@push('test')
+        push
+@endpush
+
+
+---
+
+(blade
+  (stack
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@pushOnce
+==================
+
+@pushOnce('test')
+        pushOnce
+@endPushOnce
+
+---
+
+(blade
+  (stack
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+==================
+@pushIf
+==================
+
+@pushIf('test')
+        pushIf
+@endPushIf
+
+---
+
+(blade
+  (stack
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@prepend
+==================
+
+@prepend('test')
+        prepend
+@endprepend
+
+---
+
+(blade
+  (stack
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@prependOnce
+==================
+
+@prependOnce('test')
+        prependOnce
+@endPrependOnce
+
+---
+
+(blade
+  (stack
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))

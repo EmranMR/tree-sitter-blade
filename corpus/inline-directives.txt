@@ -1,0 +1,131 @@
+==================
+@extends
+==================
+
+@extends('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@yield
+==================
+
+@yield('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@include
+==================
+
+@include('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@includeIf
+==================
+
+@includeIf('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@includeWhen
+==================
+
+@includeWhen('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@includeUnless
+==================
+
+@includeUnless('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@includeFirst
+==================
+
+@includeFirst('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@props
+==================
+
+@props('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@method
+==================
+
+@method('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@inject
+==================
+
+@inject('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@each
+==================
+
+@each('test')
+
+---
+
+(blade
+  (directive)
+  (parameter))
