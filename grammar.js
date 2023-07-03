@@ -297,9 +297,12 @@ module.exports = grammar({
         // !Loops
         loop: ($) => choice($._for, $._foreach, $._forelse, $._while),
         loop_operator: ($) =>
-            seq(
-                alias(/@(continue|break)/, $.directive),
-                optional($._directive_parameter)
+            choice(
+                seq(
+                    alias(/@(continue|break)/, $.directive),
+                    optional($._directive_parameter)
+                ),
+                seq(alias('@empty', $.directive))
             ),
 
         _for: ($) =>
