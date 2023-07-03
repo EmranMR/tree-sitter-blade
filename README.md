@@ -65,7 +65,7 @@ I will however put an example once I write one for Nova.
 I would like some input from ***NeoVim*** users on how they deal with queries and `queries/` folder. If the editor uses the queries stored in the `queries/` from this repo, more than happy to accept any pull requests with regards to that. At the moment all the `.scm` files in that folder are just stubs. 🔴
 
 ## Contribution
-See the contribution guidelines for more details, as well as in depth info about the `grammar` itself
+See the [contribution](/CONTRIBUTION.md) guidelines for more details, as well as in depth info about the `grammar` itself. Please note, if you are contributing to the `grammar.js` file, I would start accepting the pull requests once, I have finished writing the tests `test/corpus`
 
 
 
