@@ -266,7 +266,7 @@ conditional keywords
     (html)
     (directive_end)))
 ==================
-@custom
+custom directive
 ==================
 
 @disk('local')
@@ -299,4 +299,27 @@ conditional keywords
     (directive_start)
     (parameter)
     (html)
+    (directive_end)))
+
+
+==================
+complex custom directive
+==================
+@example('test')
+    @example('test')
+        test
+    @endexample
+@endexample
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (conditional
+      (directive_start)
+      (parameter)
+      (html)
+      (directive_end))
     (directive_end)))

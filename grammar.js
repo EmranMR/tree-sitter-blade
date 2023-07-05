@@ -262,15 +262,15 @@ module.exports = grammar({
                 $._if_statement_directive_body,
                 alias('@enderror', $.directive_end)
             ),
-        // BUG: lookbehind is not supported so we can't /@(?!end)[a-z]+/
-        // This is the best that can be achieved without externals
-        // Only problem will be character "e" can not be used as the first character
-        // @exxx
+
         _custom: ($) =>
             seq(
-                alias(/@[^e][a-zA-Z]+/, $.directive_start),
+                alias(/@[a-zA-Z]+/, $.directive_start),
                 $._if_statement_directive_body,
-                alias(/@end[a-zA-Z]+/, $.directive_end)
+                alias(
+                    token(prec(1, /@end[a-zA-Z]+/)),
+                    $.directive_end
+                )
             ),
 
         // ! Conditional Attributes
@@ -279,7 +279,7 @@ module.exports = grammar({
                 alias(
                     token(
                         prec(
-                            1,
+                            2,
                             /@(class|style|checked|selected|disabled|readonly|required)/
                         )
                     ),

@@ -1052,7 +1052,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@[^e][a-zA-Z]+"
+            "value": "@[a-zA-Z]+"
           },
           "named": true,
           "value": "directive_start"
@@ -1064,8 +1064,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "@end[a-zA-Z]+"
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "@end[a-zA-Z]+"
+              }
+            }
           },
           "named": true,
           "value": "directive_end"
@@ -1081,7 +1088,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PREC",
-              "value": 1,
+              "value": 2,
               "content": {
                 "type": "PATTERN",
                 "value": "@(class|style|checked|selected|disabled|readonly|required)"
