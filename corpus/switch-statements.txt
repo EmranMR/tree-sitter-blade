@@ -1,0 +1,34 @@
+==================
+@switch
+==================
+
+@switch($i)
+    @case(1)
+        First case...
+        @break
+
+    @case(2)
+        Second case...
+        @break
+
+    @default
+        Default case...
+@endswitch
+
+---
+
+(blade
+  (switch
+    (directive_start)
+    (parameter)
+    (directive)
+    (parameter)
+    (html)
+    (directive)
+    (directive)
+    (parameter)
+    (html)
+    (directive)
+    (directive)
+    (html)
+    (directive_end)))

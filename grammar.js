@@ -65,12 +65,7 @@ module.exports = grammar({
         attribute: ($) =>
             seq(
                 alias(
-                    token(
-                        prec(
-                            2,
-                            /@(class|style|checked|selected|disabled|readonly|required)/
-                        )
-                    ),
+                    /@(class|style|checked|selected|disabled|readonly|required)/,
                     $.directive
                 ),
                 $._directive_parameter
