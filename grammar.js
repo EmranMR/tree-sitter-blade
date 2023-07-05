@@ -185,7 +185,7 @@ module.exports = grammar({
                 $._error,
                 $._custom
             ),
-        // see if statement body bookmark
+        // used in the conditional body rules
         conditional_keyword: ($) =>
             choice(
                 '@else',
@@ -289,7 +289,6 @@ module.exports = grammar({
             ),
 
         // !switch
-        // REVIEW: injection for param as PHP for case as HTML
         switch: ($) =>
             seq(
                 alias('@switch', $.directive_start),
@@ -355,7 +354,7 @@ module.exports = grammar({
         /  This is the engine              /
         /-----------------------------------*/
 
-        // !directive body
+        // !normal directive body
         _directive_body: ($) => repeat1($._definition),
         _directive_body_with_parameter: ($) =>
             seq($._directive_parameter, optional($._directive_body)),
@@ -393,6 +392,7 @@ module.exports = grammar({
         parameter: ($) => choice(/[^()]+/, $._text_with_parenthesis),
         _text_with_parenthesis: ($) =>
             seq(/[^()]+/, '(', repeat($.parameter), ')'),
+        // !text
         text: ($) =>
             choice(
                 token(prec(-2, /[{}!@()?-]/)),

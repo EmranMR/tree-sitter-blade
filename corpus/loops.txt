@@ -108,10 +108,20 @@
 @endforeach
 
 ---
-
 (blade
   (loop
     (directive_start)
     (parameter)
+    (loop_operator
+      (directive)
+      (parameter))
     (html)
+    (php_statement
+      (bracket)
+      (php)
+      (bracket))
+    (html)
+    (loop_operator
+      (directive)
+      (parameter))
     (directive_end)))
