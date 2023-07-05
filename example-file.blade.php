@@ -1,12 +1,7 @@
-@switch($i)
-    @case(1)
-        First case...
-        @break
+@foreach($users as $user)
 
-    @case(2)
-        Second case...
-        @break
 
-    @default
-        Default case...
-@endswitch
+    <li>{{ $user->name }}</li>
+
+    @break($user->number == 5)
+@endforeach
