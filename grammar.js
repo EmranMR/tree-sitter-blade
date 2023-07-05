@@ -65,7 +65,12 @@ module.exports = grammar({
         attribute: ($) =>
             seq(
                 alias(
-                    /@(class|style|checked|selected|disabled|readonly|required)/,
+                    token(
+                        prec(
+                            1,
+                            /@(class|style|checked|selected|disabled|readonly|required)/
+                        )
+                    ),
                     $.directive
                 ),
                 $._directive_parameter
@@ -74,7 +79,12 @@ module.exports = grammar({
         _inline_directive: ($) =>
             seq(
                 alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/,
+                    token(
+                        prec(
+                            1,
+                            /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/
+                        )
+                    ),
                     $.directive
                 ),
                 $._directive_parameter
@@ -190,7 +200,10 @@ module.exports = grammar({
             choice(
                 '@else',
                 seq(
-                    alias(/@(elseif|else[a-zA-Z]+)/, $.directive),
+                    alias(
+                        token(prec(1, /@(elseif|else[a-zA-Z]+)/)),
+                        $.directive
+                    ),
                     optional($._directive_parameter)
                 )
             ),
@@ -309,7 +322,10 @@ module.exports = grammar({
         loop_operator: ($) =>
             choice(
                 seq(
-                    alias(/@(continue|break)/, $.directive),
+                    alias(
+                        token(prec(1, /@(continue|break)/)),
+                        $.directive
+                    ),
                     optional($._directive_parameter)
                 ),
                 seq(alias('@empty', $.directive))

@@ -1217,8 +1217,15 @@
             {
               "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "@(continue|break)"
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "@(continue|break)"
+                  }
+                }
               },
               "named": true,
               "value": "directive"
