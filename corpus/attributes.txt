@@ -1,0 +1,104 @@
+==================
+@class
+==================
+
+<div @class('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@style
+==================
+
+<div @style('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@checked
+==================
+
+<div @checked('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@selected
+==================
+
+<div @selected('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@disabled
+==================
+
+<div @disabled('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@readonly
+==================
+
+<div @readonly('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))
+
+==================
+@required
+==================
+
+<div @required('test') > </div>
+
+---
+
+(blade
+  (html)
+  (attribute
+    (directive)
+    (parameter))
+  (html))

@@ -352,7 +352,7 @@ module.exports = grammar({
         /*------------------------------------
         /  Do NOT change below this line   /
         /  without running tests           /
-        /  This is basically the engine    /
+        /  This is the engine              /
         /-----------------------------------*/
 
         // !directive body
