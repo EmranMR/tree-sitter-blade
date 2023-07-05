@@ -1067,13 +1067,34 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "@[a-zA-Z]+"
-          },
-          "named": true,
-          "value": "directive_start"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "@unless[a-zA-Z\\d]+"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": -1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "@[a-zA-Z\\d]+"
+                  }
+                }
+              },
+              "named": true,
+              "value": "directive_start"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -1088,7 +1109,7 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "@end[a-zA-Z]+"
+                "value": "@end[a-zA-Z\\d]+"
               }
             }
           },
@@ -1586,7 +1607,7 @@
           "type": "TOKEN",
           "content": {
             "type": "PREC",
-            "value": -1,
+            "value": -2,
             "content": {
               "type": "PATTERN",
               "value": "[{}!@()?-]"
@@ -1594,8 +1615,15 @@
           }
         },
         {
-          "type": "PATTERN",
-          "value": "[^\\s(){!}@-]([^(){!}@?]*[^\\s{!}()@?-])?"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": -1,
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\s(){!}@-]([^(){!}@?]*[^\\s{!}()@?-])?"
+            }
+          }
         }
       ]
     }

@@ -274,10 +274,16 @@ module.exports = grammar({
 
         _custom: ($) =>
             seq(
-                alias(/@[a-zA-Z]+/, $.directive_start),
+                choice(
+                    alias(/@unless[a-zA-Z\d]+/, $.directive_start),
+                    alias(
+                        token(prec(-1, /@[a-zA-Z\d]+/)),
+                        $.directive_start
+                    )
+                ),
                 $._if_statement_directive_body,
                 alias(
-                    token(prec(1, /@end[a-zA-Z]+/)),
+                    token(prec(1, /@end[a-zA-Z\d]+/)),
                     $.directive_end
                 )
             ),
@@ -389,8 +395,13 @@ module.exports = grammar({
             seq(/[^()]+/, '(', repeat($.parameter), ')'),
         text: ($) =>
             choice(
-                token(prec(-1, /[{}!@()?-]/)),
-                /[^\s(){!}@-]([^(){!}@?]*[^\s{!}()@?-])?/
+                token(prec(-2, /[{}!@()?-]/)),
+                token(
+                    prec(
+                        -1,
+                        /[^\s(){!}@-]([^(){!}@?]*[^\s{!}()@?-])?/
+                    )
+                )
             ),
     },
 })
