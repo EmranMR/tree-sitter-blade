@@ -1,0 +1,302 @@
+==================
+@if
+==================
+
+@if (true)
+    test
+@endif
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@if nesting
+==================
+
+@if(true)
+        @if(true)
+            test
+        @endif
+@endif
+
+---
+
+ (blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (conditional
+      (directive_start)
+      (parameter)
+      (html)
+      (directive_end))
+    (directive_end)))
+
+==================
+conditional keywords
+==================
+
+@if (true)
+    test
+@elseif (true)
+    test
+@else
+    test
+@endif
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (html)
+    (conditional_keyword)
+    (html)
+    (directive_end)))
+
+==================
+@unless
+==================
+
+@unless(true)
+        test
+@endunless
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@isset
+==================
+
+@isset(true)
+        test
+@endisset
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@empty
+==================
+
+@empty(true)
+        test
+@endempty
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@auth
+==================
+
+@auth
+        test
+@endauth
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (html)
+    (directive_end)))
+
+==================
+@auth with parameters
+==================
+
+@auth('test')
+        test
+@endauth
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@guest
+==================
+
+@guest
+        test
+@endguest
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (html)
+    (directive_end)))
+
+==================
+@guest with parameters
+==================
+
+@guest('test')
+        test
+@endguest
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@production
+==================
+
+@production
+        test
+@endproduction
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (html)
+    (directive_end)))
+
+==================
+@env
+==================
+
+@env('test')
+        test
+@endenv
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@hasSection
+==================
+
+@hasSection('test')
+        test
+@endif
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@sectionMissing
+==================
+
+@sectionMissing('test')
+        test
+@endif
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+
+==================
+@error
+==================
+
+@error (true)
+    test
+@enderror
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))
+==================
+@custom
+==================
+
+@disk('local')
+    test
+@elsedisk('s3')
+    test
+@else
+    test
+@enddisk
+
+@unlessdisk('local')
+    test
+@enddisk
+
+---
+
+(blade
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (html)
+    (conditional_keyword)
+    (html)
+    (directive_end))
+  (conditional
+    (directive_start)
+    (parameter)
+    (html)
+    (directive_end)))

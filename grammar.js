@@ -173,6 +173,7 @@ module.exports = grammar({
                 $._env,
                 $._hasSection,
                 $._sectionMissing,
+                $._error,
                 $._custom
             ),
         // see if statement body bookmark
@@ -269,17 +270,19 @@ module.exports = grammar({
             seq(
                 alias(/@[^e][a-zA-Z]+/, $.directive_start),
                 $._if_statement_directive_body,
-                alias(
-                    token(prec(1, /@end[a-zA-Z]+/)),
-                    $.directive_end
-                )
+                alias(/@end[a-zA-Z]+/, $.directive_end)
             ),
 
         // ! Conditional Attributes
         attribute: ($) =>
             seq(
                 alias(
-                    /@(class|style|checked|selected|disabled|readonly|required)/,
+                    token(
+                        prec(
+                            1,
+                            /@(class|style|checked|selected|disabled|readonly|required)/
+                        )
+                    ),
                     $.directive
                 ),
                 $._directive_parameter

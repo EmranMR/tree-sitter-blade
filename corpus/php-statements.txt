@@ -1,5 +1,5 @@
 ==================
-Escaped
+{{ escaped }}
 ==================
 
 {{echo 'test'}}
@@ -13,7 +13,7 @@ Escaped
     (bracket)))
 
 ==================
-Not Escaped
+{!! not escaped !!}
 ==================
 
 {!!echo 'test'!!}
@@ -26,7 +26,7 @@ Not Escaped
     (php)
     (bracket)))
 ==================
-Inline Raw
+inline raw
 ==================
 
 @php(echo 'test')
@@ -39,7 +39,7 @@ Inline Raw
     (parameter)))
 
 ==================
-Multi Line Raw
+multi line raw
 ==================
 
 @php
@@ -55,7 +55,7 @@ echo 'test'
     (directive_end)))
 
 ==================
-Classic Raw
+classic raw
 ==================
 
 <?php

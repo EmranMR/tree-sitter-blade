@@ -579,33 +579,6 @@
         }
       ]
     },
-    "_prependOnce": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@prependOnce"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_directive_body_with_parameter"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endPrependOnce"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
     "_pushIf": {
       "type": "SEQ",
       "members": [
@@ -660,6 +633,33 @@
         }
       ]
     },
+    "_prependOnce": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@prependOnce"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_body_with_parameter"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endPrependOnce"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
     "conditional": {
       "type": "CHOICE",
       "members": [
@@ -702,6 +702,10 @@
         {
           "type": "SYMBOL",
           "name": "_sectionMissing"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_error"
         },
         {
           "type": "SYMBOL",
@@ -1060,15 +1064,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "@end[a-zA-Z]+"
-              }
-            }
+            "type": "PATTERN",
+            "value": "@end[a-zA-Z]+"
           },
           "named": true,
           "value": "directive_end"
@@ -1081,8 +1078,15 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "@(class|style|checked|selected|disabled|readonly|required)"
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "@(class|style|checked|selected|disabled|readonly|required)"
+              }
+            }
           },
           "named": true,
           "value": "directive"
