@@ -8,9 +8,9 @@ module.exports = grammar({
             choice(
                 $.keyword,
                 $.php_statement,
+                $.attribute,
                 $._inline_directive,
                 $._nested_directive,
-                $.attribute,
                 $.loop_operator,
                 alias($.text, $.html)
             ),
@@ -61,6 +61,20 @@ module.exports = grammar({
                 alias('?>', $.directive_end)
             ),
 
+        // ! Conditional Attributes
+        attribute: ($) =>
+            seq(
+                alias(
+                    token(
+                        prec(
+                            2,
+                            /@(class|style|checked|selected|disabled|readonly|required)/
+                        )
+                    ),
+                    $.directive
+                ),
+                $._directive_parameter
+            ),
         // !inline directives
         _inline_directive: ($) =>
             seq(
@@ -271,21 +285,6 @@ module.exports = grammar({
                     token(prec(1, /@end[a-zA-Z]+/)),
                     $.directive_end
                 )
-            ),
-
-        // ! Conditional Attributes
-        attribute: ($) =>
-            seq(
-                alias(
-                    token(
-                        prec(
-                            2,
-                            /@(class|style|checked|selected|disabled|readonly|required)/
-                        )
-                    ),
-                    $.directive
-                ),
-                $._directive_parameter
             ),
 
         // !switch
