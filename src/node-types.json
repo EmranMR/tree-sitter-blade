@@ -197,7 +197,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "directive",
@@ -858,10 +858,6 @@
   },
   {
     "type": ")",
-    "named": false
-  },
-  {
-    "type": "@else",
     "named": false
   },
   {
