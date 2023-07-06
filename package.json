@@ -1,6 +1,6 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.9.0",
+    "version": "0.9.7",
     "description": "",
     "main": "bindings/node",
     "scripts": {
