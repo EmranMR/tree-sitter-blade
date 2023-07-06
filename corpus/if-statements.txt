@@ -61,7 +61,8 @@ conditional keywords
       (directive)
       (parameter))
     (html)
-    (conditional_keyword)
+    (conditional_keyword
+      (directive))
     (html)
     (directive_end)))
 
@@ -292,7 +293,8 @@ custom directive
       (directive)
       (parameter))
     (html)
-    (conditional_keyword)
+    (conditional_keyword
+      (directive))
     (html)
     (directive_end))
   (conditional

@@ -735,8 +735,13 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "@else"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@else"
+          },
+          "named": true,
+          "value": "directive"
         },
         {
           "type": "SEQ",

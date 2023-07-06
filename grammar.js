@@ -188,7 +188,7 @@ module.exports = grammar({
         // used in the conditional body rules
         conditional_keyword: ($) =>
             choice(
-                '@else',
+                alias('@else', $.directive),
                 seq(
                     alias(/@(elseif|else[a-zA-Z]+)/, $.directive),
                     optional($._directive_parameter)
