@@ -13,7 +13,7 @@
   (fragment
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -31,7 +31,7 @@
   (section
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -48,7 +48,7 @@
 (blade
   (once
     (directive_start)
-    (html)
+    (php)
     (directive_end)))
 
 
@@ -66,6 +66,6 @@
 (blade
   (verbatim
     (directive_start)
-    (html)
+    (php)
     (directive_end)))
 

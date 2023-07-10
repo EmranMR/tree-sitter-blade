@@ -42,7 +42,7 @@
             "name": "text"
           },
           "named": true,
-          "value": "html"
+          "value": "php"
         }
       ]
     },
@@ -138,7 +138,7 @@
                   "name": "text"
                 },
                 "named": true,
-                "value": "php"
+                "value": "php_only"
               }
             },
             {
@@ -181,7 +181,7 @@
                   "name": "text"
                 },
                 "named": true,
-                "value": "php"
+                "value": "php_only"
               }
             },
             {
@@ -210,10 +210,6 @@
         {
           "type": "SYMBOL",
           "name": "_multi_line_raw"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_classic_raw"
         }
       ]
     },
@@ -259,7 +255,7 @@
                   "name": "text"
                 },
                 "named": true,
-                "value": "php"
+                "value": "php_only"
               }
             },
             {
@@ -272,49 +268,6 @@
           "content": {
             "type": "STRING",
             "value": "@endphp"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_classic_raw": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "<?php"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "text"
-                },
-                "named": true,
-                "value": "php"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "?>"
           },
           "named": true,
           "value": "directive_end"

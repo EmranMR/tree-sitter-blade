@@ -11,7 +11,7 @@
   (loop
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -28,12 +28,12 @@
   (loop
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (php_statement
       (bracket)
-      (php)
+      (php_only)
       (bracket))
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -49,7 +49,7 @@
   (loop
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -65,7 +65,7 @@
   (loop
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 
@@ -84,15 +84,15 @@
   (loop
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (php_statement
       (bracket)
-      (php)
+      (php_only)
       (bracket))
-    (html)
+    (php)
     (loop_operator
       (directive))
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -115,12 +115,12 @@
     (loop_operator
       (directive)
       (parameter))
-    (html)
+    (php)
     (php_statement
       (bracket)
-      (php)
+      (php_only)
       (bracket))
-    (html)
+    (php)
     (loop_operator
       (directive)
       (parameter))

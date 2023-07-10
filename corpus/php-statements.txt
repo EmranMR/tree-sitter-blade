@@ -9,7 +9,7 @@
 (blade
   (php_statement
     (bracket)
-    (php)
+    (php_only)
     (bracket)))
 
 ==================
@@ -23,7 +23,7 @@
 (blade
   (php_statement
     (bracket)
-    (php)
+    (php_only)
     (bracket)))
 ==================
 inline raw
@@ -51,20 +51,5 @@ echo 'test'
  (blade
   (php_statement
     (directive_start)
-    (php)
-    (directive_end)))
-
-==================
-classic raw
-==================
-
-<?php
-echo 'test'
-?>
----
-
- (blade
-  (php_statement
-    (directive_start)
-    (php)
+    (php_only)
     (directive_end)))

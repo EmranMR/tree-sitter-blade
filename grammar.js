@@ -12,7 +12,7 @@ module.exports = grammar({
                 $._inline_directive,
                 $._nested_directive,
                 $.loop_operator,
-                alias($.text, $.html)
+                alias($.text, $.php)
             ),
 
         comment: ($) =>
@@ -31,19 +31,19 @@ module.exports = grammar({
         _escaped: ($) =>
             seq(
                 alias('{{', $.bracket),
-                optional(repeat(alias($.text, $.php))),
+                optional(repeat(alias($.text, $.php_only))),
                 alias('}}', $.bracket)
             ),
         _unescaped: ($) =>
             seq(
                 alias('{!!', $.bracket),
-                optional(repeat(alias($.text, $.php))),
+                optional(repeat(alias($.text, $.php_only))),
                 alias('!!}', $.bracket)
             ),
 
         //! raw php
         _raw: ($) =>
-            choice($._inline_raw, $._multi_line_raw, $._classic_raw),
+            choice($._inline_raw, $._multi_line_raw),
 
         _inline_raw: ($) =>
             seq(alias('@php', $.directive), $._directive_parameter),
@@ -51,16 +51,9 @@ module.exports = grammar({
         _multi_line_raw: ($) =>
             seq(
                 alias('@php', $.directive_start),
-                optional(repeat(alias($.text, $.php))),
+                optional(repeat(alias($.text, $.php_only))),
                 alias('@endphp', $.directive_end)
             ),
-        _classic_raw: ($) =>
-            seq(
-                alias('<?php', $.directive_start),
-                optional(repeat(alias($.text, $.php))),
-                alias('?>', $.directive_end)
-            ),
-
         // ! Conditional Attributes
         attribute: ($) =>
             seq(

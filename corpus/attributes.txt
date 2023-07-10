@@ -7,11 +7,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @style
@@ -22,11 +22,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @checked
@@ -37,11 +37,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @selected
@@ -52,11 +52,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @disabled
@@ -67,11 +67,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @readonly
@@ -82,11 +82,11 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))
 
 ==================
 @required
@@ -97,8 +97,8 @@
 ---
 
 (blade
-  (html)
+  (php)
   (attribute
     (directive)
     (parameter))
-  (html))
+  (php))

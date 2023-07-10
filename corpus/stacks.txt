@@ -13,7 +13,7 @@
   (stack
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -30,7 +30,7 @@
   (stack
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 ==================
 @pushIf
@@ -46,7 +46,7 @@
   (stack
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -63,7 +63,7 @@
   (stack
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -80,5 +80,5 @@
   (stack
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))

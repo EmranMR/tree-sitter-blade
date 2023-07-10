@@ -1,13 +1,20 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.9.7",
+    "version": "0.10.0",
     "description": "",
     "main": "bindings/node",
+    "keywords": ["tree-sitter-blade for Laravel Blade files"],
+    "homepage": "https://github.com/EmranMR/tree-sitter-blade",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/EmranMR/tree-sitter-blade"
+    },
+    "bugs": "https://github.com/EmranMR/tree-sitter-blade/issues",
+    "funding": "https://github.com/sponsors/EmranMR",
     "scripts": {
-        "test": "tree-sitter parse example-file.blade.php",
-        "prebuild": "tree-sitter generate",
-        "build": "./TreeSitterParserBuild/compile_parser.sh ${PWD} /Applications/Nova.app/",
-        "postbuild": "cp libtree-sitter-blade.dylib ../Syntaxes/"
+        "test": "tree-sitter generate && tree-sitter test",
+        "parse": "tree-sitter generate && parse example-file.blade.php",
+        "generate": "tree-sitter generate"
     },
     "author": "Emran M Ramezan",
     "license": "MIT",

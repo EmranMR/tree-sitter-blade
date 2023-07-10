@@ -43,10 +43,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -64,6 +60,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -145,10 +145,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -166,6 +162,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -243,10 +243,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -264,6 +260,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -288,11 +288,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "html",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "keyword",
@@ -332,10 +327,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -353,6 +344,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -430,10 +425,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -451,6 +442,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -497,6 +492,11 @@
     "fields": {}
   },
   {
+    "type": "php_only",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "php_statement",
     "named": true,
     "fields": {},
@@ -525,7 +525,7 @@
           "named": true
         },
         {
-          "type": "php",
+          "type": "php_only",
           "named": true
         }
       ]
@@ -564,10 +564,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -585,6 +581,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -643,10 +643,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -664,6 +660,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -722,10 +722,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -743,6 +739,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {
@@ -806,10 +806,6 @@
           "named": true
         },
         {
-          "type": "html",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
@@ -827,6 +823,10 @@
         },
         {
           "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
           "named": true
         },
         {

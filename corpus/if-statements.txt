@@ -12,7 +12,7 @@
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -34,7 +34,7 @@
     (conditional
       (directive_start)
       (parameter)
-      (html)
+      (php)
       (directive_end))
     (directive_end)))
 
@@ -56,14 +56,14 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (conditional_keyword
       (directive)
       (parameter))
-    (html)
+    (php)
     (conditional_keyword
       (directive))
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -80,7 +80,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -97,7 +97,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -114,7 +114,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -130,7 +130,7 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -147,7 +147,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -163,7 +163,7 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -180,7 +180,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -196,7 +196,7 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -213,7 +213,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -230,7 +230,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -247,7 +247,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 ==================
@@ -264,7 +264,7 @@ conditional keywords
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 ==================
 custom directive
@@ -288,19 +288,19 @@ custom directive
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (conditional_keyword
       (directive)
       (parameter))
-    (html)
+    (php)
     (conditional_keyword
       (directive))
-    (html)
+    (php)
     (directive_end))
   (conditional
     (directive_start)
     (parameter)
-    (html)
+    (php)
     (directive_end)))
 
 
@@ -322,6 +322,6 @@ complex custom directive
     (conditional
       (directive_start)
       (parameter)
-      (html)
+      (php)
       (directive_end))
     (directive_end)))
