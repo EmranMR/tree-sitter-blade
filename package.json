@@ -1,6 +1,6 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.10.0",
+    "version": "0.1.0",
     "description": "",
     "main": "bindings/node",
     "keywords": ["tree-sitter-blade for Laravel Blade files"],
