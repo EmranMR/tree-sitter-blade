@@ -37,10 +37,10 @@ of use I have narrowed everything down to the following rules/queries:
 
 #### 2. (php_only) 🚧
 > This will be availble once the [split parser](https://github.com/tree-sitter/tree-sitter-php/pull/180) is merged into `tre-sitter-php`.The name might also change.
--   You inject php into `(php)` nodes. This is for all the php
+-   You inject `php_only` into `(php_only)` nodes. This is for all the php
     directives including `{{ x }}`, `{!! x !!}} ` and so forth
 -   Optional: `(#set! injection.combined)` but considering laravel
-    will render the different `php` points like havin multiple
+    will render the different `php_only` points like having multiple
     `<?php code ?>` The codes should have the same scope. In Nova you
     also get extra autocompletion which are built-in.
 
@@ -51,7 +51,7 @@ of use I have narrowed everything down to the following rules/queries:
     as `(php-only)` however decided to keep it separate.
 -   This is for all the inline directives such as `@extends(x)`,
     `@yield(x)` and so forth
--   you inject `php` in `(parameter)` to get a nice syntax
+-   you inject `php_only` in `(parameter)` to get a nice syntax
     highlighting
 -   Do ***NOT*** add `(#set! injection.combined)`
     -   Because they are _parameter_.
