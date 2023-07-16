@@ -19,6 +19,10 @@ This is very useful for editors and services that are based on tree-sitter. Such
 ## Sponsorship ❤️
 If you found this project helpful, I would really appreciate if you can [sponsor](https://github.com/sponsors/EmranMR) me so that I could keep maintaining and improving the grammar to include the entire **Laravel Ecosystem** inlcluding **Livewire**, **AlpineJS**,  **Inertia** and so forth. Furthermore keeping the project up to date with **future releases of Laravel**.
 
+## NeoVim Users
+If you are NeoVim user and would like to give this parser a shot, I would highly recommend checking out the [step by step guide and tips](https://github.com/EmranMR/tree-sitter-blade/discussions/19#discussion-5400675) by @yaegassy. 
+Once stable the repo will be hopefully added to nvim-treesitter allowing to install via `:TSInstall` instead.
+
 ## How to inject languages:
 
 When you parse your code there are three main important injection

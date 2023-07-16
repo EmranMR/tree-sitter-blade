@@ -23,8 +23,7 @@ module.exports = grammar({
             ),
 
         // !keywords
-        keyword: ($) => choice($._csrf),
-        _csrf: ($) => '@csrf',
+        keyword: ($) => alias(/@(csrf|viteReactRefresh)/, $.directive),
         // ! PHP Statements
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
@@ -67,7 +66,7 @@ module.exports = grammar({
         _inline_directive: ($) =>
             seq(
                 alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)/,
+                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite)/,
                     $.directive
                 ),
                 $._directive_parameter

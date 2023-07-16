@@ -85,17 +85,13 @@
       ]
     },
     "keyword": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_csrf"
-        }
-      ]
-    },
-    "_csrf": {
-      "type": "STRING",
-      "value": "@csrf"
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "@(csrf|viteReactRefresh)"
+      },
+      "named": true,
+      "value": "directive"
     },
     "php_statement": {
       "type": "CHOICE",
@@ -299,7 +295,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each)"
+            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite)"
           },
           "named": true,
           "value": "directive"

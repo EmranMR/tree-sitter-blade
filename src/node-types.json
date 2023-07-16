@@ -292,7 +292,17 @@
   {
     "type": "keyword",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "directive",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "loop",

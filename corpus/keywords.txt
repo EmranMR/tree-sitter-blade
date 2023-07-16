@@ -7,4 +7,17 @@
 ---
 
 (blade
-  (keyword))
+  (keyword
+    (directive)))
+
+==================
+@viteReactRefresh
+==================
+
+@viteReactRefresh
+
+---
+
+(blade
+  (keyword
+    (directive)))

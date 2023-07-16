@@ -129,3 +129,15 @@
 (blade
   (directive)
   (parameter))
+
+==================
+@vite
+==================
+
+ @vite('resources/js/app.js')
+ 
+---
+
+(blade
+  (directive)
+  (parameter))
