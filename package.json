@@ -1,9 +1,14 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "tree-sitter-blade for Laravel Blade files",
     "main": "bindings/node",
-    "keywords": ["tree-sitter-blade", "blade", "tree-sitter", "laravel"],
+    "keywords": [
+        "tree-sitter-blade",
+        "blade",
+        "tree-sitter",
+        "laravel"
+    ],
     "homepage": "https://github.com/EmranMR/tree-sitter-blade",
     "repository": {
         "type": "git",
@@ -33,6 +38,5 @@
             ],
             "injection-regex": "blade"
         }
-
     ]
 }
