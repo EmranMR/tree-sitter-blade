@@ -8,9 +8,9 @@
 
 (blade
   (php_statement
-    (bracket)
+    (bracket_start)
     (php_only)
-    (bracket)))
+    (bracket_end)))
 
 ==================
 {!! not escaped !!}
@@ -22,9 +22,9 @@
 
 (blade
   (php_statement
-    (bracket)
+    (bracket_start)
     (php_only)
-    (bracket)))
+    (bracket_end)))
 ==================
 inline raw
 ==================

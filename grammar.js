@@ -17,32 +17,32 @@ module.exports = grammar({
 
         comment: ($) =>
             seq(
-                alias('{{--', $.bracket),
+                alias('{{--', $.bracket_start),
                 optional(repeat($.text)),
-                alias('--}}', $.bracket)
+                alias('--}}', $.bracket_end)
             ),
 
         // !keywords
-        keyword: ($) => alias(/@(csrf|viteReactRefresh)/, $.directive),
+        keyword: ($) =>
+            alias(/@(csrf|viteReactRefresh)/, $.directive),
         // ! PHP Statements
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
         _escaped: ($) =>
             seq(
-                alias('{{', $.bracket),
+                alias('{{', $.bracket_start),
                 optional(repeat(alias($.text, $.php_only))),
-                alias('}}', $.bracket)
+                alias('}}', $.bracket_end)
             ),
         _unescaped: ($) =>
             seq(
-                alias('{!!', $.bracket),
+                alias('{!!', $.bracket_start),
                 optional(repeat(alias($.text, $.php_only))),
-                alias('!!}', $.bracket)
+                alias('!!}', $.bracket_end)
             ),
 
         //! raw php
-        _raw: ($) =>
-            choice($._inline_raw, $._multi_line_raw),
+        _raw: ($) => choice($._inline_raw, $._multi_line_raw),
 
         _inline_raw: ($) =>
             seq(alias('@php', $.directive), $._directive_parameter),

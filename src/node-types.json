@@ -98,7 +98,11 @@
       "required": true,
       "types": [
         {
-          "type": "bracket",
+          "type": "bracket_end",
+          "named": true
+        },
+        {
+          "type": "bracket_start",
           "named": true
         },
         {
@@ -515,7 +519,11 @@
       "required": false,
       "types": [
         {
-          "type": "bracket",
+          "type": "bracket_end",
+          "named": true
+        },
+        {
+          "type": "bracket_start",
           "named": true
         },
         {
@@ -871,7 +879,11 @@
     "named": false
   },
   {
-    "type": "bracket",
+    "type": "bracket_end",
+    "named": true
+  },
+  {
+    "type": "bracket_start",
     "named": true
   },
   {

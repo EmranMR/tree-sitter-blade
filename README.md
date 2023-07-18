@@ -34,6 +34,12 @@ keep maintaining and improving the grammar to include the entire
 **Inertia** and so forth. Furthermore keeping the project up to date
 with **future releases of Laravel**.
 
+## Nova Users
+
+All you need to do, to get started is to simply install the
+[Laravel Suit Extension](https://extensions.panic.com/extensions/emran-mr/emran-mr.laravel/)
+from the Extension Library.
+
 ## NeoVim Users
 
 If you are NeoVim user and would like to give this parser a shot, I
@@ -82,15 +88,15 @@ of use I have narrowed everything down to the following rules/queries:
 -   optional: It will add a nice syntax highlighting for your
     parameters
 -   This is also a php injection point. I initially had this aliased
-    as `(php-only)` however decided to keep it separate.
+    as `(php_only)`, however I decided to keep it separate.
 -   This is for all the inline directives such as `@extends(x)`,
     `@yield(x)` and so forth
 -   you inject `php_only` in `(parameter)` to get a nice syntax
     highlighting
 -   Do **_NOT_** add `(#set! injection.combined)`
     -   Because they are _parameter_.
-    -   This is just for syntax highlighting and getting nice `php`
-        IDE autocompletion if needed.
+    -   This is just for syntax highlighting and getting a nice `php`
+        IDE autocompletion if supported by your editor.
 
 #### 4. (javascript)
 
@@ -134,13 +140,24 @@ tree-sitter queries:
 
 ## Folding
 
-The grammar is written in a way so that you can easily add folding
-functionality. All you have to do is to mark the regions between
-`(directive_start)` and `(directive_end)`
+The grammar is written in a way to support code folding. You write
+them in `queries/folds.scm`.
 
-You will need to first find out what capture groups your editor uses.
-I will add an example in `folds.scm` for your information once I write
-one for Nova.
+As long as your editor supports `folds.scm` , you can easily write
+predicates to implement foldings. This will allow you to clear up
+clutter and focus on the feature you are working in hand.
+
+You can have a look into `queries/folds.scm`, which has the excerpts
+used to implement this feature in Nova.
+
+The following is a list of `nodes` that you need to capture to
+implement the folding
+
+1. `(directive_start)` and `(directive_end)`
+2. `(bracket_start)` and `(bracket_end)`
+
+> Please note each **editor** uses it's own sets of
+> predicates/variables so you need to look into their documentation.
 
 ## Quick Note about `queries/` folder
 
@@ -175,26 +192,6 @@ as well as in depth info about the `grammar` itself.
 
 -   [x] Write the grammar
 -   [x] Write the tests
+-   [x] Support folding
 -   [ ] Support Livewire 🪼
 -   [ ] support AlpineJS
--   [ ] support for Javascript injection points (examples needed from
-        the users please raise an
-        [issue](https://github.com/EmranMR/tree-sitter-blade/issues))
--   [ ] Write the queries (examples needed example needed from the
-        users, please raise an
-        [issue](https://github.com/EmranMR/tree-sitter-blade/issues))
-
-<!-- ## For Nova Contributors & Issues
-
-Head over to this repo:
-
--   [blade extension for Nova](https://github.com/EmranMR/nova-blade)
-
-You need to compile the parser to `.dylib` and then copy it in the
-`Syntax/` folder of the extension.
-
-You can download the build script here:
-[**Parser Build Script**](https://docs.nova.app/syntax-reference/build_script.zip)
-
-Please refer to the README file in that repo for more information
-about contributing and using the build script. -->

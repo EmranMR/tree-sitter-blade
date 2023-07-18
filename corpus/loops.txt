@@ -30,9 +30,9 @@
     (parameter)
     (php)
     (php_statement
-      (bracket)
+      (bracket_start)
       (php_only)
-      (bracket))
+      (bracket_end))
     (php)
     (directive_end)))
 
@@ -86,9 +86,9 @@
     (parameter)
     (php)
     (php_statement
-      (bracket)
+      (bracket_start)
       (php_only)
-      (bracket))
+      (bracket_end))
     (php)
     (loop_operator
       (directive))
@@ -117,9 +117,9 @@
       (parameter))
     (php)
     (php_statement
-      (bracket)
+      (bracket_start)
       (php_only)
-      (bracket))
+      (bracket_end))
     (php)
     (loop_operator
       (directive)

@@ -8,6 +8,6 @@
 
 (blade
   (comment
-    (bracket)
+    (bracket_start)
     (text)
-    (bracket)))
+    (bracket_end)))
