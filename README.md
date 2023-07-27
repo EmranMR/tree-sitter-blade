@@ -37,7 +37,7 @@ with **future releases of Laravel**.
 ## Nova Users
 
 Simply install the
-[Laravel Suit Extension](https://extensions.panic.com/extensions/emran-mr/emran-mr.laravel/)
+[Laravel Suite Extension](https://extensions.panic.com/extensions/emran-mr/emran-mr.laravel/)
 from the Extension Library.
 
 ## NeoVim Users
