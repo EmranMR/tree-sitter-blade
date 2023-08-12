@@ -24,7 +24,10 @@ module.exports = grammar({
 
         // !keywords
         keyword: ($) =>
-            alias(/@(csrf|viteReactRefresh)/, $.directive),
+            alias(
+                /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig)/,
+                $.directive
+            ),
         // ! PHP Statements
         php_statement: ($) =>
             choice($._escaped, $._unescaped, $._raw),
@@ -66,7 +69,7 @@ module.exports = grammar({
         _inline_directive: ($) =>
             seq(
                 alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite)/,
+                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire)/,
                     $.directive
                 ),
                 $._directive_parameter
@@ -81,7 +84,8 @@ module.exports = grammar({
                 $.stack,
                 $.conditional,
                 $.switch,
-                $.loop
+                $.loop,
+                $.livewire
             ),
 
         // !fragment
@@ -338,6 +342,27 @@ module.exports = grammar({
                 alias('@while', $.directive_start),
                 $._directive_body_with_parameter,
                 alias('@endwhile', $.directive_end)
+            ),
+
+        // !livewire 🪼
+        livewire: ($) => choice($._presist, $._teleport, $._volt),
+        _presist: ($) =>
+            seq(
+                alias('@persist', $.directive_start),
+                $._directive_body_with_parameter,
+                alias('@endpersist', $.directive_end)
+            ),
+        _teleport: ($) =>
+            seq(
+                alias('@teleport', $.directive_start),
+                $._directive_body_with_parameter,
+                alias('@endteleport', $.directive_end)
+            ),
+        _volt: ($) =>
+            seq(
+                alias('@volt', $.directive_start),
+                $._directive_body_with_parameter,
+                alias('@endvolt', $.directive_end)
             ),
 
         /*------------------------------------

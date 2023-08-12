@@ -88,7 +88,7 @@
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
-        "value": "@(csrf|viteReactRefresh)"
+        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig)"
       },
       "named": true,
       "value": "directive"
@@ -295,7 +295,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite)"
+            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire)"
           },
           "named": true,
           "value": "directive"
@@ -340,6 +340,10 @@
         {
           "type": "SYMBOL",
           "name": "loop"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "livewire"
         }
       ]
     },
@@ -1330,6 +1334,104 @@
           "content": {
             "type": "STRING",
             "value": "@endwhile"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "livewire": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_presist"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_teleport"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_volt"
+        }
+      ]
+    },
+    "_presist": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@persist"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_body_with_parameter"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endpersist"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_teleport": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@teleport"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_body_with_parameter"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endteleport"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_volt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@volt"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_body_with_parameter"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endvolt"
           },
           "named": true,
           "value": "directive_end"

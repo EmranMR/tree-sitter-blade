@@ -47,6 +47,10 @@
           "named": true
         },
         {
+          "type": "livewire",
+          "named": true
+        },
+        {
           "type": "loop",
           "named": true
         },
@@ -153,6 +157,10 @@
           "named": true
         },
         {
+          "type": "livewire",
+          "named": true
+        },
+        {
           "type": "loop",
           "named": true
         },
@@ -251,6 +259,10 @@
           "named": true
         },
         {
+          "type": "livewire",
+          "named": true
+        },
+        {
           "type": "loop",
           "named": true
         },
@@ -309,6 +321,89 @@
     }
   },
   {
+    "type": "livewire",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "loop",
     "named": true,
     "fields": {},
@@ -342,6 +437,10 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
           "named": true
         },
         {
@@ -440,6 +539,10 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
           "named": true
         },
         {
@@ -586,6 +689,10 @@
           "named": true
         },
         {
+          "type": "livewire",
+          "named": true
+        },
+        {
           "type": "loop",
           "named": true
         },
@@ -665,6 +772,10 @@
           "named": true
         },
         {
+          "type": "livewire",
+          "named": true
+        },
+        {
           "type": "loop",
           "named": true
         },
@@ -741,6 +852,10 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
           "named": true
         },
         {
@@ -825,6 +940,10 @@
         },
         {
           "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
           "named": true
         },
         {

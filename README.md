@@ -164,10 +164,10 @@ implement the folding
 This is for `tree-sitter cli`. Your editor or service might use
 different **_capture group_** name or **_predicates_**.
 
-Consequently you will need to find out in their documentation how you
-could approach queries or where they are stored and used by your
-editor. For example **_Nova_** does not use anything in this folder
-and uses it's own `Queries` folder instead.
+Consequently you will need to find out how you could approach queries
+or where they are stored and used by your editor by reading their
+documentation. For example **_Nova_** does not use anything in this
+folder and uses it's own `Queries` folder instead.
 
 At the moment consider all the `.scm` files in that folder as stubs
 based on the upcoming Nova extension I am developing. 🔴
@@ -180,12 +180,13 @@ detailed examples of what you are trying to achieve.
 
 -   code excerpts or screenshots would be appreciated
 
-If you need help with anything else, feel free to use the
+If you need help with anything else or would like to share tips and
+tricks for fellow devs, feel free to use the
 [discussion tab](https://github.com/EmranMR/tree-sitter-blade/discussions)
 
 ## Contribution
 
-See the [contribution](/CONTRIBUTION.md) guidelines for more details,
+See the [contribution](/CONTRIBUTING.md) guidelines for more details,
 as well as in depth info about the `grammar` itself.
 
 ## Todos
@@ -193,5 +194,5 @@ as well as in depth info about the `grammar` itself.
 -   [x] Write the grammar
 -   [x] Write the tests
 -   [x] Support folding
--   [ ] Support Livewire 🪼
+-   [x] Support Livewire 🪼
 -   [ ] support AlpineJS

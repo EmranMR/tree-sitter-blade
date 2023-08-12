@@ -1,0 +1,100 @@
+==================
+@livewireScriptConfig
+==================
+
+@livewireScripts
+
+---
+
+(blade
+  (keyword
+    (directive)))
+
+==================
+@livewireStyles
+==================
+
+@livewireStyles
+
+---
+
+(blade
+  (keyword
+    (directive)))
+
+==================
+@livewireScriptConfig
+==================
+
+@livewireScriptConfig
+
+---
+
+(blade
+  (keyword
+    (directive)))
+
+==================
+@livewire
+==================
+
+ @livewire('show-posts')
+
+---
+
+(blade
+  (directive)
+  (parameter))
+
+==================
+@persist
+==================
+
+@persist('player)
+  <div>hello world</div>
+@endpersist
+
+---
+
+(blade
+  (livewire
+    (directive_start)
+    (parameter)
+    (php)
+    (directive_end)))
+
+==================
+@teleport
+==================
+
+@teleport('player)
+  <div>hello world</div>
+@endteleport
+
+---
+
+(blade
+  (livewire
+    (directive_start)
+    (parameter)
+    (php)
+    (directive_end)))
+
+==================
+@volt
+==================
+
+@volt('player)
+  <div>hello world</div>
+@endvolt
+
+---
+
+(blade
+  (livewire
+    (directive_start)
+    (parameter)
+    (php)
+    (directive_end)))
+
+

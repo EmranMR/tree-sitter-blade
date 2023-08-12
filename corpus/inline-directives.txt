@@ -135,7 +135,7 @@
 ==================
 
  @vite('resources/js/app.js')
- 
+
 ---
 
 (blade
