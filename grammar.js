@@ -345,8 +345,8 @@ module.exports = grammar({
             ),
 
         // !livewire 🪼
-        livewire: ($) => choice($._presist, $._teleport, $._volt),
-        _presist: ($) =>
+        livewire: ($) => choice($._persist, $._teleport, $._volt),
+        _persist: ($) =>
             seq(
                 alias('@persist', $.directive_start),
                 $._directive_body_with_parameter,
