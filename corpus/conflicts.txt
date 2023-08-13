@@ -1,0 +1,40 @@
+==================
+Orphan Punctuation Marks
+==================
+
+@ { } {} () !
+
+---
+
+(blade
+  (php)
+  (php)
+  (php)
+  (php)
+  (php)
+  (php))
+
+==================
+text starting with @
+==================
+
+test@test.com
+
+@test
+
+@custom('test')
+    hello
+@endcustom
+
+---
+
+    (blade
+      (php)
+      (php)
+      (php)
+      (php)
+      (conditional
+        (directive_start)
+        (parameter)
+        (php)
+        (directive_end)))
