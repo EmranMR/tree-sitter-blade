@@ -2,11 +2,15 @@
 Orphan Punctuation Marks
 ==================
 
-@ { } {} () !
+@ { } {} () ! ( )
 
 ---
 
 (blade
+  (php)
+  (php)
+  (php)
+  (php)
   (php)
   (php)
   (php)
@@ -28,13 +32,41 @@ test@test.com
 
 ---
 
-    (blade
-      (php)
-      (php)
-      (php)
-      (php)
-      (conditional
-        (directive_start)
-        (parameter)
-        (php)
-        (directive_end)))
+(blade
+  (php)
+  (php)
+  (php)
+  (php)
+  (conditional
+    (directive_start)
+    (parameter)
+    (php)
+    (directive_end)))
+
+==================
+Comments Ending with Punctuation Conflict
+==================
+
+{{--)--}}
+{{--}--}}
+{{--@--}}
+{{--!--}}
+
+---
+(blade
+  (comment
+    (bracket_start)
+    (text)
+    (bracket_end))
+  (comment
+    (bracket_start)
+    (text)
+    (bracket_end))
+  (comment
+    (bracket_start)
+    (text)
+    (bracket_end))
+  (comment
+    (bracket_start)
+    (text)
+    (bracket_end)))

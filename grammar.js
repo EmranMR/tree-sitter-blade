@@ -412,7 +412,7 @@ module.exports = grammar({
         // !text
         text: ($) =>
             choice(
-                token(prec(-1, /[{}!@()?-][a-zA-Z\d]*[^\(]/)), // custom directive conflict resolution
+                token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)), // custom directive conflict resolution
                 token(prec(-2, /[{}!@()?-]/)), // orphan tags
                 token(
                     prec(
