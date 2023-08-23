@@ -417,7 +417,7 @@ module.exports = grammar({
                 token(
                     prec(
                         -1,
-                        /[^\s(){!}@-]([^(){!}@?]*[^\s{!}()@?-])?/ //general text
+                        /[^\s(){!}@-]([^(){!}@?]*[^{!}()@?-])?/ //general text
                     )
                 )
             ),

@@ -2,7 +2,7 @@
 @class
 ==================
 
-<div @class('test') > </div>
+<div @class('test') id="test" style="test" > </div>
 
 ---
 
