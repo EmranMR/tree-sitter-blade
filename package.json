@@ -1,6 +1,6 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "tree-sitter-blade for Laravel Blade files",
     "main": "bindings/node",
     "keywords": [
@@ -18,7 +18,7 @@
     "funding": "https://github.com/sponsors/EmranMR",
     "scripts": {
         "test": "tree-sitter generate && tree-sitter test",
-        "parse": "tree-sitter generate && tree-sitter parse example-file.blade.php",
+        "parse": "tree-sitter generate && tree-sitter parse example-file.blade",
         "generate": "tree-sitter generate"
     },
     "author": "Emran M Ramezan",
