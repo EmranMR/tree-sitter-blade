@@ -680,6 +680,18 @@
         },
         {
           "type": "SYMBOL",
+          "name": "_can"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cannot"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_canany"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_custom"
         }
       ]
@@ -1015,6 +1027,87 @@
           "content": {
             "type": "STRING",
             "value": "@enderror"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_can": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@can"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_if_statement_directive_body"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endcan"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_cannot": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@cannot"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_if_statement_directive_body"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endcannot"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_canany": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@canany"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_if_statement_directive_body"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endcanany"
           },
           "named": true,
           "value": "directive_end"

@@ -179,6 +179,9 @@ module.exports = grammar({
                 $._hasSection,
                 $._sectionMissing,
                 $._error,
+                $._can,
+                $._cannot,
+                $._canany,
                 $._custom
             ),
         // used in the conditional body rules
@@ -268,6 +271,27 @@ module.exports = grammar({
                 alias('@enderror', $.directive_end)
             ),
 
+        // !Authorisation Directives
+        _can: ($) =>
+            seq(
+                alias('@can', $.directive_start),
+                $._if_statement_directive_body,
+                alias('@endcan', $.directive_end)
+            ),
+
+        _cannot: ($) =>
+            seq(
+                alias('@cannot', $.directive_start),
+                $._if_statement_directive_body,
+                alias('@endcannot', $.directive_end)
+            ),
+        _canany: ($) =>
+            seq(
+                alias('@canany', $.directive_start),
+                $._if_statement_directive_body,
+                alias('@endcanany', $.directive_end)
+            ),
+        // !Custom if Statements
         _custom: ($) =>
             seq(
                 choice(
