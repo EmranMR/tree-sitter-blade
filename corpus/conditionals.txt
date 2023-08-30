@@ -283,21 +283,22 @@ conditional keywords
 
 (blade
   (conditional
-    (directive_start)
-    (parameter)
-    (php)
-    (php)
-    (php)
-    (php)
-    (php)
-    (conditional_keyword
-      (directive)
-      (parameter))
-    (php)
-    (conditional_keyword
-      (directive))
-    (php)
-    (directive_end)))
+    (authorization
+      (directive_start)
+      (parameter)
+      (php)
+      (php)
+      (php)
+      (php)
+      (php)
+      (conditional_keyword
+        (directive)
+        (parameter))
+      (php)
+      (conditional_keyword
+        (directive))
+      (php)
+      (directive_end))))
 
 ================================================================================
 @cannot
@@ -313,18 +314,19 @@ conditional keywords
 
 (blade
   (conditional
-    (directive_start)
-    (parameter)
-    (php)
-    (php)
-    (php)
-    (php)
-    (php)
-    (conditional_keyword
-      (directive)
-      (parameter))
-    (php)
-    (directive_end)))
+    (authorization
+      (directive_start)
+      (parameter)
+      (php)
+      (php)
+      (php)
+      (php)
+      (php)
+      (conditional_keyword
+        (directive)
+        (parameter))
+      (php)
+      (directive_end))))
 
 ================================================================================
 @canany
@@ -340,18 +342,20 @@ conditional keywords
 
 (blade
   (conditional
-    (directive_start)
-    (parameter)
-    (php)
-    (php)
-    (php)
-    (php)
-    (php)
-    (conditional_keyword
-      (directive)
-      (parameter))
-    (php)
-    (directive_end)))
+    (authorization
+      (directive_start)
+      (parameter)
+      (php)
+      (php)
+      (php)
+      (php)
+      (php)
+      (conditional_keyword
+        (directive)
+        (parameter))
+      (php)
+      (directive_end))))
+
 ================================================================================
 custom directive
 ================================================================================
