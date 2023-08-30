@@ -684,6 +684,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "_feature"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_custom"
         }
       ]
@@ -1117,6 +1121,33 @@
           "content": {
             "type": "STRING",
             "value": "@endcanany"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_feature": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@feature"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_if_statement_directive_body"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endfeature"
           },
           "named": true,
           "value": "directive_end"
