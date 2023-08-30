@@ -680,15 +680,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_can"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_cannot"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_canany"
+          "name": "_authorization"
         },
         {
           "type": "SYMBOL",
@@ -1030,6 +1022,23 @@
           },
           "named": true,
           "value": "directive_end"
+        }
+      ]
+    },
+    "_authorization": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_can"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_canany"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_cannot"
         }
       ]
     },

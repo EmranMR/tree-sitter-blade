@@ -179,9 +179,7 @@ module.exports = grammar({
                 $._hasSection,
                 $._sectionMissing,
                 $._error,
-                $._can,
-                $._cannot,
-                $._canany,
+                $._authorization,
                 $._custom
             ),
         // used in the conditional body rules
@@ -272,6 +270,7 @@ module.exports = grammar({
             ),
 
         // !Authorisation Directives
+        _authorization: ($) => choice($._can, $._canany, $._cannot),
         _can: ($) =>
             seq(
                 alias('@can', $.directive_start),
