@@ -1,6 +1,6 @@
-==================
+================================================================================
 @switch
-==================
+================================================================================
 
 @switch($i)
     @case(1)
@@ -15,18 +15,24 @@
         Default case...
 @endswitch
 
----
+--------------------------------------------------------------------------------
 
 (blade
   (switch
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (directive)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive)
     (directive)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive)
     (directive)

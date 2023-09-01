@@ -1,33 +1,37 @@
-==================
+================================================================================
 @for
-==================
+================================================================================
 
 @for ($i = 0; $i < 10; $i++)
     The current value is
 @endfor
----
+--------------------------------------------------------------------------------
 
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
-==================
+================================================================================
 @foreach
-==================
+================================================================================
 
 @foreach ($users as $user)
     <p>This is user {{ $user->id }}</p>
 @endforeach
 
----
+--------------------------------------------------------------------------------
 
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (php_statement
       (bracket_start)
@@ -36,54 +40,59 @@
     (php)
     (directive_end)))
 
-==================
+================================================================================
 @forelse
-==================
+================================================================================
 
 @forelse ($user as $user)
     The current value is
 @endforelse
----
+--------------------------------------------------------------------------------
 
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
-==================
+================================================================================
 @while
-==================
+================================================================================
 
 @while (true)
     <p>I'm looping forever.</p>
 @endwhile
----
+--------------------------------------------------------------------------------
 
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
-
-==================
+================================================================================
 @empty in loops
-==================
+================================================================================
 
 @forelse ($users as $user)
     <li>{{ $user->name }}</li>
 @empty
     <p>No users</p>
 @endforelse
----
+--------------------------------------------------------------------------------
 
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (php_statement
       (bracket_start)
@@ -95,9 +104,9 @@
     (php)
     (directive_end)))
 
-==================
+================================================================================
 @continue and @break in loops
-==================
+================================================================================
 
 @foreach ($users as $user)
     @continue($user->type == 1)
@@ -107,14 +116,19 @@
     @break($user->number == 5)
 @endforeach
 
----
+--------------------------------------------------------------------------------
+
 (blade
   (loop
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (loop_operator
       (directive)
-      (parameter))
+      (bracket_start)
+      (parameter)
+      (bracket_end))
     (php)
     (php_statement
       (bracket_start)
@@ -123,5 +137,7 @@
     (php)
     (loop_operator
       (directive)
-      (parameter))
+      (bracket_start)
+      (parameter)
+      (bracket_end))
     (directive_end)))

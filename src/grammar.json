@@ -50,13 +50,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "{{--"
-          },
-          "named": true,
-          "value": "bracket_start"
+          "type": "STRING",
+          "value": "{{--"
         },
         {
           "type": "CHOICE",
@@ -74,13 +69,8 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "--}}"
-          },
-          "named": true,
-          "value": "bracket_end"
+          "type": "STRING",
+          "value": "--}}"
         }
       ]
     },
@@ -1683,15 +1673,20 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "PREC",
-            "value": 1,
+            "type": "TOKEN",
             "content": {
-              "type": "STRING",
-              "value": "("
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "("
+              }
             }
-          }
+          },
+          "named": true,
+          "value": "bracket_start"
         },
         {
           "type": "CHOICE",
@@ -1709,15 +1704,20 @@
           ]
         },
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "PREC",
-            "value": 1,
+            "type": "TOKEN",
             "content": {
-              "type": "STRING",
-              "value": ")"
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": ")"
+              }
             }
-          }
+          },
+          "named": true,
+          "value": "bracket_end"
         }
       ]
     },

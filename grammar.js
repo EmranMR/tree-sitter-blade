@@ -15,12 +15,7 @@ module.exports = grammar({
                 alias($.text, $.php)
             ),
 
-        comment: ($) =>
-            seq(
-                alias('{{--', $.bracket_start),
-                optional(repeat($.text)),
-                alias('--}}', $.bracket_end)
-            ),
+        comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
 
         // !keywords
         keyword: ($) =>
@@ -424,9 +419,9 @@ module.exports = grammar({
         // !directive parameter
         _directive_parameter: ($) =>
             seq(
-                token(prec(1, '(')),
+                alias(token(prec(1, '(')), $.bracket_start),
                 optional(repeat($.parameter)),
-                token(prec(1, ')'))
+                alias(token(prec(1, ')')), $.bracket_end)
             ),
         // parenthesis balancing
         parameter: ($) => choice(/[^()]+/, $._text_with_parenthesis),

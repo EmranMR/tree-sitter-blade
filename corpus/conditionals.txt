@@ -11,7 +11,9 @@
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -30,10 +32,14 @@
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (conditional
       (directive_start)
+      (bracket_start)
       (parameter)
+      (bracket_end)
       (php)
       (directive_end))
     (directive_end)))
@@ -55,11 +61,15 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (conditional_keyword
       (directive)
-      (parameter))
+      (bracket_start)
+      (parameter)
+      (bracket_end))
     (php)
     (conditional_keyword
       (directive))
@@ -79,7 +89,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -96,7 +108,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -113,7 +127,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -146,7 +162,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -179,7 +197,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -212,7 +232,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -229,7 +251,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -246,7 +270,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -263,7 +289,9 @@ conditional keywords
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -285,7 +313,9 @@ conditional keywords
   (conditional
     (authorization
       (directive_start)
+      (bracket_start)
       (parameter)
+      (bracket_end)
       (php)
       (php)
       (php)
@@ -293,7 +323,9 @@ conditional keywords
       (php)
       (conditional_keyword
         (directive)
-        (parameter))
+        (bracket_start)
+        (parameter)
+        (bracket_end))
       (php)
       (conditional_keyword
         (directive))
@@ -316,7 +348,9 @@ conditional keywords
   (conditional
     (authorization
       (directive_start)
+      (bracket_start)
       (parameter)
+      (bracket_end)
       (php)
       (php)
       (php)
@@ -324,7 +358,9 @@ conditional keywords
       (php)
       (conditional_keyword
         (directive)
-        (parameter))
+        (bracket_start)
+        (parameter)
+        (bracket_end))
       (php)
       (directive_end))))
 
@@ -344,7 +380,9 @@ conditional keywords
   (conditional
     (authorization
       (directive_start)
+      (bracket_start)
       (parameter)
+      (bracket_end)
       (php)
       (php)
       (php)
@@ -352,7 +390,9 @@ conditional keywords
       (php)
       (conditional_keyword
         (directive)
-        (parameter))
+        (bracket_start)
+        (parameter)
+        (bracket_end))
       (php)
       (directive_end))))
 
@@ -377,11 +417,15 @@ custom directive
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (conditional_keyword
       (directive)
-      (parameter))
+      (bracket_start)
+      (parameter)
+      (bracket_end))
     (php)
     (conditional_keyword
       (directive))
@@ -389,7 +433,9 @@ custom directive
     (directive_end))
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (php)
     (directive_end)))
 
@@ -407,10 +453,14 @@ complex custom directive
 (blade
   (conditional
     (directive_start)
+    (bracket_start)
     (parameter)
+    (bracket_end)
     (conditional
       (directive_start)
+      (bracket_start)
       (parameter)
+      (bracket_end)
       (php)
       (directive_end))
     (directive_end)))
