@@ -175,6 +175,7 @@ module.exports = grammar({
                 $._sectionMissing,
                 $._error,
                 $.authorization,
+                $._feature,
                 $._custom
             ),
         // used in the conditional body rules
@@ -285,6 +286,14 @@ module.exports = grammar({
                 $._if_statement_directive_body,
                 alias('@endcanany', $.directive_end)
             ),
+        // !Laravel Pennant
+        _feature: ($) =>
+            seq(
+                alias('@feature', $.directive_start),
+                $._if_statement_directive_body,
+                alias('@endfeature', $.directive_end)
+            ),
+
         // !Custom if Statements
         _custom: ($) =>
             seq(

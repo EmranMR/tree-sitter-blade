@@ -397,6 +397,38 @@ conditional keywords
       (directive_end))))
 
 ================================================================================
+@feature
+================================================================================
+
+@feature('site-redesign')
+    hello world
+@elsefeature('purchase-button', 'seafoam-green')
+    hello world
+@else
+    hello world
+@endfeature
+
+--------------------------------------------------------------------------------
+
+(blade
+  (conditional
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (php)
+    (conditional_keyword
+      (directive)
+      (bracket_start)
+      (parameter)
+      (bracket_end))
+    (php)
+    (conditional_keyword
+      (directive))
+    (php)
+    (directive_end)))
+
+================================================================================
 custom directive
 ================================================================================
 
