@@ -673,8 +673,13 @@
           "name": "authorization"
         },
         {
-          "type": "SYMBOL",
-          "name": "_feature"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_feature"
+          },
+          "named": true,
+          "value": "pennant"
         },
         {
           "type": "SYMBOL",

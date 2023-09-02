@@ -412,21 +412,22 @@ conditional keywords
 
 (blade
   (conditional
-    (directive_start)
-    (bracket_start)
-    (parameter)
-    (bracket_end)
-    (php)
-    (conditional_keyword
-      (directive)
+    (pennant
+      (directive_start)
       (bracket_start)
       (parameter)
-      (bracket_end))
-    (php)
-    (conditional_keyword
-      (directive))
-    (php)
-    (directive_end)))
+      (bracket_end)
+      (php)
+      (conditional_keyword
+        (directive)
+        (bracket_start)
+        (parameter)
+        (bracket_end))
+      (php)
+      (conditional_keyword
+        (directive))
+      (php)
+      (directive_end))))
 
 ================================================================================
 custom directive

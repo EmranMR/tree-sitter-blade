@@ -175,7 +175,7 @@ module.exports = grammar({
                 $._sectionMissing,
                 $._error,
                 $.authorization,
-                $._feature,
+                alias($._feature, $.pennant),
                 $._custom
             ),
         // used in the conditional body rules
