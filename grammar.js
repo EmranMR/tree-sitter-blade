@@ -20,7 +20,7 @@ module.exports = grammar({
         // !keywords
         keyword: ($) =>
             alias(
-                /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig)/,
+                /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent)/,
                 $.directive
             ),
         // ! PHP Statements
@@ -64,7 +64,7 @@ module.exports = grammar({
         _inline_directive: ($) =>
             seq(
                 alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware)/,
+                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section)/,
                     $.directive
                 ),
                 $._directive_parameter
@@ -96,7 +96,7 @@ module.exports = grammar({
             seq(
                 alias('@section', $.directive_start),
                 $._directive_body_with_parameter,
-                alias('@endsection', $.directive_end)
+                alias(/@(endsection|show)/, $.directive_end)
             ),
 
         // once

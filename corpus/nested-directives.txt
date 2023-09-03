@@ -22,9 +22,14 @@
 @section
 ================================================================================
 
-@section('test')
-        section
-@endsection
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        @section('test')
+          @parent
+            test
+        @endsection
 
 
 --------------------------------------------------------------------------------
@@ -35,6 +40,15 @@
     (bracket_start)
     (parameter)
     (bracket_end)
+    (php)
+    (directive_end))
+  (section
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (keyword
+      (directive))
     (php)
     (directive_end)))
 

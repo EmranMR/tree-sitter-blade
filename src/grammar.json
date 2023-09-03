@@ -78,7 +78,7 @@
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
-        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig)"
+        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent)"
       },
       "named": true,
       "value": "directive"
@@ -285,7 +285,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware)"
+            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section)"
           },
           "named": true,
           "value": "directive"
@@ -383,8 +383,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "@endsection"
+            "type": "PATTERN",
+            "value": "@(endsection|show)"
           },
           "named": true,
           "value": "directive_end"
