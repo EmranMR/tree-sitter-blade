@@ -64,7 +64,7 @@ module.exports = grammar({
         _inline_directive: ($) =>
             seq(
                 alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire)/,
+                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware)/,
                     $.directive
                 ),
                 $._directive_parameter

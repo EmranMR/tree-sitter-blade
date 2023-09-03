@@ -285,7 +285,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire)"
+            "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware)"
           },
           "named": true,
           "value": "directive"
