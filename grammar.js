@@ -62,12 +62,15 @@ module.exports = grammar({
             ),
         // !inline directives
         _inline_directive: ($) =>
-            seq(
-                alias(
-                    /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section)/,
-                    $.directive
+            choice(
+                seq(
+                    alias(
+                        /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section)/,
+                        $.directive
+                    ),
+                    $._directive_parameter
                 ),
-                $._directive_parameter
+                $.inlineSection
             ),
         // !nested directives
         _nested_directive: ($) =>
@@ -91,14 +94,25 @@ module.exports = grammar({
                 alias('@endfragment', $.directive_end)
             ),
 
-        // !section
+        // ! section
         section: ($) =>
             seq(
                 alias('@section', $.directive_start),
-                $._directive_body_with_parameter,
+                alias('(', $.bracket_start),
+                optional(alias($._section_parameter, $.parameter)),
+                alias(')', $.bracket_end),
+                optional($._directive_body),
                 alias(/@(endsection|show)/, $.directive_end)
             ),
-
+        inlineSection: ($) =>
+            seq(
+                alias('@section', $.directive),
+                alias('(', $.bracket_start),
+                optional(alias($._section_parameter, $.parameter)),
+                ',',
+                optional(alias($._section_parameter, $.parameter)),
+                alias(')', $.bracket_end)
+            ),
         // once
         once: ($) =>
             seq(
@@ -425,6 +439,9 @@ module.exports = grammar({
         _if_statement_directive_body_with_no_parameter: ($) =>
             repeat1(choice($._definition, $.conditional_keyword)),
 
+        //!parameters
+        _section_parameter: ($) =>
+            seq(optional(/[\"\']/), $.text, optional(/[\"\']/)),
         // !directive parameter
         _directive_parameter: ($) =>
             seq(
@@ -440,11 +457,11 @@ module.exports = grammar({
         text: ($) =>
             choice(
                 token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)), // custom directive conflict resolution
-                token(prec(-2, /[{}!@()?-]/)), // orphan tags
+                token(prec(-2, /[{}!@()?,-]/)), // orphan tags
                 token(
                     prec(
                         -1,
-                        /[^\s(){!}@-]([^(){!}@?]*[^{!}()@?-])?/ //general text
+                        /[^\s(){!}@-]([^(){!}@,?]*[^{!}()@?,-])?/ //general text
                     )
                 )
             ),

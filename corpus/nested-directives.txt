@@ -38,14 +38,16 @@
   (section
     (directive_start)
     (bracket_start)
-    (parameter)
+    (parameter
+      (text))
     (bracket_end)
     (php)
     (directive_end))
   (section
     (directive_start)
     (bracket_start)
-    (parameter)
+    (parameter
+      (text))
     (bracket_end)
     (keyword
       (directive))

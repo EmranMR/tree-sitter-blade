@@ -178,3 +178,33 @@
   (bracket_start)
   (parameter)
   (bracket_end))
+
+================================================================================
+@inlineSection
+================================================================================
+
+@section('test','test')
+
+@section('test')
+  <div></div>
+@endsection
+
+--------------------------------------------------------------------------------
+
+(blade
+  (inlineSection
+    (directive)
+    (bracket_start)
+    (parameter
+      (text))
+    (parameter
+      (text))
+    (bracket_end))
+  (section
+    (directive_start)
+    (bracket_start)
+    (parameter
+      (text))
+    (bracket_end)
+    (php)
+    (directive_end)))
