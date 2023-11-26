@@ -4,16 +4,6 @@ module.exports = grammar({
 
     rules: {
         blade: ($) => repeat($._definition),
-        _definition: ($) =>
-            choice(
-                $.keyword,
-                $.php_statement,
-                $.attribute,
-                $._inline_directive,
-                $._nested_directive,
-                $.loop_operator,
-                alias($.text, $.php)
-            ),
 
         comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
 
@@ -25,7 +15,13 @@ module.exports = grammar({
             ),
         // ! PHP Statements
         php_statement: ($) =>
-            choice($._escaped, $._unescaped, $._raw),
+            choice(
+                $._escaped,
+                $._unescaped,
+                $._raw,
+                $._setup,
+                $._hooks
+            ),
         _escaped: ($) =>
             seq(
                 alias('{{', $.bracket_start),
@@ -65,7 +61,7 @@ module.exports = grammar({
             choice(
                 seq(
                     alias(
-                        /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section)/,
+                        /@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section|servers|import)/,
                         $.directive
                     ),
                     $._directive_parameter
@@ -83,6 +79,7 @@ module.exports = grammar({
                 $.conditional,
                 $.switch,
                 $.loop,
+                $.envoy,
                 $.livewire
             ),
 
@@ -385,6 +382,114 @@ module.exports = grammar({
                 alias('@endwhile', $.directive_end)
             ),
 
+        // !envoy
+        envoy: ($) => choice($._task, $._story),
+
+        _setup: ($) =>
+            seq(
+                alias('@setup', $.directive_start),
+                optional(repeat(alias($.text, $.php_only))),
+                alias('@endsetup', $.directive_end)
+            ),
+
+        _task: ($) =>
+            seq(
+                alias('@task', $.directive_start),
+                $._envoy_shell_body_with_parameter,
+                alias('@endtask', $.directive_end)
+            ),
+
+        _story: ($) =>
+            seq(
+                alias('@story', $.directive_start),
+                $._envoy_shell_body_with_parameter,
+                alias('@endstory', $.directive_end)
+            ),
+
+        _hooks: ($) =>
+            choice(
+                $._before,
+                $._after,
+                $._envoy_error,
+                $._success,
+                $._finished
+            ),
+
+        _before: ($) =>
+            seq(
+                alias('@before', $.directive_start),
+                optional(
+                    repeat(
+                        choice(
+                            $._notification,
+                            alias($.text, $.php_only)
+                        )
+                    )
+                ),
+                alias('@endbefore', $.directive_end)
+            ),
+        _after: ($) =>
+            seq(
+                alias('@after', $.directive_start),
+                optional(
+                    repeat(
+                        choice(
+                            $._notification,
+                            alias($.text, $.php_only)
+                        )
+                    )
+                ),
+                alias('@endafter', $.directive_end)
+            ),
+        _envoy_error: ($) =>
+            seq(
+                alias('@error', $.directive_start),
+                optional(
+                    repeat(
+                        choice(
+                            $._notification,
+                            alias($.text, $.php_only)
+                        )
+                    )
+                ),
+                alias('@enderror', $.directive_end)
+            ),
+        _success: ($) =>
+            seq(
+                alias('@success', $.directive_start),
+                optional(
+                    repeat(
+                        choice(
+                            $._notification,
+                            alias($.text, $.php_only)
+                        )
+                    )
+                ),
+                alias('@endsuccess', $.directive_end)
+            ),
+        _finished: ($) =>
+            seq(
+                alias('@finished', $.directive_start),
+                optional(
+                    repeat(
+                        choice(
+                            $._notification,
+                            alias($.text, $.php_only)
+                        )
+                    )
+                ),
+                alias('@endfinished', $.directive_end)
+            ),
+
+        // !envoy:notification
+        _notification: ($) =>
+            seq(
+                alias(
+                    /@(slack|discord|telegram|microsoftTeams)/,
+                    $.directive
+                ),
+                $._directive_parameter
+            ),
         // !livewire 🪼
         livewire: ($) => choice($._persist, $._teleport, $._volt),
         _persist: ($) =>
@@ -412,10 +517,38 @@ module.exports = grammar({
         /  This is the engine              /
         /-----------------------------------*/
 
+        //!definitions
+        // !General Use Def
+        _definition: ($) =>
+            choice($._def_commons, alias($.text, $.php)),
+        // !Envoy Definition
+        _envoy_definition: ($) =>
+            choice($._def_commons, alias($.text, $.shell)),
+
+        // Shared, common definition components
+        // Only text have different meaning
+        // allows modularisation
+        _def_commons: ($) =>
+            choice(
+                $.keyword,
+                $.php_statement,
+                $.attribute,
+                $._inline_directive,
+                $._nested_directive,
+                $.loop_operator
+            ),
+
         // !normal directive body
         _directive_body: ($) => repeat1($._definition),
         _directive_body_with_parameter: ($) =>
             seq($._directive_parameter, optional($._directive_body)),
+
+        _envoy_shell_body_with_parameter: ($) =>
+            seq(
+                $._directive_parameter,
+                optional(repeat($._envoy_definition))
+            ),
+
         _directive_body_with_optional_parameter: ($) =>
             seq(
                 optional($._directive_parameter),
@@ -439,9 +572,10 @@ module.exports = grammar({
         _if_statement_directive_body_with_no_parameter: ($) =>
             repeat1(choice($._definition, $.conditional_keyword)),
 
-        //!parameters
-        _section_parameter: ($) =>
-            seq(optional(/[\"\']/), $.text, optional(/[\"\']/)),
+        // !parenthesis balancing
+        parameter: ($) => choice(/[^()]+/, $._text_with_parenthesis),
+        _text_with_parenthesis: ($) =>
+            seq(/[^()]+/, '(', repeat($.parameter), ')'),
         // !directive parameter
         _directive_parameter: ($) =>
             seq(
@@ -449,10 +583,9 @@ module.exports = grammar({
                 optional(repeat($.parameter)),
                 alias(token(prec(1, ')')), $.bracket_end)
             ),
-        // parenthesis balancing
-        parameter: ($) => choice(/[^()]+/, $._text_with_parenthesis),
-        _text_with_parenthesis: ($) =>
-            seq(/[^()]+/, '(', repeat($.parameter), ')'),
+        // !section parameters
+        _section_parameter: ($) =>
+            seq(optional(/[\"\']/), $.text, optional(/[\"\']/)),
         // !text
         text: ($) =>
             choice(
