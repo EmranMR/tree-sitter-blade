@@ -1,8 +1,8 @@
 # HELLO! 👋
 
-Welcome to the contribution guide, and I hope you enjoyed the grammar.
-Here you will find out how the grammar is organised and how you can
-contribute, so that it adheres to the grammar styles.
+Welcome to the contribution guide, and I hope you are enjoying the
+grammar. Here you will find out how the grammar is organised and how
+you can contribute, so that it adheres to the grammar styles.
 
 ### Prerequisite:
 
@@ -27,7 +27,7 @@ code**!
 ### How to set up
 
 1. Clone this repo
-2. Install the dependancies
+2. Install the dependancies: `npm i`
 3. To check if your set up is working just run `npm run test`.
     > Make sure you have set up your `tree-sitter`'s
     > `parser-directories` path correctly in your config file see
@@ -39,11 +39,12 @@ Go ahead open up the `grammar.js` in the root directory.
 
 Everything is organised in the order they appear in the document
 inside`_definition`. The `rules` are then made up like lego using the
-"building block" rules written at the bottom of the `grammar.js`. As a
-result any changes below the "warning comment" will likely to cause
-breakage, so make sure you run the test every time you amend anything.
-However it is very unlikely you would need to touch anything below
-that line, unless you are writing a very **complicated** rule.
+"building block" rules that were written at the bottom of the
+`grammar.js`. As a result any changes below the "warning comment" **⚠️
+will likely to cause breakage ⚠️**, so make sure you **run the unit
+tests** every time you amend anything. However it is very unlikely you
+would need to touch anything below that line, unless you are writing a
+very **complicated** rule.
 
 ### $.\_definition:
 

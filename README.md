@@ -24,6 +24,9 @@ tree-sitter. Such as, but not limited to:
 -   **_zed_**
 -   **_Nova_** by panic
 -   **_Github_**
+-   **_Emacs_**
+
+<img src="https://raw.githubusercontent.com/EmranMR/Laravel-Nova-Extension/main/Images/screenshot.png" width="60%" style="border-radius: 2%" alt="php injection" title="php injection" />
 
 ## Sponsorship ❤️
 
@@ -34,19 +37,29 @@ keep maintaining and improving the grammar to include the entire
 **Inertia** and so forth. Furthermore keeping the project up to date
 with **future releases of Laravel**.
 
-## Nova Users
+## Nova Users <img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Laravel.novaextension/extension.png?raw=true" width="40px" style="position: relative; top: 10px;left: 10px" alt="alt text" title="image Title" />
 
 Simply install the
 [Laravel Suite Extension](https://extensions.panic.com/extensions/emran-mr/emran-mr.laravel/)
-from the Extension Library.
+from the Extension Library. That includes:
+
+1. injections including the `php injection` out of the box!
+2. Autocompletion
+3. Folding
+4. Syntax Highlighting
 
 ## NeoVim Users
 
 If you are NeoVim user and would like to give this parser a shot, I
 would highly recommend checking out the
 [step by step guide and tips](https://github.com/EmranMR/tree-sitter-blade/discussions/19#discussion-5400675)
-by @yaegassy. Once stable the repo will be hopefully added to
-`nvim-treesitter` allowing to install via `:TSInstall` instead.
+by @yaegassy.
+
+Once stable this repo will be hopefully get added to `nvim-treesitter`
+allowing you to install via `:TSInstall` instead.
+
+> I do not know how to do this myself, I would appreciate some help in
+> that matter.
 
 ## How to inject languages:
 
@@ -54,19 +67,19 @@ When you parse your code there are three main important injection
 points. There is an example in the `queries/injection.scm`. For ease
 of use I have narrowed everything down to the following rules/queries:
 
-#### 1. (php)
+### 1. (php)
 
 -   This will inject `html/php` into your document
 -   You need to inject `php` in the `(php)` nodes
 -   make sure it is `(#set! injection.combined)`
 
-```
+```scm
 ((php) @injection.content
     (#set! injection.combined)
     (#set! injection.language php))
 ```
 
-#### 2. (php_only) 🚧
+### 2. (php_only) 🚧
 
 > This will be availble once the
 > [split parser](https://github.com/tree-sitter/tree-sitter-php/pull/180)
@@ -79,7 +92,13 @@ of use I have narrowed everything down to the following rules/queries:
     `<?php code ?>` The codes should have the same scope. In Nova you
     also get extra autocompletion which are built-in.
 
-#### 3. (parameter) 🚧
+```scm
+((php_only) @injection.content
+   (#set! injection.combined)
+   (#set! injection.language php_only))
+```
+
+### 3. (parameter) 🚧
 
 > This will be availble once the
 > [split parser](https://github.com/tree-sitter/tree-sitter-php/pull/180)
@@ -98,7 +117,28 @@ of use I have narrowed everything down to the following rules/queries:
     -   This is just for syntax highlighting and getting a nice `php`
         IDE autocompletion if supported by your editor.
 
-#### 4. (javascript)
+```scm
+directive parameters
+((parameter) @injection.content
+   (#set! injection.language php_only))
+```
+
+### 4. (shell)
+
+-   This is used specifically for Laravel Envoy
+-   Mainly to parse stuff inside `@task`
+-   You will get a nice `shell` syntax highlighting and possibly
+    completion when writing your envoys
+    > You can use whatever you want, zsh etc, I am just using `sh` as
+    > an example
+
+```scm
+((shell) @injection.content
+   (#set! injection.combined)
+   (#set! injection.language sh))
+```
+
+### 5. (javascript)
 
 -   TBA
 -   I would really appreciate if anyone experienced with **_inertia_**
@@ -106,37 +146,55 @@ of use I have narrowed everything down to the following rules/queries:
     [issue](https://github.com/EmranMR/tree-sitter-blade/issues) and
     discuss the regions that are points of interest for injection.
 -   I am more of a TALL (**_tailwind, alpinejs, laravel and
-    livewire_**) person and I will add alpineJS support shortly so
-    that `javascript` is injected into your `alpineJS` directives,
+    livewire_**) person and I will add a first party AlpineJS support
+    so that `javascript` is injected into your `AlpineJS` directives,
     such as `x-data` 😏
 
 ## How to Highlight:
 
-For ease of use, I managed to boil everything down to the following
-tree-sitter queries:
+This is what you need to use inside your `highlights.scm`. For ease of
+use, I managed to boil everything down to the following tree-sitter
+queries:
 
-#### 1. (directives)
+#### 1. (directives) `@theme_selector`
 
 -   This is your keywords like `@csrf` or inline directives such as
     `@extends()`
 -   By highlighting `(directive)` you are painting `@extends` in
     `@extends(x)` and the keywords
 
-#### 2. (directive_start)
+#### 2. (directive_start) `@theme_selector`
 
 -   This is for multiline directives such as `@php x @endphp`
 -   this will specifically target the `@php`
 
-#### 3. (directive_end)
+#### 3. (directive_end) `@theme_selector`
 
 -   This is also for multiline directives such as `@php x @endphp`
 -   However it will target the closing directive such as `@endphp`
 
-#### 4. (comment)
+#### 4. optional: (attribute (directive) `@theme_selector`)
+
+-   You can use this to fine tune your highlight and grab the blade
+    `attribute` directives to get highlighted as an `attribute`
+-   This is optional, I understand some rather have blade highlighted
+    as a framework tag
+
+#### 5. (comment) `@theme_selector`
 
 -   This is your comments `{{-- x --}}`
 -   so you can add a capture for comment highlight to this query using
     `(comment)`
+
+#### 6. optional: (bracket_start) `@theme_selector`
+
+-   If you want to highlight your brackets such as `{{}}` use this to
+    capture
+
+#### 7. optional: (bracket_end) `@theme_selector`
+
+-   If you want to highlight your brackets such as `{{}}` use this to
+    capture
 
 ## Folding
 
@@ -156,8 +214,23 @@ implement the folding
 1. `(directive_start)` and `(directive_end)`
 2. `(bracket_start)` and `(bracket_end)`
 
-> Please note each **editor** uses it's own sets of
+> ❗ Please note each **editor** uses it's own sets of
 > predicates/variables so you need to look into their documentation.
+
+```scm
+; Example Query used in Nova to implement folding
+
+(   (directive_start) @start
+    (directive_end) @end.after
+    (#set! role block))
+
+
+(   (bracket_start) @start
+    (bracket_end) @end
+    (#set! role block))
+```
+
+<img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Images/php%20injection.gif?raw=true" width="60%" style="border-radius: 2%" alt="php injection" title="php injection" />
 
 ## Quick Note about `queries/` folder
 
@@ -189,10 +262,11 @@ tricks for fellow devs, feel free to use the
 See the [contribution](/CONTRIBUTING.md) guidelines for more details,
 as well as in depth info about the `grammar` itself.
 
-## Todos
+## Next in Line
 
 -   [x] Write the grammar
 -   [x] Write the tests
 -   [x] Support folding
 -   [x] Support Livewire 🪼
+-   [x] Laravel envoy
 -   [ ] support AlpineJS

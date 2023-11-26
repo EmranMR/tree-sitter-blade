@@ -1,7 +1,7 @@
 {
     "name": "tree-sitter-blade",
-    "version": "0.7.0",
-    "description": "tree-sitter-blade for Laravel Blade files",
+    "version": "0.8.0",
+    "description": "tree-sitter-blade grammar for Laravel Blade files",
     "main": "bindings/node",
     "keywords": [
         "tree-sitter-blade",
@@ -21,7 +21,7 @@
         "parse": "tree-sitter generate && tree-sitter parse example-file.blade",
         "generate": "tree-sitter generate"
     },
-    "author": "Emran M Ramezan",
+    "author": "Emran Mashhadi Ramezan",
     "license": "MIT",
     "dependencies": {
         "nan": "^2.17.0"

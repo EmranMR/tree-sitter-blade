@@ -1,3 +1,7 @@
+# copyright: This parser build is created and provided by Panic inc
+# You do not require this file in order to use the tree-sitter-blade
+# This is only for .dylib generation for Nova extension development
+
 # Repository
 SRC_DIR := src
 
@@ -29,7 +33,7 @@ ifneq ("$(wildcard $(SRC_DIR)/scanner.cc)", "")
 endif
 
 ifeq (, $(CPPSRC))
-	ADDITIONALLIBS := 
+	ADDITIONALLIBS :=
 else
 	ADDITIONALLIBS := -lc++
 endif
