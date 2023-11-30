@@ -1634,7 +1634,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_envoy_shell_body_with_parameter"
+          "name": "_directive_body_with_parameter"
         },
         {
           "type": "ALIAS",
@@ -1661,7 +1661,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_envoy_shell_body_with_parameter"
+          "name": "_directive_body_with_parameter"
         },
         {
           "type": "ALIAS",
@@ -2080,42 +2080,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_def_commons"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "text"
-          },
-          "named": true,
-          "value": "php"
-        }
-      ]
-    },
-    "_envoy_definition": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_def_commons"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "text"
-          },
-          "named": true,
-          "value": "shell"
-        }
-      ]
-    },
-    "_def_commons": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
           "name": "keyword"
         },
         {
@@ -2137,6 +2101,10 @@
         {
           "type": "SYMBOL",
           "name": "loop_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
         }
       ]
     },
@@ -2160,30 +2128,6 @@
             {
               "type": "SYMBOL",
               "name": "_directive_body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "_envoy_shell_body_with_parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_directive_parameter"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_envoy_definition"
-              }
             },
             {
               "type": "BLANK"

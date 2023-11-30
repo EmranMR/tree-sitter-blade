@@ -7,16 +7,16 @@ Orphan Punctuation Marks
 --------------------------------------------------------------------------------
 
 (blade
-  (php)
-  (php)
-  (php)
-  (php)
-  (php)
-  (php)
-  (php)
-  (php)
-  (php)
-  (php))
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text)
+  (text))
 
 ================================================================================
 text starting with @
@@ -33,16 +33,16 @@ test@test.com
 --------------------------------------------------------------------------------
 
 (blade
-  (php)
-  (php)
-  (php)
-  (php)
+  (text)
+  (text)
+  (text)
+  (text)
   (conditional
     (directive_start)
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================

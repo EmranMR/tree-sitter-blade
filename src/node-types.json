@@ -103,10 +103,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -120,6 +116,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -194,10 +194,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -211,6 +207,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -320,10 +320,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -337,6 +333,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -454,15 +454,15 @@
           "named": true
         },
         {
-          "type": "shell",
-          "named": true
-        },
-        {
           "type": "stack",
           "named": true
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -545,10 +545,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -562,6 +558,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -686,10 +686,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -703,6 +699,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -785,10 +785,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -802,6 +798,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -911,10 +911,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -928,6 +924,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1033,10 +1033,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1053,16 +1049,15 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "verbatim",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "php",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "php_only",
@@ -1181,10 +1176,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1201,16 +1192,15 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "verbatim",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "shell",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "stack",
@@ -1285,10 +1275,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1302,6 +1288,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1384,10 +1374,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1401,6 +1387,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1488,10 +1478,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1505,6 +1491,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {

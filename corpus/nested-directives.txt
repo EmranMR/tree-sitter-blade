@@ -15,7 +15,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -41,7 +41,7 @@
     (parameter
       (text))
     (bracket_end)
-    (php)
+    (text)
     (directive_end))
   (section
     (directive_start)
@@ -51,7 +51,7 @@
     (bracket_end)
     (keyword
       (directive))
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -68,7 +68,7 @@
 (blade
   (once
     (directive_start)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -85,5 +85,5 @@
 (blade
   (verbatim
     (directive_start)
-    (php)
+    (text)
     (directive_end)))
