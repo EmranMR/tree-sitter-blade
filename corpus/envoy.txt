@@ -46,19 +46,19 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (shell)
+    (text)
     (conditional
       (directive_start)
       (bracket_start)
       (parameter)
       (bracket_end)
-      (php)
+      (text)
       (php_statement
         (bracket_start)
         (php_only)
         (bracket_end))
       (directive_end))
-    (shell)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -93,21 +93,21 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (shell)
+    (text)
     (directive_end))
   (envoy
     (directive_start)
     (bracket_start)
     (parameter)
     (bracket_end)
-    (shell)
+    (text)
     (directive_end))
   (envoy
     (directive_start)
     (bracket_start)
     (parameter)
     (bracket_end)
-    (shell)
+    (text)
     (directive_end)))
 
 ================================================================================

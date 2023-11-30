@@ -64,7 +64,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -83,7 +83,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -102,5 +102,5 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))

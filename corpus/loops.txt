@@ -13,7 +13,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -32,12 +32,12 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (php_statement
       (bracket_start)
       (php_only)
       (bracket_end))
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -55,7 +55,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -73,7 +73,7 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -93,15 +93,15 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php)
+    (text)
     (php_statement
       (bracket_start)
       (php_only)
       (bracket_end))
-    (php)
+    (text)
     (loop_operator
       (directive))
-    (php)
+    (text)
     (directive_end)))
 
 ================================================================================
@@ -129,12 +129,12 @@
       (bracket_start)
       (parameter)
       (bracket_end))
-    (php)
+    (text)
     (php_statement
       (bracket_start)
       (php_only)
       (bracket_end))
-    (php)
+    (text)
     (loop_operator
       (directive)
       (bracket_start)

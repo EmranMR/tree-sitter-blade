@@ -4,6 +4,17 @@ module.exports = grammar({
 
     rules: {
         blade: ($) => repeat($._definition),
+        //!definitions
+        _definition: ($) =>
+            choice(
+                $.keyword,
+                $.php_statement,
+                $.attribute,
+                $._inline_directive,
+                $._nested_directive,
+                $.loop_operator,
+                $.text
+            ),
 
         comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
 
@@ -395,14 +406,14 @@ module.exports = grammar({
         _task: ($) =>
             seq(
                 alias('@task', $.directive_start),
-                $._envoy_shell_body_with_parameter,
+                $._directive_body_with_parameter,
                 alias('@endtask', $.directive_end)
             ),
 
         _story: ($) =>
             seq(
                 alias('@story', $.directive_start),
-                $._envoy_shell_body_with_parameter,
+                $._directive_body_with_parameter,
                 alias('@endstory', $.directive_end)
             ),
 
@@ -517,38 +528,10 @@ module.exports = grammar({
         /  This is the engine              /
         /-----------------------------------*/
 
-        //!definitions
-        // !General Use Def
-        _definition: ($) =>
-            choice($._def_commons, alias($.text, $.php)),
-        // !Envoy Definition
-        _envoy_definition: ($) =>
-            choice($._def_commons, alias($.text, $.shell)),
-
-        // Shared, common definition components
-        // Only text have different meaning
-        // allows modularisation
-        _def_commons: ($) =>
-            choice(
-                $.keyword,
-                $.php_statement,
-                $.attribute,
-                $._inline_directive,
-                $._nested_directive,
-                $.loop_operator
-            ),
-
         // !normal directive body
         _directive_body: ($) => repeat1($._definition),
         _directive_body_with_parameter: ($) =>
             seq($._directive_parameter, optional($._directive_body)),
-
-        _envoy_shell_body_with_parameter: ($) =>
-            seq(
-                $._directive_parameter,
-                optional(repeat($._envoy_definition))
-            ),
-
         _directive_body_with_optional_parameter: ($) =>
             seq(
                 optional($._directive_parameter),
