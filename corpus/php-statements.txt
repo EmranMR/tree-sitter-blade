@@ -46,7 +46,8 @@ multi line raw
 ================================================================================
 
 @php
-echo 'test'
+    $name = $attributes->get('name');
+    $value = resolve_input($name, $value, empty($model) ? null : $model, $useOld);
 @endphp
 
 --------------------------------------------------------------------------------

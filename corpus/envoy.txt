@@ -142,12 +142,6 @@
   (php_statement
     (directive_start)
     (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -166,12 +160,6 @@
   (php_statement
     (directive_start)
     (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -189,12 +177,6 @@
 (blade
   (php_statement
     (directive_start)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (php_only)
     (directive_end)))
 
@@ -230,12 +212,6 @@
   (php_statement
     (directive_start)
     (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -258,12 +234,6 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (php_only)
     (directive_end)))
 
@@ -288,12 +258,6 @@
     (parameter)
     (bracket_end)
     (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -317,12 +281,6 @@
     (parameter)
     (bracket_end)
     (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -345,11 +303,5 @@
     (bracket_start)
     (parameter)
     (bracket_end)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
-    (php_only)
     (php_only)
     (directive_end)))

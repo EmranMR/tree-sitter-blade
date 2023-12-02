@@ -13,10 +13,15 @@ module.exports = grammar({
                 $._inline_directive,
                 $._nested_directive,
                 $.loop_operator,
-                $.text
+                alias($._text, $.text)
             ),
 
-        comment: ($) => seq('{{--', optional(repeat($.text)), '--}}'),
+        comment: ($) =>
+            seq(
+                '{{--',
+                optional(repeat(alias($._text, $.text))),
+                '--}}'
+            ),
 
         // !keywords
         keyword: ($) =>
@@ -36,13 +41,13 @@ module.exports = grammar({
         _escaped: ($) =>
             seq(
                 alias('{{', $.bracket_start),
-                optional(repeat(alias($.text, $.php_only))),
+                optional($.php_only),
                 alias('}}', $.bracket_end)
             ),
         _unescaped: ($) =>
             seq(
                 alias('{!!', $.bracket_start),
-                optional(repeat(alias($.text, $.php_only))),
+                optional($.php_only),
                 alias('!!}', $.bracket_end)
             ),
 
@@ -55,7 +60,7 @@ module.exports = grammar({
         _multi_line_raw: ($) =>
             seq(
                 alias('@php', $.directive_start),
-                optional(repeat(alias($.text, $.php_only))),
+                optional($.php_only),
                 alias('@endphp', $.directive_end)
             ),
         // ! Conditional Attributes
@@ -399,7 +404,7 @@ module.exports = grammar({
         _setup: ($) =>
             seq(
                 alias('@setup', $.directive_start),
-                optional(repeat(alias($.text, $.php_only))),
+                optional($.php_only),
                 alias('@endsetup', $.directive_end)
             ),
 
@@ -429,66 +434,31 @@ module.exports = grammar({
         _before: ($) =>
             seq(
                 alias('@before', $.directive_start),
-                optional(
-                    repeat(
-                        choice(
-                            $._notification,
-                            alias($.text, $.php_only)
-                        )
-                    )
-                ),
+                optional(repeat(choice($._notification, $.php_only))),
                 alias('@endbefore', $.directive_end)
             ),
         _after: ($) =>
             seq(
                 alias('@after', $.directive_start),
-                optional(
-                    repeat(
-                        choice(
-                            $._notification,
-                            alias($.text, $.php_only)
-                        )
-                    )
-                ),
+                optional(repeat(choice($._notification, $.php_only))),
                 alias('@endafter', $.directive_end)
             ),
         _envoy_error: ($) =>
             seq(
                 alias('@error', $.directive_start),
-                optional(
-                    repeat(
-                        choice(
-                            $._notification,
-                            alias($.text, $.php_only)
-                        )
-                    )
-                ),
+                optional(repeat(choice($._notification, $.php_only))),
                 alias('@enderror', $.directive_end)
             ),
         _success: ($) =>
             seq(
                 alias('@success', $.directive_start),
-                optional(
-                    repeat(
-                        choice(
-                            $._notification,
-                            alias($.text, $.php_only)
-                        )
-                    )
-                ),
+                optional(repeat(choice($._notification, $.php_only))),
                 alias('@endsuccess', $.directive_end)
             ),
         _finished: ($) =>
             seq(
                 alias('@finished', $.directive_start),
-                optional(
-                    repeat(
-                        choice(
-                            $._notification,
-                            alias($.text, $.php_only)
-                        )
-                    )
-                ),
+                optional(repeat(choice($._notification, $.php_only))),
                 alias('@endfinished', $.directive_end)
             ),
 
@@ -568,9 +538,17 @@ module.exports = grammar({
             ),
         // !section parameters
         _section_parameter: ($) =>
-            seq(optional(/[\"\']/), $.text, optional(/[\"\']/)),
-        // !text
-        text: ($) =>
+            seq(
+                optional(/[\"\']/),
+                alias($._text, $.text),
+                optional(/[\"\']/)
+            ),
+
+        // !text definitions
+        php_only: ($) => prec.right(repeat1($._text)),
+        // hidden to reduce AST noise in php_only #39
+        // It is selectively unhidden for other areas
+        _text: ($) =>
             choice(
                 token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)), // custom directive conflict resolution
                 token(prec(-2, /[{}!@()?,-]/)), // orphan tags
