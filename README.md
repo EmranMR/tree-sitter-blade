@@ -10,6 +10,18 @@
 
 > The grammar is up to date as of **_Laravel 10.x_**
 
+## ⚠️ v0.9.0 Update ✨
+
+-   There has been some structural refactor to make the grammar future
+    proof, semantic and flexible as it grows with Laravel
+-   Please read the `v0.9.0` Release Note for the upgrade guide, if
+    you have any questions feel free to start a discussion or raise an
+    issue
+-   As soon as you change your `injections.scm` you are good to go ✅
+    to enjoy all the new features ✨
+-   I have also updated the instructions underneath 👇 for new and
+    upcoming users
+
 ## Introduction (feel free to skip)
 
 This project aims to write the tree-sitter grammar for
@@ -67,16 +79,15 @@ When you parse your code there are three main important injection
 points. There is an example in the `queries/injection.scm`. For ease
 of use I have narrowed everything down to the following rules/queries:
 
-### 1. (php)
+### 1. html/php
 
 -   This will inject `html/php` into your document
--   You need to inject `php` in the `(php)` nodes
--   make sure it is `(#set! injection.combined)`
 
 ```scm
-((php) @injection.content
-    (#set! injection.combined)
-    (#set! injection.language php))
+((text) @injection.content
+   (#not-has-ancestor? @injection.content "envoy")
+   (#set! injection.combined)
+   (#set! injection.language php))
 ```
 
 ### 2. (php_only) 🚧
@@ -102,7 +113,7 @@ of use I have narrowed everything down to the following rules/queries:
 
 > This will be availble once the
 > [split parser](https://github.com/tree-sitter/tree-sitter-php/pull/180)
-> is merged into `tre-sitter-php`.The name might also change.
+> is merged into `tree-sitter-php`.The name might also change.
 
 -   optional: It will add a nice syntax highlighting for your
     parameters
@@ -123,20 +134,23 @@ directive parameters
    (#set! injection.language php_only))
 ```
 
-### 4. (shell)
+### 4. Envoy/Bash
 
 -   This is used specifically for Laravel Envoy
 -   Mainly to parse stuff inside `@task`
 -   You will get a nice `shell` syntax highlighting and possibly
     completion when writing your envoys
-    > You can use whatever you want, zsh etc, I am just using `sh` as
-    > an example
+    > You can use whatever you want, zsh etc Here is an an example
+    > with `bash`
 
 ```scm
-((shell) @injection.content
+((text) @injection.content
+   (#has-ancestor? @injection.content "envoy")
    (#set! injection.combined)
-   (#set! injection.language sh))
+   (#set! injection.language bash))
 ```
+
+<img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Images/Envoy%20Injection.png?raw=true" width="60%" style="border-radius: 2%" alt="php injection" title="php injection" />
 
 ### 5. (javascript)
 
@@ -230,7 +244,7 @@ implement the folding
     (#set! role block))
 ```
 
-<img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Images/php%20injection.gif?raw=true" width="60%" style="border-radius: 2%" alt="php injection" title="php injection" />
+<img src="https://raw.githubusercontent.com/EmranMR/Laravel-Nova-Extension/main/Images/folding.gif" width="60%" style="border-radius: 2%" alt="php injection" title="php injection" />
 
 ## Quick Note about `queries/` folder
 
