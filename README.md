@@ -10,11 +10,11 @@
 
 > The grammar is up to date as of **_Laravel 10.x_**
 
-## ⚠️ v0.9.0 Update ✨
+## ⚠️ v0.9.0 Upgrade Guide ✨
 
 -   There has been some structural refactor to make the grammar future
     proof, semantic and flexible as it grows with Laravel
--   Please read the `v0.9.0` Release Note for the upgrade guide, if
+-   Please read the `v0.9.0` [Release Note for the Upgrade Guide](https://github.com/EmranMR/tree-sitter-blade/releases/tag/v0.9.0), if
     you have any questions feel free to start a discussion or raise an
     issue
 -   As soon as you change your `injections.scm` you are good to go ✅
