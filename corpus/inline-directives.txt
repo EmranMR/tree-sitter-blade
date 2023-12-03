@@ -206,5 +206,5 @@
     (parameter
       (text))
     (bracket_end)
-    (php)
+    (text)
     (directive_end)))

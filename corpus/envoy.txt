@@ -1,0 +1,307 @@
+================================================================================
+@server
+================================================================================
+
+@servers(['web' => ['user@192.168.1.1'], 'workers' => ['user@192.168.1.2']])
+
+--------------------------------------------------------------------------------
+
+(blade
+  (directive)
+  (bracket_start)
+  (parameter)
+  (bracket_end))
+
+================================================================================
+@import
+================================================================================
+@import('vendor/package/Envoy.blade.php')
+--------------------------------------------------------------------------------
+
+(blade
+  (directive)
+  (bracket_start)
+  (parameter)
+  (bracket_end))
+
+================================================================================
+@task
+================================================================================
+
+@task('deploy', ['on' => 'web'])
+    cd /home/user/example.com
+
+    @if ($branch)
+        git pull origin {{ $branch }}
+    @endif
+
+    php artisan migrate --force
+@endtask
+
+--------------------------------------------------------------------------------
+
+(blade
+  (envoy
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (text)
+    (conditional
+      (directive_start)
+      (bracket_start)
+      (parameter)
+      (bracket_end)
+      (text)
+      (php_statement
+        (bracket_start)
+        (php_only)
+        (bracket_end))
+      (directive_end))
+    (text)
+    (directive_end)))
+
+================================================================================
+@story
+================================================================================
+@servers(['web' => ['user@192.168.1.1']])
+
+@story('deploy')
+    update-code
+    install-dependencies
+@endstory
+
+@task('update-code')
+    cd /home/user/example.com
+    git pull origin master
+@endtask
+
+@task('install-dependencies')
+    cd /home/user/example.com
+    composer install
+@endtask
+
+--------------------------------------------------------------------------------
+
+(blade
+  (directive)
+  (bracket_start)
+  (parameter)
+  (bracket_end)
+  (envoy
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (text)
+    (directive_end))
+  (envoy
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (text)
+    (directive_end))
+  (envoy
+    (directive_start)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (text)
+    (directive_end)))
+
+================================================================================
+@setup
+================================================================================
+
+@setup
+    $now = new DateTime;
+@endsetup
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@before
+================================================================================
+
+@before
+    if ($task === 'deploy') {
+        // ...
+    }
+@endbefore
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@after
+================================================================================
+
+@after
+    if ($task === 'deploy') {
+        // ...
+    }
+@endafter
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@error
+================================================================================
+
+@error
+    if ($task === 'deploy') {
+        // ...
+    }
+@enderror
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@success
+================================================================================
+
+@success
+  echo "success";
+@endsuccess
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@finished
+================================================================================
+
+@finished
+    if ($exitCode > 0) {
+        // There were errors in one of the tasks...
+    }
+@endfinished
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@slack
+================================================================================
+
+@finished
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    if ($task === 'deploy') {
+        // ...
+    }
+@endfinished
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (directive)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@discord
+================================================================================
+
+@finished
+    @discord('discord-webhook-url')
+    if ($task === 'deploy') {
+        // ...
+    }
+@endfinished
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (directive)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@telegram
+================================================================================
+
+@finished
+    @telegram('bot-id','chat-id')
+    if ($task === 'deploy') {
+        // ...
+    }
+@endfinished
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (directive)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (php_only)
+    (directive_end)))
+
+================================================================================
+@microsoftTeams
+================================================================================
+
+@finished
+    @microsoftTeams('webhook-url')
+    if ($task === 'deploy') {
+        // ...
+    }
+@endfinished
+
+--------------------------------------------------------------------------------
+
+(blade
+  (php_statement
+    (directive_start)
+    (directive)
+    (bracket_start)
+    (parameter)
+    (bracket_end)
+    (php_only)
+    (directive_end)))

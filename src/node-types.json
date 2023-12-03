@@ -67,6 +67,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -99,10 +103,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -116,6 +116,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -154,6 +158,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -186,10 +194,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -206,6 +210,10 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "verbatim",
           "named": true
         }
@@ -217,7 +225,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -272,6 +280,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -308,10 +320,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -325,6 +333,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -356,6 +368,105 @@
         },
         {
           "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "envoy",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "bracket_end",
+          "named": true
+        },
+        {
+          "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
+          "named": true
+        },
+        {
+          "type": "envoy",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "inlineSection",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "loop_operator",
+          "named": true
+        },
+        {
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
           "named": true
         }
       ]
@@ -398,6 +509,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -430,10 +545,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -447,6 +558,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -535,6 +650,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -567,10 +686,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -584,6 +699,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -630,6 +749,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -662,10 +785,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -679,6 +798,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -752,6 +875,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -784,10 +911,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -801,6 +924,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -870,6 +997,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -902,10 +1033,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -922,16 +1049,15 @@
           "named": true
         },
         {
+          "type": "text",
+          "named": true
+        },
+        {
           "type": "verbatim",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "php",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "php_only",
@@ -1014,6 +1140,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -1046,10 +1176,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1063,6 +1189,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1109,6 +1239,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -1141,10 +1275,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1158,6 +1288,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1204,6 +1338,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -1236,10 +1374,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1253,6 +1387,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
@@ -1304,6 +1442,10 @@
           "named": true
         },
         {
+          "type": "envoy",
+          "named": true
+        },
+        {
           "type": "fragment",
           "named": true
         },
@@ -1336,10 +1478,6 @@
           "named": true
         },
         {
-          "type": "php",
-          "named": true
-        },
-        {
           "type": "php_statement",
           "named": true
         },
@@ -1353,6 +1491,10 @@
         },
         {
           "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         },
         {
