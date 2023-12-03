@@ -36,13 +36,8 @@
           "name": "loop_operator"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_text"
-          },
-          "named": true,
-          "value": "text"
+          "type": "SYMBOL",
+          "name": "text"
         }
       ]
     },
@@ -57,16 +52,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "REPEAT",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_text"
-                },
-                "named": true,
-                "value": "text"
-              }
+              "type": "SYMBOL",
+              "name": "text"
             },
             {
               "type": "BLANK"
@@ -2305,13 +2292,8 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_text"
-          },
-          "named": true,
-          "value": "text"
+          "type": "SYMBOL",
+          "name": "text"
         },
         {
           "type": "CHOICE",
@@ -2328,6 +2310,17 @@
       ]
     },
     "php_only": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "SYMBOL",
+          "name": "_text"
+        }
+      }
+    },
+    "text": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {

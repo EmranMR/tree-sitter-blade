@@ -13,15 +13,10 @@ module.exports = grammar({
                 $._inline_directive,
                 $._nested_directive,
                 $.loop_operator,
-                alias($._text, $.text)
+                $.text
             ),
 
-        comment: ($) =>
-            seq(
-                '{{--',
-                optional(repeat(alias($._text, $.text))),
-                '--}}'
-            ),
+        comment: ($) => seq('{{--', optional($.text), '--}}'),
 
         // !keywords
         keyword: ($) =>
@@ -538,14 +533,11 @@ module.exports = grammar({
             ),
         // !section parameters
         _section_parameter: ($) =>
-            seq(
-                optional(/[\"\']/),
-                alias($._text, $.text),
-                optional(/[\"\']/)
-            ),
+            seq(optional(/[\"\']/), $.text, optional(/[\"\']/)),
 
         // !text definitions
         php_only: ($) => prec.right(repeat1($._text)),
+        text: ($) => prec.right(repeat1($._text)),
         // hidden to reduce AST noise in php_only #39
         // It is selectively unhidden for other areas
         _text: ($) =>
