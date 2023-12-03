@@ -129,7 +129,6 @@ of use I have narrowed everything down to the following rules/queries:
         IDE autocompletion if supported by your editor.
 
 ```scm
-directive parameters
 ((parameter) @injection.content
    (#set! injection.language php_only))
 ```
