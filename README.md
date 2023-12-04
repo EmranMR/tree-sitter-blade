@@ -139,6 +139,7 @@ of use I have narrowed everything down to the following rules/queries:
 -   Mainly to parse stuff inside `@task`
 -   You will get a nice `shell` syntax highlighting and possibly
     completion when writing your envoys
+-   For your hooks, `@before, @after ... ` you will get `php_only` injections provided by the code above, automatically.
     > You can use whatever you want, zsh etc Here is an an example
     > with `bash`
 
