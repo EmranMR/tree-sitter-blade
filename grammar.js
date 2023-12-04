@@ -1,6 +1,5 @@
 module.exports = grammar({
     name: 'blade',
-    extras: ($) => [$.comment, /\s+/],
 
     rules: {
         blade: ($) => repeat($._definition),
@@ -13,6 +12,7 @@ module.exports = grammar({
                 $._inline_directive,
                 $._nested_directive,
                 $.loop_operator,
+                $.comment,
                 $.text
             ),
 

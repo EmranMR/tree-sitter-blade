@@ -14,9 +14,10 @@
 
 -   There has been some structural refactor to make the grammar future
     proof, semantic and flexible as it grows with Laravel
--   Please read the `v0.9.0` [Release Note for the Upgrade Guide](https://github.com/EmranMR/tree-sitter-blade/releases/tag/v0.9.0), if
-    you have any questions feel free to start a discussion or raise an
-    issue
+-   Please read the `v0.9.0`
+    [Release Note for the Upgrade Guide](https://github.com/EmranMR/tree-sitter-blade/releases/tag/v0.9.0),
+    if you have any questions feel free to start a discussion or raise
+    an issue
 -   As soon as you change your `injections.scm` you are good to go ✅
     to enjoy all the new features ✨
 -   I have also updated the instructions underneath 👇 for new and
@@ -86,6 +87,7 @@ of use I have narrowed everything down to the following rules/queries:
 ```scm
 ((text) @injection.content
    (#not-has-ancestor? @injection.content "envoy")
+   (#not-has-parent? @injection.content  "comment")
    (#set! injection.combined)
    (#set! injection.language php))
 ```
@@ -98,35 +100,25 @@ of use I have narrowed everything down to the following rules/queries:
 
 -   You inject `php_only` into `(php_only)` nodes. This is for all the
     php directives including `{{ x }}`, `{!! x !!}} ` and so forth
--   Optional: `(#set! injection.combined)` but considering laravel
-    will render the different `php_only` points like having multiple
-    `<?php code ?>` The codes should have the same scope. In Nova you
-    also get extra autocompletion which are built-in.
 
 ```scm
 ((php_only) @injection.content
-   (#set! injection.combined)
    (#set! injection.language php_only))
 ```
 
-### 3. (parameter) 🚧
+### 3. optional: (parameter) 🚧
 
 > This will be availble once the
 > [split parser](https://github.com/tree-sitter/tree-sitter-php/pull/180)
 > is merged into `tree-sitter-php`.The name might also change.
 
--   optional: It will add a nice syntax highlighting for your
-    parameters
+-   It will add a nice syntax highlighting for your parameters
 -   This is also a php injection point. I initially had this aliased
     as `(php_only)`, however I decided to keep it separate.
 -   This is for all the inline directives such as `@extends(x)`,
     `@yield(x)` and so forth
 -   you inject `php_only` in `(parameter)` to get a nice syntax
     highlighting
--   Do **_NOT_** add `(#set! injection.combined)`
-    -   Because they are _parameter_.
-    -   This is just for syntax highlighting and getting a nice `php`
-        IDE autocompletion if supported by your editor.
 
 ```scm
 ((parameter) @injection.content
@@ -139,7 +131,8 @@ of use I have narrowed everything down to the following rules/queries:
 -   Mainly to parse stuff inside `@task`
 -   You will get a nice `shell` syntax highlighting and possibly
     completion when writing your envoys
--   For your hooks, `@before, @after ... ` you will get `php_only` injections provided by the code above, automatically.
+-   For your hooks, `@before, @after ... ` you will get `php_only`
+    injections provided by the code above, automatically.
     > You can use whatever you want, zsh etc Here is an an example
     > with `bash`
 

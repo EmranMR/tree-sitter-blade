@@ -47,6 +47,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -147,6 +151,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -257,6 +265,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -394,6 +406,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -490,6 +506,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -634,6 +654,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -730,6 +754,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -859,6 +887,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -974,6 +1006,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -1124,6 +1160,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -1223,6 +1263,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -1319,6 +1363,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -1423,6 +1471,10 @@
         },
         {
           "type": "bracket_start",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
