@@ -45,11 +45,7 @@ Comments Ending with Punctuation Conflict
 --------------------------------------------------------------------------------
 
 (blade
-  (comment
-    (text))
-  (comment
-    (text))
-  (comment
-    (text))
-  (comment
-    (text)))
+  (comment)
+  (comment)
+  (comment)
+  (comment))
