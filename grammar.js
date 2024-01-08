@@ -13,11 +13,13 @@ module.exports = grammar({
                 $._nested_directive,
                 $.loop_operator,
                 $.comment,
-                $.text
+                $.text,
+                $.alpine_js
             ),
 
         // https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
-        comment: $ => token(seq('{{--', /[^-]*-+([^}-][^-]*-+)*/, '}}')),
+        comment: ($) =>
+            token(seq('{{--', /[^-]*-+([^}-][^-]*-+)*/, '}}')),
 
         // !keywords
         keyword: ($) =>
@@ -488,6 +490,14 @@ module.exports = grammar({
                 alias('@endvolt', $.directive_end)
             ),
 
+        alpine_js: ($) =>
+            seq(
+                token(prec(1, /x-[a-zA-Z1-9]+=/)),
+                token(prec(1, /[\"\']/)),
+                $.text,
+                token(prec(1, /[\"\']/))
+            ),
+
         /*------------------------------------
         /  Do NOT change below this line   /
         /  without running tests           /
@@ -544,11 +554,11 @@ module.exports = grammar({
         _text: ($) =>
             choice(
                 token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)), // custom directive conflict resolution
-                token(prec(-2, /[{}!@()?,-]/)), // orphan tags
+                token(prec(-2, /[\"\'x{}!@()?,-]/)), // orphan tags
                 token(
                     prec(
                         -1,
-                        /[^\s(){!}@-]([^(){!}@,?]*[^{!}()@?,-])?/ //general text
+                        /[^\"\'\sx(){!}@-]([^\"\'x(){!}@,?]*[^\"\'x{!}()@?,-])?/ //general text
                     )
                 )
             ),

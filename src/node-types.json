@@ -1,5 +1,20 @@
 [
   {
+    "type": "alpine_js",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "attribute",
     "named": true,
     "fields": {},
@@ -34,6 +49,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -142,6 +161,10 @@
       "required": false,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -236,6 +259,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -379,6 +406,10 @@
       "required": true,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -481,6 +512,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -627,6 +662,10 @@
       "required": true,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -729,6 +768,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -860,6 +903,10 @@
       "required": true,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -981,6 +1028,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -1133,6 +1184,10 @@
       "required": true,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -1236,6 +1291,10 @@
       "required": true,
       "types": [
         {
+          "type": "alpine_js",
+          "named": true
+        },
+        {
           "type": "attribute",
           "named": true
         },
@@ -1338,6 +1397,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
@@ -1446,6 +1509,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alpine_js",
+          "named": true
+        },
         {
           "type": "attribute",
           "named": true
