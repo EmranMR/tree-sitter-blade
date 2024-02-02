@@ -6,37 +6,12 @@
     "keywords": [
         "tree-sitter-blade",
         "blade",
-        "tree-sitter",
-        "laravel"
-    ],
-    "homepage": "https://github.com/EmranMR/tree-sitter-blade",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/EmranMR/tree-sitter-blade"
-    },
-    "bugs": "https://github.com/EmranMR/tree-sitter-blade/issues",
-    "funding": "https://github.com/sponsors/EmranMR",
-    "scripts": {
-        "test": "tree-sitter generate && tree-sitter test",
-        "parse": "tree-sitter generate && tree-sitter parse example-file.blade",
-        "generate": "tree-sitter generate"
-    },
-    "author": "Emran Mashhadi Ramezan",
-    "license": "MIT",
-    "dependencies": {
-        "nan": "^2.17.0"
-    },
-    "devDependencies": {
-        "tree-sitter-cli": "^0.20.8"
-    },
-    "tree-sitter": [
-        {
-            "scope": "source.blade.php",
-            "file-types": [
-                "blade",
-                "php"
-            ],
-            "injection-regex": "blade"
-        }
-    ]
+        "php"
+      ],
+      "injection-regex": "blade",
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections-text.scm",
+      "folds": "queries/folds.scm"
+    }
+  ]
 }
