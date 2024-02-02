@@ -262,8 +262,17 @@
             {
               "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "@(extends|yield|include|includeIf|includeWhen|includeUnless|includeFirst|props|method|inject|each|vite|livewire|aware|section|servers|import)"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "PATTERN",
+                    "value": "@(extends|yield|include(If|When|Unless|First)?|props)"
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "@(method|inject|each|vite|livewire|aware|section|servers|import)"
+                  }
+                ]
               },
               "named": true,
               "value": "directive"
