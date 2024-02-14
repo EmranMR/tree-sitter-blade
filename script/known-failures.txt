@@ -1,0 +1,2 @@
+examples/breeze/stubs/default/resources/views/components/input-error.blade.php
+examples/breeze/stubs/default/resources/views/components/modal.blade.php
