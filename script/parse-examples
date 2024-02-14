@@ -30,7 +30,7 @@ clone_repo laravel breeze 4dce985b91081bd0bfd31c612bdbb0fd2187a89b
 known_failures=$(cat script/known-failures.txt)
 
 # shellcheck disable=2046
-tree-sitter parse -q \
+tree-sitter parse -q --scope source.blade.php \
   examples/**/*.blade.php \
   $(for file in $known_failures; do echo "!${file}"; done)
 
