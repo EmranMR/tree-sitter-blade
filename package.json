@@ -18,6 +18,7 @@
   "funding": "https://github.com/sponsors/EmranMR",
   "scripts": {
     "build": "tree-sitter generate",
+    "lint": "eslint grammar.js",
     "test": "tree-sitter test",
     "test-examples": "script/parse-examples"
   },
@@ -27,6 +28,8 @@
     "nan": "^2.17.0"
   },
   "devDependencies": {
+    "eslint": ">=8.54.0",
+    "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "^0.20.8"
   },
   "tree-sitter": [
