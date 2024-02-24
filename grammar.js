@@ -85,7 +85,18 @@ module.exports = grammar({
                     ),
                     $._directive_parameter
                 ),
-                $.inlineSection
+                $.inlineSection,
+                $._use
+            ),
+        // !TODO add test for this
+        _use: ($) =>
+            seq(
+                alias('@use', $.directive),
+                alias('(', $.bracket_start),
+                optional(alias($._section_parameter, $.parameter)),
+                ',',
+                optional(alias($._section_parameter, $.parameter)),
+                alias(')', $.bracket_end)
             ),
         // !nested directives
         _nested_directive: ($) =>
