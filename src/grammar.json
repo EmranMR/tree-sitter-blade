@@ -354,20 +354,25 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": ","
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_section_parameter"
-              },
-              "named": true,
-              "value": "parameter"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_section_parameter"
+                  },
+                  "named": true,
+                  "value": "parameter"
+                }
+              ]
             },
             {
               "type": "BLANK"

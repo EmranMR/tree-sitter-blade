@@ -94,8 +94,9 @@ module.exports = grammar({
                 alias('@use', $.directive),
                 alias('(', $.bracket_start),
                 optional(alias($._section_parameter, $.parameter)),
-                ',',
-                optional(alias($._section_parameter, $.parameter)),
+                optional(
+                    seq(',', alias($._section_parameter, $.parameter))
+                ),
                 alias(')', $.bracket_end)
             ),
         // !nested directives
