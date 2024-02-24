@@ -186,9 +186,10 @@ and paste. But here are some detailed information:
 
 > ❗ Please note each **editor** uses it's own sets of
 > predicates/variables so you need to look into their documentation.
-> This is what you need to use inside your `highlights.scm`. For ease
-> of use, I managed to boil everything down to the following
-> tree-sitter queries:
+
+This is what you need to use inside your `highlights.scm`. For ease
+of use, I managed to boil everything down to the following
+tree-sitter queries:
 
 #### 1. (directives) `@theme_selector`
 
