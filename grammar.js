@@ -33,7 +33,8 @@ module.exports = grammar({
                 $._unescaped,
                 $._raw,
                 $._setup,
-                $._hooks
+                $._hooks,
+                $._js
             ),
         _escaped: ($) =>
             seq(
@@ -60,6 +61,8 @@ module.exports = grammar({
                 optional($.php_only),
                 alias('@endphp', $.directive_end)
             ),
+        _js: ($) =>
+            seq(alias('@js', $.directive), $._directive_parameter),
         // ! Conditional Attributes
         attribute: ($) =>
             seq(

@@ -96,6 +96,10 @@
         {
           "type": "SYMBOL",
           "name": "_hooks"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_js"
         }
       ]
     },
@@ -232,6 +236,24 @@
           },
           "named": true,
           "value": "directive_end"
+        }
+      ]
+    },
+    "_js": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@js"
+          },
+          "named": true,
+          "value": "directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_parameter"
         }
       ]
     },
