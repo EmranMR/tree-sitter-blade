@@ -12,12 +12,12 @@ you can contribute, so that it adheres to the grammar styles.
 -   Make sure you are familiar with this chapter from
     [tree-sitter](https://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
     especially the functions.
--   in depth knowledge is not necessary unless you are contributing to
+-   In-depth knowledge is not necessary unless you are contributing to
     the core.
 
 ### General Overview:
 
-The grammar is pretty abstracted, i.e there are lots of aliases and
+The grammar is pretty abstracted, i.e., there are many aliases and
 hidden rules. However I personally believe it is easy to read and
 follow. This was intentional so that it is future proof, extensible
 and maintainable. Thanks to this, there is a 98% chance that the
@@ -28,21 +28,25 @@ code**!
 
 1. Clone this repo
 2. Install the dependancies: `npm i`
-3. To check if your set up is working just run `npm run test`.
-    > Make sure you have set up your `tree-sitter`'s
-    > `parser-directories` path correctly in your config file see
-    > [path](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#paths)
+3. To check if your setup is working, simply run:
+    - `npm run test`: This will run the Unit Test to ensure you have
+      not broken functionalities
+    - `npm run example-test`: This will try to parse alot of common
+      Laravel Method for an automated test drive :)
+        > Make sure you have set up your `tree-sitter`'s
+        > `parser-directories` path correctly in your config file see
+        > [path](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#paths)
 
 ### Overview
 
 Go ahead open up the `grammar.js` in the root directory.
 
-Everything is organised in the order they appear in the document
-inside`_definition`. The `rules` are then made up like lego using the
-"building block" rules that were written at the bottom of the
-`grammar.js`. As a result any changes below the "warning comment" **⚠️
-will likely to cause breakage ⚠️**, so make sure you **run the unit
-tests** every time you amend anything. However it is very unlikely you
+Everything is organized in the order they appear in the document
+inside `$._definition`. The `rules` are then made up like lego using
+the "building block" rules that were written at the bottom of the
+`grammar.js`. As a result, any changes below the 'warning comment' ⚠️
+**are likely to cause breakage** ⚠️, so make sure you run the unit
+tests every time you amend anything. However it is very unlikely you
 would need to touch anything below that line, unless you are writing a
 very **complicated** rule.
 
@@ -61,7 +65,7 @@ document, with **_NO_** _parameters_ for example:
 #### 2. $.php_statement
 
 These are the directives or rules that need their content parsed as
-`php`
+`php_only`
 
 -   `{{}}`
 -   `{!! !!}`
@@ -102,16 +106,28 @@ operators that can appear in any subtree.
 -   `@continue`
 -   ...
 
-#### 7. $.text
+#### 7. $.php_only
 
-This is another rule which is very unlikely you would need to ever
-touch. This will capture anything that is not blade, and used for
-`injection` purposes.
+Integral node, which is used for `php_only` injections. This is based
+on the `$._text` node
+
+#### 8. $.text
+
+This is a general use text node. In this grammar it can be used,
+alongside predicates in the `injection.scm` to achieve interesting
+outcome. Such as injecting normal `text`, `html` or even `shell`. This
+is also built on `$._text`
+
+#### 9. $.\_text
+
+This should not be used, instead you should opt for `$.text` or
+`$.php_only` if needed
 
 ### Adding New Directives:
 
-First thing to do is to find out what category it falls into; so look
-into the `_definition`, pick rule group and dig in to get an idea.
+The first thing to do is to determine what category it belongs to.
+Look at the `$._definition`, pick a rule group, and dig in, to get an
+idea.
 
 As an example look below on how the `@if` directive is defined:
 
@@ -130,16 +146,17 @@ graph TD;
 
 Whenever you define a new rule, you need to test it in two ways:
 
-1. Write an example extract in the `example-file.blade.php`
-    - Then parse it in your terminal, and check the output
-    ```bash
-    npm run parse
-    ```
-2. Once happy with your result, write the appropiate `test` files
-   inside the appropiate group (or make one) in the `corpus/`
+1. You could use the automated parsing to test drive the parser
+    - You would need to run the following command.
+    - This will download a few of the Laravel-based repositories and
+      parse the blade files.
 
-To finish off and ensure your rule is not breaking any other rules,
-just do the followig:
+```bash
+npm run test-example
+```
+
+2. To ensure your rule is not breaking any other rules, just do the
+   following to run the unit test:
 
 ```
 npm run test
@@ -147,14 +164,11 @@ npm run test
 
 If all green you are good to go 👍
 
+Once happy with your result, write the appropriate unit `test` in
+`test/corpus/`. You could either use any of the categories or make
+your own.
+
 ### Pull requests:
 
-Once you have:
-
-1. added your rule
-2. generated the parser
-3. wrote the test
-4. and your `npm run test` output was all green you are ready to do a
-   pull request for a review
-5. `npm run generate` and then do a _pull request_
-    > Ensure you include everything in the `src/*` as well
+-   Just follow the pull request template and ensure you have
+    completed all necessary steps. 😊"
