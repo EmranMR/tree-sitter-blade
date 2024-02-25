@@ -25,7 +25,7 @@
 This project aims to write the tree-sitter grammar for
 [Laravel Blade](https://laravel.com/docs/10.x/blade#main-content).
 
-The grammar could potentially used in any editors or services that are
+The grammar could potentially be used in any editors or services that are
 based on [Tree-Sitter](https://github.com/tree-sitter/tree-sitter).
 Such as, but not limited to:
 
