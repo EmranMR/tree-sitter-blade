@@ -96,10 +96,6 @@
         {
           "type": "SYMBOL",
           "name": "_hooks"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_js"
         }
       ]
     },
@@ -312,6 +308,10 @@
         {
           "type": "SYMBOL",
           "name": "_use"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_js"
         }
       ]
     },

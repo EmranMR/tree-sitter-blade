@@ -34,7 +34,6 @@ module.exports = grammar({
         $._raw,
         $._setup,
         $._hooks,
-        $._js,
       ),
     _escaped: ($) =>
       seq(
@@ -87,6 +86,7 @@ module.exports = grammar({
         ),
         $.inlineSection,
         $._use,
+        $._js,
       ),
     // !TODO add test for this
     _use: ($) =>
