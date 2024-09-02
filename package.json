@@ -2,6 +2,7 @@
   "name": "tree-sitter-blade",
   "version": "0.10.1",
   "description": "tree-sitter-blade grammar for Laravel Blade files",
+  "type": "module",
   "main": "bindings/node",
   "keywords": [
     "tree-sitter-blade",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "eslint": ">=8.54.0",
     "eslint-config-google": "^0.14.0",
+    "globals": "^15.9.0",
     "tree-sitter-cli": "^0.20.8"
   },
   "tree-sitter": [
