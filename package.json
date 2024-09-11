@@ -19,7 +19,7 @@
   "funding": "https://github.com/sponsors/EmranMR",
   "scripts": {
     "build": "tree-sitter generate",
-    "lint": "eslint grammar.js",
+    "lint": "eslint grammar.cjs",
     "test": "tree-sitter test",
     "test-examples": "script/parse-examples"
   },
