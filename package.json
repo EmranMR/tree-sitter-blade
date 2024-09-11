@@ -2,7 +2,6 @@
   "name": "tree-sitter-blade",
   "version": "0.10.1",
   "description": "tree-sitter-blade grammar for Laravel Blade files",
-  "type": "module",
   "main": "bindings/node",
   "keywords": [
     "tree-sitter-blade",
