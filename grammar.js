@@ -23,7 +23,7 @@ module.exports = grammar({
     // !keywords
     keyword: ($) =>
       alias(
-        /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent)/,
+        /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)/,
         $.directive,
       ),
     // ! PHP Statements

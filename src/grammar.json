@@ -69,7 +69,7 @@
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
-        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent)"
+        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)"
       },
       "named": true,
       "value": "directive"

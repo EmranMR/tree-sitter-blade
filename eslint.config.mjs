@@ -1,5 +1,5 @@
-import globals from "globals"
-import google from "eslint-config-google"
+import globals from 'globals';
+import google from 'eslint-config-google';
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
       globals: {
         ...globals.commonjs,
         ...globals.es2021,
-      }
+      },
     },
     ...google,
     rules: {
@@ -17,12 +17,12 @@ export default [
       'max-len': [
         'error',
         {
-          code: 120,
+          code: 125,
           ignoreComments: true,
           ignoreUrls: true,
           ignoreStrings: true,
         },
       ],
     },
-  }
-]
+  },
+];
