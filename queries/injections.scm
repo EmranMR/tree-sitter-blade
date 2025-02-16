@@ -1,3 +1,11 @@
+((script_element
+  (raw_text) @injection.content)
+ (#set! injection.language "javascript"))
+
+((style_element
+  (raw_text) @injection.content)
+ (#set! injection.language "css"))
+
 ((text) @injection.content
     (#not-has-ancestor? @injection.content "envoy")
     (#set! injection.combined)
