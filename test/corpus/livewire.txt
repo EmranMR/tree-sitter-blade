@@ -52,7 +52,7 @@
 @persist
 ================================================================================
 
-@persist('player)
+@persist('player')
   <div>hello world</div>
 @endpersist
 
@@ -71,7 +71,7 @@
 @teleport
 ================================================================================
 
-@teleport('player)
+@teleport('player')
   <div>hello world</div>
 @endteleport
 
@@ -90,7 +90,7 @@
 @volt
 ================================================================================
 
-@volt('player)
+@volt('player')
   <div>hello world</div>
 @endvolt
 
