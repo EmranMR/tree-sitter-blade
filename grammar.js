@@ -76,9 +76,17 @@ export default grammar(html, {
       ),
 
     // ! raw php
-    _raw: ($) => choice($._inline_raw, $._multi_line_raw),
+    _raw: ($) =>
+      choice(
+        $._inline_raw,
+        $._multi_line_raw,
+      ),
 
-    _inline_raw: ($) => seq(alias("@php", $.directive), $._directive_parameter),
+    _inline_raw: ($) =>
+      seq(
+        alias("@php", $.directive),
+        $._directive_parameter,
+      ),
 
     _multi_line_raw: ($) =>
       seq(
@@ -86,7 +94,11 @@ export default grammar(html, {
         optional($.php_only),
         alias("@endphp", $.directive_end),
       ),
-    _js: ($) => seq(alias("@js", $.directive), $._directive_parameter),
+    _js: ($) =>
+      seq(
+        alias("@js", $.directive),
+        $._directive_parameter,
+      ),
 
     // tree-sitter-html override
     attribute: ($) =>
@@ -357,7 +369,13 @@ export default grammar(html, {
       ),
 
     // !Authorisation Directives
-    authorization: ($) => choice($._can, $._canany, $._cannot),
+    authorization: ($) =>
+      choice(
+        $._can,
+        $._canany,
+        $._cannot,
+      ),
+
     _can: ($) =>
       seq(
         alias("@can", $.directive_start),
@@ -415,14 +433,21 @@ export default grammar(html, {
       ),
 
     // !Loops
-    loop: ($) => choice($._for, $._foreach, $._forelse, $._while),
+    loop: ($) =>
+      choice(
+        $._for,
+        $._foreach,
+        $._forelse,
+        $._while,
+      ),
+
     loop_operator: ($) =>
       choice(
         seq(
           alias(/@(continue|break)/, $.directive),
           optional($._directive_parameter),
         ),
-        seq(alias("@empty", $.directive)),
+        alias("@empty", $.directive),
       ),
 
     _for: ($) =>
@@ -454,7 +479,11 @@ export default grammar(html, {
       ),
 
     // !envoy
-    envoy: ($) => choice($._task, $._story),
+    envoy: ($) =>
+      choice(
+        $._task,
+        $._story,
+      ),
 
     _setup: ($) =>
       seq(
@@ -527,7 +556,12 @@ export default grammar(html, {
         $._directive_parameter,
       ),
     // !livewire 🪼
-    livewire: ($) => choice($._persist, $._teleport, $._volt),
+    livewire: ($) =>
+      choice(
+        $._persist,
+        $._teleport,
+        $._volt,
+      ),
     _persist: ($) =>
       seq(
         alias("@persist", $.directive_start),
@@ -547,16 +581,19 @@ export default grammar(html, {
         alias("@endvolt", $.directive_end),
       ),
 
-    /* ------------------------------------
-        /  Do NOT change below this line   /
-        /  without running tests           /
-        /  This is the engine              /
-        /-----------------------------------*/
+    /*-----------------------------------*
+    /  Do NOT change below this line
+    /  without running tests
+    /  This is the engine
+    /*----------------------------------*/
 
     // !normal directive body
     _directive_body: ($) => repeat1($._node),
     _directive_body_with_parameter: ($) =>
-      seq($._directive_parameter, optional($._directive_body)),
+      seq(
+        $._directive_parameter,
+        optional($._directive_body),
+      ),
     _directive_body_with_optional_parameter: ($) =>
       seq(
         optional($._directive_parameter),
@@ -567,16 +604,25 @@ export default grammar(html, {
       seq(
         $._directive_parameter,
         optional(
-          repeat(choice($._node, $.conditional_keyword)),
+          repeat(choice(
+            $._node,
+            $.conditional_keyword,
+          )),
         ),
       ),
     _if_statement_directive_body_with_optional_parameter: ($) =>
       seq(
         optional($._directive_parameter),
-        repeat1(choice($._node, $.conditional_keyword)),
+        repeat1(choice(
+          $._node,
+          $.conditional_keyword,
+        )),
       ),
     _if_statement_directive_body_with_no_parameter: ($) =>
-      repeat1(choice($._node, $.conditional_keyword)),
+      repeat1(choice(
+        $._node,
+        $.conditional_keyword,
+      )),
 
     // !parenthesis balancing
     parameter: ($) =>
@@ -592,8 +638,14 @@ export default grammar(html, {
         $.text,
         token(prec(1, ")")),
       ),
-    _text_with_parenthesis: ($) => seq(/[^()]+/, "(", repeat($.parameter), ")"),
-    //
+    _text_with_parenthesis: ($) =>
+      seq(
+        /[^()]+/,
+        "(",
+        repeat($.parameter),
+        ")",
+      ),
+
     // !directive parameter
     _directive_parameter: ($) =>
       seq(
