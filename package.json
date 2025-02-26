@@ -58,6 +58,7 @@
   "scripts": {
     "install": "node-gyp-build",
     "lint": "eslint grammar.js",
+    "build": "deno -ERW ./main/grammar.ts && tree-sitter generate",
     "test": "node --test bindings/node/*_test.js"
   }
 }
