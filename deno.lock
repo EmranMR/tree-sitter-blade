@@ -20,6 +20,7 @@
     "npm:eslint@^9.20.1": "9.20.1",
     "npm:globals@^15.15.0": "15.15.0",
     "npm:node-addon-api@^8.2.1": "8.3.0",
+    "npm:node-gyp-build@4.8.4": "4.8.4",
     "npm:node-gyp-build@^4.8.2": "4.8.4",
     "npm:tree-sitter-cli@0.25.1": "0.25.1",
     "npm:tree-sitter-cli@~0.25.1": "0.25.1"
