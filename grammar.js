@@ -237,7 +237,7 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // ------------------
     // https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
-    comment: (_$) => token(seq("{{--", /[^-]*-+([^}-][^-]*-+)*/, "}}")),
+    comment: (_) => token(seq("{{--", /[^-]*-+([^}-][^-]*-+)*/, "}}")),
     // !keywords
     keyword: ($) => alias(
       /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)/,
@@ -838,7 +838,7 @@ var grammar_default = grammar(import_grammar.default, {
     // hidden to reduce AST noise in php_only #39
     // It is selectively unhidden for other areas
     // Create alternative text rep for php_only
-    _text: (_$) => choice(
+    _text: (_) => choice(
       token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
       // custom directive conflict resolution
       token(prec(-2, /[{}!@()?,-]/)),

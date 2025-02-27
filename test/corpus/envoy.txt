@@ -131,9 +131,9 @@
 ================================================================================
 
 @before
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endbefore
 
 --------------------------------------------------------------------------------
@@ -149,9 +149,9 @@
 ================================================================================
 
 @after
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endafter
 
 --------------------------------------------------------------------------------
@@ -167,9 +167,9 @@
 ================================================================================
 
 @error
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @enderror
 
 --------------------------------------------------------------------------------
@@ -185,7 +185,9 @@
 ================================================================================
 
 @success
-  echo "success";
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endsuccess
 
 --------------------------------------------------------------------------------
@@ -201,9 +203,9 @@
 ================================================================================
 
 @finished
-    if ($exitCode > 0) {
-        // There were errors in one of the tasks...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endfinished
 
 --------------------------------------------------------------------------------
@@ -220,9 +222,6 @@
 
 @finished
     @slack('webhook-url', '#bots', 'Hello, Slack.')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
@@ -243,9 +242,6 @@
 
 @finished
     @discord('discord-webhook-url')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
@@ -266,9 +262,6 @@
 
 @finished
     @telegram('bot-id','chat-id')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
@@ -289,9 +282,6 @@
 
 @finished
     @microsoftTeams('webhook-url')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
