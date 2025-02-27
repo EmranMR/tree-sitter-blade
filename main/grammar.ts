@@ -4,10 +4,10 @@
  * @license MIT
  */
 
-import NodeSet from "./NodeSet.ts";
+import NodeMap from "./NodeMap.ts";
 import html from "../tree-sitter-html/grammar.js";
 
-const nodes = new NodeSet();
+const nodes = new NodeMap();
 
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
@@ -105,6 +105,9 @@ export default grammar(html, {
         alias($.html_attribute, $.html),
         $.php_statement,
       ),
+    attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
+
+    attribute_value: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
 
     // utilised from tree-sitter-html
     html_attribute: ($) =>
@@ -153,7 +156,6 @@ export default grammar(html, {
             $.section,
             $.stack,
             $.once,
-            $.stack,
           ),
         ),
         alias("@endfragment", $.directive_end),
@@ -238,7 +240,6 @@ export default grammar(html, {
             $.once,
             $.fragment,
             $.section,
-            $.once,
             $.verbatim,
           ),
         ),
@@ -261,7 +262,6 @@ export default grammar(html, {
             $.once,
             $.fragment,
             $.section,
-            $.once,
             $.verbatim,
           ),
         ),
@@ -284,7 +284,6 @@ export default grammar(html, {
             $.once,
             $.fragment,
             $.section,
-            $.once,
             $.verbatim,
           ),
         ),
@@ -307,7 +306,6 @@ export default grammar(html, {
             $.once,
             $.fragment,
             $.section,
-            $.once,
             $.verbatim,
           ),
         ),
@@ -330,7 +328,6 @@ export default grammar(html, {
             $.once,
             $.fragment,
             $.section,
-            $.once,
             $.verbatim,
           ),
         ),
@@ -351,8 +348,8 @@ export default grammar(html, {
         $._hasSection,
         $._sectionMissing,
         $._error,
-        $.authorization,
-        alias($._feature, $.pennant),
+        $._authorization,
+        $._feature,
         $._custom,
       ),
 
@@ -444,7 +441,7 @@ export default grammar(html, {
       ),
 
     // !Authorisation Directives
-    authorization: ($) => choice($._can, $._canany, $._cannot),
+    _authorization: ($) => choice($._can, $._canany, $._cannot),
 
     _can: ($) =>
       seq(
@@ -496,7 +493,19 @@ export default grammar(html, {
         $._directive_parameter,
         repeat($._case),
         optional(
-          seq(alias("@default", $.directive), repeat($._node)),
+          seq(
+            alias("@default", $.directive),
+            nodes.without(
+              $.doctype,
+              $.section,
+              $.once,
+              $.stack,
+              $.verbatim,
+              $.envoy,
+              $.fragment,
+              $.switch,
+            ),
+          ),
         ),
         alias("@endswitch", $.directive_end),
       ),
@@ -513,6 +522,7 @@ export default grammar(html, {
             $.verbatim,
             $.envoy,
             $.fragment,
+            $.switch,
           ),
         ),
         alias("@break", $.directive),

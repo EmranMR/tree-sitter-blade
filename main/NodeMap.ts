@@ -1,26 +1,26 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-export default class NodeSet {
-  private nodes: Set<SymbolRule<string>>;
+export default class NodeMap {
+  private nodes: Map<string, SymbolRule<string>>;
   private extraNodes: Set<SymbolRule<string>>;
 
   constructor() {
-    this.nodes = new Set();
+    this.nodes = new Map();
     this.extraNodes = new Set();
   }
 
   /**
-   * The method used to collect and package entire grammar
+   * The method used to collect, cache and return the entire grammar
    */
   add(...nodes: SymbolRule<string>[]) {
     if (this.nodes.size != 0) {
       console.error("This should be only ever be called collect node sets");
-      return choice(...this.nodes);
+      return repeat(choice(...this.nodes.values()));
     }
 
-    nodes.forEach((node) => this.nodes.add(node));
-    return choice(...this.nodes);
+    nodes.forEach((node) => this.nodes.set(node.name, node));
+    return repeat(choice(...this.nodes.values()));
   }
 
   /**
@@ -28,8 +28,8 @@ export default class NodeSet {
    */
   all() {
     return this.extraNodes.size == 0
-      ? repeat1(choice(...this.nodes))
-      : repeat1(choice(...this.merged()));
+      ? repeat1(choice(...this.nodes.values()))
+      : repeat1(choice(...this.mergedWith(...this.nodes.values())));
   }
 
   /**
@@ -44,34 +44,29 @@ export default class NodeSet {
    * Only use the following nodes (no caching)
    */
   only(...nodes: SymbolRule<string>[]) {
-    const temp = new Set<SymbolRule<string>>();
-    nodes.forEach((node) => temp.add(node));
-
     return repeat1(
       choice(
-        ...temp,
+        ...nodes,
       ),
     );
   }
 
   /**
-   * Return a new set without the specified nodes.
+   * Return cached nodes without the specified nodes.
    */
   without(...nodes: SymbolRule<string>[]): Repeat1Rule {
-    const temp = this.extraNodes.size == 0
-      ? new Set(this.nodes)
-      : this.merged();
+    const temp = new Map(this.nodes);
 
-    nodes.forEach((node) => temp.delete(node));
-    return repeat1(choice(...temp));
+    nodes.forEach((node) => temp.delete(node.name));
+    return repeat1(choice(...temp.values()));
   }
 
   /**
-   * Return the merged set and clears the extraNodes.
+   * Return the merged node set and clears the extraNodes.
    */
-  private merged() {
-    const temp = this.nodes.union(this.extraNodes);
+  private mergedWith(...nodes: SymbolRule<string>[]) {
+    const temp = new Set(this.extraNodes);
     this.extraNodes.clear();
-    return temp;
+    return temp.union(new Set(nodes));
   }
 }
