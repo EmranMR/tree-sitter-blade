@@ -53,12 +53,13 @@
     "eslint": "^9.14.0",
     "eslint-config-treesitter": "^1.0.2",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.25.2"
+    "tree-sitter-cli": "^0.25.2",
+    "@types/node": "^22.13.0"
   },
   "scripts": {
     "install": "node-gyp-build",
     "lint": "eslint grammar.js",
-    "build": "deno -ERW ./main/grammar.ts && tree-sitter generate",
+    "build": "deno -A ./main/bundle.ts && tree-sitter generate",
     "test": "node --test bindings/node/*_test.js"
   }
 }
