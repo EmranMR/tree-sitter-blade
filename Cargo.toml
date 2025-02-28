@@ -1,26 +1,33 @@
 [package]
 name = "tree-sitter-blade"
 description = "blade grammar for the tree-sitter parsing library"
-version = "0.0.1"
-keywords = ["incremental", "parsing", "blade"]
+version = "0.11.0"
+authors = ["Emran M. Rahaman <Emran@opulence.design>"]
+keywords = ["incremental", "parsing", "tree-sitter", "blade"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-blade"
-edition = "2018"
+repository = "https://github.com/EmranMR/tree-sitter-blade"
+edition = "2021"
 license = "MIT"
+autoexamples = false
 
 build = "bindings/rust/build.rs"
 include = [
+  "LICENSE",
   "bindings/rust/*",
   "grammar.js",
   "queries/*",
   "src/*",
+  "tree-sitter.json",
 ]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20.10"
+tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "1.0"
+cc = "1.1"
+
+[dev-dependencies]
+tree-sitter = "0.25"
