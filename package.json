@@ -1,14 +1,6 @@
 {
   "name": "tree-sitter-blade",
   "version": "0.11.0",
-  "description": "tree-sitter-blade grammar for Laravel Blade files",
-  "main": "bindings/node",
-  "keywords": [
-    "tree-sitter-blade",
-    "blade",
-    "tree-sitter",
-    "laravel"
-  ],
   "homepage": "https://github.com/EmranMR/tree-sitter-blade",
   "repository": {
     "type": "git",
@@ -18,6 +10,25 @@
   "funding": "https://github.com/sponsors/EmranMR",
   "author": "Emran Mashhadi Ramezan",
   "license": "MIT",
+  "description": "tree-sitter-blade grammar for Laravel Blade files",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "tree-sitter-blade",
+    "blade",
+    "tree-sitter",
+    "laravel"
+  ],
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
   "dependencies": {
     "node-addon-api": "^8.2.2",
     "node-gyp-build": "^4.8.2"
