@@ -1,69 +1,94 @@
-# copyright: This parser build is created and provided by Panic inc
-# You do not require this file in order to use the tree-sitter-blade
-# This is only for .dylib generation for Nova extension development
+ifeq ($(OS),Windows_NT)
+$(error Windows is not supported)
+endif
 
-# Repository
+LANGUAGE_NAME := tree-sitter-blade
+HOMEPAGE_URL := https://github.com/EmranMR/tree-sitter-blade
+VERSION := 0.11.0
+
+# repository
 SRC_DIR := src
 
-PARSER_REPO_URL ?= $(shell git -C $(SRC_DIR) remote get-url origin )
-# the # in the sed pattern has to be escaped or it will be interpreted as a comment
-PARSER_NAME ?= $(shell basename $(PARSER_REPO_URL) | cut -d '-' -f3 | sed 's\#.git\#\#')
-UPPER_PARSER_NAME := $(shell echo $(PARSER_NAME) | tr a-z A-Z )
+TS ?= tree-sitter
 
 # install directory layout
 PREFIX ?= /usr/local
 INCLUDEDIR ?= $(PREFIX)/include
 LIBDIR ?= $(PREFIX)/lib
+PCLIBDIR ?= $(LIBDIR)/pkgconfig
 
-# collect sources, and link if necessary
-# Some Tree Sitter grammars include .cc files directly in others,
-# so we shouldn't just wildcard select them all.
-# Only collect known file names.
-ifneq ("$(wildcard $(SRC_DIR)/parser.c)", "")
-	SRC += $(SRC_DIR)/parser.c
-endif
-ifneq ("$(wildcard $(SRC_DIR)/scanner.c)", "")
-	SRC += $(SRC_DIR)/scanner.c
-endif
-ifneq ("$(wildcard $(SRC_DIR)/parser.cc)", "")
-    CPPSRC += $(SRC_DIR)/parser.cc
-endif
-ifneq ("$(wildcard $(SRC_DIR)/scanner.cc)", "")
-    CPPSRC += $(SRC_DIR)/scanner.cc
-endif
+# source/object files
+PARSER := $(SRC_DIR)/parser.c
+EXTRAS := $(filter-out $(PARSER),$(wildcard $(SRC_DIR)/*.c))
+OBJS := $(patsubst %.c,%.o,$(PARSER) $(EXTRAS))
 
-ifeq (, $(CPPSRC))
-	ADDITIONALLIBS :=
+# flags
+ARFLAGS ?= rcs
+override CFLAGS += -I$(SRC_DIR) -std=c11 -fPIC
+
+# ABI versioning
+SONAME_MAJOR = $(shell sed -n 's/\#define LANGUAGE_VERSION //p' $(PARSER))
+SONAME_MINOR = $(word 1,$(subst ., ,$(VERSION)))
+
+# OS-specific bits
+ifeq ($(shell uname),Darwin)
+	SOEXT = dylib
+	SOEXTVER_MAJOR = $(SONAME_MAJOR).$(SOEXT)
+	SOEXTVER = $(SONAME_MAJOR).$(SONAME_MINOR).$(SOEXT)
+	LINKSHARED = -dynamiclib -Wl,-install_name,$(LIBDIR)/lib$(LANGUAGE_NAME).$(SOEXTVER),-rpath,@executable_path/../Frameworks
 else
-	ADDITIONALLIBS := -lc++
+	SOEXT = so
+	SOEXTVER_MAJOR = $(SOEXT).$(SONAME_MAJOR)
+	SOEXTVER = $(SOEXT).$(SONAME_MAJOR).$(SONAME_MINOR)
+	LINKSHARED = -shared -Wl,-soname,lib$(LANGUAGE_NAME).$(SOEXTVER)
+endif
+ifneq ($(filter $(shell uname),FreeBSD NetBSD DragonFly),)
+	PCLIBDIR := $(PREFIX)/libdata/pkgconfig
 endif
 
-SRC += $(CPPSRC)
-OBJ := $(addsuffix .o,$(basename $(SRC)))
+all: lib$(LANGUAGE_NAME).a lib$(LANGUAGE_NAME).$(SOEXT) $(LANGUAGE_NAME).pc
 
-CFLAGS ?= -O3 -Wall -Wextra -I$(SRC_DIR)
-CXXFLAGS ?= -O3 -Wall -Wextra -I$(SRC_DIR)
-override CFLAGS += -std=gnu99 -fPIC
-override CXXFLAGS += -fPIC
+lib$(LANGUAGE_NAME).a: $(OBJS)
+	$(AR) $(ARFLAGS) $@ $^
 
-LINKSHARED := $(LINKSHARED)-dynamiclib -Wl,
-ifneq ($(ADDITIONALLIBS),)
-  LINKSHARED := $(LINKSHARED)$(ADDITIONALLIBS),
-endif
-LINKSHARED := $(LINKSHARED)-install_name,$(LIBDIR)/libtree-sitter-$(PARSER_NAME).dylib,-rpath,@executable_path/../Frameworks
-
-all: libtree-sitter-$(PARSER_NAME).dylib
-
-libtree-sitter-$(PARSER_NAME).dylib: $(OBJ)
+lib$(LANGUAGE_NAME).$(SOEXT): $(OBJS)
 	$(CC) $(LDFLAGS) $(LINKSHARED) $^ $(LDLIBS) -o $@
+ifneq ($(STRIP),)
+	$(STRIP) $@
+endif
+
+$(LANGUAGE_NAME).pc: bindings/c/$(LANGUAGE_NAME).pc.in
+	sed -e 's|@PROJECT_VERSION@|$(VERSION)|' \
+		-e 's|@CMAKE_INSTALL_LIBDIR@|$(LIBDIR:$(PREFIX)/%=%)|' \
+		-e 's|@CMAKE_INSTALL_INCLUDEDIR@|$(INCLUDEDIR:$(PREFIX)/%=%)|' \
+		-e 's|@PROJECT_DESCRIPTION@|$(DESCRIPTION)|' \
+		-e 's|@PROJECT_HOMEPAGE_URL@|$(HOMEPAGE_URL)|' \
+		-e 's|@CMAKE_INSTALL_PREFIX@|$(PREFIX)|' $< > $@
+
+$(PARSER): $(SRC_DIR)/grammar.json
+	$(TS) generate $^
 
 install: all
-	install -d '$(DESTDIR)$(LIBDIR)'
-	install -m755 libtree-sitter-$(PARSER_NAME).dylib '$(DESTDIR)$(LIBDIR)'/libtree-sitter-$(PARSER_NAME).dylib
-	install -d '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter
+	install -d '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter '$(DESTDIR)$(PCLIBDIR)' '$(DESTDIR)$(LIBDIR)'
+	install -m644 bindings/c/$(LANGUAGE_NAME).h '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter/$(LANGUAGE_NAME).h
+	install -m644 $(LANGUAGE_NAME).pc '$(DESTDIR)$(PCLIBDIR)'/$(LANGUAGE_NAME).pc
+	install -m644 lib$(LANGUAGE_NAME).a '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).a
+	install -m755 lib$(LANGUAGE_NAME).$(SOEXT) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXTVER)
+	ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR)
+	ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXT)
+
+uninstall:
+	$(RM) '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).a \
+		'$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXTVER) \
+		'$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR) \
+		'$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXT) \
+		'$(DESTDIR)$(INCLUDEDIR)'/tree_sitter/$(LANGUAGE_NAME).h \
+		'$(DESTDIR)$(PCLIBDIR)'/$(LANGUAGE_NAME).pc
 
 clean:
-	rm -f $(OBJ) libtree-sitter-$(PARSER_NAME).dylib
-	rm -rf build/
+	$(RM) $(OBJS) $(LANGUAGE_NAME).pc lib$(LANGUAGE_NAME).a lib$(LANGUAGE_NAME).$(SOEXT)
 
-.PHONY: all install clean
+test:
+	$(TS) test
+
+.PHONY: all install uninstall clean test
