@@ -6,6 +6,7 @@ node_modules
 package-lock.json
 .build/
 .DS_Store
+/examples
 
 # Compiled files and materials for Nova
 # See Nova extension repo EmranMR/Laravel-Nova-Extension
