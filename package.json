@@ -1,14 +1,6 @@
 {
   "name": "tree-sitter-blade",
   "version": "0.11.0",
-  "description": "tree-sitter-blade grammar for Laravel Blade files",
-  "main": "bindings/node",
-  "keywords": [
-    "tree-sitter-blade",
-    "blade",
-    "tree-sitter",
-    "laravel"
-  ],
   "homepage": "https://github.com/EmranMR/tree-sitter-blade",
   "repository": {
     "type": "git",
@@ -16,34 +8,48 @@
   },
   "bugs": "https://github.com/EmranMR/tree-sitter-blade/issues",
   "funding": "https://github.com/sponsors/EmranMR",
-  "scripts": {
-    "build": "tree-sitter generate",
-    "lint": "eslint grammar.js",
-    "test": "tree-sitter test",
-    "test-examples": "script/parse-examples"
-  },
   "author": "Emran Mashhadi Ramezan",
   "license": "MIT",
+  "description": "tree-sitter-blade grammar for Laravel Blade files",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "tree-sitter-blade",
+    "blade",
+    "tree-sitter",
+    "laravel"
+  ],
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
   "dependencies": {
-    "nan": "^2.17.0"
+    "node-addon-api": "^8.2.2",
+    "node-gyp-build": "^4.8.2"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.22.4"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "eslint": "^9.10.0",
-    "eslint-config-google": "^0.14.0",
-    "globals": "^15.9.0",
-    "tree-sitter-cli": "^0.20.8"
+    "eslint": "^9.14.0",
+    "eslint-config-treesitter": "^1.0.2",
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.2"
   },
-  "tree-sitter": [
-    {
-      "scope": "source.blade.php",
-      "file-types": [
-        "blade",
-        "php"
-      ],
-      "injection-regex": "blade",
-      "highlights": "queries/highlights.scm",
-      "injections": "queries/injections-text.scm",
-      "folds": "queries/folds.scm"
-    }
-  ]
+  "scripts": {
+    "install": "node-gyp-build",
+    "lint": "eslint grammar.js",
+    "test": "node --test bindings/node/*_test.js"
+  }
 }

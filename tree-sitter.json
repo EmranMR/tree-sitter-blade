@@ -1,0 +1,38 @@
+{
+  "grammars": [
+    {
+      "name": "blade",
+      "camelcase": "Blade",
+      "scope": "source.blade.php",
+      "file-types": [
+        "blade",
+        "php"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm",
+      "tags": "queries/tags.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.11.0",
+    "license": "MIT",
+    "description": "Laravel Blade grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Emran Ramezan",
+        "email": "Emran@opulence.design"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/EmranMR/tree-sitter-blade"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

@@ -1,1 +1,0 @@
-examples/breeze/stubs/default/resources/views/components/input-error.blade.php
