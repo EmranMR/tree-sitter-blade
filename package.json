@@ -31,19 +31,6 @@
     "eslint": "^9.10.0",
     "eslint-config-google": "^0.14.0",
     "globals": "^15.9.0",
-    "tree-sitter-cli": "^0.20.8"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.blade.php",
-      "file-types": [
-        "blade",
-        "php"
-      ],
-      "injection-regex": "blade",
-      "highlights": "queries/highlights.scm",
-      "injections": "queries/injections-text.scm",
-      "folds": "queries/folds.scm"
-    }
-  ]
+    "tree-sitter-cli": "^0.25.2"
+  }
 }

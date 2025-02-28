@@ -14,3 +14,4 @@ build
 .nova/
 *.dylib
 *.o
+*.so
