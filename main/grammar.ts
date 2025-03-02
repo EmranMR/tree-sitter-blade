@@ -839,9 +839,13 @@ export default grammar(html, {
     _directive_parameter: ($) =>
       seq(
         alias("(", $.bracket_start),
-        optional(repeat(alias($.text, $.parameter))),
+        optional(repeat($.parameter)),
         alias(")", $.bracket_end),
       ),
+
+    // !parenthesis balancing - for functions/casts
+    parameter: ($) => choice(/[^()]+/, $._nested_parenthases),
+    _nested_parenthases: ($) => seq("(", repeat($.parameter), ")"),
 
     text: ($) => prec.right(repeat1($._text)),
     // hidden to reduce AST noise in php_only #39
@@ -849,9 +853,17 @@ export default grammar(html, {
 
     // Create alternative text rep for php_only
     _text: (_) =>
+      // custom directive conflict resolution
       choice(
-        token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)), // custom directive conflict resolution
-        token(prec(-2, /[{}!@()?,-]/)), // orphan tags
+        token(prec(
+          -1,
+          /@[a-zA-Z\d]*[^\(-]/,
+        )),
+        // orphan tags
+        token(prec(
+          -2,
+          /[{}!@()?,-]/,
+        )),
         token(
           prec(
             -1,

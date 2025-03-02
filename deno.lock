@@ -24,6 +24,7 @@
     "npm:node-gyp-build@4.8.4": "4.8.4",
     "npm:node-gyp-build@^4.8.2": "4.8.4",
     "npm:prebuildify@^6.0.1": "6.0.1",
+    "npm:tree-sitter-cli@0.25.2": "0.25.2",
     "npm:tree-sitter-cli@~0.25.2": "0.25.2"
   },
   "jsr": {

@@ -4,5 +4,22 @@
     "types": [
       "tree-sitter-cli/dsl"
     ]
+  },
+  "tasks": {
+    "bundle": "deno -A ./main/bundle.ts",
+    "test": "deno test main/",
+    "parse": {
+      "command": "tree-sitter parse example.blade.php",
+      "dependencies": [
+        "bundle",
+        "generate"
+      ]
+    },
+    "generate": {
+      "command": "deno task build",
+      "dependencies": [
+        "bundle"
+      ]
+    }
   }
 }
