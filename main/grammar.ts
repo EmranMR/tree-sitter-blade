@@ -18,33 +18,37 @@ export default grammar(html, {
   rules: {
     // The entire grammar
     document: ($) =>
-      nodes.add(
-        // tree-sitter-html
-        $.doctype,
-        $.entity,
-        $.text,
-        $.element,
-        $.script_element,
-        $.style_element,
-        $.erroneous_end_tag,
-        // tree-sitter-blade
-        $.keyword,
-        $.php_statement,
-        $._inline_directive,
-        $.comment,
-        $.switch,
-        $.loop,
-        $.loop_operator,
-        $.envoy,
-        $.livewire,
-        // wip nested
-        $.fragment,
-        $.section,
-        $.once,
-        $.verbatim,
-        $.stack,
-        // conditional
-        $.conditional,
+      repeat(
+        choice(
+          ...nodes.add(
+            // tree-sitter-html
+            $.doctype,
+            $.entity,
+            $.text,
+            $.element,
+            $.script_element,
+            $.style_element,
+            $.erroneous_end_tag,
+            // tree-sitter-blade
+            $.keyword,
+            $.php_statement,
+            $._inline_directive,
+            $.comment,
+            $.switch,
+            $.loop,
+            $.loop_operator,
+            $.envoy,
+            $.livewire,
+            // wip nested
+            $.fragment,
+            $.section,
+            $.once,
+            $.verbatim,
+            $.stack,
+            // conditional
+            $.conditional,
+          ),
+        ),
       ),
     // ------------------
 
@@ -148,14 +152,18 @@ export default grammar(html, {
         alias("@fragment", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.fragment,
-            $.section,
-            $.stack,
-            $.once,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.fragment,
+                $.section,
+                $.stack,
+                $.once,
+              ),
+            ),
           ),
         ),
         alias("@endfragment", $.directive_end),
@@ -177,12 +185,16 @@ export default grammar(html, {
           alias("@section", $.directive_start),
           optional($._directive_parameter),
           optional(
-            nodes.without(
-              $.doctype,
-              $.section,
-              $.once,
-              $.envoy,
-              $.fragment,
+            repeat1(
+              choice(
+                ...nodes.without(
+                  $.doctype,
+                  $.section,
+                  $.once,
+                  $.envoy,
+                  $.fragment,
+                ),
+              ),
             ),
           ),
           alias(/@(endsection|show)/, $.directive_end),
@@ -193,10 +205,14 @@ export default grammar(html, {
       seq(
         alias("@once", $.directive_start),
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.section,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.section,
+              ),
+            ),
           ),
         ),
         alias("@endonce", $.directive_end),
@@ -206,10 +222,14 @@ export default grammar(html, {
       seq(
         alias("@verbatim", $.directive_start),
         optional(
-          nodes.without(
-            $.doctype,
-            $.livewire,
-            $.envoy,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.livewire,
+                $.envoy,
+              ),
+            ),
           ),
         ),
         alias("@endverbatim", $.directive_end),
@@ -229,18 +249,22 @@ export default grammar(html, {
         alias("@push", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.loop,
-            $.loop_operator,
-            $.conditional,
-            $.stack,
-            $.once,
-            $.fragment,
-            $.section,
-            $.verbatim,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.loop,
+                $.loop_operator,
+                $.conditional,
+                $.stack,
+                $.once,
+                $.fragment,
+                $.section,
+                $.verbatim,
+              ),
+            ),
           ),
         ),
         alias("@endpush", $.directive_end),
@@ -251,18 +275,22 @@ export default grammar(html, {
         alias("@pushOnce", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.loop,
-            $.loop_operator,
-            $.conditional,
-            $.stack,
-            $.once,
-            $.fragment,
-            $.section,
-            $.verbatim,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.loop,
+                $.loop_operator,
+                $.conditional,
+                $.stack,
+                $.once,
+                $.fragment,
+                $.section,
+                $.verbatim,
+              ),
+            ),
           ),
         ),
         alias("@endPushOnce", $.directive_end),
@@ -273,18 +301,22 @@ export default grammar(html, {
         alias("@pushIf", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.loop,
-            $.loop_operator,
-            $.conditional,
-            $.stack,
-            $.once,
-            $.fragment,
-            $.section,
-            $.verbatim,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.loop,
+                $.loop_operator,
+                $.conditional,
+                $.stack,
+                $.once,
+                $.fragment,
+                $.section,
+                $.verbatim,
+              ),
+            ),
           ),
         ),
         alias("@endPushIf", $.directive_end),
@@ -295,18 +327,22 @@ export default grammar(html, {
         alias("@prepend", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.loop,
-            $.loop_operator,
-            $.conditional,
-            $.stack,
-            $.once,
-            $.fragment,
-            $.section,
-            $.verbatim,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.loop,
+                $.loop_operator,
+                $.conditional,
+                $.stack,
+                $.once,
+                $.fragment,
+                $.section,
+                $.verbatim,
+              ),
+            ),
           ),
         ),
         alias("@endprepend", $.directive_end),
@@ -317,18 +353,22 @@ export default grammar(html, {
         alias("@prependOnce", $.directive_start),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.envoy,
-            $.livewire,
-            $.loop,
-            $.loop_operator,
-            $.conditional,
-            $.stack,
-            $.once,
-            $.fragment,
-            $.section,
-            $.verbatim,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.envoy,
+                $.livewire,
+                $.loop,
+                $.loop_operator,
+                $.conditional,
+                $.stack,
+                $.once,
+                $.fragment,
+                $.section,
+                $.verbatim,
+              ),
+            ),
           ),
         ),
         alias("@endPrependOnce", $.directive_end),
@@ -495,15 +535,19 @@ export default grammar(html, {
         optional(
           seq(
             alias("@default", $.directive),
-            nodes.without(
-              $.doctype,
-              $.section,
-              $.once,
-              $.stack,
-              $.verbatim,
-              $.envoy,
-              $.fragment,
-              $.switch,
+            repeat1(
+              choice(
+                ...nodes.without(
+                  $.doctype,
+                  $.section,
+                  $.once,
+                  $.stack,
+                  $.verbatim,
+                  $.envoy,
+                  $.fragment,
+                  $.switch,
+                ),
+              ),
             ),
           ),
         ),
@@ -514,15 +558,19 @@ export default grammar(html, {
         alias("@case", $.directive),
         $._directive_parameter,
         optional(
-          nodes.without(
-            $.doctype,
-            $.section,
-            $.once,
-            $.stack,
-            $.verbatim,
-            $.envoy,
-            $.fragment,
-            $.switch,
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.section,
+                $.once,
+                $.stack,
+                $.verbatim,
+                $.envoy,
+                $.fragment,
+                $.switch,
+              ),
+            ),
           ),
         ),
         alias("@break", $.directive),
@@ -662,27 +710,31 @@ export default grammar(html, {
       seq(
         alias("@persist", $.directive_start),
         $._directive_parameter,
-        nodes.only(
+        repeat1(choice(
           $.entity,
           $.text,
           $.element,
           $.php_statement,
           $.conditional,
-        ),
+        )),
         alias("@endpersist", $.directive_end),
       ),
     _teleport: ($) =>
       seq(
         alias("@teleport", $.directive_start),
         $._directive_parameter,
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.fragment,
-          $.section,
-          $.once,
-          $.verbatim,
-          $.stack,
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.fragment,
+              $.section,
+              $.once,
+              $.verbatim,
+              $.stack,
+            ),
+          ),
         ),
         alias("@endteleport", $.directive_end),
       ),
@@ -690,14 +742,18 @@ export default grammar(html, {
       seq(
         alias("@volt", $.directive_start),
         $._directive_parameter,
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.fragment,
-          $.section,
-          $.once,
-          $.verbatim,
-          $.stack,
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.fragment,
+              $.section,
+              $.once,
+              $.verbatim,
+              $.stack,
+            ),
+          ),
         ),
         alias("@endvolt", $.directive_end),
       ),
@@ -711,9 +767,11 @@ export default grammar(html, {
     // !conditional helpers
 
     _conditonal_body: ($) =>
-      nodes
-        .with($.conditional_keyword)
-        .all(),
+      repeat1(choice(
+        ...nodes
+          .with($.conditional_keyword)
+          .all(),
+      )),
 
     _conditional_directive_body: ($) =>
       seq(
@@ -733,20 +791,19 @@ export default grammar(html, {
     _envoy_if: ($) =>
       seq(
         alias("@if", $.directive_start),
-        nodes.only(
+        repeat1(choice(
           $.conditional_keyword,
           $.text,
           $._envoy_if,
-        ),
+        )),
         alias("@endif", $.directive_end),
       ),
 
     _envoy_body: ($) =>
-      nodes.only(
+      repeat1(choice(
         $.text,
         $._envoy_if,
-      ),
-
+      )),
     _envoy_directive_body: ($) =>
       seq(
         $._directive_parameter,
@@ -755,18 +812,22 @@ export default grammar(html, {
 
     // !loop helpers
     _loop_body: ($) =>
-      nodes
-        .without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.section,
-          $.fragment,
-          $.once,
-          $.verbatim,
-          $.stack,
-          $.conditional,
+      repeat1(
+        choice(
+          ...nodes
+            .without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.section,
+              $.fragment,
+              $.once,
+              $.verbatim,
+              $.stack,
+              $.conditional,
+            ),
         ),
+      ),
 
     _loop_directive_body: ($) =>
       seq(

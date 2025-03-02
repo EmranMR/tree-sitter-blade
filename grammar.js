@@ -142,28 +142,41 @@ var require_grammar = __commonJS({
 
 // main/NodeMap.ts
 var NodeMap = class {
-  nodes;
+  cachedNodes;
   extraNodes;
   constructor() {
-    this.nodes = /* @__PURE__ */ new Map();
+    this.cachedNodes = /* @__PURE__ */ new Map();
     this.extraNodes = /* @__PURE__ */ new Set();
   }
   /**
    * The method used to collect, cache and return the entire grammar
+   * new nodes needing cached can be added at a later point
    */
   add(...nodes2) {
-    if (this.nodes.size != 0) {
-      console.error("This should be only ever be called collect node sets");
-      return repeat(choice(...this.nodes.values()));
+    if (this.size() != 0) {
+      nodes2.forEach(
+        (node) => {
+          if (!this.has(node)) {
+            this.set(node);
+          }
+        }
+      );
+      return this.cachedNodes.values();
     }
-    nodes2.forEach((node) => this.nodes.set(node.name, node));
-    return repeat(choice(...this.nodes.values()));
+    nodes2.forEach((node) => this.set(node));
+    return this.cachedNodes.values();
   }
   /**
-   * returns all the cached nodes
+   * Map the node to the cache
+   */
+  set(node) {
+    this.cachedNodes.set(node.name, node);
+  }
+  /**
+   * returns all the cached nodes, including the extra nodes specified
    */
   all() {
-    return this.extraNodes.size == 0 ? repeat1(choice(...this.nodes.values())) : repeat1(choice(...this.mergedWith(...this.nodes.values())));
+    return this.extraNodes.size == 0 ? this.cachedNodes.values() : this.mergedWith(...this.cachedNodes.values());
   }
   /**
    * rule specific nodes to be used temporarily.
@@ -173,22 +186,26 @@ var NodeMap = class {
     return this;
   }
   /**
-   * Only use the following nodes (no caching)
+   * Checks if a node already exists
    */
-  only(...nodes2) {
-    return repeat1(
-      choice(
-        ...nodes2
-      )
-    );
+  has(node) {
+    return this.cachedNodes.has(node.name);
   }
   /**
    * Return cached nodes without the specified nodes.
+   *
+   * If extra nodes are provided, it will be merged and returned as well
    */
   without(...nodes2) {
-    const temp = new Map(this.nodes);
+    const temp = new Map(this.cachedNodes);
     nodes2.forEach((node) => temp.delete(node.name));
-    return repeat1(choice(...temp.values()));
+    return this.extraNodes.size == 0 ? temp.values() : this.mergedWith(...temp.values());
+  }
+  /**
+   * returns the size of the Data Structure
+   */
+  size() {
+    return this.cachedNodes.size;
   }
   /**
    * Return the merged node set and clears the extraNodes.
@@ -207,33 +224,37 @@ var grammar_default = grammar(import_grammar.default, {
   name: "blade",
   rules: {
     // The entire grammar
-    document: ($) => nodes.add(
-      // tree-sitter-html
-      $.doctype,
-      $.entity,
-      $.text,
-      $.element,
-      $.script_element,
-      $.style_element,
-      $.erroneous_end_tag,
-      // tree-sitter-blade
-      $.keyword,
-      $.php_statement,
-      $._inline_directive,
-      $.comment,
-      $.switch,
-      $.loop,
-      $.loop_operator,
-      $.envoy,
-      $.livewire,
-      // wip nested
-      $.fragment,
-      $.section,
-      $.once,
-      $.verbatim,
-      $.stack,
-      // conditional
-      $.conditional
+    document: ($) => repeat(
+      choice(
+        ...nodes.add(
+          // tree-sitter-html
+          $.doctype,
+          $.entity,
+          $.text,
+          $.element,
+          $.script_element,
+          $.style_element,
+          $.erroneous_end_tag,
+          // tree-sitter-blade
+          $.keyword,
+          $.php_statement,
+          $._inline_directive,
+          $.comment,
+          $.switch,
+          $.loop,
+          $.loop_operator,
+          $.envoy,
+          $.livewire,
+          // wip nested
+          $.fragment,
+          $.section,
+          $.once,
+          $.verbatim,
+          $.stack,
+          // conditional
+          $.conditional
+        )
+      )
     ),
     // ------------------
     // https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
@@ -312,14 +333,18 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@fragment", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.fragment,
-          $.section,
-          $.stack,
-          $.once
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.fragment,
+              $.section,
+              $.stack,
+              $.once
+            )
+          )
         )
       ),
       alias("@endfragment", $.directive_end)
@@ -339,12 +364,16 @@ var grammar_default = grammar(import_grammar.default, {
         alias("@section", $.directive_start),
         optional($._directive_parameter),
         optional(
-          nodes.without(
-            $.doctype,
-            $.section,
-            $.once,
-            $.envoy,
-            $.fragment
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.section,
+                $.once,
+                $.envoy,
+                $.fragment
+              )
+            )
           )
         ),
         alias(/@(endsection|show)/, $.directive_end)
@@ -353,10 +382,14 @@ var grammar_default = grammar(import_grammar.default, {
     once: ($) => seq(
       alias("@once", $.directive_start),
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.section
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.section
+            )
+          )
         )
       ),
       alias("@endonce", $.directive_end)
@@ -364,10 +397,14 @@ var grammar_default = grammar(import_grammar.default, {
     verbatim: ($) => seq(
       alias("@verbatim", $.directive_start),
       optional(
-        nodes.without(
-          $.doctype,
-          $.livewire,
-          $.envoy
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.livewire,
+              $.envoy
+            )
+          )
         )
       ),
       alias("@endverbatim", $.directive_end)
@@ -383,18 +420,22 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@push", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.loop,
-          $.loop_operator,
-          $.conditional,
-          $.stack,
-          $.once,
-          $.fragment,
-          $.section,
-          $.verbatim
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.loop,
+              $.loop_operator,
+              $.conditional,
+              $.stack,
+              $.once,
+              $.fragment,
+              $.section,
+              $.verbatim
+            )
+          )
         )
       ),
       alias("@endpush", $.directive_end)
@@ -403,18 +444,22 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@pushOnce", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.loop,
-          $.loop_operator,
-          $.conditional,
-          $.stack,
-          $.once,
-          $.fragment,
-          $.section,
-          $.verbatim
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.loop,
+              $.loop_operator,
+              $.conditional,
+              $.stack,
+              $.once,
+              $.fragment,
+              $.section,
+              $.verbatim
+            )
+          )
         )
       ),
       alias("@endPushOnce", $.directive_end)
@@ -423,18 +468,22 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@pushIf", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.loop,
-          $.loop_operator,
-          $.conditional,
-          $.stack,
-          $.once,
-          $.fragment,
-          $.section,
-          $.verbatim
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.loop,
+              $.loop_operator,
+              $.conditional,
+              $.stack,
+              $.once,
+              $.fragment,
+              $.section,
+              $.verbatim
+            )
+          )
         )
       ),
       alias("@endPushIf", $.directive_end)
@@ -443,18 +492,22 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@prepend", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.loop,
-          $.loop_operator,
-          $.conditional,
-          $.stack,
-          $.once,
-          $.fragment,
-          $.section,
-          $.verbatim
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.loop,
+              $.loop_operator,
+              $.conditional,
+              $.stack,
+              $.once,
+              $.fragment,
+              $.section,
+              $.verbatim
+            )
+          )
         )
       ),
       alias("@endprepend", $.directive_end)
@@ -463,18 +516,22 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@prependOnce", $.directive_start),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.envoy,
-          $.livewire,
-          $.loop,
-          $.loop_operator,
-          $.conditional,
-          $.stack,
-          $.once,
-          $.fragment,
-          $.section,
-          $.verbatim
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.envoy,
+              $.livewire,
+              $.loop,
+              $.loop_operator,
+              $.conditional,
+              $.stack,
+              $.once,
+              $.fragment,
+              $.section,
+              $.verbatim
+            )
+          )
         )
       ),
       alias("@endPrependOnce", $.directive_end)
@@ -604,15 +661,19 @@ var grammar_default = grammar(import_grammar.default, {
       optional(
         seq(
           alias("@default", $.directive),
-          nodes.without(
-            $.doctype,
-            $.section,
-            $.once,
-            $.stack,
-            $.verbatim,
-            $.envoy,
-            $.fragment,
-            $.switch
+          repeat1(
+            choice(
+              ...nodes.without(
+                $.doctype,
+                $.section,
+                $.once,
+                $.stack,
+                $.verbatim,
+                $.envoy,
+                $.fragment,
+                $.switch
+              )
+            )
           )
         )
       ),
@@ -622,15 +683,19 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@case", $.directive),
       $._directive_parameter,
       optional(
-        nodes.without(
-          $.doctype,
-          $.section,
-          $.once,
-          $.stack,
-          $.verbatim,
-          $.envoy,
-          $.fragment,
-          $.switch
+        repeat1(
+          choice(
+            ...nodes.without(
+              $.doctype,
+              $.section,
+              $.once,
+              $.stack,
+              $.verbatim,
+              $.envoy,
+              $.fragment,
+              $.switch
+            )
+          )
         )
       ),
       alias("@break", $.directive)
@@ -740,40 +805,48 @@ var grammar_default = grammar(import_grammar.default, {
     _persist: ($) => seq(
       alias("@persist", $.directive_start),
       $._directive_parameter,
-      nodes.only(
+      repeat1(choice(
         $.entity,
         $.text,
         $.element,
         $.php_statement,
         $.conditional
-      ),
+      )),
       alias("@endpersist", $.directive_end)
     ),
     _teleport: ($) => seq(
       alias("@teleport", $.directive_start),
       $._directive_parameter,
-      nodes.without(
-        $.doctype,
-        $.envoy,
-        $.fragment,
-        $.section,
-        $.once,
-        $.verbatim,
-        $.stack
+      repeat1(
+        choice(
+          ...nodes.without(
+            $.doctype,
+            $.envoy,
+            $.fragment,
+            $.section,
+            $.once,
+            $.verbatim,
+            $.stack
+          )
+        )
       ),
       alias("@endteleport", $.directive_end)
     ),
     _volt: ($) => seq(
       alias("@volt", $.directive_start),
       $._directive_parameter,
-      nodes.without(
-        $.doctype,
-        $.envoy,
-        $.fragment,
-        $.section,
-        $.once,
-        $.verbatim,
-        $.stack
+      repeat1(
+        choice(
+          ...nodes.without(
+            $.doctype,
+            $.envoy,
+            $.fragment,
+            $.section,
+            $.once,
+            $.verbatim,
+            $.stack
+          )
+        )
       ),
       alias("@endvolt", $.directive_end)
     ),
@@ -783,7 +856,9 @@ var grammar_default = grammar(import_grammar.default, {
     /  This is the engine
     /*----------------------------------*/
     // !conditional helpers
-    _conditonal_body: ($) => nodes.with($.conditional_keyword).all(),
+    _conditonal_body: ($) => repeat1(choice(
+      ...nodes.with($.conditional_keyword).all()
+    )),
     _conditional_directive_body: ($) => seq(
       $._directive_parameter,
       optional($._conditonal_body)
@@ -797,32 +872,36 @@ var grammar_default = grammar(import_grammar.default, {
     // ! envoy helpers
     _envoy_if: ($) => seq(
       alias("@if", $.directive_start),
-      nodes.only(
+      repeat1(choice(
         $.conditional_keyword,
         $.text,
         $._envoy_if
-      ),
+      )),
       alias("@endif", $.directive_end)
     ),
-    _envoy_body: ($) => nodes.only(
+    _envoy_body: ($) => repeat1(choice(
       $.text,
       $._envoy_if
-    ),
+    )),
     _envoy_directive_body: ($) => seq(
       $._directive_parameter,
       optional($._envoy_body)
     ),
     // !loop helpers
-    _loop_body: ($) => nodes.without(
-      $.doctype,
-      $.envoy,
-      $.livewire,
-      $.section,
-      $.fragment,
-      $.once,
-      $.verbatim,
-      $.stack,
-      $.conditional
+    _loop_body: ($) => repeat1(
+      choice(
+        ...nodes.without(
+          $.doctype,
+          $.envoy,
+          $.livewire,
+          $.section,
+          $.fragment,
+          $.once,
+          $.verbatim,
+          $.stack,
+          $.conditional
+        )
+      )
     ),
     _loop_directive_body: ($) => seq(
       $._directive_parameter,

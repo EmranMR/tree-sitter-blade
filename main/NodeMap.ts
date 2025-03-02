@@ -1,35 +1,46 @@
-/// <reference types="tree-sitter-cli/dsl" />
-// @ts-check
-
 export default class NodeMap {
-  private nodes: Map<string, SymbolRule<string>>;
+  private cachedNodes: Map<string, SymbolRule<string>>;
   private extraNodes: Set<SymbolRule<string>>;
 
   constructor() {
-    this.nodes = new Map();
+    this.cachedNodes = new Map();
     this.extraNodes = new Set();
   }
 
   /**
    * The method used to collect, cache and return the entire grammar
+   * new nodes needing cached can be added at a later point
    */
   add(...nodes: SymbolRule<string>[]) {
-    if (this.nodes.size != 0) {
-      console.error("This should be only ever be called collect node sets");
-      return repeat(choice(...this.nodes.values()));
+    if (this.size() != 0) {
+      nodes.forEach(
+        (node) => {
+          if (!this.has(node)) {
+            this.set(node);
+          }
+        },
+      );
+      return this.cachedNodes.values();
     }
 
-    nodes.forEach((node) => this.nodes.set(node.name, node));
-    return repeat(choice(...this.nodes.values()));
+    nodes.forEach((node) => this.set(node));
+    return this.cachedNodes.values();
   }
 
   /**
-   * returns all the cached nodes
+   * Map the node to the cache
+   */
+  private set(node: SymbolRule<string>) {
+    this.cachedNodes.set(node.name, node);
+  }
+
+  /**
+   * returns all the cached nodes, including the extra nodes specified
    */
   all() {
     return this.extraNodes.size == 0
-      ? repeat1(choice(...this.nodes.values()))
-      : repeat1(choice(...this.mergedWith(...this.nodes.values())));
+      ? this.cachedNodes.values()
+      : this.mergedWith(...this.cachedNodes.values());
   }
 
   /**
@@ -41,24 +52,32 @@ export default class NodeMap {
   }
 
   /**
-   * Only use the following nodes (no caching)
+   * Checks if a node already exists
    */
-  only(...nodes: SymbolRule<string>[]) {
-    return repeat1(
-      choice(
-        ...nodes,
-      ),
-    );
+  has(node: SymbolRule<string>) {
+    return this.cachedNodes.has(node.name);
   }
 
   /**
    * Return cached nodes without the specified nodes.
+   *
+   * If extra nodes are provided, it will be merged and returned as well
    */
-  without(...nodes: SymbolRule<string>[]): Repeat1Rule {
-    const temp = new Map(this.nodes);
+  without(...nodes: SymbolRule<string>[]) {
+    const temp = new Map(this.cachedNodes);
 
     nodes.forEach((node) => temp.delete(node.name));
-    return repeat1(choice(...temp.values()));
+
+    return this.extraNodes.size == 0
+      ? temp.values()
+      : this.mergedWith(...temp.values());
+  }
+
+  /**
+   * returns the size of the Data Structure
+   */
+  size() {
+    return this.cachedNodes.size;
   }
 
   /**
