@@ -14,7 +14,7 @@
     }
   ],
   "metadata": {
-    "version": "0.11.0",
+    "version": "0.12.0",
     "license": "MIT",
     "description": "Laravel Blade grammar for tree-sitter",
     "authors": [

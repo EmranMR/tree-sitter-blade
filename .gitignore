@@ -26,6 +26,11 @@ dist/
 *.dll
 *.pc
 
+# Zig artifacts
+.zig-cache/
+zig-cache/
+zig-out/
+
 # Example dirs
 /examples/*/
 
