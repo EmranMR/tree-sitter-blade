@@ -72,15 +72,15 @@ export default grammar(html, {
 
     _escaped: ($) =>
       seq(
-        alias("{{", $.bracket_start),
+        "{{",
         optional(alias($.text, $.php_only)),
-        alias("}}", $.bracket_end),
+        "}}",
       ),
     _unescaped: ($) =>
       seq(
-        alias("{!!", $.bracket_start),
+        "{!!",
         optional(alias($.text, $.php_only)),
-        alias("!!}", $.bracket_end),
+        "!!}",
       ),
 
     // ! raw php
@@ -195,19 +195,17 @@ export default grammar(html, {
       choice(
         seq(
           alias("@section", $.directive),
-          alias("(", $.bracket_start),
+          "(",
           alias(/[^,()]+/, $.parameter),
           ",",
           alias(/[^,()]+/, $.parameter),
-          alias(")", $.bracket_end),
+          ")",
         ),
         seq(
           alias("@section", $.directive),
-          alias("@section", $.directive),
-          alias("@section", $.directive),
-          alias("(", $.bracket_start),
+          "(",
           alias(/[^,()]+/, $.parameter),
-          alias(")", $.bracket_end),
+          ")",
           optional(
             repeat1(
               choice(
@@ -808,9 +806,9 @@ export default grammar(html, {
     // !directive parameter
     _directive_parameter: ($) =>
       seq(
-        alias("(", $.bracket_start),
+        "(",
         optional(repeat($.parameter)),
-        alias(")", $.bracket_end),
+        ")",
       ),
 
     // !parenthesis balancing - for functions/casts

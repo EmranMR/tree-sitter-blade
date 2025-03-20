@@ -268,14 +268,14 @@ var grammar_default = grammar(import_grammar.default, {
     php_tag: (_) => /<\?([pP][hH][pP]|=)?/,
     // --------------------
     _escaped: ($) => seq(
-      alias("{{", $.bracket_start),
+      "{{",
       optional(alias($.text, $.php_only)),
-      alias("}}", $.bracket_end)
+      "}}"
     ),
     _unescaped: ($) => seq(
-      alias("{!!", $.bracket_start),
+      "{!!",
       optional(alias($.text, $.php_only)),
-      alias("!!}", $.bracket_end)
+      "!!}"
     ),
     // ! raw php
     _raw: ($) => choice($._inline_raw, $._multi_line_raw),
@@ -372,17 +372,17 @@ var grammar_default = grammar(import_grammar.default, {
     section: ($) => choice(
       seq(
         alias("@section", $.directive),
-        alias("(", $.bracket_start),
+        "(",
         alias(/[^,()]+/, $.parameter),
         ",",
         alias(/[^,()]+/, $.parameter),
-        alias(")", $.bracket_end)
+        ")"
       ),
       seq(
         alias("@section", $.directive),
-        alias("(", $.bracket_start),
+        "(",
         alias(/[^,()]+/, $.parameter),
-        alias(")", $.bracket_end),
+        ")",
         optional(
           repeat1(
             choice(
@@ -879,9 +879,9 @@ var grammar_default = grammar(import_grammar.default, {
     _loop_directive_body: ($) => seq($._directive_parameter, optional($._loop_body)),
     // !directive parameter
     _directive_parameter: ($) => seq(
-      alias("(", $.bracket_start),
+      "(",
       optional(repeat($.parameter)),
-      alias(")", $.bracket_end)
+      ")"
     ),
     // !parenthesis balancing - for functions/casts
     parameter: ($) => choice(/[^()]+/, $._nested_parenthases),
