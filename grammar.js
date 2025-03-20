@@ -154,13 +154,11 @@ var NodeMap = class {
    */
   add(...nodes2) {
     if (this.size() != 0) {
-      nodes2.forEach(
-        (node) => {
-          if (!this.has(node)) {
-            this.set(node);
-          }
+      nodes2.forEach((node) => {
+        if (!this.has(node)) {
+          this.set(node);
         }
-      );
+      });
       return this.cachedNodes.values();
     }
     nodes2.forEach((node) => this.set(node));
@@ -242,7 +240,6 @@ var grammar_default = grammar(import_grammar.default, {
           $.comment,
           $.switch,
           $.loop,
-          $.loop_operator,
           $.envoy,
           $.livewire,
           // wip nested
@@ -265,13 +262,7 @@ var grammar_default = grammar(import_grammar.default, {
       $.directive
     ),
     // ! PHP Statements
-    php_statement: ($) => choice(
-      $._escaped,
-      $._unescaped,
-      $._setup,
-      $._raw,
-      $._php
-    ),
+    php_statement: ($) => choice($._escaped, $._unescaped, $._setup, $._raw, $._php),
     // From tree-sitter-php
     _php: ($) => seq($.php_tag, optional(alias($.text, $.php_only)), "?>"),
     php_tag: (_) => /<\?([pP][hH][pP]|=)?/,
@@ -315,7 +306,15 @@ var grammar_default = grammar(import_grammar.default, {
     // ! Conditional Blade Attribute Directives
     blade_attribute: ($) => seq(
       alias(
-        /@(class|style|checked|selected|disabled|readonly|required)/,
+        choice(
+          "@class",
+          "@style",
+          "@checked",
+          "@selected",
+          "@disabled",
+          "@readonly",
+          "@required"
+        ),
         $.directive
       ),
       $._directive_parameter
@@ -323,7 +322,27 @@ var grammar_default = grammar(import_grammar.default, {
     // !inline directives
     _inline_directive: ($) => seq(
       alias(
-        /@(include(If|When|Unless|First)?|extends|yield|method|inject|each|vite|livewire|aware|section|servers|import|js|svg|props|use)/,
+        choice(
+          "@include",
+          "@includeIf",
+          "@includeWhen",
+          "@includeUnless",
+          "@includeFirst",
+          "@extends",
+          "@yield",
+          "@method",
+          "@inject",
+          "@each",
+          "@vite",
+          "@livewire",
+          "@aware",
+          "@servers",
+          "@import",
+          "@js",
+          "@svg",
+          "@props",
+          "@use"
+        ),
         $.directive
       ),
       $._directive_parameter
@@ -354,15 +373,16 @@ var grammar_default = grammar(import_grammar.default, {
       seq(
         alias("@section", $.directive),
         alias("(", $.bracket_start),
-        alias($.text, $.parameter),
+        alias(/[^,()]+/, $.parameter),
         ",",
-        alias($.text, $.parameter),
-        alias(")", $.bracket_end),
-        alias($.text, $.parameter)
+        alias(/[^,()]+/, $.parameter),
+        alias(")", $.bracket_end)
       ),
       seq(
-        alias("@section", $.directive_start),
-        optional($._directive_parameter),
+        alias("@section", $.directive),
+        alias("(", $.bracket_start),
+        alias(/[^,()]+/, $.parameter),
+        alias(")", $.bracket_end),
         optional(
           repeat1(
             choice(
@@ -383,13 +403,7 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@once", $.directive_start),
       optional(
         repeat1(
-          choice(
-            ...nodes.without(
-              $.doctype,
-              $.envoy,
-              $.section
-            )
-          )
+          choice(...nodes.without($.doctype, $.envoy, $.section))
         )
       ),
       alias("@endonce", $.directive_end)
@@ -398,13 +412,7 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@verbatim", $.directive_start),
       optional(
         repeat1(
-          choice(
-            ...nodes.without(
-              $.doctype,
-              $.livewire,
-              $.envoy
-            )
-          )
+          choice(...nodes.without($.doctype, $.livewire, $.envoy))
         )
       ),
       alias("@endverbatim", $.directive_end)
@@ -427,7 +435,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.envoy,
               $.livewire,
               $.loop,
-              $.loop_operator,
+              $._loop_operator,
               $.conditional,
               $.stack,
               $.once,
@@ -451,7 +459,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.envoy,
               $.livewire,
               $.loop,
-              $.loop_operator,
+              $._loop_operator,
               $.conditional,
               $.stack,
               $.once,
@@ -475,7 +483,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.envoy,
               $.livewire,
               $.loop,
-              $.loop_operator,
+              $._loop_operator,
               $.conditional,
               $.stack,
               $.once,
@@ -499,7 +507,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.envoy,
               $.livewire,
               $.loop,
-              $.loop_operator,
+              $._loop_operator,
               $.conditional,
               $.stack,
               $.once,
@@ -523,7 +531,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.envoy,
               $.livewire,
               $.loop,
-              $.loop_operator,
+              $._loop_operator,
               $.conditional,
               $.stack,
               $.once,
@@ -558,7 +566,7 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@else", $.directive),
       seq(
         alias(/@(elseif|else[a-zA-Z]+)/, $.directive),
-        optional($._directive_parameter)
+        $._directive_parameter
       )
     ),
     _if: ($) => seq(
@@ -646,12 +654,7 @@ var grammar_default = grammar(import_grammar.default, {
         alias(token(prec(-1, /@[a-zA-Z\d]+/)), $.directive_start)
       ),
       $._conditional_directive_body,
-      alias(
-        token(
-          prec(1, /@end[a-zA-Z\d]+/)
-        ),
-        $.directive_end
-      )
+      alias(token(prec(1, /@end[a-zA-Z\d]+/)), $.directive_end)
     ),
     // !switch
     switch: ($) => seq(
@@ -702,7 +705,7 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // !Loops
     loop: ($) => choice($._for, $._foreach, $._forelse, $._while),
-    loop_operator: ($) => choice(
+    _loop_operator: ($) => choice(
       seq(
         alias(/@(continue|break)/, $.directive),
         optional($._directive_parameter)
@@ -730,11 +733,7 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@endwhile", $.directive_end)
     ),
     // !envoy
-    envoy: ($) => choice(
-      $._task,
-      $._story,
-      $._hooks
-    ),
+    envoy: ($) => choice($._task, $._story, $._hooks),
     _setup: ($) => seq(
       alias("@setup", $.directive_start),
       optional(alias($.text, $.php_only)),
@@ -759,37 +758,27 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     _before: ($) => seq(
       alias("@before", $.directive_start),
-      optional(
-        repeat($._notification)
-      ),
+      optional(repeat($._notification)),
       alias("@endbefore", $.directive_end)
     ),
     _after: ($) => seq(
       alias("@after", $.directive_start),
-      optional(
-        repeat($._notification)
-      ),
+      optional(repeat($._notification)),
       alias("@endafter", $.directive_end)
     ),
     _envoy_error: ($) => seq(
       alias("@error", $.directive_start),
-      optional(
-        repeat($._notification)
-      ),
+      optional(repeat($._notification)),
       alias("@enderror", $.directive_end)
     ),
     _success: ($) => seq(
       alias("@success", $.directive_start),
-      optional(
-        repeat($._notification)
-      ),
+      optional(repeat($._notification)),
       alias("@endsuccess", $.directive_end)
     ),
     _finished: ($) => seq(
       alias("@finished", $.directive_start),
-      optional(
-        repeat($._notification)
-      ),
+      optional(repeat($._notification)),
       alias("@endfinished", $.directive_end)
     ),
     // !envoy:notification
@@ -805,13 +794,15 @@ var grammar_default = grammar(import_grammar.default, {
     _persist: ($) => seq(
       alias("@persist", $.directive_start),
       $._directive_parameter,
-      repeat1(choice(
-        $.entity,
-        $.text,
-        $.element,
-        $.php_statement,
-        $.conditional
-      )),
+      repeat1(
+        choice(
+          $.entity,
+          $.text,
+          $.element,
+          $.php_statement,
+          $.conditional
+        )
+      ),
       alias("@endpersist", $.directive_end)
     ),
     _teleport: ($) => seq(
@@ -856,41 +847,23 @@ var grammar_default = grammar(import_grammar.default, {
     /  This is the engine
     /*----------------------------------*/
     // !conditional helpers
-    _conditonal_body: ($) => repeat1(choice(
-      ...nodes.with($.conditional_keyword).all()
-    )),
-    _conditional_directive_body: ($) => seq(
-      $._directive_parameter,
-      optional($._conditonal_body)
-    ),
-    _conditional_body_with_optional_parameter: ($) => seq(
-      optional(
-        $._directive_parameter
-      ),
-      $._conditonal_body
-    ),
+    _conditonal_body: ($) => repeat1(choice(...nodes.with($.conditional_keyword).all())),
+    _conditional_directive_body: ($) => seq($._directive_parameter, optional($._conditonal_body)),
+    _conditional_body_with_optional_parameter: ($) => seq(optional($._directive_parameter), $._conditonal_body),
     // ! envoy helpers
     _envoy_if: ($) => seq(
-      alias("@if", $.directive_start),
-      repeat1(choice(
-        $.conditional_keyword,
-        $.text,
-        $._envoy_if
-      )),
+      alias(token(prec(-1, "@if")), $.directive_start),
+      repeat1(choice($.conditional_keyword, $.text, $._envoy_if)),
       alias("@endif", $.directive_end)
     ),
-    _envoy_body: ($) => repeat1(choice(
-      $.text,
-      $._envoy_if
-    )),
-    _envoy_directive_body: ($) => seq(
-      $._directive_parameter,
-      optional($._envoy_body)
-    ),
+    _envoy_body: ($) => repeat1(choice($.text, $._envoy_if)),
+    _envoy_directive_body: ($) => seq($._directive_parameter, optional($._envoy_body)),
     // !loop helpers
     _loop_body: ($) => repeat1(
       choice(
-        ...nodes.without(
+        ...nodes.with(
+          $._loop_operator
+        ).without(
           $.doctype,
           $.envoy,
           $.livewire,
@@ -903,10 +876,7 @@ var grammar_default = grammar(import_grammar.default, {
         )
       )
     ),
-    _loop_directive_body: ($) => seq(
-      $._directive_parameter,
-      optional($._loop_body)
-    ),
+    _loop_directive_body: ($) => seq($._directive_parameter, optional($._loop_body)),
     // !directive parameter
     _directive_parameter: ($) => seq(
       alias("(", $.bracket_start),
@@ -923,15 +893,9 @@ var grammar_default = grammar(import_grammar.default, {
     _text: (_) => (
       // custom directive conflict resolution
       choice(
-        token(prec(
-          -1,
-          /@[a-zA-Z\d]*[^\(-]/
-        )),
+        token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
         // orphan tags
-        token(prec(
-          -2,
-          /[{}!@()?,-]/
-        )),
+        token(prec(-2, /[{}!@()?,-]/)),
         token(
           prec(
             -1,

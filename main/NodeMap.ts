@@ -13,13 +13,11 @@ export default class NodeMap {
    */
   add(...nodes: SymbolRule<string>[]) {
     if (this.size() != 0) {
-      nodes.forEach(
-        (node) => {
-          if (!this.has(node)) {
-            this.set(node);
-          }
-        },
-      );
+      nodes.forEach((node) => {
+        if (!this.has(node)) {
+          this.set(node);
+        }
+      });
       return this.cachedNodes.values();
     }
 

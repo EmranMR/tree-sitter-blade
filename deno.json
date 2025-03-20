@@ -8,7 +8,14 @@
   "tasks": {
     "bundle": "deno -A ./main/bundle.ts",
     "test": "deno test main/",
-    "parse": {
+    "test-grammar": {
+      "command": "npx tree-sitter test",
+      "dependencies": [
+        "bundle",
+        "generate"
+      ]
+    },
+    "prse": {
       "command": "tree-sitter parse example.blade.php",
       "dependencies": [
         "bundle",
