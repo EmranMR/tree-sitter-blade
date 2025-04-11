@@ -15,7 +15,7 @@
         "generate"
       ]
     },
-    "prse": {
+    "parse": {
       "command": "tree-sitter parse example.blade.php",
       "dependencies": [
         "bundle",

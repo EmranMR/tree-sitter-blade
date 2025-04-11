@@ -10,43 +10,40 @@ import html from "../tree-sitter-html/grammar.js";
 const nodes = new NodeMap();
 
 /// <reference types="tree-sitter-cli/dsl" />
-// @ts-check
 
 export default grammar(html, {
   name: "blade",
 
   rules: {
     // The entire grammar
-    document: ($) =>
-      repeat(
-        choice(
-          ...nodes.add(
-            // tree-sitter-html
-            $.doctype,
-            $.entity,
-            $.text,
-            $.element,
-            $.script_element,
-            $.style_element,
-            $.erroneous_end_tag,
-            // tree-sitter-blade
-            $.keyword,
-            $.php_statement,
-            $._inline_directive,
-            $.comment,
-            $.switch,
-            $.loop,
-            $.envoy,
-            $.livewire,
-            // wip nested
-            $.fragment,
-            $.section,
-            $.once,
-            $.verbatim,
-            $.stack,
-            // conditional
-            $.conditional,
-          ),
+    _node: ($) =>
+      choice(
+        ...nodes.add(
+          // tree-sitter-html
+          $.doctype,
+          $.entity,
+          $.text,
+          $.element,
+          $.script_element,
+          $.style_element,
+          $.erroneous_end_tag,
+          // tree-sitter-blade
+          $.keyword,
+          $.php_statement,
+          $._inline_directive,
+          $.comment,
+          $.switch,
+          $.loop,
+          $.envoy,
+          $.livewire,
+          // wip nested
+          $.fragment,
+          $.section,
+          $.once,
+          $.verbatim,
+          $.stack,
+          // conditional
+          $.conditional,
         ),
       ),
     // ------------------
@@ -784,9 +781,8 @@ export default grammar(html, {
       repeat1(
         choice(
           ...nodes
-            .with(
-              $._loop_operator,
-            ).without(
+            .with($._loop_operator)
+            .without(
               $.doctype,
               $.envoy,
               $.livewire,

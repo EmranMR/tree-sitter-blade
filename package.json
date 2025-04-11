@@ -61,7 +61,7 @@
     "lint": "eslint grammar.js",
     "build": " tree-sitter generate",
     "prestart": "tree-sitter build --wasm",
-    "start": "tree-sitter playground",
+    "start": "tree-sitter playground -q",
     "test": "node --test bindings/node/*_test.js",
     "bundle": "deno -A ./main/bundle.ts"
   }
