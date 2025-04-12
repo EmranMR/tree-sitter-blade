@@ -6,14 +6,26 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter)))
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value))))
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @style
@@ -23,14 +35,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @checked
@@ -40,14 +54,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @selected
@@ -57,14 +73,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @disabled
@@ -74,14 +92,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @readonly
@@ -91,14 +111,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))
 
 ================================================================================
 @required
@@ -108,11 +130,13 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (text)
-  (attribute
-    (directive)
-    (bracket_start)
-    (parameter)
-    (bracket_end))
-  (text))
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (blade
+          (directive)
+          (parameter))))
+    (end_tag
+      (tag_name))))

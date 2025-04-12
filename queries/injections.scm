@@ -14,14 +14,14 @@
 ((php_only) @injection.content
     (#set! injection.language php_only))
 
-((parameter) @injection.content                                                                                                 
-    (#set! injection.include-children) ; You may need this, depending on your editor e.g Helix                                                                                          
+((parameter) @injection.content
+    (#set! injection.include-children) ; You may need this, depending on your editor e.g Helix
     (#set! injection.language "php-only"))
 
 
 ; ; See #33
 ; ; AlpineJS attributes
-((attribute
+((html
   (attribute_name) @_attr
     (#match? @_attr "^x-[a-z]+")
   (quoted_attribute_value
@@ -29,7 +29,7 @@
   (#set! injection.language "javascript"))
 
 ; ; Apline Events
-((attribute
+((html
   (attribute_name) @_attr
     (#match? @_attr "^@[a-z]+")
   (quoted_attribute_value
@@ -41,7 +41,7 @@
   (_
     (tag_name) @_tag
       (#match? @_tag "[^x][^-]")
-  (attribute
+  (html
     (attribute_name) @_attr
       (#match? @_attr "^:[a-z]+")
     (quoted_attribute_value
@@ -54,7 +54,7 @@
   (_
     (tag_name) @_tag
       (#match? @_tag "^x-[a-z]+")
-  (attribute
+  (html
     (attribute_name) @_attr
       (#match? @_attr "^::[a-z]+")
     (quoted_attribute_value
@@ -65,7 +65,7 @@
 ; ; <htmlTag :class="baz" />
 (element
   (_
-  (attribute
+  (html
     (attribute_name) @_attr
       (#match? @_attr "^:[a-z]+")
     (quoted_attribute_value
@@ -78,7 +78,7 @@
   (_
     (tag_name) @_tag
       (#match? @_tag "^x-[a-z]+")
-    (attribute
+    (html
       (attribute_name) @_attr
         (#match? @_attr "^:[a-z]+")
       (quoted_attribute_value

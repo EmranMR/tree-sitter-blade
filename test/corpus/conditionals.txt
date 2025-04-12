@@ -8,12 +8,10 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -29,17 +27,13 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (conditional
       (directive_start)
-      (bracket_start)
       (parameter)
-      (bracket_end)
       (text)
       (directive_end))
     (directive_end)))
@@ -58,18 +52,14 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (conditional_keyword
       (directive)
-      (bracket_start)
-      (parameter)
-      (bracket_end))
+      (parameter))
     (text)
     (conditional_keyword
       (directive))
@@ -86,12 +76,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -105,12 +93,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -124,12 +110,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -143,7 +127,7 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
     (text)
@@ -159,12 +143,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -178,7 +160,7 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
     (text)
@@ -194,12 +176,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -213,7 +193,7 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
     (text)
@@ -229,12 +209,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -248,12 +226,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -267,12 +243,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -286,12 +260,10 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -309,24 +281,19 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
-    (authorization
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (conditional_keyword
-        (directive)
-        (bracket_start)
-        (parameter)
-        (bracket_end))
-      (text)
-      (conditional_keyword
-        (directive))
-      (text)
-      (directive_end))))
+    (directive_start)
+    (parameter)
+    (comment)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (text)
+    (conditional_keyword
+      (directive))
+    (text)
+    (directive_end)))
 
 ================================================================================
 @cannot
@@ -340,21 +307,16 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
-    (authorization
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (conditional_keyword
-        (directive)
-        (bracket_start)
-        (parameter)
-        (bracket_end))
-      (text)
-      (directive_end))))
+    (directive_start)
+    (parameter)
+    (comment)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (text)
+    (directive_end)))
 
 ================================================================================
 @canany
@@ -368,21 +330,16 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
-    (authorization
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (conditional_keyword
-        (directive)
-        (bracket_start)
-        (parameter)
-        (bracket_end))
-      (text)
-      (directive_end))))
+    (directive_start)
+    (parameter)
+    (comment)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (text)
+    (directive_end)))
 
 ================================================================================
 @feature
@@ -398,24 +355,19 @@ conditional keywords
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
-    (pennant
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (conditional_keyword
-        (directive)
-        (bracket_start)
-        (parameter)
-        (bracket_end))
-      (text)
-      (conditional_keyword
-        (directive))
-      (text)
-      (directive_end))))
+    (directive_start)
+    (parameter)
+    (text)
+    (conditional_keyword
+      (directive)
+      (parameter))
+    (text)
+    (conditional_keyword
+      (directive))
+    (text)
+    (directive_end)))
 
 ================================================================================
 custom directive
@@ -435,18 +387,14 @@ custom directive
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (conditional_keyword
       (directive)
-      (bracket_start)
-      (parameter)
-      (bracket_end))
+      (parameter))
     (text)
     (conditional_keyword
       (directive))
@@ -454,9 +402,7 @@ custom directive
     (directive_end))
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -471,17 +417,13 @@ complex custom directive
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (conditional
       (directive_start)
-      (bracket_start)
       (parameter)
-      (bracket_end)
       (text)
       (directive_end))
     (directive_end)))

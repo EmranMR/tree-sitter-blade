@@ -850,11 +850,12 @@ var grammar_default = grammar(import_grammar.default, {
     _conditional_body_with_optional_parameter: ($) => seq(optional($._directive_parameter), $._conditonal_body),
     // ! envoy helpers
     _envoy_if: ($) => seq(
-      alias(token(prec(-1, "@if")), $.directive_start),
-      repeat1(choice($.conditional_keyword, $.text, $._envoy_if)),
+      alias("@if", $.directive_start),
+      $._directive_parameter,
+      choice($.conditional_keyword, $._envoy_body),
       alias("@endif", $.directive_end)
     ),
-    _envoy_body: ($) => repeat1(choice($.text, $._envoy_if)),
+    _envoy_body: ($) => repeat1(choice($.text, $._envoy_if, $._escaped)),
     _envoy_directive_body: ($) => seq($._directive_parameter, optional($._envoy_body)),
     // !loop helpers
     _loop_body: ($) => repeat1(

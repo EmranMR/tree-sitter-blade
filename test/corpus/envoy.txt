@@ -6,11 +6,9 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @import
@@ -18,11 +16,9 @@
 @import('vendor/package/Envoy.blade.php')
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @task
@@ -40,24 +36,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
-    (conditional
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (php_statement
-        (bracket_start)
-        (php_only)
-        (bracket_end))
-      (directive_end))
+    (directive_start)
+    (parameter)
+    (text)
+    (php_only)
+    (directive_end)
     (text)
     (directive_end)))
 
@@ -83,30 +71,22 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
   (parameter)
-  (bracket_end)
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end))
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end))
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -120,7 +100,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (php_statement
     (directive_start)
     (php_only)
@@ -138,10 +118,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -156,10 +141,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -174,10 +164,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -192,10 +187,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -210,10 +210,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -226,14 +231,11 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -246,14 +248,11 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -266,14 +265,11 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -286,12 +282,9 @@
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))

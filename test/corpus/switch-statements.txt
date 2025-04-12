@@ -17,22 +17,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (switch
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive)
     (directive)

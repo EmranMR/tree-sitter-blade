@@ -6,7 +6,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -18,7 +18,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -30,7 +30,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -42,11 +42,9 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @persist
@@ -58,13 +56,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
@@ -77,13 +78,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
@@ -96,11 +100,14 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
