@@ -78,7 +78,7 @@ module.exports = grammar({
           alias(
             choice(
               /@(extends|yield|include(If|When|Unless|First)?|props)/,
-              /@(method|inject|each|vite|livewire|aware|section|servers|import)/,
+              /@(method|inject|each|vite|livewire|aware|section|servers|import|stack)/,
             ),
             $.directive,
           ),

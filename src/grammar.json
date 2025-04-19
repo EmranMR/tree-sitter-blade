@@ -289,7 +289,7 @@
                   },
                   {
                     "type": "PATTERN",
-                    "value": "@(method|inject|each|vite|livewire|aware|section|servers|import)"
+                    "value": "@(method|inject|each|vite|livewire|aware|section|servers|import|stack)"
                   }
                 ]
               },
