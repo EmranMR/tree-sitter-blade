@@ -5,7 +5,7 @@
  */
 
 import NodeMap from "./NodeMap.ts";
-import html from "../tree-sitter-html/grammar.js";
+import html from "../../tree-sitter-html/grammar.js";
 
 const nodes = new NodeMap();
 
@@ -157,6 +157,7 @@ export default grammar(html, {
             "@svg",
             "@props",
             "@use",
+            "@stack",
           ),
           $.directive,
         ),

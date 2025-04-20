@@ -136,3 +136,30 @@
     (directive)
     (parameter)
     (directive_end)))
+
+================================================================================
+@foreach with casted parameter
+================================================================================
+
+@foreach ( (array) $users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+--------------------------------------------------------------------------------
+
+(document
+  (loop
+    (directive_start)
+    (parameter)
+    (parameter
+      (parameter))
+    (parameter)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (php_statement
+        (php_only))
+      (end_tag
+        (tag_name)))
+    (directive_end)))

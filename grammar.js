@@ -24,9 +24,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// tree-sitter-html/grammar.js
+// ../tree-sitter-html/grammar.js
 var require_grammar = __commonJS({
-  "tree-sitter-html/grammar.js"(exports, module) {
+  "../tree-sitter-html/grammar.js"(exports, module) {
     module.exports = grammar({
       name: "html",
       extras: ($) => [
@@ -339,7 +339,8 @@ var grammar_default = grammar(import_grammar.default, {
           "@js",
           "@svg",
           "@props",
-          "@use"
+          "@use",
+          "@stack"
         ),
         $.directive
       ),
