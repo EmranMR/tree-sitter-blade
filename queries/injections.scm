@@ -3,21 +3,52 @@
 ((comment) @injection.content
  (#set! injection.language "comment"))
 
+; -----------------------------------------
+; If your code editor supports **has-ancestor**
 ; could be bash or zsh
 ; or whatever tree-sitter grammar you have.
-((text) @injection.content
-    (#has-ancestor? @injection.content "envoy")
-    (#set! injection.combined)
-    (#set! injection.language bash))
+; -----------------------------------------
+;     ((text) @injection.content
+;         (#has-ancestor? @injection.content "envoy")
+;         (#set! injection.combined)
+;         (#set! injection.language bash))
+; -----------------------------------------
 
 
 ((php_only) @injection.content
-    (#set! injection.language php_only))
+    (#set! injection.language "php-only"))
 
 ((parameter) @injection.content
     (#set! injection.include-children) ; You may need this, depending on your editor e.g Helix
     (#set! injection.language "php-only"))
 
+
+; ; Livewire attributes
+((html
+  (attribute_name) @_attr
+    (#any-of? @_attr
+      "wire:click"
+      "wire:submit"
+      "wire:model"
+      "wire:loading"
+      "wire:navigate"
+      "wire:current"
+      "wire:cloak"
+      "wire:dirty"
+      "wire:confirm"
+      "wire:transition"
+      "wire:init"
+      "wire:poll"
+      "wire:offline"
+      "wire:ignore"
+      "wire:replace"
+      "wire:show"
+      "wire:stream"
+      "wire:text"
+    )
+  (quoted_attribute_value
+    (attribute_value) @injection.content))
+  (#set! injection.language "javascript"))
 
 ; ; See #33
 ; ; AlpineJS attributes
