@@ -36,7 +36,7 @@ export default grammar(html, {
           $.loop,
           $.envoy,
           $.livewire,
-          // wip nested
+          // nested
           $.fragment,
           $.section,
           $.once,
@@ -102,6 +102,39 @@ export default grammar(html, {
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
 
     attribute_value: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
+    quoted_attribute_value: ($) =>
+      choice(
+        seq(
+          "'",
+          optional(
+            repeat(
+              choice(
+                $.php_statement,
+                $.conditional,
+                $._inline_directive,
+                $.comment,
+                alias(token(prec(-1, /[^']+/)), $.attribute_value),
+              ),
+            ),
+          ),
+          "'",
+        ),
+        seq(
+          '"',
+          optional(
+            repeat(
+              choice(
+                $.php_statement,
+                $.conditional,
+                $._inline_directive,
+                $.comment,
+                alias(token(prec(-1, /[^"]+/)), $.attribute_value),
+              ),
+            ),
+          ),
+          '"',
+        ),
+      ),
 
     // utilised from tree-sitter-html
     html_attribute: ($) =>

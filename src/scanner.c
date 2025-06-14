@@ -1,3 +1,8 @@
+// -------------------------------------------------
+// | https://github.com/tree-sitter/tree-sitter-html/blob/master/src/scanner.c
+// | The Following is imported from tree-sitter-html
+// | and modified to make it compatible with blade
+// -------------------------------------------------
 #include "tag.h"
 #include "tree_sitter/parser.h"
 

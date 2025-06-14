@@ -89,3 +89,135 @@ Nested Self Closing Components
   (element
     (self_closing_tag
       (tag_name))))
+
+================================================================================
+PHP syntax inside attribute values
+================================================================================
+
+
+<div id="{{$php}}"> ... </div>
+<img id="{{$php}}"/>
+<div class="bg-red-{{$php}}"> ... </div>
+<div class="bg-{{$php}}-500"> ... </div>
+<div class="{{$php}}-red-500"> ... </div>
+
+<div id='{{$php}}'> ... </div>
+<img id='{{$php}}'/>
+<div class='bg-red-{{$php}}'> ... </div>
+<div class='bg-{{$php}}-500'> ... </div>
+<div class='{{$php}}-red-500'> ... </div>
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only))))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only)))))))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only))
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only))))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only)))))))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (html
+          (attribute_name)
+          (quoted_attribute_value
+            (php_statement
+              (php_only))
+            (attribute_value)))))
+    (text)
+    (end_tag
+      (tag_name))))

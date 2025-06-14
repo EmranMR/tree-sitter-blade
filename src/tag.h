@@ -1,3 +1,8 @@
+// -------------------------------------------------
+// | https://github.com/tree-sitter/tree-sitter-html/blob/master/src/tag.h
+// | The Following is imported from tree-sitter-html
+// | and modified to make it compatible with blade
+// -------------------------------------------------
 #include "tree_sitter/array.h"
 
 #include <string.h>

@@ -426,7 +426,8 @@ Laravel 12 Welcome.blade.php
         (html
           (attribute_name)
           (quoted_attribute_value
-            (attribute_value)))))
+            (php_statement
+              (php_only))))))
     (element
       (start_tag
         (tag_name))
@@ -548,7 +549,8 @@ Laravel 12 Welcome.blade.php
                     (html
                       (attribute_name)
                       (quoted_attribute_value
-                        (attribute_value))))
+                        (php_statement
+                          (php_only)))))
                   (attribute
                     (html
                       (attribute_name)
@@ -566,7 +568,8 @@ Laravel 12 Welcome.blade.php
                     (html
                       (attribute_name)
                       (quoted_attribute_value
-                        (attribute_value))))
+                        (php_statement
+                          (php_only)))))
                   (attribute
                     (html
                       (attribute_name)
@@ -587,7 +590,8 @@ Laravel 12 Welcome.blade.php
                       (html
                         (attribute_name)
                         (quoted_attribute_value
-                          (attribute_value))))
+                          (php_statement
+                            (php_only)))))
                     (attribute
                       (html
                         (attribute_name)

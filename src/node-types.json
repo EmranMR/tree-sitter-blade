@@ -4,226 +4,48 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "bracket_end",
+          "type": "blade",
           "named": true
         },
         {
-          "type": "bracket_start",
+          "type": "html",
           "named": true
         },
         {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "parameter",
+          "type": "php_statement",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "authorization",
+    "type": "attribute_name",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "directive_end",
-          "named": true
-        },
-        {
-          "type": "directive_start",
-          "named": true
-        },
-        {
-          "type": "envoy",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "inlineSection",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "livewire",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "switch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
+  },
+  {
+    "type": "attribute_value",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "blade",
     "named": true,
-    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional",
-          "named": true
-        },
         {
           "type": "directive",
           "named": true
         },
         {
-          "type": "envoy",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "inlineSection",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "livewire",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
           "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "switch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
           "named": true
         }
       ]
@@ -235,24 +57,8 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "authorization",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
         {
           "type": "comment",
           "named": true
@@ -278,15 +84,27 @@
           "named": true
         },
         {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
           "type": "envoy",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "fragment",
           "named": true
         },
         {
@@ -302,10 +120,6 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
           "type": "once",
           "named": true
         },
@@ -314,11 +128,11 @@
           "named": true
         },
         {
-          "type": "pennant",
+          "type": "php_statement",
           "named": true
         },
         {
-          "type": "php_statement",
+          "type": "script_element",
           "named": true
         },
         {
@@ -327,6 +141,10 @@
         },
         {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "style_element",
           "named": true
         },
         {
@@ -353,14 +171,6 @@
       "required": true,
       "types": [
         {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "directive",
           "named": true
         },
@@ -372,25 +182,19 @@
     }
   },
   {
-    "type": "envoy",
+    "type": "doctype",
     "named": true,
+    "fields": {}
+  },
+  {
+    "type": "document",
+    "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
         {
           "type": "comment",
           "named": true
@@ -404,11 +208,15 @@
           "named": true
         },
         {
-          "type": "directive_end",
+          "type": "doctype",
           "named": true
         },
         {
-          "type": "directive_start",
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
           "named": true
         },
         {
@@ -416,11 +224,11 @@
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "fragment",
           "named": true
         },
         {
@@ -436,7 +244,106 @@
           "named": true
         },
         {
-          "type": "loop_operator",
+          "type": "once",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "script_element",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        },
+        {
+          "type": "stack",
+          "named": true
+        },
+        {
+          "type": "style_element",
+          "named": true
+        },
+        {
+          "type": "switch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        },
+        {
+          "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "doctype",
+          "named": true
+        },
+        {
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "end_tag",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "envoy",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
+          "named": true
+        },
+        {
+          "type": "fragment",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "livewire",
+          "named": true
+        },
+        {
+          "type": "loop",
           "named": true
         },
         {
@@ -452,11 +359,27 @@
           "named": true
         },
         {
+          "type": "script_element",
+          "named": true
+        },
+        {
           "type": "section",
           "named": true
         },
         {
+          "type": "self_closing_tag",
+          "named": true
+        },
+        {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "start_tag",
+          "named": true
+        },
+        {
+          "type": "style_element",
           "named": true
         },
         {
@@ -469,6 +392,75 @@
         },
         {
           "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "end_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "envoy",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "conditional_keyword",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php_only",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "erroneous_end_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "erroneous_end_tag_name",
           "named": true
         }
       ]
@@ -483,18 +475,6 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -515,15 +495,15 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -531,19 +511,7 @@
           "named": true
         },
         {
-          "type": "livewire",
-          "named": true
-        },
-        {
           "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
           "named": true
         },
         {
@@ -555,11 +523,11 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
-          "type": "stack",
+          "type": "style_element",
           "named": true
         },
         {
@@ -578,7 +546,7 @@
     }
   },
   {
-    "type": "inlineSection",
+    "type": "html",
     "named": true,
     "fields": {},
     "children": {
@@ -586,19 +554,15 @@
       "required": true,
       "types": [
         {
-          "type": "bracket_end",
+          "type": "attribute_name",
           "named": true
         },
         {
-          "type": "bracket_start",
+          "type": "attribute_value",
           "named": true
         },
         {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "parameter",
+          "type": "quoted_attribute_value",
           "named": true
         }
       ]
@@ -628,18 +592,6 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -660,15 +612,15 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -684,14 +636,6 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
           "type": "parameter",
           "named": true
         },
@@ -700,11 +644,11 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
-          "type": "stack",
+          "type": "style_element",
           "named": true
         },
         {
@@ -713,10 +657,6 @@
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
           "named": true
         }
       ]
@@ -731,23 +671,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional",
           "named": true
         },
         {
@@ -763,15 +687,15 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -779,19 +703,7 @@
           "named": true
         },
         {
-          "type": "livewire",
-          "named": true
-        },
-        {
           "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
           "named": true
         },
         {
@@ -803,11 +715,11 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
-          "type": "stack",
+          "type": "style_element",
           "named": true
         },
         {
@@ -816,37 +728,6 @@
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "loop_operator",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "parameter",
           "named": true
         }
       ]
@@ -861,18 +742,6 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -893,15 +762,19 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
           "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "inlineSection",
           "named": true
         },
         {
@@ -917,10 +790,6 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
           "type": "once",
           "named": true
         },
@@ -933,11 +802,15 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "style_element",
           "named": true
         },
         {
@@ -966,117 +839,6 @@
         {
           "type": "parameter",
           "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pennant",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional",
-          "named": true
-        },
-        {
-          "type": "conditional_keyword",
-          "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "directive_end",
-          "named": true
-        },
-        {
-          "type": "directive_start",
-          "named": true
-        },
-        {
-          "type": "envoy",
-          "named": true
-        },
-        {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "inlineSection",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "livewire",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        },
-        {
-          "type": "php_statement",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "switch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
-          "named": true
         }
       ]
     }
@@ -1094,14 +856,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
         {
           "type": "directive",
           "named": true
@@ -1121,6 +875,68 @@
         {
           "type": "php_only",
           "named": true
+        },
+        {
+          "type": "php_tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quoted_attribute_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "attribute_value",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        },
+        {
+          "type": "php_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "script_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "end_tag",
+          "named": true
+        },
+        {
+          "type": "raw_text",
+          "named": true
+        },
+        {
+          "type": "start_tag",
+          "named": true
         }
       ]
     }
@@ -1133,18 +949,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
         {
           "type": "comment",
           "named": true
@@ -1162,19 +966,15 @@
           "named": true
         },
         {
-          "type": "directive_start",
+          "type": "element",
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "fragment",
-          "named": true
-        },
-        {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -1190,14 +990,6 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
           "type": "parameter",
           "named": true
         },
@@ -1206,11 +998,15 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "style_element",
           "named": true
         },
         {
@@ -1223,6 +1019,25 @@
         },
         {
           "type": "verbatim",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "self_closing_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "tag_name",
           "named": true
         }
       ]
@@ -1237,23 +1052,7 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
-          "named": true
-        },
-        {
-          "type": "conditional",
           "named": true
         },
         {
@@ -1269,35 +1068,19 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
           "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "livewire",
-          "named": true
-        },
-        {
-          "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
           "named": true
         },
         {
@@ -1309,11 +1092,11 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
-          "type": "stack",
+          "type": "style_element",
           "named": true
         },
         {
@@ -1323,9 +1106,47 @@
         {
           "type": "text",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "start_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
         },
         {
-          "type": "verbatim",
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "style_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "end_tag",
+          "named": true
+        },
+        {
+          "type": "raw_text",
+          "named": true
+        },
+        {
+          "type": "start_tag",
           "named": true
         }
       ]
@@ -1340,18 +1161,6 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -1372,15 +1181,15 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
           "named": true
         },
         {
-          "type": "fragment",
+          "type": "entity",
           "named": true
         },
         {
-          "type": "inlineSection",
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -1396,14 +1205,6 @@
           "named": true
         },
         {
-          "type": "loop_operator",
-          "named": true
-        },
-        {
-          "type": "once",
-          "named": true
-        },
-        {
           "type": "parameter",
           "named": true
         },
@@ -1412,23 +1213,15 @@
           "named": true
         },
         {
-          "type": "section",
+          "type": "script_element",
           "named": true
         },
         {
-          "type": "stack",
-          "named": true
-        },
-        {
-          "type": "switch",
+          "type": "style_element",
           "named": true
         },
         {
           "type": "text",
-          "named": true
-        },
-        {
-          "type": "verbatim",
           "named": true
         }
       ]
@@ -1448,18 +1241,6 @@
       "required": true,
       "types": [
         {
-          "type": "attribute",
-          "named": true
-        },
-        {
-          "type": "bracket_end",
-          "named": true
-        },
-        {
-          "type": "bracket_start",
-          "named": true
-        },
-        {
           "type": "comment",
           "named": true
         },
@@ -1480,7 +1261,15 @@
           "named": true
         },
         {
-          "type": "envoy",
+          "type": "element",
+          "named": true
+        },
+        {
+          "type": "entity",
+          "named": true
+        },
+        {
+          "type": "erroneous_end_tag",
           "named": true
         },
         {
@@ -1488,23 +1277,11 @@
           "named": true
         },
         {
-          "type": "inlineSection",
-          "named": true
-        },
-        {
           "type": "keyword",
           "named": true
         },
         {
-          "type": "livewire",
-          "named": true
-        },
-        {
           "type": "loop",
-          "named": true
-        },
-        {
-          "type": "loop_operator",
           "named": true
         },
         {
@@ -1520,11 +1297,19 @@
           "named": true
         },
         {
+          "type": "script_element",
+          "named": true
+        },
+        {
           "type": "section",
           "named": true
         },
         {
           "type": "stack",
+          "named": true
+        },
+        {
+          "type": "style_element",
           "named": true
         },
         {
@@ -1543,6 +1328,18 @@
     }
   },
   {
+    "type": "!!}",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -1555,16 +1352,37 @@
     "named": false
   },
   {
-    "type": "bracket_end",
-    "named": true
+    "type": "/>",
+    "named": false
   },
   {
-    "type": "bracket_start",
-    "named": true
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<!",
+    "named": false
+  },
+  {
+    "type": "</",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "?>",
+    "named": false
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "directive",
@@ -1577,5 +1395,41 @@
   {
     "type": "directive_start",
     "named": true
+  },
+  {
+    "type": "doctype",
+    "named": false
+  },
+  {
+    "type": "entity",
+    "named": true
+  },
+  {
+    "type": "erroneous_end_tag_name",
+    "named": true
+  },
+  {
+    "type": "php_tag",
+    "named": true
+  },
+  {
+    "type": "raw_text",
+    "named": true
+  },
+  {
+    "type": "tag_name",
+    "named": true
+  },
+  {
+    "type": "{!!",
+    "named": false
+  },
+  {
+    "type": "{{",
+    "named": false
+  },
+  {
+    "type": "}}",
+    "named": false
   }
 ]
