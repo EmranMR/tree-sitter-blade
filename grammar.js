@@ -256,7 +256,22 @@ var grammar_default = grammar(import_grammar.default, {
     comment: (_) => token(seq("{{--", /[^-]*-+([^}-][^-]*-+)*/, "}}")),
     // !keywords
     keyword: ($) => alias(
-      /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)/,
+      choice(
+        "@csrf",
+        "@viteReactRefresh",
+        "@livewireStyles",
+        "@livewireScripts",
+        "@livewireScriptConfig",
+        "@parent",
+        "@inertia",
+        "@inertiaHead",
+        // log1x/sage-directives #77
+        "@routes",
+        "@permalink",
+        "@title",
+        "@content",
+        "@excerpt"
+      ),
       $.directive
     ),
     // ! PHP Statements
@@ -372,7 +387,17 @@ var grammar_default = grammar(import_grammar.default, {
           "@svg",
           "@props",
           "@use",
-          "@stack"
+          "@stack",
+          // log1x/sage-directives #77
+          "@asset",
+          "@json",
+          "@script",
+          "@thumbnail",
+          "@extract",
+          "@set",
+          // ACF (Advanced Custom Fields)
+          "@field",
+          "@options"
         ),
         $.directive
       ),

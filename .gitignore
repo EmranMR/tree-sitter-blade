@@ -1,24 +1,24 @@
-# Rust artefacts
+# Rust artifacts
 target/
 
-# Node artefacts
+# Node artifacts
 build/
 prebuilds/
 node_modules/
 
-# Swift artefacts
+# Swift artifacts
 .build/
 
-# Go artefacts
+# Go artifacts
 _obj/
 
-# Python artefacts
+# Python artifacts
 .venv/
 dist/
 *.egg-info
 *.whl
 
-# C artefacts
+# C artifacts
 *.a
 *.so
 *.so.*
@@ -44,6 +44,6 @@ zig-out/
 *.tgz
 *.zip
 
-# Nova artefacts
+# Nova artifacts
 TreeSitterParserBuild
 .nova/

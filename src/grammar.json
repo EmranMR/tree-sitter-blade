@@ -596,8 +596,61 @@
     "keyword": {
       "type": "ALIAS",
       "content": {
-        "type": "PATTERN",
-        "value": "@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "@csrf"
+          },
+          {
+            "type": "STRING",
+            "value": "@viteReactRefresh"
+          },
+          {
+            "type": "STRING",
+            "value": "@livewireStyles"
+          },
+          {
+            "type": "STRING",
+            "value": "@livewireScripts"
+          },
+          {
+            "type": "STRING",
+            "value": "@livewireScriptConfig"
+          },
+          {
+            "type": "STRING",
+            "value": "@parent"
+          },
+          {
+            "type": "STRING",
+            "value": "@inertia"
+          },
+          {
+            "type": "STRING",
+            "value": "@inertiaHead"
+          },
+          {
+            "type": "STRING",
+            "value": "@routes"
+          },
+          {
+            "type": "STRING",
+            "value": "@permalink"
+          },
+          {
+            "type": "STRING",
+            "value": "@title"
+          },
+          {
+            "type": "STRING",
+            "value": "@content"
+          },
+          {
+            "type": "STRING",
+            "value": "@excerpt"
+          }
+        ]
       },
       "named": true,
       "value": "directive"
@@ -965,6 +1018,38 @@
               {
                 "type": "STRING",
                 "value": "@stack"
+              },
+              {
+                "type": "STRING",
+                "value": "@asset"
+              },
+              {
+                "type": "STRING",
+                "value": "@json"
+              },
+              {
+                "type": "STRING",
+                "value": "@script"
+              },
+              {
+                "type": "STRING",
+                "value": "@thumbnail"
+              },
+              {
+                "type": "STRING",
+                "value": "@extract"
+              },
+              {
+                "type": "STRING",
+                "value": "@set"
+              },
+              {
+                "type": "STRING",
+                "value": "@field"
+              },
+              {
+                "type": "STRING",
+                "value": "@options"
               }
             ]
           },

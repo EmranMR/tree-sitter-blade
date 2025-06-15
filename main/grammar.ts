@@ -54,7 +54,22 @@ export default grammar(html, {
     // !keywords
     keyword: ($) =>
       alias(
-        /@(csrf|viteReactRefresh|livewireStyles|livewireScripts|livewireScriptConfig|parent|inertia|inertiaHead|routes)/,
+        choice(
+          "@csrf",
+          "@viteReactRefresh",
+          "@livewireStyles",
+          "@livewireScripts",
+          "@livewireScriptConfig",
+          "@parent",
+          "@inertia",
+          "@inertiaHead",
+          // log1x/sage-directives #77
+          "@routes",
+          "@permalink",
+          "@title",
+          "@content",
+          "@excerpt",
+        ),
         $.directive,
       ),
     // ! PHP Statements
@@ -191,6 +206,16 @@ export default grammar(html, {
             "@props",
             "@use",
             "@stack",
+            // log1x/sage-directives #77
+            "@asset",
+            "@json",
+            "@script",
+            "@thumbnail",
+            "@extract",
+            "@set",
+            // ACF (Advanced Custom Fields)
+            "@field",
+            "@options",
           ),
           $.directive,
         ),
