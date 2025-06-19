@@ -25,8 +25,10 @@ dist/
 *.dylib
 *.dll
 *.pc
+*.exp
+*.lib
 
-# Zig artefacts
+# Zig artifacts
 .zig-cache/
 zig-cache/
 zig-out/
@@ -43,6 +45,9 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+# Logs
+log.html
 
 # Nova artifacts
 TreeSitterParserBuild
