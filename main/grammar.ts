@@ -5,7 +5,7 @@
  */
 
 import NodeMap from "./NodeMap.ts";
-import html from "../../tree-sitter-html/grammar.js";
+import html from "../tree-sitter-html/grammar.js";
 
 const nodes = new NodeMap();
 
