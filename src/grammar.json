@@ -386,22 +386,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "blade_attribute"
-          },
-          "named": true,
-          "value": "blade"
+          "type": "SYMBOL",
+          "name": "_blade_attribute"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "html_attribute"
-          },
-          "named": true,
-          "value": "html"
+          "type": "SYMBOL",
+          "name": "_html_attribute"
         },
         {
           "type": "SYMBOL",
@@ -845,7 +835,7 @@
         }
       ]
     },
-    "html_attribute": {
+    "_html_attribute": {
       "type": "SEQ",
       "members": [
         {
@@ -884,7 +874,7 @@
         }
       ]
     },
-    "blade_attribute": {
+    "_blade_attribute": {
       "type": "SEQ",
       "members": [
         {

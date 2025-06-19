@@ -24,9 +24,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../tree-sitter-html/grammar.js
+// tree-sitter-html/grammar.js
 var require_grammar = __commonJS({
-  "../tree-sitter-html/grammar.js"(exports, module) {
+  "tree-sitter-html/grammar.js"(exports, module) {
     module.exports = grammar({
       name: "html",
       extras: ($) => [
@@ -300,8 +300,8 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // tree-sitter-html override
     attribute: ($) => choice(
-      alias($.blade_attribute, $.blade),
-      alias($.html_attribute, $.html),
+      $._blade_attribute,
+      $._html_attribute,
       $.php_statement
     ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
@@ -339,7 +339,7 @@ var grammar_default = grammar(import_grammar.default, {
       )
     ),
     // utilised from tree-sitter-html
-    html_attribute: ($) => seq(
+    _html_attribute: ($) => seq(
       $.attribute_name,
       optional(
         seq(
@@ -349,7 +349,7 @@ var grammar_default = grammar(import_grammar.default, {
       )
     ),
     // ! Conditional Blade Attribute Directives
-    blade_attribute: ($) => seq(
+    _blade_attribute: ($) => seq(
       alias(
         choice(
           "@class",

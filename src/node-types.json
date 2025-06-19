@@ -4,19 +4,31 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "blade",
+          "type": "attribute_name",
           "named": true
         },
         {
-          "type": "html",
+          "type": "attribute_value",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         },
         {
           "type": "php_statement",
+          "named": true
+        },
+        {
+          "type": "quoted_attribute_value",
           "named": true
         }
       ]
@@ -31,25 +43,6 @@
     "type": "attribute_value",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "blade",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "conditional",
@@ -540,29 +533,6 @@
         },
         {
           "type": "verbatim",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "html",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "attribute_name",
-          "named": true
-        },
-        {
-          "type": "attribute_value",
-          "named": true
-        },
-        {
-          "type": "quoted_attribute_value",
           "named": true
         }
       ]
