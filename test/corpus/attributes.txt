@@ -11,19 +11,16 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter)))
+        (directive)
+        (parameter))
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value)))
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (end_tag
       (tag_name))))
 
@@ -40,9 +37,8 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))
 
@@ -59,9 +55,8 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))
 
@@ -78,9 +73,8 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))
 
@@ -97,9 +91,8 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))
 
@@ -116,9 +109,8 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))
 
@@ -135,8 +127,7 @@
     (start_tag
       (tag_name)
       (attribute
-        (blade
-          (directive)
-          (parameter))))
+        (directive)
+        (parameter)))
     (end_tag
       (tag_name))))

@@ -41,10 +41,9 @@ Heavily Nested
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name))))
@@ -113,11 +112,10 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only))))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only)))))
     (text)
     (end_tag
       (tag_name)))
@@ -125,19 +123,17 @@ PHP syntax inside attribute values
     (self_closing_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only)))))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))))))
   (element
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name)))
@@ -145,10 +141,9 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name)))
@@ -156,12 +151,11 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only))
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name)))
@@ -169,11 +163,10 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only))))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only)))))
     (text)
     (end_tag
       (tag_name)))
@@ -181,19 +174,17 @@ PHP syntax inside attribute values
     (self_closing_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only)))))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))))))
   (element
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name)))
@@ -201,10 +192,9 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name)))
@@ -212,12 +202,11 @@ PHP syntax inside attribute values
     (start_tag
       (tag_name)
       (attribute
-        (html
-          (attribute_name)
-          (quoted_attribute_value
-            (php_statement
-              (php_only))
-            (attribute_value)))))
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))
+          (attribute_value))))
     (text)
     (end_tag
       (tag_name))))

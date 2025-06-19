@@ -110,8 +110,8 @@ export default grammar(html, {
     // tree-sitter-html override
     attribute: ($) =>
       choice(
-        alias($.blade_attribute, $.blade),
-        alias($.html_attribute, $.html),
+        $._blade_attribute,
+        $._html_attribute,
         $.php_statement,
       ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
@@ -152,34 +152,32 @@ export default grammar(html, {
       ),
 
     // utilised from tree-sitter-html
-    html_attribute: ($) =>
-      seq(
-        $.attribute_name,
-        optional(
-          seq(
-            "=",
-            choice($.attribute_value, $.quoted_attribute_value),
-          ),
+    _html_attribute: ($) => seq(
+      $.attribute_name,
+      optional(
+        seq(
+          "=",
+          choice($.attribute_value, $.quoted_attribute_value),
         ),
       ),
+    ),
 
     // ! Conditional Blade Attribute Directives
-    blade_attribute: ($) =>
-      seq(
-        alias(
-          choice(
-            "@class",
-            "@style",
-            "@checked",
-            "@selected",
-            "@disabled",
-            "@readonly",
-            "@required",
-          ),
-          $.directive,
+    _blade_attribute: ($) => seq(
+      alias(
+        choice(
+          "@class",
+          "@style",
+          "@checked",
+          "@selected",
+          "@disabled",
+          "@readonly",
+          "@required",
         ),
-        $._directive_parameter,
+        $.directive,
       ),
+      $._directive_parameter,
+    ),
 
     // !inline directives
     _inline_directive: ($) =>
