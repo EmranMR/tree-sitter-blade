@@ -152,32 +152,34 @@ export default grammar(html, {
       ),
 
     // utilised from tree-sitter-html
-    _html_attribute: ($) => seq(
-      $.attribute_name,
-      optional(
-        seq(
-          "=",
-          choice($.attribute_value, $.quoted_attribute_value),
+    _html_attribute: ($) =>
+      seq(
+        $.attribute_name,
+        optional(
+          seq(
+            "=",
+            choice($.attribute_value, $.quoted_attribute_value),
+          ),
         ),
       ),
-    ),
 
     // ! Conditional Blade Attribute Directives
-    _blade_attribute: ($) => seq(
-      alias(
-        choice(
-          "@class",
-          "@style",
-          "@checked",
-          "@selected",
-          "@disabled",
-          "@readonly",
-          "@required",
+    _blade_attribute: ($) =>
+      seq(
+        alias(
+          choice(
+            "@class",
+            "@style",
+            "@checked",
+            "@selected",
+            "@disabled",
+            "@readonly",
+            "@required",
+          ),
+          $.directive,
         ),
-        $.directive,
+        $._directive_parameter,
       ),
-      $._directive_parameter,
-    ),
 
     // !inline directives
     _inline_directive: ($) =>

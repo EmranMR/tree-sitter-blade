@@ -53,14 +53,11 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.32",
-    "eslint": "^9.29.0",
-    "eslint-config-treesitter": "^1.0.2",
     "prebuildify": "^6.0.1",
     "tree-sitter-cli": "^0.25.6"
   },
   "scripts": {
     "install": "node-gyp-build",
-    "lint": "eslint grammar.js",
     "build": " tree-sitter generate",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground -q",
