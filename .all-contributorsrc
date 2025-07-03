@@ -1,0 +1,25 @@
+{
+  "projectName": "tree-sitter-blade",
+  "projectOwner": "EmranMR",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 150,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "EmranMR",
+      "name": "Emran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11975985?v=4",
+      "profile": "https://github.com/EmranMR",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true
+}
