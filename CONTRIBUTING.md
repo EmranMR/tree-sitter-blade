@@ -64,7 +64,7 @@ follows:
 - `deno run start`
   - This will create a **_Playground_** where you can test the grammar **live**
     in your browser!
-- `deno run build`
+- `deno run generate`
   - This will _bundle_ and _generate_ the grammar.
 - `deno run test-grammar`
   - This will run the unit tests for you
