@@ -1212,7 +1212,7 @@
                 "value": "@section"
               },
               "named": true,
-              "value": "directive"
+              "value": "directive_start"
             },
             {
               "type": "STRING",

@@ -940,6 +940,10 @@
           "named": true
         },
         {
+          "type": "directive_start",
+          "named": true
+        },
+        {
           "type": "element",
           "named": true
         },

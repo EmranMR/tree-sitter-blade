@@ -171,7 +171,7 @@
     (parameter)
     (parameter))
   (section
-    (directive)
+    (directive_start)
     (parameter)
     (element
       (start_tag

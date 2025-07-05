@@ -440,7 +440,7 @@ var grammar_default = grammar(import_grammar.default, {
         ")"
       ),
       seq(
-        alias("@section", $.directive),
+        alias("@section", $.directive_start),
         "(",
         alias(/[^,()]+/, $.parameter),
         ")",

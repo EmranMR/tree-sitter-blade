@@ -264,7 +264,7 @@ export default grammar(html, {
           ")",
         ),
         seq(
-          alias("@section", $.directive),
+          alias("@section", $.directive_start),
           "(",
           alias(/[^,()]+/, $.parameter),
           ")",

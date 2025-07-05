@@ -34,12 +34,12 @@
 
 (document
   (section
-    (directive)
+    (directive_start)
     (parameter)
     (text)
     (directive_end))
   (section
-    (directive)
+    (directive_start)
     (parameter)
     (keyword
       (directive))
