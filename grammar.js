@@ -762,7 +762,7 @@ var grammar_default = grammar(import_grammar.default, {
           )
         )
       ),
-      alias("@break", $.directive)
+      optional(alias("@break", $.directive))
     ),
     // !Loops
     loop: ($) => choice($._for, $._foreach, $._forelse, $._while),

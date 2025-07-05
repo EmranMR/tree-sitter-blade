@@ -11,6 +11,11 @@
         Second case...
         @break
 
+    @case(3)
+    @case(4)
+        Third and fourth case...
+        @break
+
     @default
         Default case...
 @endswitch
@@ -25,6 +30,12 @@
     (parameter)
     (text)
     (directive)
+    (directive)
+    (parameter)
+    (text)
+    (directive)
+    (directive)
+    (parameter)
     (directive)
     (parameter)
     (text)

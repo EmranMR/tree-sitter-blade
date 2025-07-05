@@ -640,7 +640,7 @@ export default grammar(html, {
             ),
           ),
         ),
-        alias("@break", $.directive),
+        optional(alias("@break", $.directive)),
       ),
 
     // !Loops

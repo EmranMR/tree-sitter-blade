@@ -2785,13 +2785,21 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@break"
-          },
-          "named": true,
-          "value": "directive"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@break"
+              },
+              "named": true,
+              "value": "directive"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
