@@ -695,14 +695,18 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "?>"
+          "type": "SYMBOL",
+          "name": "php_end_tag"
         }
       ]
     },
     "php_tag": {
       "type": "PATTERN",
       "value": "<\\?([pP][hH][pP]|=)?"
+    },
+    "php_end_tag": {
+      "type": "STRING",
+      "value": "?>"
     },
     "_escaped": {
       "type": "SEQ",
