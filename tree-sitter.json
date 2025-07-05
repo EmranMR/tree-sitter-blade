@@ -9,8 +9,7 @@
         "php"
       ],
       "highlights": "queries/highlights.scm",
-      "injections": "queries/injections.scm",
-      "tags": "queries/tags.scm"
+      "injections": "queries/injections.scm"
     }
   ],
   "metadata": {
@@ -21,6 +20,10 @@
       {
         "name": "Emran Ramezan",
         "email": "Emran@opulence.design"
+      },
+      {
+        "name": "Caleb White",
+        "email": "cdwhite3@pm.me"
       }
     ],
     "links": {

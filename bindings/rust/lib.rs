@@ -7,7 +7,9 @@
 //! use tree_sitter::Parser;
 //!
 //! let code = r#"
-//! println("hello world")
+//! @php
+//!   echo "Hello, World!";
+//! @endphp
 //! "#;
 //! let mut parser = Parser::new();
 //! let language = tree_sitter_blade::LANGUAGE;
@@ -37,13 +39,25 @@ pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_blade
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
 pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
+/// The syntax highlighting query for blade.
+pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
+
+/// The injection query for blade.
+pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
+
 #[cfg(test)]
 mod tests {
     #[test]
-    fn test_can_load_grammar() {
+    fn test_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
             .set_language(&super::LANGUAGE.into())
             .expect("Error loading Blade parser");
+
+        let code = r#"@php echo "Hello, World!"; @endphp"#;
+
+        let tree = parser.parse(code, None).unwrap();
+        let root = tree.root_node();
+        assert!(!root.has_error());
     }
 }

@@ -9,9 +9,9 @@
         "src",
       ],
       "sources": [
-        "bindings/node/binding.cc",
         "src/parser.c",
         "src/scanner.c",
+        "bindings/node/binding.cc",
       ],
       "conditions": [
         ["OS!='win'", {

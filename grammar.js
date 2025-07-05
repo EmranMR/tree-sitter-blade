@@ -277,7 +277,11 @@ var grammar_default = grammar(import_grammar.default, {
     // ! PHP Statements
     php_statement: ($) => choice($._escaped, $._unescaped, $._setup, $._raw, $._php),
     // From tree-sitter-php
-    _php: ($) => seq($.php_tag, optional(alias($.text, $.php_only)), $.php_end_tag),
+    _php: ($) => seq(
+      $.php_tag,
+      optional(alias($.text, $.php_only)),
+      $.php_end_tag
+    ),
     php_tag: (_) => /<\?([pP][hH][pP]|=)?/,
     php_end_tag: (_) => "?>",
     // --------------------

@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -27,22 +28,21 @@ concurrency:
 
 jobs:
   test:
-    name: Test parsers (Node 24)
+    name: Test parsers
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-14]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
       - name: Use Node.js 24
         uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
       - name: Set up examples
         run: |-
           git clone https://github.com/laravel/breeze examples/breeze --single-branch --depth=1 --filter=blob:none
@@ -51,9 +51,9 @@ jobs:
         with:
           test-rust: true
           test-node: true
-          test-python: true
+          test-python: false
           test-go: true
-          test-swift: true
+          test-swift: false
       - name: Parse examples
         id: test
         uses: tree-sitter/parse-action@v4

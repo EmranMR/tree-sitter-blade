@@ -21,8 +21,8 @@
       "email": "cdwhite3@pm.me"
     }
   ],
-  "main": "bindings/node",
-  "types": "bindings/node",
+  "main": "bindings/node/index.cjs",
+  "types": "bindings/node/index.d.ts",
   "keywords": [
     "tree-sitter-blade",
     "blade",
@@ -30,12 +30,12 @@
     "laravel"
   ],
   "files": [
-    "grammar.js",
-    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
+    "grammar.js",
+    "tree-sitter.json",
     "src/**",
     "*.wasm"
   ],
@@ -48,7 +48,7 @@
   },
   "peerDependenciesMeta": {
     "tree-sitter": {
-      "optional": true
+      "optional": false
     }
   },
   "devDependencies": {
@@ -61,7 +61,7 @@
     "build": " tree-sitter generate",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground -q",
-    "test": "node --test bindings/node/*_test.js",
+    "test": "node --test bindings/node/*_test.cjs",
     "bundle": "deno -A ./main/bundle.ts"
   }
 }
