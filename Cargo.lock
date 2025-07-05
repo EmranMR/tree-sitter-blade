@@ -179,7 +179,7 @@ dependencies = [
 
 [[package]]
 name = "tree-sitter-blade"
-version = "0.11.0"
+version = "0.12.0"
 dependencies = [
  "cc",
  "tree-sitter",

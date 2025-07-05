@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-blade
 HOMEPAGE_URL := https://github.com/EmranMR/tree-sitter-blade
-VERSION := 0.11.0
+VERSION := 0.12.0
 
 # repository
 SRC_DIR := src
