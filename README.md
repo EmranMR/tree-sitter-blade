@@ -30,7 +30,7 @@ limited to:
 
 ## Common Editors Set Up 💻
 
-### <img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Laravel.novaextension/extension.png?raw=true" width="35px" style="position: relative; right:5px; bottom:-10px " alt="alt text" title="image Title" /> Nova
+### <img src="https://github.com/EmranMR/Laravel-Nova-Extension/blob/main/Laravel.novaextension/extension.png?raw=true" width="30px" style="position: relative; right:5px; top:10px" alt="alt text" title="image Title" /> Nova
 
 Simply install the
 [Laravel Suite Extension](https://extensions.panic.com/extensions/emran-mr/emran-mr.laravel/)
@@ -42,11 +42,11 @@ from the Extension Library. That includes:
 4. Syntax Highlighting
 5. Auto Indentation
 
-### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Neovim-mark.svg/500px-Neovim-mark.svg.png" height="35px" style="position: relative; right:5px; bottom:-10px " alt="alt text" title="image Title" /> NeoVim
+### <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Neovim-mark.svg/500px-Neovim-mark.svg.png" width="25px" style="position: relative; right:5px; top:10px " alt="alt text" title="image Title" /> NeoVim
 
 Simply use the [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) plugin and install the `blade` grammar.
 
-### <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Zed_Editor_Logo.png" width="35px" style="position: relative; right:5px; bottom:-10px " alt="alt text" title="image Title" /> Zed
+### <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Zed_Editor_Logo.png" width="30px" style="position: relative; right:5px; top:10px" alt="alt text" title="image Title" /> Zed
 
 Simply
 [download the extension](https://github.com/bajrangCoder/zed-laravel-blade) from
