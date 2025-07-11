@@ -1,11 +1,11 @@
 from unittest import TestCase
 
-import tree_sitter, tree_sitter_blade
-
+import tree_sitter_blade
+from tree_sitter import Language, Parser
 
 class TestLanguage(TestCase):
-    def test_can_load_grammar(self):
-        try:
-            tree_sitter.Language(tree_sitter_blade.language())
-        except Exception:
-            self.fail("Error loading Blade grammar")
+    def test_grammar(self):
+        language = Language(tree_sitter_blade.language())
+        parser = Parser(language)
+        tree = parser.parse(b"@php echo 'Hello, World!'; @endphp")
+        self.assertFalse(tree.root_node.has_error)

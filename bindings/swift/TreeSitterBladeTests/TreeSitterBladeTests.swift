@@ -2,11 +2,17 @@ import XCTest
 import SwiftTreeSitter
 import TreeSitterBlade
 
-final class TreeSitterBladeTests: XCTestCase {
-    func testCanLoadGrammar() throws {
+final class TreeSitterPHPTests: XCTestCase {
+    func testGrammar() throws {
         let parser = Parser()
         let language = Language(language: tree_sitter_blade())
-        XCTAssertNoThrow(try parser.setLanguage(language),
-                         "Error loading Blade grammar")
+        try parser.setLanguage(language);
+
+        let source = "@php echo 'Hello, World!'; @endphp";
+
+        let tree = try XCTUnwrap(parser.parse(source))
+        let root = try XCTUnwrap(tree.rootNode)
+
+        XCTAssertFalse(root.hasError)
     }
 }

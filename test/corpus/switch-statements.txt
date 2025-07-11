@@ -11,28 +11,33 @@
         Second case...
         @break
 
+    @case(3)
+    @case(4)
+        Third and fourth case...
+        @break
+
     @default
         Default case...
 @endswitch
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (switch
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
+    (text)
+    (directive)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (text)
     (directive)
     (directive)

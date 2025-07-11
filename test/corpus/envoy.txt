@@ -6,11 +6,9 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @import
@@ -18,11 +16,9 @@
 @import('vendor/package/Envoy.blade.php')
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @task
@@ -40,24 +36,16 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
-    (conditional
-      (directive_start)
-      (bracket_start)
-      (parameter)
-      (bracket_end)
-      (text)
-      (php_statement
-        (bracket_start)
-        (php_only)
-        (bracket_end))
-      (directive_end))
+    (directive_start)
+    (parameter)
+    (text)
+    (php_only)
+    (directive_end)
     (text)
     (directive_end)))
 
@@ -83,30 +71,22 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
   (parameter)
-  (bracket_end)
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end))
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end))
   (envoy
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -120,7 +100,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (php_statement
     (directive_start)
     (php_only)
@@ -131,17 +111,22 @@
 ================================================================================
 
 @before
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endbefore
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -149,17 +134,22 @@
 ================================================================================
 
 @after
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endafter
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -167,17 +157,22 @@
 ================================================================================
 
 @error
-    if ($task === 'deploy') {
-        // ...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @enderror
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -185,15 +180,22 @@
 ================================================================================
 
 @success
-  echo "success";
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endsuccess
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -201,17 +203,22 @@
 ================================================================================
 
 @finished
-    if ($exitCode > 0) {
-        // There were errors in one of the tasks...
-    }
+    @microsoftTeams('webhook-url')
+    @slack('webhook-url', '#bots', 'Hello, Slack.')
+    @discord('discord-webhook-url')
 @endfinished
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
-    (php_only)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
+    (directive)
+    (parameter)
     (directive_end)))
 
 ================================================================================
@@ -220,21 +227,15 @@
 
 @finished
     @slack('webhook-url', '#bots', 'Hello, Slack.')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -243,21 +244,15 @@
 
 @finished
     @discord('discord-webhook-url')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -266,21 +261,15 @@
 
 @finished
     @telegram('bot-id','chat-id')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))
 
 ================================================================================
@@ -289,19 +278,13 @@
 
 @finished
     @microsoftTeams('webhook-url')
-    if ($task === 'deploy') {
-        // ...
-    }
 @endfinished
 
 --------------------------------------------------------------------------------
 
-(blade
-  (php_statement
+(document
+  (envoy
     (directive_start)
     (directive)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (php_only)
     (directive_end)))

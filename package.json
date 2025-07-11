@@ -1,18 +1,28 @@
 {
   "name": "tree-sitter-blade",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "homepage": "https://github.com/EmranMR/tree-sitter-blade",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/EmranMR/tree-sitter-blade"
   },
   "bugs": "https://github.com/EmranMR/tree-sitter-blade/issues",
   "funding": "https://github.com/sponsors/EmranMR",
-  "author": "Emran Mashhadi Ramezan",
   "license": "MIT",
   "description": "tree-sitter-blade grammar for Laravel Blade files",
-  "main": "bindings/node",
-  "types": "bindings/node",
+  "author": {
+    "name": "Emran Mashhadi Ramezan",
+    "email": "2t5ukanu@duck.com"
+  },
+  "contributors": [
+    {
+      "name": "Caleb White",
+      "email": "cdwhite3@pm.me"
+    }
+  ],
+  "main": "bindings/node/index.cjs",
+  "types": "bindings/node/index.d.ts",
   "keywords": [
     "tree-sitter-blade",
     "blade",
@@ -20,36 +30,38 @@
     "laravel"
   ],
   "files": [
-    "grammar.js",
-    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
+    "grammar.js",
+    "tree-sitter.json",
     "src/**",
     "*.wasm"
   ],
   "dependencies": {
-    "node-addon-api": "^8.2.2",
-    "node-gyp-build": "^4.8.2"
+    "node-addon-api": "^8.4.0",
+    "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
     "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
     "tree-sitter": {
-      "optional": true
+      "optional": false
     }
   },
   "devDependencies": {
-    "eslint": "^9.14.0",
-    "eslint-config-treesitter": "^1.0.2",
+    "@types/node": "^22.15.32",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.25.2"
+    "tree-sitter-cli": "^0.25.6"
   },
   "scripts": {
     "install": "node-gyp-build",
-    "lint": "eslint grammar.js",
-    "test": "node --test bindings/node/*_test.js"
+    "build": " tree-sitter generate",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground -q",
+    "test": "node --test bindings/node/*_test.cjs",
+    "bundle": "deno -A ./main/bundle.ts"
   }
 }

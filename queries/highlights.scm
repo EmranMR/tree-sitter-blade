@@ -1,4 +1,16 @@
-(directive) @tag
-(directive_start) @tag
-(directive_end) @tag
-(comment) @comment
+; inherits: html
+
+[
+  (directive)
+  (directive_start)
+  (directive_end)
+] @tag
+
+[
+  "{{"
+  "}}"
+  "{!!"
+  "!!}"
+  "("
+  ")"
+] @punctuation.bracket

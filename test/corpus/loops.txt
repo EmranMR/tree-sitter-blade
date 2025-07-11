@@ -7,12 +7,10 @@
 @endfor
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -26,18 +24,18 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
-    (php_statement
-      (bracket_start)
-      (php_only)
-      (bracket_end))
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (php_statement
+        (php_only))
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
@@ -49,12 +47,10 @@
 @endforelse
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -67,13 +63,16 @@
 @endwhile
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
@@ -87,21 +86,24 @@
 @endforelse
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
-    (php_statement
-      (bracket_start)
-      (php_only)
-      (bracket_end))
-    (text)
-    (loop_operator
-      (directive))
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (php_statement
+        (php_only))
+      (end_tag
+        (tag_name)))
+    (directive)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
@@ -118,26 +120,46 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (loop
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (loop_operator
-      (directive)
-      (bracket_start)
-      (parameter)
-      (bracket_end))
-    (text)
-    (php_statement
-      (bracket_start)
-      (php_only)
-      (bracket_end))
-    (text)
-    (loop_operator
-      (directive)
-      (bracket_start)
-      (parameter)
-      (bracket_end))
+    (directive)
+    (parameter)
+    (element
+      (start_tag
+        (tag_name))
+      (php_statement
+        (php_only))
+      (end_tag
+        (tag_name)))
+    (directive)
+    (parameter)
+    (directive_end)))
+
+================================================================================
+@foreach with casted parameter
+================================================================================
+
+@foreach ( (array) $users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+--------------------------------------------------------------------------------
+
+(document
+  (loop
+    (directive_start)
+    (parameter)
+    (parameter
+      (parameter))
+    (parameter)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (php_statement
+        (php_only))
+      (end_tag
+        (tag_name)))
     (directive_end)))

@@ -9,6 +9,7 @@ on:
       - "common/*"
       - "*/grammar.js"
       - "*/src/**"
+      - "main/**"
       - "bindings/**"
       - "binding.gyp"
   pull_request:
@@ -17,17 +18,18 @@ on:
       - "common/*"
       - "*/grammar.js"
       - "*/src/**"
+      - "main/**"
       - "bindings/**"
       - "binding.gyp"
 
 concurrency:
-  group: ${{github.workflow}}-${{github.ref}}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   test:
     name: Test parsers
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -36,7 +38,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@v1
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Set up examples
         run: |-
           git clone https://github.com/laravel/breeze examples/breeze --single-branch --depth=1 --filter=blob:none
@@ -45,14 +51,13 @@ jobs:
         with:
           test-rust: true
           test-node: true
-          test-python: true
+          test-python: false
           test-go: true
-          test-swift: true
+          test-swift: false
       - name: Parse examples
         id: test
         uses: tree-sitter/parse-action@v4
         with:
           files: |
             examples/**/*blade.php
-          invalid-files: |
-            examples/breeze/stubs/default/resources/views/components/input-error.blade.php
+          invalid-files: ""

@@ -9,12 +9,10 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (fragment
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -34,21 +32,15 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (section
     (directive_start)
-    (bracket_start)
-    (parameter
-      (text))
-    (bracket_end)
+    (parameter)
     (text)
     (directive_end))
   (section
     (directive_start)
-    (bracket_start)
-    (parameter
-      (text))
-    (bracket_end)
+    (parameter)
     (keyword
       (directive))
     (text)
@@ -65,7 +57,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (once
     (directive_start)
     (text)
@@ -82,7 +74,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (verbatim
     (directive_start)
     (text)

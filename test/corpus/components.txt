@@ -1,0 +1,212 @@
+================================================================================
+Nested <dot> notation
+================================================================================
+
+<x-card>
+    <x-card.header>...</x-card.header>
+    <x-card.body>...</x-card.body>
+</x-card>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+Heavily Nested
+================================================================================
+
+    <x-form.input.test someAttribute="value">...</x-form.input.test>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name))))
+
+================================================================================
+Package Component
+================================================================================
+
+<x-nightshade::calendar />
+<x-nightshade::color-picker />
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (self_closing_tag
+      (tag_name)))
+  (element
+    (self_closing_tag
+      (tag_name))))
+
+================================================================================
+Self Closing Components
+================================================================================
+
+<x-package-alert/>
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (self_closing_tag
+      (tag_name))))
+
+================================================================================
+Nested Self Closing Components
+================================================================================
+
+<x-package-alert.success/>
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (self_closing_tag
+      (tag_name))))
+
+================================================================================
+PHP syntax inside attribute values
+================================================================================
+
+
+<div id="{{$php}}"> ... </div>
+<img id="{{$php}}"/>
+<div class="bg-red-{{$php}}"> ... </div>
+<div class="bg-{{$php}}-500"> ... </div>
+<div class="{{$php}}-red-500"> ... </div>
+
+<div id='{{$php}}'> ... </div>
+<img id='{{$php}}'/>
+<div class='bg-red-{{$php}}'> ... </div>
+<div class='bg-{{$php}}-500'> ... </div>
+<div class='{{$php}}-red-500'> ... </div>
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))))))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only)))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))))))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name)))
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (php_statement
+            (php_only))
+          (attribute_value))))
+    (text)
+    (end_tag
+      (tag_name))))

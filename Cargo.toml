@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-blade"
 description = "blade grammar for the tree-sitter parsing library"
-version = "0.11.0"
+version = "0.12.0"
 authors = ["Emran M. Rahaman <Emran@opulence.design>"]
 keywords = ["incremental", "parsing", "tree-sitter", "blade"]
 categories = ["parsing", "text-editors"]
@@ -13,10 +13,10 @@ autoexamples = false
 build = "bindings/rust/build.rs"
 include = [
   "LICENSE",
-  "bindings/rust/*",
+  "bindings/rust",
   "grammar.js",
-  "queries/*",
-  "src/*",
+  "queries",
+  "src",
   "tree-sitter.json",
 ]
 

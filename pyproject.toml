@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-blade"
 description = "Blade grammar for tree-sitter"
-version = "0.11.0"
+version = "0.12.0"
 keywords = ["incremental", "parsing", "tree-sitter", "blade"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -14,8 +14,10 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
 ]
-authors = [{ name = "Emran Ramezan", email = "Emran@opulence.design" }]
-requires-python = ">=3.9"
+authors = [
+  { name = "Emran Ramezan", email = "Emran@opulence.design" },
+]
+requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"
 
@@ -23,8 +25,8 @@ readme = "README.md"
 Homepage = "https://github.com/EmranMR/tree-sitter-blade"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.22"]
+core = ["tree-sitter~=0.24"]
 
 [tool.cibuildwheel]
-build = "cp39-*"
+build = "cp310-*"
 build-frontend = "build"

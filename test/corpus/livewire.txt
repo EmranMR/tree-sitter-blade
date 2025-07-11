@@ -6,7 +6,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -18,7 +18,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -30,7 +30,7 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (keyword
     (directive)))
 
@@ -42,65 +42,72 @@
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (directive)
-  (bracket_start)
-  (parameter)
-  (bracket_end))
+  (parameter))
 
 ================================================================================
 @persist
 ================================================================================
 
-@persist('player)
+@persist('player')
   <div>hello world</div>
 @endpersist
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
 @teleport
 ================================================================================
 
-@teleport('player)
+@teleport('player')
   <div>hello world</div>
 @endteleport
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))
 
 ================================================================================
 @volt
 ================================================================================
 
-@volt('player)
+@volt('player')
   <div>hello world</div>
 @endvolt
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (livewire
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
-    (text)
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
     (directive_end)))

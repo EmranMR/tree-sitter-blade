@@ -1,174 +1,253 @@
 # HELLO! 👋
 
-Welcome to the contribution guide, and I hope you are enjoying the
-grammar. Here you will find out how the grammar is organised and how
-you can contribute, so that it adheres to the grammar styles.
+Welcome to the contribution guide, and I hope you are enjoying the grammar. Here
+you will find out how the grammar is organised and how you can contribute, so
+that it adheres to the grammar styles.
 
 ### Prerequisite:
 
--   You need to know how to use the
-    [tree-sitter cli](https://tree-sitter.github.io/tree-sitter/creating-parsers#tool-overview)
-    for generating and testing
--   Make sure you are familiar with this chapter from
-    [tree-sitter](https://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
-    especially the functions.
--   In-depth knowledge is not necessary unless you are contributing to
-    the core.
+---
 
-### General Overview:
+#### Dev Tooling
 
-The grammar is pretty abstracted, i.e., there are many aliases and
-hidden rules. However I personally believe it is easy to read and
-follow. This was intentional so that it is future proof, extensible
-and maintainable. Thanks to this, there is a 98% chance that the
-future new directive rules can be added with **no more than 6 lines of
-code**!
+- Deno `^2.0`
+- Node `^24.0`
+- tree-sitter-cli `^0.24.4`
+
+> You do **NOT** need to know `TypeScript`
+
+#### tree-sitter knowledge
+
+- You need to know how to use the
+  [tree-sitter cli](https://tree-sitter.github.io/tree-sitter/creating-parsers#tool-overview)
+  for generating and testing
+- Make sure you are familiar with this chapter from
+  [tree-sitter](https://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
+  especially the functions.
+- In-depth knowledge is not necessary unless you are contributing to the core.
+
+### General:
+
+---
+
+Unlike most othter `tree-sitter` grammars, where you write the grammar at
+`grammar.js`, The grammar for tree-sitter-blade is written in `ts` and exists at
+`main/grammar.ts`.
+
+> This was a design decision to make maintenance and contributing easier, with
+> full typing support, pointing out any errors before compilation. In addition
+> this makes the grammar future proof, extensible moving forward.
+
+The grammar itself is pretty abstracted with the help of `alias()` as well as
+utilising hidden rules via `_` for better end user Dev Experience. This also
+provides a very clean abstract syntax tree AST. As such it should be easy to
+follow without any prior knowledge.
 
 ### How to set up
 
+---
+
 1. Clone this repo
-2. Install the dependancies: `npm i`
+2. run `deno install --allow-scripts=npm:tree-sitter-cli`
 3. To check if your setup is working, simply run:
-    - `npm run test`: This will run the Unit Test to ensure you have
-      not broken functionalities
-    - `npm run example-test`: This will try to parse alot of common
-      Laravel Method for an automated test drive :)
-        > Make sure you have set up your `tree-sitter`'s
-        > `parser-directories` path correctly in your config file see
-        > [path](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#paths)
+   - `deno run test-grammar`: This will run the Unit Test to ensure you have
 
-### Overview
+> Make sure you have set up your `tree-sitter`'s `parser-directories` path
+> correctly in your config file see
+> [path](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#paths)
 
-Go ahead open up the `grammar.js` in the root directory.
+#### Available Tasks/Scripts to help you during development
 
-Everything is organized in the order they appear in the document
-inside `$._definition`. The `rules` are then made up like lego using
-the "building block" rules that were written at the bottom of the
-`grammar.js`. As a result, any changes below the 'warning comment' ⚠️
-**are likely to cause breakage** ⚠️, so make sure you run the unit
-tests every time you amend anything. However it is very unlikely you
-would need to touch anything below that line, unless you are writing a
-very **complicated** rule.
+You can run `deno task` to see the tasks available. The main ones are as it
+follows:
 
-### $.\_definition:
+- `deno run start`
+  - This will create a **_Playground_** where you can test the grammar **live**
+    in your browser!
+- `deno run generate`
+  - This will _bundle_ and _generate_ the grammar.
+- `deno run test-grammar`
+  - This will run the unit tests for you
 
-This is basically what the parser uses as a starting point to read the
-`blade` document. The following explains the grouping/name convention:
+### Overview of the Grammar Structure (`main/grammar.ts`)
+
+---
+
+You write your grammar at `main/grammar.ts`.
+
+The grammar DSL is defined in the `exported` `grammar()` function. This function
+inherits `html` DSL from `tree-sitter-html`. As such all the nodes defined in
+the `tree-sitter-html` are also available in this function. You could modify or
+override. `$.attribute` is a good example of this.
+
+> The _external scanners_ are not automatically loaded. They were copied and
+
+> pasted from tree-sitter-html and modified for this project
+
+#### $.\_node:
+
+inside `$._node` node, all the `html` and `blade` nodes are loaded to the
+`NodeMap` data structure. This will override what is defined in the
+`tree-sitter-html`. The `$._node` is then used in `$.document` defined by the
+`tree-sitter-html`.
 
 #### 1. $.keyword:
 
-These are the stand-alone directives that can appear anywhere in the
-document, with **_NO_** _parameters_ for example:
+These are the stand-alone directives that can appear anywhere in the document,
+with **_NO_** _parameters_ for example:
 
--   `@csrf`
+- `@csrf`
 
 #### 2. $.php_statement
 
-These are the directives or rules that need their content parsed as
-`php_only`
+These are the directives or rules that need their content parsed as `php_only`
 
--   `{{}}`
--   `{!! !!}`
--   ...
+- `{{}}`
+- `{!! !!}`
+- ...
 
 #### 3. $.attribute
 
 Blade attributes, such as:
 
--   `@class()`
--   `@style()`
--   ...
+- `@class()`
+- `@style()`
+- ...
 
 #### 4. $.\_inline_directive
 
 These are the directives that **_take on_** parameters.
 
--   `@yield()`
--   `@extends()`
--   ...
-    > Names starting with `_` are hiddent when parsing. see
-    > [tree-sitter](https://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
+- `@yield()`
+- `@extends()`
+- ...
+  > Names starting with `_` are hiddent when parsing. see
+  > [tree-sitter](https://tree-sitter.github.io/tree-sitter/creating-parsers#writing-the-grammar)
 
 #### 5. $.\_nested_directives
 
 Directive that have _start_ and _end_ directive, with a _body_
 
--   `@if() @endif`
--   `@error @enderror`
--   ...
+- `@if() @endif`
+- `@error @enderror`
+- ...
 
 #### 6. $.loop_operator
 
-Very unlikely you would need to touch this, but these are loop
-operators that can appear in any subtree.
+Very unlikely you would need to touch this, but these are loop operators that
+can appear in any subtree.
 
--   `@break`
--   `@continue`
--   ...
+- `@break`
+- `@continue`
+- ...
 
-#### 7. $.php_only
+#### 7. $.\_text
 
-Integral node, which is used for `php_only` injections. This is based
-on the `$._text` node
+This should not be used, instead you should opt for `$.text` or `$.php_only` if
+needed
 
-#### 8. $.text
+#### 9. $.text
 
-This is a general use text node. In this grammar it can be used,
-alongside predicates in the `injection.scm` to achieve interesting
-outcome. Such as injecting normal `text`, `html` or even `shell`. This
-is also built on `$._text`
-
-#### 9. $.\_text
-
-This should not be used, instead you should opt for `$.text` or
-`$.php_only` if needed
+This is a general use text node. In this grammar it can be used, alongside
+predicates in the `injection.scm` to achieve interesting outcome. Such as
+injecting normal `text`, `html` or even `shell`. This is also built on `$._text`
 
 ### Adding New Directives:
 
-The first thing to do is to determine what category it belongs to.
-Look at the `$._definition`, pick a rule group, and dig in, to get an
-idea.
+---
+
+The first thing to do is to determine what category it belongs to. Look at the
+`$._definition`, pick a rule group, and dig in, to get an idea.
 
 As an example look below on how the `@if` directive is defined:
 
 ```mermaid
 graph TD;
-    A($._definition)-->B($._nested_directive)-->C($.conditional)-->D[/Directives\];
+    A($.document)-->B($._nested_directive)-->C($.conditional)-->D[/Directives\];
     D---> E($._if);
     D--> G(...);
 
     E --> H($.directive_start) & I($._if_statement_body) & J($.directive_end)
-
-
 ```
+
+#### A Note on the `NodeMap`
+
+The entire Blade grammar is packaged into the `nodes` object, when defining the
+`$._node` tree node. This allows you to pick and choose the nodes that you would
+like to allow recursively be for a specific Blade structure. For example
+
+##### Example:
+
+- For example take a look at the `$.fragmant` node.
+- Here, only `nodes` that are needed are repeated in the body of `fragment` that
+  are _semantically_ correct via the `without()` method
+
+##### Other `NodeMap` methods available:
+
+###### `add()`
+
+- This should be used preferably once, when defining `$._node`
+
+###### `all()`
+
+- Returns all the nodes that are cached via `add()`
+
+###### `with()`
+
+- Sometimes only a specific node based on a specific subNode, that you do not
+  wish to cache, as it is not used elsewhere. As such you can define it as
+  usual, and bundle it with the stuff you have cached via `with()`
+- `$.loop` body is a good example of this
+
+###### `without()`
+
+- Returns all nodes, without the ones defined here from the cached nodes via
+  `add()`
+
+###### `has()`
+
+- Used to check if a specific `node` exists in the cache
+
+#### Defining a node:
+
+If you are adding a new keyword and so forth, it is as easy as writing it to the
+correct node.
+
+On a _**very rare**_ occasion that you might need to create a brand new node,
+please consider the following:
+
+- Only use nodes that are needed from the `nodes` object. This will keep the
+  grammar semantically correct.
+- Be as specific as you can be. This will allow syntax highlighting, to
+  _highlight_ the **users** that the syntax they used is incorrect.
 
 ### Test it:
 
+---
+
 Whenever you define a new rule, you need to test it in two ways:
 
-1. You could use the automated parsing to test drive the parser
-    - You would need to run the following command.
-    - This will download a few of the Laravel-based repositories and
-      parse the blade files.
+1. Once you are satisfied with your definition, you can use the built in, super
+   helpful tree-sitter playground to test your syntax. Just run the following
+   command and you are good to go to test it in your browser
 
-```bash
-npm run test-example
-```
+   ```bash
+   deno run start
+   ```
 
-2. To ensure your rule is not breaking any other rules, just do the
-   following to run the unit test:
+2. To ensure your rule is not breaking any other rules, just do the following to
+   run the unit test:
 
-```
-npm run test
-```
+   ```bash
+   deno run test-grammar
+   ```
 
 If all green you are good to go 👍
 
 Once happy with your result, write the appropriate unit `test` in
-`test/corpus/`. You could either use any of the categories or make
-your own.
+`test/corpus/`. You could either use any of the categories or make your own.
 
 ### Pull requests:
 
--   Just follow the pull request template and ensure you have
-    completed all necessary steps. 😊"
+- Just follow the pull request template and ensure you have completed all
+  necessary steps. 😊"

@@ -6,7 +6,7 @@ Orphan Punctuation Marks
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (text))
 
 ================================================================================
@@ -23,13 +23,11 @@ test@test.com
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (text)
   (conditional
     (directive_start)
-    (bracket_start)
     (parameter)
-    (bracket_end)
     (text)
     (directive_end)))
 
@@ -44,7 +42,7 @@ Comments Ending with Punctuation Conflict
 
 --------------------------------------------------------------------------------
 
-(blade
+(document
   (comment)
   (comment)
   (comment)
