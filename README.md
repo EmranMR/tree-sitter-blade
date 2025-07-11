@@ -85,17 +85,10 @@ your fellow devs, feel free to use the
 [discussion tab](https://github.com/EmranMR/tree-sitter-blade/discussions) and
 create a discussion!
 
-## 👥 Contribution
+## 👥 Contributing
 
 See the [contribution](/CONTRIBUTING.md) guidelines for more details, as well as
 in depth info about the `grammar` itself.
-
-## Contributors
-
-> Don't forget to add yourself when you commit!
-
-- [@EmranMR](https://github.com/EmranMR)
-- [@calebdw](https://github.com/calebdw)
 
 ## Anyone said coffee? ☕
 
