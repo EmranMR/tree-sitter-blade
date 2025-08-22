@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-blade",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "homepage": "https://github.com/EmranMR/tree-sitter-blade",
   "type": "module",
   "repository": {
