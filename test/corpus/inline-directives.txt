@@ -244,3 +244,17 @@
 (document
   (directive)
   (parameter))
+
+================================================================================
+@wireUiScripts
+================================================================================
+
+@wireUiScripts(['nonce': 'csp-token'])
+@wireUiScripts(['nonce': 'csp-token', 'foo' => true])
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (directive)
+  (parameter))

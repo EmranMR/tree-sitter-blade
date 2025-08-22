@@ -79,3 +79,72 @@
     (directive_start)
     (text)
     (directive_end)))
+
+================================================================================
+@script
+================================================================================
+
+@script
+    <script>
+        setInterval(() => {
+            $wire.$refresh()
+        }, 2000)
+    </script>
+@endscript
+
+
+--------------------------------------------------------------------------------
+
+(document
+  (livewire
+    (directive_start)
+    (script_element
+      (start_tag
+        (tag_name))
+      (raw_text)
+      (end_tag
+        (tag_name)))
+    (directive_end)))
+
+================================================================================
+@assets
+================================================================================
+ @assets
+  <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css"/>
+@endassets
+
+
+--------------------------------------------------------------------------------
+
+(document
+  (livewire
+    (directive_start)
+    (script_element
+      (start_tag
+        (tag_name)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (attribute
+          (attribute_name)))
+      (raw_text)
+      (end_tag
+        (tag_name)))
+    (element
+      (self_closing_tag
+        (tag_name)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))))
+    (directive_end)))

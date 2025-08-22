@@ -270,7 +270,9 @@ var grammar_default = grammar(import_grammar.default, {
         "@permalink",
         "@title",
         "@content",
-        "@excerpt"
+        "@excerpt",
+        // WireUI
+        "@wireUiScripts"
       ),
       $.directive
     ),
@@ -402,7 +404,9 @@ var grammar_default = grammar(import_grammar.default, {
           "@set",
           // ACF (Advanced Custom Fields)
           "@field",
-          "@options"
+          "@options",
+          // WireUI
+          "@wireUiScripts"
         ),
         $.directive
       ),
@@ -851,7 +855,7 @@ var grammar_default = grammar(import_grammar.default, {
       $._directive_parameter
     ),
     // !livewire 🪼
-    livewire: ($) => choice($._persist, $._teleport, $._volt),
+    livewire: ($) => choice($._persist, $._teleport, $._volt, $._script, $._assets),
     _persist: ($) => seq(
       alias("@persist", $.directive_start),
       $._directive_parameter,
@@ -902,6 +906,40 @@ var grammar_default = grammar(import_grammar.default, {
       ),
       alias("@endvolt", $.directive_end)
     ),
+    _script: ($) => seq(
+      alias("@script", $.directive_start),
+      repeat1(
+        choice(
+          ...nodes.without(
+            $.doctype,
+            $.envoy,
+            $.fragment,
+            $.section,
+            $.once,
+            $.verbatim,
+            $.stack
+          )
+        )
+      ),
+      alias("@endscript", $.directive_end)
+    ),
+    _assets: ($) => seq(
+      alias("@assets", $.directive_start),
+      repeat1(
+        choice(
+          ...nodes.without(
+            $.doctype,
+            $.envoy,
+            $.fragment,
+            $.section,
+            $.once,
+            $.verbatim,
+            $.stack
+          )
+        )
+      ),
+      alias("@endassets", $.directive_end)
+    ),
     /*-----------------------------------*
     /  Do NOT change below this line
     /  without running tests
@@ -931,8 +969,7 @@ var grammar_default = grammar(import_grammar.default, {
           $.fragment,
           $.once,
           $.verbatim,
-          $.stack,
-          $.conditional
+          $.stack
         )
       )
     ),

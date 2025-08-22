@@ -645,6 +645,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "directive",
           "named": true
         },

@@ -639,6 +639,10 @@
           {
             "type": "STRING",
             "value": "@excerpt"
+          },
+          {
+            "type": "STRING",
+            "value": "@wireUiScripts"
           }
         ]
       },
@@ -1044,6 +1048,10 @@
               {
                 "type": "STRING",
                 "value": "@options"
+              },
+              {
+                "type": "STRING",
+                "value": "@wireUiScripts"
               }
             ]
           },
@@ -3330,6 +3338,14 @@
         {
           "type": "SYMBOL",
           "name": "_volt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_script"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_assets"
         }
       ]
     },
@@ -3564,6 +3580,180 @@
           "content": {
             "type": "STRING",
             "value": "@endvolt"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_script": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@script"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "entity"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "text"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "script_element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "style_element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "erroneous_end_tag"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "keyword"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "php_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_inline_directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "switch"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "livewire"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "conditional"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endscript"
+          },
+          "named": true,
+          "value": "directive_end"
+        }
+      ]
+    },
+    "_assets": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@assets"
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "entity"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "text"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "script_element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "style_element"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "erroneous_end_tag"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "keyword"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "php_statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_inline_directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "switch"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "loop"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "livewire"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "conditional"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@endassets"
           },
           "named": true,
           "value": "directive_end"
@@ -3845,6 +4035,10 @@
           {
             "type": "SYMBOL",
             "name": "loop"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "conditional"
           }
         ]
       }
