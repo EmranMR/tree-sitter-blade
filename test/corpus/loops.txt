@@ -164,7 +164,6 @@
         (tag_name)))
     (directive_end)))
 
-
 ================================================================================
 loop and conditionals
 ================================================================================
@@ -178,3 +177,20 @@ loop and conditionals
 
 --------------------------------------------------------------------------------
 
+(document
+  (loop
+    (directive_start)
+    (parameter)
+    (conditional
+      (directive_start)
+      (parameter)
+      (element
+        (start_tag
+          (tag_name))
+        (text)
+        (php_statement
+          (php_only))
+        (end_tag
+          (tag_name)))
+      (directive_end))
+    (directive_end)))
