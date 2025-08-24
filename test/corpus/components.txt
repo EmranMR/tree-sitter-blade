@@ -133,7 +133,9 @@ PHP syntax inside attribute values
       (attribute
         (attribute_name)
         (quoted_attribute_value
-          (attribute_value))))
+          (attribute_value)
+          (php_statement
+            (php_only)))))
     (text)
     (end_tag
       (tag_name)))
@@ -143,6 +145,9 @@ PHP syntax inside attribute values
       (attribute
         (attribute_name)
         (quoted_attribute_value
+          (attribute_value)
+          (php_statement
+            (php_only))
           (attribute_value))))
     (text)
     (end_tag
@@ -184,7 +189,9 @@ PHP syntax inside attribute values
       (attribute
         (attribute_name)
         (quoted_attribute_value
-          (attribute_value))))
+          (attribute_value)
+          (php_statement
+            (php_only)))))
     (text)
     (end_tag
       (tag_name)))
@@ -194,6 +201,9 @@ PHP syntax inside attribute values
       (attribute
         (attribute_name)
         (quoted_attribute_value
+          (attribute_value)
+          (php_statement
+            (php_only))
           (attribute_value))))
     (text)
     (end_tag

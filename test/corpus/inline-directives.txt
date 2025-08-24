@@ -219,6 +219,9 @@
       (attribute
         (attribute_name)
         (quoted_attribute_value
+          (attribute_value)
+          (directive)
+          (parameter)
           (attribute_value))))
     (end_tag
       (tag_name))))

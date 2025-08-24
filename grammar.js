@@ -323,7 +323,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.conditional,
               $._inline_directive,
               $.comment,
-              alias(token(prec(-1, /[^']+/)), $.attribute_value)
+              alias($._singly_quoted_attribute_text, $.attribute_value)
             )
           )
         ),
@@ -338,7 +338,7 @@ var grammar_default = grammar(import_grammar.default, {
               $.conditional,
               $._inline_directive,
               $.comment,
-              alias(token(prec(-1, /[^"]+/)), $.attribute_value)
+              alias($._doubly_quoted_attribute_text, $.attribute_value)
             )
           )
         ),
@@ -908,7 +908,7 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     _script: ($) => seq(
       alias("@script", $.directive_start),
-      repeat1(
+      optional(repeat1(
         choice(
           ...nodes.without(
             $.doctype,
@@ -920,12 +920,12 @@ var grammar_default = grammar(import_grammar.default, {
             $.stack
           )
         )
-      ),
+      )),
       alias("@endscript", $.directive_end)
     ),
     _assets: ($) => seq(
       alias("@assets", $.directive_start),
-      repeat1(
+      optional(repeat1(
         choice(
           ...nodes.without(
             $.doctype,
@@ -937,7 +937,7 @@ var grammar_default = grammar(import_grammar.default, {
             $.stack
           )
         )
-      ),
+      )),
       alias("@endassets", $.directive_end)
     ),
     /*-----------------------------------*
@@ -999,6 +999,22 @@ var grammar_default = grammar(import_grammar.default, {
             /[^\s(){!}@-]([^<>(){!}@,?]*[^<>{!}()@?,-])?/
             // general text
           )
+        )
+      )
+    ),
+    _singly_quoted_attribute_text: (_) => prec.right(
+      repeat1(
+        choice(
+          token(prec(-2, /[{}]/)),
+          token(prec(-1, /[^'{}]/))
+        )
+      )
+    ),
+    _doubly_quoted_attribute_text: (_) => prec.right(
+      repeat1(
+        choice(
+          token(prec(-2, /[{}]/)),
+          token(prec(-1, /[^"{}]/))
         )
       )
     )
