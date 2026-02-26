@@ -4134,6 +4134,17 @@
           "type": "TOKEN",
           "content": {
             "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "PATTERN",
+              "value": "@@[a-zA-Z\\d]*"
+            }
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
             "value": -1,
             "content": {
               "type": "PATTERN",
@@ -4177,6 +4188,17 @@
               "type": "TOKEN",
               "content": {
                 "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "@@[a-zA-Z\\d]*"
+                }
+              }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
                 "value": -2,
                 "content": {
                   "type": "PATTERN",
@@ -4207,6 +4229,17 @@
         "content": {
           "type": "CHOICE",
           "members": [
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "@@[a-zA-Z\\d]*"
+                }
+              }
+            },
             {
               "type": "TOKEN",
               "content": {

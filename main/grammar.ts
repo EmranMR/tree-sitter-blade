@@ -925,6 +925,8 @@ export default grammar(html, {
     _text: (_) =>
       // custom directive conflict resolution
       choice(
+        // escaped blade directives e.g. @@if, @@csrf
+        token(prec(1, /@@[a-zA-Z\d]*/)),
         token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
         // orphan tags
         token(prec(-2, /[{}!@()?,-]/)),
@@ -940,6 +942,8 @@ export default grammar(html, {
       prec.right(
         repeat1(
           choice(
+            // escaped blade directives e.g. @@if, @@csrf
+            token(prec(1, /@@[a-zA-Z\d]*/)),
             token(prec(-2, /[{}]/)),
             token(prec(-1, /[^'{}]/)),
           ),
@@ -949,6 +953,8 @@ export default grammar(html, {
       prec.right(
         repeat1(
           choice(
+            // escaped blade directives e.g. @@if, @@csrf
+            token(prec(1, /@@[a-zA-Z\d]*/)),
             token(prec(-2, /[{}]/)),
             token(prec(-1, /[^"{}]/)),
           ),

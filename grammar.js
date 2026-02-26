@@ -990,6 +990,8 @@ var grammar_default = grammar(import_grammar.default, {
     _text: (_) => (
       // custom directive conflict resolution
       choice(
+        // escaped blade directives e.g. @@if, @@csrf
+        token(prec(1, /@@[a-zA-Z\d]*/)),
         token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
         // orphan tags
         token(prec(-2, /[{}!@()?,-]/)),
@@ -1005,6 +1007,8 @@ var grammar_default = grammar(import_grammar.default, {
     _singly_quoted_attribute_text: (_) => prec.right(
       repeat1(
         choice(
+          // escaped blade directives e.g. @@if, @@csrf
+          token(prec(1, /@@[a-zA-Z\d]*/)),
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^'{}]/))
         )
@@ -1013,6 +1017,8 @@ var grammar_default = grammar(import_grammar.default, {
     _doubly_quoted_attribute_text: (_) => prec.right(
       repeat1(
         choice(
+          // escaped blade directives e.g. @@if, @@csrf
+          token(prec(1, /@@[a-zA-Z\d]*/)),
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^"{}]/))
         )
