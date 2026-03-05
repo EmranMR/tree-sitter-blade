@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "attribute_name",
           "named": true
         },
@@ -16,7 +20,19 @@
           "named": true
         },
         {
+          "type": "conditional_keyword",
+          "named": true
+        },
+        {
           "type": "directive",
+          "named": true
+        },
+        {
+          "type": "directive_end",
+          "named": true
+        },
+        {
+          "type": "directive_start",
           "named": true
         },
         {
