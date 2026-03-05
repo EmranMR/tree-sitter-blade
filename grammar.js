@@ -309,7 +309,8 @@ var grammar_default = grammar(import_grammar.default, {
     attribute: ($) => choice(
       $._blade_attribute,
       $._html_attribute,
-      $.php_statement
+      $.php_statement,
+      $._conditional_attribute
     ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
     attribute_value: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
@@ -370,6 +371,54 @@ var grammar_default = grammar(import_grammar.default, {
         $.directive
       ),
       $._directive_parameter
+    ),
+    // ! Conditional directives inside HTML tag attributes
+    // Handles: <div @if($cond) x-data="..." @endif>
+    _conditional_attribute: ($) => seq(
+      alias(
+        choice(
+          "@if",
+          "@unless",
+          "@isset",
+          "@empty",
+          "@auth",
+          "@guest",
+          "@env",
+          "@can",
+          "@cannot",
+          "@canany",
+          "@error",
+          "@feature",
+          "@production"
+        ),
+        $.directive_start
+      ),
+      $._directive_parameter,
+      repeat($.attribute),
+      repeat(
+        seq(
+          $.conditional_keyword,
+          repeat($.attribute)
+        )
+      ),
+      alias(
+        choice(
+          "@endif",
+          "@endunless",
+          "@endisset",
+          "@endempty",
+          "@endauth",
+          "@endguest",
+          "@endenv",
+          "@endcan",
+          "@endcannot",
+          "@endcanany",
+          "@enderror",
+          "@endfeature",
+          "@endproduction"
+        ),
+        $.directive_end
+      )
     ),
     // !inline directives
     _inline_directive: ($) => seq(
@@ -986,12 +1035,13 @@ var grammar_default = grammar(import_grammar.default, {
     text: ($) => prec.right(repeat1($._text)),
     // hidden to reduce AST noise in php_only #39
     // It is selectively unhidden for other areas
+    // escaped blade directives e.g. @@if, @@csrf
+    _escaped_directive: (_) => token(prec(1, /@@[a-zA-Z\d]*/)),
     // Create alternative text rep for php_only
-    _text: (_) => (
+    _text: ($) => (
       // custom directive conflict resolution
       choice(
-        // escaped blade directives e.g. @@if, @@csrf
-        token(prec(1, /@@[a-zA-Z\d]*/)),
+        $._escaped_directive,
         token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
         // orphan tags
         token(prec(-2, /[{}!@()?,-]/)),
@@ -1004,21 +1054,19 @@ var grammar_default = grammar(import_grammar.default, {
         )
       )
     ),
-    _singly_quoted_attribute_text: (_) => prec.right(
+    _singly_quoted_attribute_text: ($) => prec.right(
       repeat1(
         choice(
-          // escaped blade directives e.g. @@if, @@csrf
-          token(prec(1, /@@[a-zA-Z\d]*/)),
+          $._escaped_directive,
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^'{}]/))
         )
       )
     ),
-    _doubly_quoted_attribute_text: (_) => prec.right(
+    _doubly_quoted_attribute_text: ($) => prec.right(
       repeat1(
         choice(
-          // escaped blade directives e.g. @@if, @@csrf
-          token(prec(1, /@@[a-zA-Z\d]*/)),
+          $._escaped_directive,
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^"{}]/))
         )

@@ -121,6 +121,7 @@ export default grammar(html, {
         $._blade_attribute,
         $._html_attribute,
         $.php_statement,
+        $._conditional_attribute,
       ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
 
@@ -187,6 +188,56 @@ export default grammar(html, {
           $.directive,
         ),
         $._directive_parameter,
+      ),
+
+    // ! Conditional directives inside HTML tag attributes
+    // Handles: <div @if($cond) x-data="..." @endif>
+    _conditional_attribute: ($) =>
+      seq(
+        alias(
+          choice(
+            "@if",
+            "@unless",
+            "@isset",
+            "@empty",
+            "@auth",
+            "@guest",
+            "@env",
+            "@can",
+            "@cannot",
+            "@canany",
+            "@error",
+            "@feature",
+            "@production",
+          ),
+          $.directive_start,
+        ),
+        $._directive_parameter,
+        repeat($.attribute),
+        repeat(
+          seq(
+            $.conditional_keyword,
+            repeat($.attribute),
+          ),
+        ),
+        alias(
+          choice(
+            "@endif",
+            "@endunless",
+            "@endisset",
+            "@endempty",
+            "@endauth",
+            "@endguest",
+            "@endenv",
+            "@endcan",
+            "@endcannot",
+            "@endcanany",
+            "@enderror",
+            "@endfeature",
+            "@endproduction",
+          ),
+          $.directive_end,
+        ),
       ),
 
     // !inline directives

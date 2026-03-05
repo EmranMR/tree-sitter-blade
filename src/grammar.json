@@ -396,6 +396,10 @@
         {
           "type": "SYMBOL",
           "name": "php_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_conditional_attribute"
         }
       ]
     },
@@ -912,6 +916,165 @@
         {
           "type": "SYMBOL",
           "name": "_directive_parameter"
+        }
+      ]
+    },
+    "_conditional_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@if"
+              },
+              {
+                "type": "STRING",
+                "value": "@unless"
+              },
+              {
+                "type": "STRING",
+                "value": "@isset"
+              },
+              {
+                "type": "STRING",
+                "value": "@empty"
+              },
+              {
+                "type": "STRING",
+                "value": "@auth"
+              },
+              {
+                "type": "STRING",
+                "value": "@guest"
+              },
+              {
+                "type": "STRING",
+                "value": "@env"
+              },
+              {
+                "type": "STRING",
+                "value": "@can"
+              },
+              {
+                "type": "STRING",
+                "value": "@cannot"
+              },
+              {
+                "type": "STRING",
+                "value": "@canany"
+              },
+              {
+                "type": "STRING",
+                "value": "@error"
+              },
+              {
+                "type": "STRING",
+                "value": "@feature"
+              },
+              {
+                "type": "STRING",
+                "value": "@production"
+              }
+            ]
+          },
+          "named": true,
+          "value": "directive_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_directive_parameter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "attribute"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "conditional_keyword"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "attribute"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              {
+                "type": "STRING",
+                "value": "@endunless"
+              },
+              {
+                "type": "STRING",
+                "value": "@endisset"
+              },
+              {
+                "type": "STRING",
+                "value": "@endempty"
+              },
+              {
+                "type": "STRING",
+                "value": "@endauth"
+              },
+              {
+                "type": "STRING",
+                "value": "@endguest"
+              },
+              {
+                "type": "STRING",
+                "value": "@endenv"
+              },
+              {
+                "type": "STRING",
+                "value": "@endcan"
+              },
+              {
+                "type": "STRING",
+                "value": "@endcannot"
+              },
+              {
+                "type": "STRING",
+                "value": "@endcanany"
+              },
+              {
+                "type": "STRING",
+                "value": "@enderror"
+              },
+              {
+                "type": "STRING",
+                "value": "@endfeature"
+              },
+              {
+                "type": "STRING",
+                "value": "@endproduction"
+              }
+            ]
+          },
+          "named": true,
+          "value": "directive_end"
         }
       ]
     },
@@ -4127,19 +4290,23 @@
         }
       ]
     },
+    "_escaped_directive": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "@@[a-zA-Z\\d]*"
+        }
+      }
+    },
     "_text": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "PATTERN",
-              "value": "@@[a-zA-Z\\d]*"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_escaped_directive"
         },
         {
           "type": "TOKEN",
@@ -4185,15 +4352,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "PATTERN",
-                  "value": "@@[a-zA-Z\\d]*"
-                }
-              }
+              "type": "SYMBOL",
+              "name": "_escaped_directive"
             },
             {
               "type": "TOKEN",
@@ -4230,15 +4390,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "PATTERN",
-                  "value": "@@[a-zA-Z\\d]*"
-                }
-              }
+              "type": "SYMBOL",
+              "name": "_escaped_directive"
             },
             {
               "type": "TOKEN",
