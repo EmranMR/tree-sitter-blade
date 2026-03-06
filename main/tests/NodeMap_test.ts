@@ -1,5 +1,5 @@
 import NodeMap from "../NodeMap.ts";
-import { assert, assertEquals, assertFalse } from "jsr:@std/assert";
+import { assert, assertEquals, assertFalse } from "@std/assert";
 
 const rule1: SymbolRule<string> = {
   type: "SYMBOL",
