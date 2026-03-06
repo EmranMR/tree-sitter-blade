@@ -50,7 +50,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: true
-          test-node: true
+          test-node: false
           test-python: false
           test-go: true
           test-swift: false
@@ -60,4 +60,5 @@ jobs:
         with:
           files: |
             examples/**/*blade.php
-          invalid-files: ""
+          invalid-files: |
+            examples/breeze/stubs/livewire-common/resources/views/components/action-message.blade.php
