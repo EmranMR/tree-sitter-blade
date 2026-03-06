@@ -131,3 +131,97 @@
         (parameter)))
     (end_tag
       (tag_name))))
+
+================================================================================
+@if conditional attribute
+================================================================================
+
+<div @if(true) x-data="test" @endif></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive_start)
+        (parameter)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+@if/@else conditional attribute
+================================================================================
+
+<div class="base" @if(true) x-data="a" @else x-data="b" @endif></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value)))
+      (attribute
+        (directive_start)
+        (parameter)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (conditional_keyword
+          (directive))
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+@if conditional attribute multiline
+================================================================================
+
+<div
+    class="test"
+    @if($hasAudio)
+        x-data="{ playing: false }"
+        wire:click="toggle"
+    @endif
+>
+</div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value)))
+      (attribute
+        (directive_start)
+        (parameter)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
