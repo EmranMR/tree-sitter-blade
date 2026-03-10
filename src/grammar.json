@@ -4127,19 +4127,23 @@
         }
       ]
     },
+    "_escaped_directive": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "@@[a-zA-Z\\d]*"
+        }
+      }
+    },
     "_text": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "PATTERN",
-              "value": "@@[a-zA-Z\\d]*"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_escaped_directive"
         },
         {
           "type": "TOKEN",
@@ -4185,15 +4189,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "PATTERN",
-                  "value": "@@[a-zA-Z\\d]*"
-                }
-              }
+              "type": "SYMBOL",
+              "name": "_escaped_directive"
             },
             {
               "type": "TOKEN",
@@ -4230,15 +4227,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "PREC",
-                "value": 1,
-                "content": {
-                  "type": "PATTERN",
-                  "value": "@@[a-zA-Z\\d]*"
-                }
-              }
+              "type": "SYMBOL",
+              "name": "_escaped_directive"
             },
             {
               "type": "TOKEN",
