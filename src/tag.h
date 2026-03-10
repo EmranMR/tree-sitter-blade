@@ -7,6 +7,9 @@
 
 #include <string.h>
 
+#define X_SLOT_TAG "X-SLOT"
+#define X_SLOT_TAG_LEN (sizeof(X_SLOT_TAG) - 1)
+
 typedef enum {
     AREA,
     BASE,
@@ -137,6 +140,7 @@ typedef enum {
     VIDEO,
 
     CUSTOM,
+    X_SLOT,
 
     END_,
 } TagType;
@@ -153,7 +157,7 @@ typedef struct {
     String custom_tag_name;
 } Tag;
 
-static const TagMapEntry TAG_TYPES_BY_TAG_NAME[126] = {
+static const TagMapEntry TAG_TYPES_BY_TAG_NAME[127] = {
     {"AREA",       AREA      },
     {"BASE",       BASE      },
     {"BASEFONT",   BASEFONT  },
@@ -280,6 +284,7 @@ static const TagMapEntry TAG_TYPES_BY_TAG_NAME[126] = {
     {"VAR",        VAR       },
     {"VIDEO",      VIDEO     },
     {"CUSTOM",     CUSTOM    },
+    {X_SLOT_TAG,   X_SLOT    },
 };
 
 static const TagType TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[] = {
@@ -290,7 +295,7 @@ static const TagType TAG_TYPES_NOT_ALLOWED_IN_PARAGRAPHS[] = {
 };
 
 static TagType tag_type_for_name(const String *tag_name) {
-    for (int i = 0; i < 126; i++) {
+    for (int i = 0; i < 127; i++) {
         const TagMapEntry *entry = &TAG_TYPES_BY_TAG_NAME[i];
         if (
             strlen(entry->tag_name) == tag_name->size &&
@@ -298,6 +303,12 @@ static TagType tag_type_for_name(const String *tag_name) {
         ) {
             return entry->tag_type;
         }
+    }
+    if (
+        tag_name->size > X_SLOT_TAG_LEN + 1 &&
+        memcmp(tag_name->contents, X_SLOT_TAG ":", X_SLOT_TAG_LEN + 1) == 0
+    ) {
+        return X_SLOT;
     }
     return CUSTOM;
 }
@@ -312,7 +323,7 @@ static inline Tag tag_new() {
 static inline Tag tag_for_name(String name) {
     Tag tag = tag_new();
     tag.type = tag_type_for_name(&name);
-    if (tag.type == CUSTOM) {
+    if (tag.type == CUSTOM || tag.type == X_SLOT) {
         tag.custom_tag_name = name;
     } else {
         array_delete(&name);
@@ -321,7 +332,7 @@ static inline Tag tag_for_name(String name) {
 }
 
 static inline void tag_free(Tag *tag) {
-    if (tag->type == CUSTOM) {
+    if (tag->type == CUSTOM || tag->type == X_SLOT) {
         array_delete(&tag->custom_tag_name);
     }
 }
@@ -332,7 +343,10 @@ static inline bool tag_is_void(const Tag *self) {
 
 static inline bool tag_eq(const Tag *self, const Tag *other) {
     if (self->type != other->type) return false;
-    if (self->type == CUSTOM) {
+    if (self->type == X_SLOT && other->custom_tag_name.size == X_SLOT_TAG_LEN) {
+        return true;
+    }
+    if (self->type == CUSTOM || self->type == X_SLOT) {
         if (self->custom_tag_name.size != other->custom_tag_name.size) {
             return false;
         }

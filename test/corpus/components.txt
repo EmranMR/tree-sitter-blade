@@ -219,4 +219,56 @@ PHP syntax inside attribute values
           (attribute_value))))
     (text)
     (end_tag
+     (tag_name))))
+
+================================================================================
+Scoped Slots
+================================================================================
+
+<x-alert>
+    <x-slot>
+        ...
+    </x-slot>
+    <x-slot:title>
+        ...
+    </x-slot>
+    <x-slot:contents>
+        ...
+    </x-slot:contents>
+    <x-slot:title>
+        ...
+    </x-slot:other>
+</x-alert>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (element
+      (start_tag
+        (tag_name))
+      (text)
+      (end_tag
+        (tag_name)))
+    (element
+      (start_tag
+        (tag_name))
+      (text))
+    (erroneous_end_tag
+      (erroneous_end_tag_name))
+    (end_tag
       (tag_name))))

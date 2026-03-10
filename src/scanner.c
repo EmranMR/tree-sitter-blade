@@ -40,7 +40,7 @@ static unsigned serialize(Scanner *scanner, char *buffer) {
 
     for (; serialized_tag_count < tag_count; serialized_tag_count++) {
         Tag tag = scanner->tags.contents[serialized_tag_count];
-        if (tag.type == CUSTOM) {
+        if (tag.type == CUSTOM || tag.type == X_SLOT) {
             unsigned name_length = tag.custom_tag_name.size;
             if (name_length > UINT8_MAX) {
                 name_length = UINT8_MAX;
@@ -87,7 +87,7 @@ static void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
             for (iter = 0; iter < serialized_tag_count; iter++) {
                 Tag tag = tag_new();
                 tag.type = (TagType)buffer[size++];
-                if (tag.type == CUSTOM) {
+                if (tag.type == CUSTOM || tag.type == X_SLOT) {
                     uint16_t name_length = (uint8_t)buffer[size++];
                     array_reserve(&tag.custom_tag_name, name_length);
                     tag.custom_tag_name.size = name_length;
