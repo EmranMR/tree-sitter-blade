@@ -986,12 +986,13 @@ var grammar_default = grammar(import_grammar.default, {
     text: ($) => prec.right(repeat1($._text)),
     // hidden to reduce AST noise in php_only #39
     // It is selectively unhidden for other areas
+    // escaped blade directives e.g. @@if, @@csrf
+    _escaped_directive: (_) => token(prec(1, /@@[a-zA-Z\d]*/)),
     // Create alternative text rep for php_only
-    _text: (_) => (
+    _text: ($) => (
       // custom directive conflict resolution
       choice(
-        // escaped blade directives e.g. @@if, @@csrf
-        token(prec(1, /@@[a-zA-Z\d]*/)),
+        $._escaped_directive,
         token(prec(-1, /@[a-zA-Z\d]*[^\(-]/)),
         // orphan tags
         token(prec(-2, /[{}!@()?,-]/)),
@@ -1004,21 +1005,19 @@ var grammar_default = grammar(import_grammar.default, {
         )
       )
     ),
-    _singly_quoted_attribute_text: (_) => prec.right(
+    _singly_quoted_attribute_text: ($) => prec.right(
       repeat1(
         choice(
-          // escaped blade directives e.g. @@if, @@csrf
-          token(prec(1, /@@[a-zA-Z\d]*/)),
+          $._escaped_directive,
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^'{}]/))
         )
       )
     ),
-    _doubly_quoted_attribute_text: (_) => prec.right(
+    _doubly_quoted_attribute_text: ($) => prec.right(
       repeat1(
         choice(
-          // escaped blade directives e.g. @@if, @@csrf
-          token(prec(1, /@@[a-zA-Z\d]*/)),
+          $._escaped_directive,
           token(prec(-2, /[{}]/)),
           token(prec(-1, /[^"{}]/))
         )
