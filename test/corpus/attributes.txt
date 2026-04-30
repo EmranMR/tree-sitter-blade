@@ -225,3 +225,77 @@
         (directive_end)))
     (end_tag
       (tag_name))))
+
+================================================================================
+@auth conditional attribute without parameter
+================================================================================
+
+<div @auth class="admin" @endauth></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive_start)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+@production conditional attribute (no parameter accepted)
+================================================================================
+
+<div @production data-env="prod" @endproduction></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive_start)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+nested conditional attributes (@auth inside @if)
+================================================================================
+
+<div @if($a) x-data="x" @auth class="admin" @endauth @endif></div>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (directive_start)
+        (parameter)
+        (attribute
+          (attribute_name)
+          (quoted_attribute_value
+            (attribute_value)))
+        (attribute
+          (directive_start)
+          (attribute
+            (attribute_name)
+            (quoted_attribute_value
+              (attribute_value)))
+          (directive_end))
+        (directive_end)))
+    (end_tag
+      (tag_name))))
