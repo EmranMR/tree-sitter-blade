@@ -1090,12 +1090,12 @@ var grammar_default = grammar(import_grammar.default, {
     // !directive parameter
     _directive_parameter: ($) => seq(
       "(",
-      optional(repeat($.parameter)),
+      optional(repeat(choice($.parameter, ","))),
       ")"
     ),
     // !parenthesis balancing - for functions/casts
-    parameter: ($) => choice(/[^()]+/, $._nested_parenthases),
-    _nested_parenthases: ($) => seq("(", repeat($.parameter), ")"),
+    parameter: ($) => choice(/[^,()]+/, $._nested_parenthases),
+    _nested_parenthases: ($) => seq("(", repeat(choice($.parameter, ",")), ")"),
     text: ($) => prec.right(repeat1($._text)),
     // hidden to reduce AST noise in php_only #39
     // It is selectively unhidden for other areas
