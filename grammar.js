@@ -278,6 +278,82 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // ! PHP Statements
     php_statement: ($) => choice($._escaped, $._unescaped, $._setup, $._raw, $._php),
+    // Override element to support dynamic Blade tags: <{{ $tag }}>...</{{ $tag }}>
+    element: ($) => choice(
+      seq(
+        $.start_tag,
+        repeat($._node),
+        choice($.end_tag, $._implicit_end_tag)
+      ),
+      $.self_closing_tag,
+      seq(
+        $.dynamic_start_tag,
+        repeat($._node),
+        $.dynamic_end_tag
+      )
+    ),
+    dynamic_start_tag: ($) => seq(
+      "<",
+      $.php_statement,
+      repeat($.attribute),
+      ">"
+    ),
+    dynamic_end_tag: ($) => seq(
+      "</",
+      $.php_statement,
+      ">"
+    ),
+    // Override start_tag to allow Blade directive fragments inside tags:
+    // <li @if($x) class="active" @endif>
+    start_tag: ($) => seq(
+      "<",
+      alias($._start_tag_name, $.tag_name),
+      repeat(choice(
+        $.attribute,
+        $.comment,
+        $._tag_directive
+      )),
+      ">"
+    ),
+    self_closing_tag: ($) => seq(
+      "<",
+      alias($._start_tag_name, $.tag_name),
+      repeat(choice(
+        $.attribute,
+        $.comment,
+        $._tag_directive
+      )),
+      "/>"
+    ),
+    _tag_directive: ($) => choice(
+      alias(token(prec(1, /@end[a-zA-Z]+/)), $.directive_end),
+      seq(alias("@if", $.directive_start), $._directive_parameter),
+      seq(alias("@unless", $.directive_start), $._directive_parameter),
+      seq(alias("@isset", $.directive_start), $._directive_parameter),
+      seq(alias("@empty", $.directive_start), $._directive_parameter),
+      seq(alias("@foreach", $.directive_start), $._directive_parameter),
+      seq(alias("@forelse", $.directive_start), $._directive_parameter),
+      seq(alias("@for", $.directive_start), $._directive_parameter),
+      seq(alias("@while", $.directive_start), $._directive_parameter),
+      seq(alias("@switch", $.directive_start), $._directive_parameter),
+      seq(alias("@case", $.directive), $._directive_parameter),
+      seq(alias("@push", $.directive_start), $._directive_parameter),
+      seq(alias("@section", $.directive_start), $._directive_parameter),
+      seq(alias("@auth", $.directive_start), optional($._directive_parameter)),
+      seq(alias("@guest", $.directive_start), optional($._directive_parameter)),
+      seq(alias("@can", $.directive_start), $._directive_parameter),
+      seq(alias("@cannot", $.directive_start), $._directive_parameter),
+      seq(alias("@error", $.directive_start), optional($._directive_parameter)),
+      seq(alias("@env", $.directive_start), $._directive_parameter),
+      seq(alias("@hasSection", $.directive_start), $._directive_parameter),
+      seq(alias("@sectionMissing", $.directive_start), $._directive_parameter),
+      seq(alias("@elseif", $.directive), $._directive_parameter),
+      alias("@else", $.directive),
+      alias("@default", $.directive),
+      alias("@break", $.directive),
+      alias("@continue", $.directive),
+      $.keyword
+    ),
     // From tree-sitter-php
     _php: ($) => seq(
       $.php_tag,
@@ -372,7 +448,11 @@ var grammar_default = grammar(import_grammar.default, {
       $._directive_parameter
     ),
     // !inline directives
-    _inline_directive: ($) => seq(
+    // Known directives get explicit `directive` node type. The catch-all regex
+    // (same token prec as _custom) ensures GLR explores BOTH paths for unknown
+    // @word(...). prec.dynamic(-1) on the whole rule means _custom (dynamic 1)
+    // wins when @endword exists; inline wins when it doesn't.
+    _inline_directive: ($) => prec.dynamic(-1, seq(
       alias(
         choice(
           "@include",
@@ -406,12 +486,28 @@ var grammar_default = grammar(import_grammar.default, {
           "@field",
           "@options",
           // WireUI
-          "@wireUiScripts"
+          "@wireUiScripts",
+          // Laravel core — localization
+          "@lang",
+          "@trans",
+          "@choice",
+          // Laravel core — debugging
+          "@dd",
+          "@dump",
+          // Laravel core — forms/session
+          "@old",
+          // Common packages
+          "@route",
+          "@cache",
+          "@entangle",
+          // Catch-all: any @word not explicitly listed.
+          // Same token prec as _custom so GLR explores both paths.
+          token(prec(-1, /@[a-zA-Z_][a-zA-Z\d_]*/))
         ),
         $.directive
       ),
       $._directive_parameter
-    ),
+    )),
     // !nested directives
     fragment: ($) => seq(
       alias("@fragment", $.directive_start),
@@ -713,14 +809,17 @@ var grammar_default = grammar(import_grammar.default, {
       alias("@endfeature", $.directive_end)
     ),
     // !Custom if Statements
-    _custom: ($) => seq(
+    // prec.dynamic(1) ensures this wins over the _inline_directive catch-all
+    // when BOTH paths complete (i.e. @endword exists). When no @endword follows,
+    // only the inline path completes, so inline wins by default.
+    _custom: ($) => prec.dynamic(1, seq(
       choice(
         alias(/@unless[a-zA-Z\d]+/, $.directive_start),
         alias(token(prec(-1, /@[a-zA-Z\d]+/)), $.directive_start)
       ),
       $._conditional_directive_body,
       alias(token(prec(1, /@end[a-zA-Z\d]+/)), $.directive_end)
-    ),
+    )),
     // !switch
     switch: ($) => seq(
       alias("@switch", $.directive_start),
@@ -890,7 +989,7 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     _volt: ($) => seq(
       alias("@volt", $.directive_start),
-      $._directive_parameter,
+      optional($._directive_parameter),
       repeat1(
         choice(
           ...nodes.without(
@@ -1010,6 +1109,9 @@ var grammar_default = grammar(import_grammar.default, {
         choice(
           $._escaped_directive,
           token(prec(-2, /[{}]/)),
+          // Match @-words (emails like user@gmail.com) as literal text
+          // BEFORE the _inline_directive catch-all (prec -1) can grab them
+          token(prec(0, /@[a-zA-Z_][a-zA-Z\d_]*/)),
           token(prec(-1, /[^'{}]/))
         )
       )
@@ -1019,6 +1121,9 @@ var grammar_default = grammar(import_grammar.default, {
         choice(
           $._escaped_directive,
           token(prec(-2, /[{}]/)),
+          // Match @-words (emails like user@gmail.com) as literal text
+          // BEFORE the _inline_directive catch-all (prec -1) can grab them
+          token(prec(0, /@[a-zA-Z_][a-zA-Z\d_]*/)),
           token(prec(-1, /[^"{}]/))
         )
       )

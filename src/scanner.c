@@ -300,6 +300,17 @@ static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
         skip(lexer);
     }
 
+    // Void elements (input, br, img, etc.) must always be implicitly closed,
+    // even when followed by Blade directives like @endif, @endforeach
+    if (valid_symbols[IMPLICIT_END_TAG] && scanner->tags.size > 0) {
+        Tag *parent = array_back(&scanner->tags);
+        if (tag_is_void(parent)) {
+            pop_tag(scanner);
+            lexer->result_symbol = IMPLICIT_END_TAG;
+            return true;
+        }
+    }
+
     switch (lexer->lookahead) {
         case '<':
             lexer->mark_end(lexer);
