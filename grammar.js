@@ -325,6 +325,20 @@ var grammar_default = grammar(import_grammar.default, {
       )),
       "/>"
     ),
+    // Override end_tag to support mixed literal+dynamic tags: </h{{ $h }}>
+    end_tag: ($) => choice(
+      seq(
+        "</",
+        alias($._end_tag_name, $.tag_name),
+        ">"
+      ),
+      seq(
+        "</",
+        alias($._end_tag_name, $.tag_name),
+        $.php_statement,
+        ">"
+      )
+    ),
     _tag_directive: ($) => choice(
       alias(token(prec(1, /@end[a-zA-Z]+/)), $.directive_end),
       seq(alias("@if", $.directive_start), $._directive_parameter),
@@ -536,7 +550,7 @@ var grammar_default = grammar(import_grammar.default, {
         "(",
         alias(/[^,()]+/, $.parameter),
         ",",
-        alias(/[^,()]+/, $.parameter),
+        alias(/[^,()]+(\([^()]*\)[^,()]*)*/, $.parameter),
         ")"
       ),
       seq(
@@ -1109,9 +1123,9 @@ var grammar_default = grammar(import_grammar.default, {
         choice(
           $._escaped_directive,
           token(prec(-2, /[{}]/)),
-          // Match @-words (emails like user@gmail.com) as literal text
+          // Match @-words (emails like user@gmail.com, npm @scope/pkg) as literal text
           // BEFORE the _inline_directive catch-all (prec -1) can grab them
-          token(prec(0, /@[a-zA-Z_][a-zA-Z\d_]*/)),
+          token(prec(0, /@[a-zA-Z\d_]+/)),
           token(prec(-1, /[^'{}]/))
         )
       )
@@ -1121,9 +1135,9 @@ var grammar_default = grammar(import_grammar.default, {
         choice(
           $._escaped_directive,
           token(prec(-2, /[{}]/)),
-          // Match @-words (emails like user@gmail.com) as literal text
+          // Match @-words (emails like user@gmail.com, npm @scope/pkg) as literal text
           // BEFORE the _inline_directive catch-all (prec -1) can grab them
-          token(prec(0, /@[a-zA-Z_][a-zA-Z\d_]*/)),
+          token(prec(0, /@[a-zA-Z\d_]+/)),
           token(prec(-1, /[^"{}]/))
         )
       )
