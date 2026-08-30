@@ -4,19 +4,12 @@
  * @license MIT
  */
 
-import NodeMap from "./NodeMap.ts";
-import html from "../tree-sitter-html/grammar.js";
-
-const nodes = new NodeMap();
-
 /// <reference types="tree-sitter-cli/dsl" />
 
-// Single source of truth for paired conditional directives.
-// `param` controls whether `$._directive_parameter` is required, optional, or
-// disallowed (e.g. `@auth` accepts an optional argument; `@production` accepts
-// none). Each entry produces strictly paired start/end directives so that a
-// missing `@end…` is reported as an error rather than swallowed.
-const CONDITIONAL_SPECS = [
+import NodeMap, { type ConditionalSpec } from "./NodeMap.ts";
+import html from "../tree-sitter-html/grammar.js";
+
+const CONDITIONAL_SPECS: ConditionalSpec[] = [
   { start: "@if", end: "@endif", param: "required" },
   { start: "@unless", end: "@endunless", param: "required" },
   { start: "@isset", end: "@endisset", param: "required" },
@@ -30,21 +23,11 @@ const CONDITIONAL_SPECS = [
   { start: "@cannot", end: "@endcannot", param: "required" },
   { start: "@canany", end: "@endcanany", param: "required" },
   { start: "@feature", end: "@endfeature", param: "required" },
+  { start: "@hasSection", end: "@endif", param: "required" },
+  { start: "@sectionMissing", end: "@endif", param: "required" },
 ];
 
-// Build a paired conditional `seq` for a given body rule. The body is what
-// changes between contexts (block-level vs. inside an HTML start tag).
-const buildConditional = ($, spec, body) => {
-  const start = alias(spec.start, $.directive_start);
-  const end = alias(spec.end, $.directive_end);
-  if (spec.param === "none") {
-    return seq(start, optional(body), end);
-  }
-  if (spec.param === "optional") {
-    return seq(start, optional($._directive_parameter), optional(body), end);
-  }
-  return seq(start, $._directive_parameter, optional(body), end);
-};
+const nodes = new NodeMap(CONDITIONAL_SPECS);
 
 export default grammar(html, {
   name: "blade",
@@ -225,20 +208,22 @@ export default grammar(html, {
         $._directive_parameter,
       ),
 
-    // ! Conditional directives inside HTML tag attributes
+    // ! HTML Attribute Conditional Directives
     // Handles: <div @if($cond) x-data="..." @endif>
     // Built from CONDITIONAL_SPECS so the directive list lives in one place
     // and start/end pairs stay strict (e.g. @if must close with @endif).
     // Nesting works because $.attribute itself includes $._conditional_attribute.
+    //
+    // WARNING: it is not possible to use $._custom conditionals
+    // as they will crash with alpineJS and other commonly used JS frameworks
+    // utilising the `@` notation such as`@click...`
     _conditional_attribute: ($) =>
       choice(
-        ...CONDITIONAL_SPECS.map((spec) =>
-          buildConditional($, spec, $._conditional_attribute_body),
+        ...nodes.getConditionalsUsing(
+          $,
+          $._conditional_attribute_body,
         ),
       ),
-
-    _conditional_attribute_body: ($) =>
-      repeat1(choice($.attribute, $.conditional_keyword)),
 
     // !inline directives
     _inline_directive: ($) =>
@@ -502,18 +487,12 @@ export default grammar(html, {
       ),
 
     // !Conditionals
-    // All paired conditionals are built from CONDITIONAL_SPECS so that the
-    // directive list lives in one place and is shared with $._conditional_attribute.
-    // $._hasSection / $._sectionMissing both close with @endif (not @end<name>),
-    // and $._custom is the catch-all for user-registered directives, so they
-    // remain explicit.
     conditional: ($) =>
       choice(
-        ...CONDITIONAL_SPECS.map((spec) =>
-          buildConditional($, spec, $._conditonal_body),
+        ...nodes.getConditionalsUsing(
+          $,
+          $._conditional_body,
         ),
-        $._hasSection,
-        $._sectionMissing,
         $._custom,
       ),
 
@@ -526,21 +505,6 @@ export default grammar(html, {
           $._directive_parameter,
         ),
       ),
-
-    _hasSection: ($) =>
-      seq(
-        alias("@hasSection", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endif", $.directive_end),
-      ),
-
-    _sectionMissing: ($) =>
-      seq(
-        alias("@sectionMissing", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endif", $.directive_end),
-      ),
-
     // !Custom if Statements
     _custom: ($) =>
       seq(
@@ -816,11 +780,17 @@ export default grammar(html, {
 
     // !conditional helpers
 
-    _conditonal_body: ($) =>
+    // The body of the conditional directives
+    _conditional_body: ($) =>
       repeat1(choice(...nodes.with($.conditional_keyword).all())),
 
+    // The body of the conditional directives when used inside the html attributes
+    // Example: <div @if($cond) x-data="..." @endif>
+    _conditional_attribute_body: ($) =>
+      repeat1(choice($.attribute, $.conditional_keyword)),
+
     _conditional_directive_body: ($) =>
-      seq($._directive_parameter, optional($._conditonal_body)),
+      seq($._directive_parameter, optional($._conditional_body)),
 
     // ! envoy helpers
     _envoy_if: ($) =>
