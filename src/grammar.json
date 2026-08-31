@@ -396,6 +396,10 @@
         {
           "type": "SYMBOL",
           "name": "php_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_conditional_attribute"
         }
       ]
     },
@@ -912,6 +916,608 @@
         {
           "type": "SYMBOL",
           "name": "_directive_parameter"
+        }
+      ]
+    },
+    "_conditional_attribute": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@if"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@unless"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endunless"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@isset"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endisset"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@empty"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endempty"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@auth"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_directive_parameter"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endauth"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@guest"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_directive_parameter"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endguest"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@production"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endproduction"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@env"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endenv"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@error"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@enderror"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@can"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcan"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@cannot"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcannot"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@canany"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcanany"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@feature"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endfeature"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@hasSection"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@sectionMissing"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_attribute_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         }
       ]
     },
@@ -2004,56 +2610,601 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_if"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@if"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_unless"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@unless"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endunless"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_isset"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@isset"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endisset"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_empty"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@empty"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endempty"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_auth"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@auth"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_directive_parameter"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endauth"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_guest"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@guest"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_directive_parameter"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endguest"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_production"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@production"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endproduction"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_env"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@env"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endenv"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_hasSection"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@error"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@enderror"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_sectionMissing"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@can"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcan"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_error"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@cannot"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcannot"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_authorization"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@canany"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endcanany"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_feature"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@feature"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endfeature"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@hasSection"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@sectionMissing"
+              },
+              "named": true,
+              "value": "directive_start"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_directive_parameter"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_conditional_body"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "@endif"
+              },
+              "named": true,
+              "value": "directive_end"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -2090,436 +3241,6 @@
               "name": "_directive_parameter"
             }
           ]
-        }
-      ]
-    },
-    "_if": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@if"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endif"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_unless": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@unless"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endunless"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_isset": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@isset"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endisset"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_empty": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@empty"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endempty"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_auth": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@auth"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_body_with_optional_parameter"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endauth"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_guest": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@guest"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_body_with_optional_parameter"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endguest"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_production": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@production"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_conditonal_body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endproduction"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_env": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@env"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endenv"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_hasSection": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@hasSection"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endif"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_sectionMissing": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@sectionMissing"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endif"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_error": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@error"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@enderror"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_authorization": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_can"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_canany"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_cannot"
-        }
-      ]
-    },
-    "_can": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@can"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endcan"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_cannot": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@cannot"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endcannot"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_canany": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@canany"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endcanany"
-          },
-          "named": true,
-          "value": "directive_end"
-        }
-      ]
-    },
-    "_feature": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@feature"
-          },
-          "named": true,
-          "value": "directive_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditional_directive_body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "@endfeature"
-          },
-          "named": true,
-          "value": "directive_end"
         }
       ]
     },
@@ -3762,7 +4483,7 @@
         }
       ]
     },
-    "_conditonal_body": {
+    "_conditional_body": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
@@ -3858,6 +4579,22 @@
         ]
       }
     },
+    "_conditional_attribute_body": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "attribute"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "conditional_keyword"
+          }
+        ]
+      }
+    },
     "_conditional_directive_body": {
       "type": "SEQ",
       "members": [
@@ -3870,33 +4607,12 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_conditonal_body"
+              "name": "_conditional_body"
             },
             {
               "type": "BLANK"
             }
           ]
-        }
-      ]
-    },
-    "_conditional_body_with_optional_parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_directive_parameter"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_conditonal_body"
         }
       ]
     },

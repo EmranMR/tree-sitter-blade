@@ -1,4 +1,4 @@
-import NodeMap from "../NodeMap.ts";
+import NodeMap, { type ConditionalSpec } from "../NodeMap.ts";
 import { assert, assertEquals, assertFalse } from "@std/assert";
 
 const rule1: SymbolRule<string> = {
@@ -14,20 +14,24 @@ const rule3: SymbolRule<string> = {
   name: "C",
 };
 
+const CONDITIONAL_SPECS: ConditionalSpec[] = [
+  { start: "@if", end: "@endif", param: "required" },
+];
+
 Deno.test("NodeMap can successfully add grammar nodes", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1, rule2);
   assert(nodes.has(rule1));
   assert(nodes.has(rule2));
 });
 
 Deno.test("NodeMap can not have duplicates nodes in cache, and can gracefully handled", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1, rule1);
   assert(nodes.size() === 1);
 });
 Deno.test("New grammmar nodes can be added later on to the cache, and gracefully handled", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule3);
   assert(nodes.has(rule3));
@@ -35,7 +39,7 @@ Deno.test("New grammmar nodes can be added later on to the cache, and gracefully
 });
 
 Deno.test("Can successfully return all cached grammar nodes", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule2);
   nodes.add(rule3);
@@ -47,7 +51,7 @@ Deno.test("Can successfully return all cached grammar nodes", () => {
 });
 
 Deno.test("Can return the nodes from the cache without a specific node", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule2);
   nodes.add(rule3);
@@ -57,7 +61,7 @@ Deno.test("Can return the nodes from the cache without a specific node", () => {
 });
 
 Deno.test("After removal cache must stay immutable", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule2);
   nodes.add(rule3);
@@ -71,7 +75,7 @@ Deno.test("After removal cache must stay immutable", () => {
 });
 
 Deno.test("Can correctly merge a temp Node for a specific grammar", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule2);
 
@@ -82,7 +86,7 @@ Deno.test("Can correctly merge a temp Node for a specific grammar", () => {
 });
 
 Deno.test("Can use with and without successfully", () => {
-  const nodes = new NodeMap();
+  const nodes = new NodeMap(CONDITIONAL_SPECS);
   nodes.add(rule1);
   nodes.add(rule2);
 

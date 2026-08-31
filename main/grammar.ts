@@ -4,12 +4,30 @@
  * @license MIT
  */
 
-import NodeMap from "./NodeMap.ts";
+/// <reference types="tree-sitter-cli/dsl" />
+
+import NodeMap, { type ConditionalSpec } from "./NodeMap.ts";
 import html from "../tree-sitter-html/grammar.js";
 
-const nodes = new NodeMap();
+const CONDITIONAL_SPECS: ConditionalSpec[] = [
+  { start: "@if", end: "@endif", param: "required" },
+  { start: "@unless", end: "@endunless", param: "required" },
+  { start: "@isset", end: "@endisset", param: "required" },
+  { start: "@empty", end: "@endempty", param: "required" },
+  { start: "@auth", end: "@endauth", param: "optional" },
+  { start: "@guest", end: "@endguest", param: "optional" },
+  { start: "@production", end: "@endproduction", param: "none" },
+  { start: "@env", end: "@endenv", param: "required" },
+  { start: "@error", end: "@enderror", param: "required" },
+  { start: "@can", end: "@endcan", param: "required" },
+  { start: "@cannot", end: "@endcannot", param: "required" },
+  { start: "@canany", end: "@endcanany", param: "required" },
+  { start: "@feature", end: "@endfeature", param: "required" },
+  { start: "@hasSection", end: "@endif", param: "required" },
+  { start: "@sectionMissing", end: "@endif", param: "required" },
+];
 
-/// <reference types="tree-sitter-cli/dsl" />
+const nodes = new NodeMap(CONDITIONAL_SPECS);
 
 export default grammar(html, {
   name: "blade",
@@ -121,6 +139,7 @@ export default grammar(html, {
         $._blade_attribute,
         $._html_attribute,
         $.php_statement,
+        $._conditional_attribute,
       ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
 
@@ -187,6 +206,23 @@ export default grammar(html, {
           $.directive,
         ),
         $._directive_parameter,
+      ),
+
+    // ! HTML Attribute Conditional Directives
+    // Handles: <div @if($cond) x-data="..." @endif>
+    // Built from CONDITIONAL_SPECS so the directive list lives in one place
+    // and start/end pairs stay strict (e.g. @if must close with @endif).
+    // Nesting works because $.attribute itself includes $._conditional_attribute.
+    //
+    // WARNING: it is not possible to use $._custom conditionals
+    // as they will crash with alpineJS and other commonly used JS frameworks
+    // utilising the `@` notation such as`@click...`
+    _conditional_attribute: ($) =>
+      choice(
+        ...nodes.getConditionalsUsing(
+          $,
+          $._conditional_attribute_body,
+        ),
       ),
 
     // !inline directives
@@ -453,19 +489,10 @@ export default grammar(html, {
     // !Conditionals
     conditional: ($) =>
       choice(
-        $._if,
-        $._unless,
-        $._isset,
-        $._empty,
-        $._auth,
-        $._guest,
-        $._production,
-        $._env,
-        $._hasSection,
-        $._sectionMissing,
-        $._error,
-        $._authorization,
-        $._feature,
+        ...nodes.getConditionalsUsing(
+          $,
+          $._conditional_body,
+        ),
         $._custom,
       ),
 
@@ -478,114 +505,6 @@ export default grammar(html, {
           $._directive_parameter,
         ),
       ),
-
-    _if: ($) =>
-      seq(
-        alias("@if", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endif", $.directive_end),
-      ),
-
-    _unless: ($) =>
-      seq(
-        alias("@unless", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endunless", $.directive_end),
-      ),
-
-    _isset: ($) =>
-      seq(
-        alias("@isset", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endisset", $.directive_end),
-      ),
-
-    _empty: ($) =>
-      seq(
-        alias("@empty", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endempty", $.directive_end),
-      ),
-
-    _auth: ($) =>
-      seq(
-        alias("@auth", $.directive_start),
-        $._conditional_body_with_optional_parameter,
-        alias("@endauth", $.directive_end),
-      ),
-
-    _guest: ($) =>
-      seq(
-        alias("@guest", $.directive_start),
-        $._conditional_body_with_optional_parameter,
-        alias("@endguest", $.directive_end),
-      ),
-
-    _production: ($) =>
-      seq(
-        alias("@production", $.directive_start),
-        optional($._conditonal_body),
-        alias("@endproduction", $.directive_end),
-      ),
-
-    _env: ($) =>
-      seq(
-        alias("@env", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endenv", $.directive_end),
-      ),
-
-    _hasSection: ($) =>
-      seq(
-        alias("@hasSection", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endif", $.directive_end),
-      ),
-
-    _sectionMissing: ($) =>
-      seq(
-        alias("@sectionMissing", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endif", $.directive_end),
-      ),
-
-    _error: ($) =>
-      seq(
-        alias("@error", $.directive_start),
-        $._conditional_directive_body,
-        alias("@enderror", $.directive_end),
-      ),
-
-    // !Authorisation Directives
-    _authorization: ($) => choice($._can, $._canany, $._cannot),
-
-    _can: ($) =>
-      seq(
-        alias("@can", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endcan", $.directive_end),
-      ),
-
-    _cannot: ($) =>
-      seq(
-        alias("@cannot", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endcannot", $.directive_end),
-      ),
-    _canany: ($) =>
-      seq(
-        alias("@canany", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endcanany", $.directive_end),
-      ),
-    // !Laravel Pennant
-    _feature: ($) =>
-      seq(
-        alias("@feature", $.directive_start),
-        $._conditional_directive_body,
-        alias("@endfeature", $.directive_end),
-      ),
-
     // !Custom if Statements
     _custom: ($) =>
       seq(
@@ -861,14 +780,17 @@ export default grammar(html, {
 
     // !conditional helpers
 
-    _conditonal_body: ($) =>
+    // The body of the conditional directives
+    _conditional_body: ($) =>
       repeat1(choice(...nodes.with($.conditional_keyword).all())),
 
-    _conditional_directive_body: ($) =>
-      seq($._directive_parameter, optional($._conditonal_body)),
+    // The body of the conditional directives when used inside the html attributes
+    // Example: <div @if($cond) x-data="..." @endif>
+    _conditional_attribute_body: ($) =>
+      repeat1(choice($.attribute, $.conditional_keyword)),
 
-    _conditional_body_with_optional_parameter: ($) =>
-      seq(optional($._directive_parameter), $._conditonal_body),
+    _conditional_directive_body: ($) =>
+      seq($._directive_parameter, optional($._conditional_body)),
 
     // ! envoy helpers
     _envoy_if: ($) =>

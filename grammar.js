@@ -144,13 +144,26 @@ var require_grammar = __commonJS({
 var NodeMap = class {
   cachedNodes;
   extraNodes;
-  constructor() {
+  conditionalSpec;
+  /**
+   * Creates a NodeMap with the supplied conditional directive definitions.
+   *
+   * @param conditionalSpec The hard-coded Blade conditional directive
+   * definitions used to generate paired conditional grammar rules.
+   */
+  constructor(conditionalSpec) {
     this.cachedNodes = /* @__PURE__ */ new Map();
     this.extraNodes = /* @__PURE__ */ new Set();
+    this.conditionalSpec = conditionalSpec;
   }
   /**
-   * The method used to collect, cache and return the entire grammar
-   * new nodes needing cached can be added at a later point
+   * Adds grammar nodes to the cache and returns all cached nodes.
+   *
+   * Nodes are stored by their name. If the cache already contains nodes,
+   * only nodes that are not already cached are added.
+   *
+   * @param nodes Grammar nodes to add to the cache.
+   * @returns An iterator over all cached grammar nodes.
    */
   add(...nodes2) {
     if (this.size() != 0) {
@@ -165,34 +178,57 @@ var NodeMap = class {
     return this.cachedNodes.values();
   }
   /**
-   * Map the node to the cache
+   * Adds a grammar node to the cache using its name as the cache key.
+   *
+   * @param node The grammar node to cache.
    */
   set(node) {
     this.cachedNodes.set(node.name, node);
   }
   /**
-   * returns all the cached nodes, including the extra nodes specified
+   * Returns all cached grammar nodes.
+   *
+   * If temporary nodes have been added with {@link with}, they are merged with
+   * the cached nodes and the temporary nodes are cleared after the merge.
+   *
+   * @returns An iterable containing the cached nodes and any temporary nodes.
    */
   all() {
     return this.extraNodes.size == 0 ? this.cachedNodes.values() : this.mergedWith(...this.cachedNodes.values());
   }
   /**
-   * rule specific nodes to be used temporarily.
+   * Adds grammar nodes as temporary nodes for the next merged node set.
+   *
+   * Temporary nodes are not added to the cache. They are included when
+   * {@link all} or {@link without} performs a merge, after which the temporary
+   * nodes are cleared.
+   *
+   * @param nodes Grammar nodes to use temporarily.
+   * @returns This NodeMap instance.
    */
   with(...nodes2) {
     nodes2.forEach((node) => this.extraNodes.add(node));
     return this;
   }
   /**
-   * Checks if a node already exists
+   * Checks whether a grammar node with the same name is already cached.
+   *
+   * @param node The grammar node whose name should be checked.
+   * @returns `true` if a node with the same name is cached; otherwise `false`.
    */
   has(node) {
     return this.cachedNodes.has(node.name);
   }
   /**
-   * Return cached nodes without the specified nodes.
+   * Returns the cached grammar nodes without the specified nodes.
    *
-   * If extra nodes are provided, it will be merged and returned as well
+   * Nodes are removed by name rather than by object identity. If temporary
+   * nodes have been added with {@link with}, they are merged into the result
+   * and then cleared.
+   *
+   * @param nodes Grammar nodes to exclude from the cached node set.
+   * @returns An iterable containing the remaining cached nodes and any
+   * temporary nodes.
    */
   without(...nodes2) {
     const temp = new Map(this.cachedNodes);
@@ -200,13 +236,67 @@ var NodeMap = class {
     return this.extraNodes.size == 0 ? temp.values() : this.mergedWith(...temp.values());
   }
   /**
-   * returns the size of the Data Structure
+   * Returns the number of cached grammar nodes.
+   *
+   * Temporary nodes added with {@link with} are not included in the count.
+   *
+   * @returns The number of cached nodes.
    */
   size() {
     return this.cachedNodes.size;
   }
   /**
-   * Return the merged node set and clears the extraNodes.
+   * Generates the conditional grammar rules for a specific body rule.
+   *
+   * Each configured conditional in {@link conditionalSpec} is converted into
+   * a paired start/end rule using the supplied body.
+   *
+   * @param $ Grammar symbols used to construct the conditional rules.
+   * @param body The grammar rule allowed as the body of each conditional.
+   * @returns An array of conditional grammar rules.
+   */
+  getConditionalsUsing($, body) {
+    return this.conditionalSpec.map(
+      (spec) => this.buildConditional($, spec, body)
+    );
+  }
+  /**
+   * Builds a paired conditional grammar rule from a conditional specification.
+   *
+   * The generated rule aliases the configured opening and closing directives
+   * as `directive_start` and `directive_end`. The directive parameter is then
+   * included according to the specification:
+   *
+   * - `required` — requires `$._directive_parameter`.
+   * - `optional` — optionally accepts `$._directive_parameter`.
+   * - `none` — does not accept a directive parameter.
+   *
+   * The conditional body is optional in all cases.
+   *
+   * @param $ Grammar symbols used to construct the conditional rule.
+   * @param spec The conditional directive specification.
+   * @param body The grammar rule allowed inside the conditional.
+   * @returns A grammar rule representing the paired conditional.
+   */
+  buildConditional($, spec, body) {
+    const start = alias(spec.start, $.directive_start);
+    const end = alias(spec.end, $.directive_end);
+    if (spec.param === "none") {
+      return seq(start, optional(body), end);
+    }
+    if (spec.param === "optional") {
+      return seq(start, optional($._directive_parameter), optional(body), end);
+    }
+    return seq(start, $._directive_parameter, optional(body), end);
+  }
+  /**
+   * Merges the temporary nodes with the supplied node set.
+   *
+   * The temporary nodes are included in the returned set and are cleared from
+   * the NodeMap after the merge.
+   *
+   * @param nodes The cached nodes to merge with the temporary nodes.
+   * @returns A set containing the supplied nodes and temporary nodes.
    */
   mergedWith(...nodes2) {
     const temp = new Set(this.extraNodes);
@@ -217,7 +307,24 @@ var NodeMap = class {
 
 // main/grammar.ts
 var import_grammar = __toESM(require_grammar());
-var nodes = new NodeMap();
+var CONDITIONAL_SPECS = [
+  { start: "@if", end: "@endif", param: "required" },
+  { start: "@unless", end: "@endunless", param: "required" },
+  { start: "@isset", end: "@endisset", param: "required" },
+  { start: "@empty", end: "@endempty", param: "required" },
+  { start: "@auth", end: "@endauth", param: "optional" },
+  { start: "@guest", end: "@endguest", param: "optional" },
+  { start: "@production", end: "@endproduction", param: "none" },
+  { start: "@env", end: "@endenv", param: "required" },
+  { start: "@error", end: "@enderror", param: "required" },
+  { start: "@can", end: "@endcan", param: "required" },
+  { start: "@cannot", end: "@endcannot", param: "required" },
+  { start: "@canany", end: "@endcanany", param: "required" },
+  { start: "@feature", end: "@endfeature", param: "required" },
+  { start: "@hasSection", end: "@endif", param: "required" },
+  { start: "@sectionMissing", end: "@endif", param: "required" }
+];
+var nodes = new NodeMap(CONDITIONAL_SPECS);
 var grammar_default = grammar(import_grammar.default, {
   name: "blade",
   rules: {
@@ -309,7 +416,8 @@ var grammar_default = grammar(import_grammar.default, {
     attribute: ($) => choice(
       $._blade_attribute,
       $._html_attribute,
-      $.php_statement
+      $.php_statement,
+      $._conditional_attribute
     ),
     attribute_name: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
     attribute_value: (_) => token(prec(-1, /[^<>"'/=\s]+/)),
@@ -370,6 +478,21 @@ var grammar_default = grammar(import_grammar.default, {
         $.directive
       ),
       $._directive_parameter
+    ),
+    // ! HTML Attribute Conditional Directives
+    // Handles: <div @if($cond) x-data="..." @endif>
+    // Built from CONDITIONAL_SPECS so the directive list lives in one place
+    // and start/end pairs stay strict (e.g. @if must close with @endif).
+    // Nesting works because $.attribute itself includes $._conditional_attribute.
+    //
+    // WARNING: it is not possible to use $._custom conditionals
+    // as they will crash with alpineJS and other commonly used JS frameworks
+    // utilising the `@` notation such as`@click...`
+    _conditional_attribute: ($) => choice(
+      ...nodes.getConditionalsUsing(
+        $,
+        $._conditional_attribute_body
+      )
     ),
     // !inline directives
     _inline_directive: ($) => seq(
@@ -611,19 +734,10 @@ var grammar_default = grammar(import_grammar.default, {
     ),
     // !Conditionals
     conditional: ($) => choice(
-      $._if,
-      $._unless,
-      $._isset,
-      $._empty,
-      $._auth,
-      $._guest,
-      $._production,
-      $._env,
-      $._hasSection,
-      $._sectionMissing,
-      $._error,
-      $._authorization,
-      $._feature,
+      ...nodes.getConditionalsUsing(
+        $,
+        $._conditional_body
+      ),
       $._custom
     ),
     // used in the conditional body rules
@@ -633,84 +747,6 @@ var grammar_default = grammar(import_grammar.default, {
         alias(/@(elseif|else[a-zA-Z]+)/, $.directive),
         $._directive_parameter
       )
-    ),
-    _if: ($) => seq(
-      alias("@if", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endif", $.directive_end)
-    ),
-    _unless: ($) => seq(
-      alias("@unless", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endunless", $.directive_end)
-    ),
-    _isset: ($) => seq(
-      alias("@isset", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endisset", $.directive_end)
-    ),
-    _empty: ($) => seq(
-      alias("@empty", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endempty", $.directive_end)
-    ),
-    _auth: ($) => seq(
-      alias("@auth", $.directive_start),
-      $._conditional_body_with_optional_parameter,
-      alias("@endauth", $.directive_end)
-    ),
-    _guest: ($) => seq(
-      alias("@guest", $.directive_start),
-      $._conditional_body_with_optional_parameter,
-      alias("@endguest", $.directive_end)
-    ),
-    _production: ($) => seq(
-      alias("@production", $.directive_start),
-      optional($._conditonal_body),
-      alias("@endproduction", $.directive_end)
-    ),
-    _env: ($) => seq(
-      alias("@env", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endenv", $.directive_end)
-    ),
-    _hasSection: ($) => seq(
-      alias("@hasSection", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endif", $.directive_end)
-    ),
-    _sectionMissing: ($) => seq(
-      alias("@sectionMissing", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endif", $.directive_end)
-    ),
-    _error: ($) => seq(
-      alias("@error", $.directive_start),
-      $._conditional_directive_body,
-      alias("@enderror", $.directive_end)
-    ),
-    // !Authorisation Directives
-    _authorization: ($) => choice($._can, $._canany, $._cannot),
-    _can: ($) => seq(
-      alias("@can", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endcan", $.directive_end)
-    ),
-    _cannot: ($) => seq(
-      alias("@cannot", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endcannot", $.directive_end)
-    ),
-    _canany: ($) => seq(
-      alias("@canany", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endcanany", $.directive_end)
-    ),
-    // !Laravel Pennant
-    _feature: ($) => seq(
-      alias("@feature", $.directive_start),
-      $._conditional_directive_body,
-      alias("@endfeature", $.directive_end)
     ),
     // !Custom if Statements
     _custom: ($) => seq(
@@ -946,9 +982,12 @@ var grammar_default = grammar(import_grammar.default, {
     /  This is the engine
     /*----------------------------------*/
     // !conditional helpers
-    _conditonal_body: ($) => repeat1(choice(...nodes.with($.conditional_keyword).all())),
-    _conditional_directive_body: ($) => seq($._directive_parameter, optional($._conditonal_body)),
-    _conditional_body_with_optional_parameter: ($) => seq(optional($._directive_parameter), $._conditonal_body),
+    // The body of the conditional directives
+    _conditional_body: ($) => repeat1(choice(...nodes.with($.conditional_keyword).all())),
+    // The body of the conditional directives when used inside the html attributes
+    // Example: <div @if($cond) x-data="..." @endif>
+    _conditional_attribute_body: ($) => repeat1(choice($.attribute, $.conditional_keyword)),
+    _conditional_directive_body: ($) => seq($._directive_parameter, optional($._conditional_body)),
     // ! envoy helpers
     _envoy_if: ($) => seq(
       alias("@if", $.directive_start),
