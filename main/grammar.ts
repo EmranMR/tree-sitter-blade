@@ -300,7 +300,8 @@ export default grammar(html, {
           "(",
           alias(/[^,()]+/, $.parameter),
           ",",
-          alias(/[^,()]+/, $.parameter),
+          // allow nested parentheses e.g. @section('title', __('Title'))
+          repeat1($.parameter),
           ")",
         ),
         seq(
