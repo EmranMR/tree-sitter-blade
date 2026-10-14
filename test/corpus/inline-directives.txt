@@ -181,6 +181,86 @@
     (directive_end)))
 
 ================================================================================
+@inlineSection with nested parentheses
+================================================================================
+
+@section('title', __('Unauthorized'))
+@section('title', __('Hello :name', ['name' => $user->name]))
+@section('title', trans('x', ['n' => count($items)]))
+
+@section('content')
+  <div></div>
+@endsection
+
+--------------------------------------------------------------------------------
+
+(document
+  (section
+    (directive)
+    (parameter)
+    (parameter)
+    (parameter
+      (parameter)))
+  (section
+    (directive)
+    (parameter)
+    (parameter)
+    (parameter
+      (parameter)))
+  (section
+    (directive)
+    (parameter)
+    (parameter)
+    (parameter
+      (parameter)
+      (parameter
+        (parameter))
+      (parameter)))
+  (section
+    (directive_start)
+    (parameter)
+    (element
+      (start_tag
+        (tag_name))
+      (end_tag
+        (tag_name)))
+    (directive_end)))
+
+================================================================================
+@inlineSection inside a component
+================================================================================
+
+<x-layouts::error error="401">
+    @section('title', __('Unauthorized'))
+    @section('subtitle', __('You are not authorized to view this page'))
+</x-layouts::error>
+
+--------------------------------------------------------------------------------
+
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value))))
+    (section
+      (directive)
+      (parameter)
+      (parameter)
+      (parameter
+        (parameter)))
+    (section
+      (directive)
+      (parameter)
+      (parameter)
+      (parameter
+        (parameter)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
 @use
 ================================================================================
 

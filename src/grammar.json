@@ -1788,13 +1788,11 @@
               "value": ","
             },
             {
-              "type": "ALIAS",
+              "type": "REPEAT1",
               "content": {
-                "type": "PATTERN",
-                "value": "[^,()]+"
-              },
-              "named": true,
-              "value": "parameter"
+                "type": "SYMBOL",
+                "name": "parameter"
+              }
             },
             {
               "type": "STRING",

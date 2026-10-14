@@ -563,7 +563,8 @@ var grammar_default = grammar(import_grammar.default, {
         "(",
         alias(/[^,()]+/, $.parameter),
         ",",
-        alias(/[^,()]+/, $.parameter),
+        // allow nested parentheses e.g. @section('title', __('Title'))
+        repeat1($.parameter),
         ")"
       ),
       seq(
