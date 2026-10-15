@@ -304,3 +304,720 @@ unbalanced custom if is an inline custom directive
     (parameter)
     (text)
     (directive_end)))
+
+================================================================================
+custom if is not opened by a commented out directive
+================================================================================
+
+@disk(1)
+    {{-- @disk(2) --}}
+@enddisk
+
+--------------------------------------------------------------------------------
+
+(document
+  (conditional
+    (directive_start)
+    (parameter)
+    (comment)
+    (directive_end)))
+
+================================================================================
+inline custom directive is not closed by a commented out end
+================================================================================
+
+@datetime($now)
+{{-- @enddatetime --}}
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (comment))
+
+================================================================================
+inline custom directive is not closed by an end in its parameter
+================================================================================
+
+@disk('@enddisk')
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter))
+
+================================================================================
+inline custom directive is not closed by an end in a directive parameter
+================================================================================
+
+@disk(1)
+@include('@enddisk')
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (directive)
+  (parameter))
+
+================================================================================
+inline custom directive is not closed by an end in php
+================================================================================
+
+@disk(1)
+{{ '@enddisk' }}
+{!! '@enddisk' !!}
+@php echo '@enddisk'; @endphp
+<?php echo '@enddisk'; ?>
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (php_statement
+    (php_only))
+  (php_statement
+    (php_only))
+  (php_statement
+    (directive_start)
+    (php_only)
+    (directive_end))
+  (php_statement
+    (php_tag)
+    (php_only)
+    (php_end_tag)))
+
+================================================================================
+inline custom directive is not closed by an end in html comments and raw text
+================================================================================
+
+@disk(1)
+<!-- @enddisk -->
+<script>let a = '@enddisk'</script>
+<style>/* @enddisk */</style>
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (comment)
+  (script_element
+    (start_tag
+      (tag_name))
+    (raw_text)
+    (end_tag
+      (tag_name)))
+  (style_element
+    (start_tag
+      (tag_name))
+    (raw_text)
+    (end_tag
+      (tag_name))))
+
+================================================================================
+custom if is closed after ends that are skipped
+================================================================================
+
+@disk(1)
+    {{-- @enddisk --}}
+    <script>'@enddisk'</script>
+@enddisk
+
+--------------------------------------------------------------------------------
+
+(document
+  (conditional
+    (directive_start)
+    (parameter)
+    (comment)
+    (script_element
+      (start_tag
+        (tag_name))
+      (raw_text)
+      (end_tag
+        (tag_name)))
+    (directive_end)))
+
+================================================================================
+nested custom ifs with long names
+================================================================================
+
+@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(1)
+@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(2)
+@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(3)
+x
+@endaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+@endaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+@endaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+--------------------------------------------------------------------------------
+
+(document
+  (conditional
+    (directive_start)
+    (parameter)
+    (conditional
+      (directive_start)
+      (parameter)
+      (conditional
+        (directive_start)
+        (parameter)
+        (text)
+        (directive_end))
+      (directive_end))
+    (directive_end)))
+
+================================================================================
+custom ifs nested deeper than the serialized state
+================================================================================
+
+@disk(0)
+@disk(1)
+@disk(2)
+@disk(3)
+@disk(4)
+@disk(5)
+@disk(6)
+@disk(7)
+@disk(8)
+@disk(9)
+@disk(10)
+@disk(11)
+@disk(12)
+@disk(13)
+@disk(14)
+@disk(15)
+@disk(16)
+@disk(17)
+@disk(18)
+@disk(19)
+@disk(20)
+@disk(21)
+@disk(22)
+@disk(23)
+@disk(24)
+@disk(25)
+@disk(26)
+@disk(27)
+@disk(28)
+@disk(29)
+@disk(30)
+@disk(31)
+@disk(32)
+@disk(33)
+@disk(34)
+@disk(35)
+@disk(36)
+@disk(37)
+@disk(38)
+@disk(39)
+@disk(40)
+@disk(41)
+@disk(42)
+@disk(43)
+@disk(44)
+@disk(45)
+@disk(46)
+@disk(47)
+@disk(48)
+@disk(49)
+@disk(50)
+@disk(51)
+@disk(52)
+@disk(53)
+@disk(54)
+@disk(55)
+@disk(56)
+@disk(57)
+@disk(58)
+@disk(59)
+@disk(60)
+@disk(61)
+@disk(62)
+@disk(63)
+@disk(64)
+@disk(65)
+x
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+@enddisk
+
+--------------------------------------------------------------------------------
+
+(document
+  (conditional
+    (directive_start)
+    (parameter)
+    (conditional
+      (directive_start)
+      (parameter)
+      (conditional
+        (directive_start)
+        (parameter)
+        (conditional
+          (directive_start)
+          (parameter)
+          (conditional
+            (directive_start)
+            (parameter)
+            (conditional
+              (directive_start)
+              (parameter)
+              (conditional
+                (directive_start)
+                (parameter)
+                (conditional
+                  (directive_start)
+                  (parameter)
+                  (conditional
+                    (directive_start)
+                    (parameter)
+                    (conditional
+                      (directive_start)
+                      (parameter)
+                      (conditional
+                        (directive_start)
+                        (parameter)
+                        (conditional
+                          (directive_start)
+                          (parameter)
+                          (conditional
+                            (directive_start)
+                            (parameter)
+                            (conditional
+                              (directive_start)
+                              (parameter)
+                              (conditional
+                                (directive_start)
+                                (parameter)
+                                (conditional
+                                  (directive_start)
+                                  (parameter)
+                                  (conditional
+                                    (directive_start)
+                                    (parameter)
+                                    (conditional
+                                      (directive_start)
+                                      (parameter)
+                                      (conditional
+                                        (directive_start)
+                                        (parameter)
+                                        (conditional
+                                          (directive_start)
+                                          (parameter)
+                                          (conditional
+                                            (directive_start)
+                                            (parameter)
+                                            (conditional
+                                              (directive_start)
+                                              (parameter)
+                                              (conditional
+                                                (directive_start)
+                                                (parameter)
+                                                (conditional
+                                                  (directive_start)
+                                                  (parameter)
+                                                  (conditional
+                                                    (directive_start)
+                                                    (parameter)
+                                                    (conditional
+                                                      (directive_start)
+                                                      (parameter)
+                                                      (conditional
+                                                        (directive_start)
+                                                        (parameter)
+                                                        (conditional
+                                                          (directive_start)
+                                                          (parameter)
+                                                          (conditional
+                                                            (directive_start)
+                                                            (parameter)
+                                                            (conditional
+                                                              (directive_start)
+                                                              (parameter)
+                                                              (conditional
+                                                                (directive_start)
+                                                                (parameter)
+                                                                (conditional
+                                                                  (directive_start)
+                                                                  (parameter)
+                                                                  (conditional
+                                                                    (directive_start)
+                                                                    (parameter)
+                                                                    (conditional
+                                                                      (directive_start)
+                                                                      (parameter)
+                                                                      (conditional
+                                                                        (directive_start)
+                                                                        (parameter)
+                                                                        (conditional
+                                                                          (directive_start)
+                                                                          (parameter)
+                                                                          (conditional
+                                                                            (directive_start)
+                                                                            (parameter)
+                                                                            (conditional
+                                                                              (directive_start)
+                                                                              (parameter)
+                                                                              (conditional
+                                                                                (directive_start)
+                                                                                (parameter)
+                                                                                (conditional
+                                                                                  (directive_start)
+                                                                                  (parameter)
+                                                                                  (conditional
+                                                                                    (directive_start)
+                                                                                    (parameter)
+                                                                                    (conditional
+                                                                                      (directive_start)
+                                                                                      (parameter)
+                                                                                      (conditional
+                                                                                        (directive_start)
+                                                                                        (parameter)
+                                                                                        (conditional
+                                                                                          (directive_start)
+                                                                                          (parameter)
+                                                                                          (conditional
+                                                                                            (directive_start)
+                                                                                            (parameter)
+                                                                                            (conditional
+                                                                                              (directive_start)
+                                                                                              (parameter)
+                                                                                              (conditional
+                                                                                                (directive_start)
+                                                                                                (parameter)
+                                                                                                (conditional
+                                                                                                  (directive_start)
+                                                                                                  (parameter)
+                                                                                                  (conditional
+                                                                                                    (directive_start)
+                                                                                                    (parameter)
+                                                                                                    (conditional
+                                                                                                      (directive_start)
+                                                                                                      (parameter)
+                                                                                                      (conditional
+                                                                                                        (directive_start)
+                                                                                                        (parameter)
+                                                                                                        (conditional
+                                                                                                          (directive_start)
+                                                                                                          (parameter)
+                                                                                                          (conditional
+                                                                                                            (directive_start)
+                                                                                                            (parameter)
+                                                                                                            (conditional
+                                                                                                              (directive_start)
+                                                                                                              (parameter)
+                                                                                                              (conditional
+                                                                                                                (directive_start)
+                                                                                                                (parameter)
+                                                                                                                (conditional
+                                                                                                                  (directive_start)
+                                                                                                                  (parameter)
+                                                                                                                  (conditional
+                                                                                                                    (directive_start)
+                                                                                                                    (parameter)
+                                                                                                                    (conditional
+                                                                                                                      (directive_start)
+                                                                                                                      (parameter)
+                                                                                                                      (conditional
+                                                                                                                        (directive_start)
+                                                                                                                        (parameter)
+                                                                                                                        (conditional
+                                                                                                                          (directive_start)
+                                                                                                                          (parameter)
+                                                                                                                          (conditional
+                                                                                                                            (directive_start)
+                                                                                                                            (parameter)
+                                                                                                                            (conditional
+                                                                                                                              (directive_start)
+                                                                                                                              (parameter)
+                                                                                                                              (conditional
+                                                                                                                                (directive_start)
+                                                                                                                                (parameter)
+                                                                                                                                (conditional
+                                                                                                                                  (directive_start)
+                                                                                                                                  (parameter)
+                                                                                                                                  (conditional
+                                                                                                                                    (directive_start)
+                                                                                                                                    (parameter)
+                                                                                                                                    (conditional
+                                                                                                                                      (directive_start)
+                                                                                                                                      (parameter)
+                                                                                                                                      (text)
+                                                                                                                                      (directive_end))
+                                                                                                                                    (directive_end))
+                                                                                                                                  (directive_end))
+                                                                                                                                (directive_end))
+                                                                                                                              (directive_end))
+                                                                                                                            (directive_end))
+                                                                                                                          (directive_end))
+                                                                                                                        (directive_end))
+                                                                                                                      (directive_end))
+                                                                                                                    (directive_end))
+                                                                                                                  (directive_end))
+                                                                                                                (directive_end))
+                                                                                                              (directive_end))
+                                                                                                            (directive_end))
+                                                                                                          (directive_end))
+                                                                                                        (directive_end))
+                                                                                                      (directive_end))
+                                                                                                    (directive_end))
+                                                                                                  (directive_end))
+                                                                                                (directive_end))
+                                                                                              (directive_end))
+                                                                                            (directive_end))
+                                                                                          (directive_end))
+                                                                                        (directive_end))
+                                                                                      (directive_end))
+                                                                                    (directive_end))
+                                                                                  (directive_end))
+                                                                                (directive_end))
+                                                                              (directive_end))
+                                                                            (directive_end))
+                                                                          (directive_end))
+                                                                        (directive_end))
+                                                                      (directive_end))
+                                                                    (directive_end))
+                                                                  (directive_end))
+                                                                (directive_end))
+                                                              (directive_end))
+                                                            (directive_end))
+                                                          (directive_end))
+                                                        (directive_end))
+                                                      (directive_end))
+                                                    (directive_end))
+                                                  (directive_end))
+                                                (directive_end))
+                                              (directive_end))
+                                            (directive_end))
+                                          (directive_end))
+                                        (directive_end))
+                                      (directive_end))
+                                    (directive_end))
+                                  (directive_end))
+                                (directive_end))
+                              (directive_end))
+                            (directive_end))
+                          (directive_end))
+                        (directive_end))
+                      (directive_end))
+                    (directive_end))
+                  (directive_end))
+                (directive_end))
+              (directive_end))
+            (directive_end))
+          (directive_end))
+        (directive_end))
+      (directive_end))
+    (directive_end)))
+
+================================================================================
+repeated inline custom directives after the inline cache is full
+================================================================================
+
+@name0(0)
+@name1(1)
+@name2(2)
+@name3(3)
+@name4(4)
+@name5(5)
+@name6(6)
+@name7(7)
+@name8(8)
+@name9(9)
+@name10(10)
+@name11(11)
+@name12(12)
+@name13(13)
+@name14(14)
+@name15(15)
+@name16(16)
+@name17(17)
+@name18(18)
+@name19(19)
+@name20(20)
+@name21(21)
+@name22(22)
+@name23(23)
+@name24(24)
+@name25(25)
+@name26(26)
+@name27(27)
+@name28(28)
+@name29(29)
+@name30(30)
+@name31(31)
+@name32(32)
+@name33(33)
+@name34(34)
+@name35(35)
+@name36(36)
+@name37(37)
+@name38(38)
+@name39(39)
+@name0(0)
+@name0(0)
+@disk(1)
+    x
+@enddisk
+
+--------------------------------------------------------------------------------
+
+(document
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (directive)
+  (parameter)
+  (conditional
+    (directive_start)
+    (parameter)
+    (text)
+    (directive_end)))

@@ -24,17 +24,32 @@ enum TokenType {
     CUSTOM_DIRECTIVE_END,
 };
 
-typedef Array(String) NameList;
+// A directive name stored as a hash, so every entry serializes to the same
+// size no matter how long the name is
+typedef struct {
+    uint32_t hash;
+    // 0 for an open custom directive whose name did not fit in the
+    // serialized state, it is closed by any custom `@end…`
+    uint8_t length;
+} DirectiveName;
+
+typedef Array(DirectiveName) DirectiveNames;
 
 typedef struct {
     Array(Tag) tags;
-    // Names of the open custom if directives, innermost last.
+    // The open custom if directives, innermost last.
     // e.g. `disk` for both `@disk(...)` and `@unlessdisk(...)`
-    NameList custom_directives;
-    // Names with no `@end…` anywhere after the current position. Any later
-    // position is a suffix of that one, so it saves looking ahead again.
-    NameList inline_directives;
+    DirectiveNames custom_directives;
+    // Names with no `@end…` anywhere after the current position, most
+    // recently used last. Any later position is a suffix of that one, so it
+    // saves looking ahead again.
+    DirectiveNames inline_directives;
 } Scanner;
+
+// Bounds of the serialized state, so the html tags always keep more than
+// half of the buffer
+#define MAX_SERIALIZED_CUSTOM_DIRECTIVES 64
+#define MAX_INLINE_DIRECTIVES 32
 
 // Longest directive name handled, so it fits in one byte when serialized
 #define MAX_DIRECTIVE_NAME_LENGTH 255
@@ -63,73 +78,60 @@ static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
 static inline void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
-// Layout: [count: u16][serialized count: u16] then [length: u8][name] per
-// name, as long as they fit before `limit`.
-static unsigned serialize_names(NameList *names, char *buffer, unsigned size, unsigned limit) {
-    unsigned start = size;
+// Layout: [count: u16][serialized count: u16] then [hash: u32][length: u8]
+// for each of the innermost `serialized count` names
+static unsigned serialize_directive_names(DirectiveNames *names, char *buffer, unsigned size, uint16_t max) {
     uint16_t count = names->size > UINT16_MAX ? UINT16_MAX : names->size;
-    uint16_t serialized_count = 0;
+    uint16_t serialized_count = count > max ? max : count;
 
-    size += sizeof(serialized_count);
     memcpy(&buffer[size], &count, sizeof(count));
     size += sizeof(count);
+    memcpy(&buffer[size], &serialized_count, sizeof(serialized_count));
+    size += sizeof(serialized_count);
 
-    for (; serialized_count < count; serialized_count++) {
-        String *name = &names->contents[serialized_count];
-        if (size + 1 + name->size >= limit) {
-            break;
-        }
-        buffer[size++] = (char)name->size;
-        memcpy(&buffer[size], name->contents, name->size);
-        size += name->size;
+    for (unsigned i = names->size - serialized_count; i < names->size; i++) {
+        DirectiveName *name = &names->contents[i];
+        memcpy(&buffer[size], &name->hash, sizeof(name->hash));
+        size += sizeof(name->hash);
+        buffer[size++] = (char)name->length;
     }
 
-    memcpy(&buffer[start], &serialized_count, sizeof(serialized_count));
     return size;
 }
 
-static unsigned deserialize_names(NameList *names, const char *buffer, unsigned size, unsigned length) {
+static unsigned deserialize_directive_names(DirectiveNames *names, const char *buffer, unsigned size, unsigned length) {
     uint16_t count = 0;
     uint16_t serialized_count = 0;
 
-    if (size + sizeof(serialized_count) + sizeof(count) > length) {
+    if (size + sizeof(count) + sizeof(serialized_count) > length) {
         return length;
     }
 
-    memcpy(&serialized_count, &buffer[size], sizeof(serialized_count));
-    size += sizeof(serialized_count);
     memcpy(&count, &buffer[size], sizeof(count));
     size += sizeof(count);
+    memcpy(&serialized_count, &buffer[size], sizeof(serialized_count));
+    size += sizeof(serialized_count);
 
     array_reserve(names, count);
-    unsigned iter = 0;
-    for (; iter < serialized_count; iter++) {
-        String name = array_new();
-        uint8_t name_length = (uint8_t)buffer[size++];
-        array_extend(&name, name_length, &buffer[size]);
-        size += name_length;
-        array_push(names, name);
+    // the outermost names that did not fit are unknown
+    DirectiveName unknown = {.hash = 0, .length = 0};
+    for (unsigned i = serialized_count; i < count; i++) {
+        array_push(names, unknown);
     }
-    // Keep the count if the buffer ran out of room, an empty name never
-    // matches a directive.
-    for (; iter < count; iter++) {
-        array_push(names, (String)array_new());
+    for (unsigned i = 0; i < serialized_count; i++) {
+        DirectiveName name;
+        memcpy(&name.hash, &buffer[size], sizeof(name.hash));
+        size += sizeof(name.hash);
+        name.length = (uint8_t)buffer[size++];
+        array_push(names, name);
     }
 
     return size;
 }
 
-static void clear_names(NameList *names) {
-    for (unsigned i = 0; i < names->size; i++) {
-        array_delete(&names->contents[i]);
-    }
-    array_clear(names);
-}
-
 static unsigned serialize(Scanner *scanner, char *buffer) {
-    // The html tags always keep at least a quarter of the buffer
-    unsigned tags_start = serialize_names(&scanner->custom_directives, buffer, 0, TREE_SITTER_SERIALIZATION_BUFFER_SIZE / 2);
-    tags_start = serialize_names(&scanner->inline_directives, buffer, tags_start, TREE_SITTER_SERIALIZATION_BUFFER_SIZE * 3 / 4);
+    unsigned tags_start = serialize_directive_names(&scanner->custom_directives, buffer, 0, MAX_SERIALIZED_CUSTOM_DIRECTIVES);
+    tags_start = serialize_directive_names(&scanner->inline_directives, buffer, tags_start, MAX_INLINE_DIRECTIVES);
 
     uint16_t tag_count = scanner->tags.size > UINT16_MAX ? UINT16_MAX : scanner->tags.size;
     uint16_t serialized_tag_count = 0;
@@ -169,12 +171,12 @@ static void deserialize(Scanner *scanner, const char *buffer, unsigned length) {
         tag_free(&scanner->tags.contents[i]);
     }
     array_clear(&scanner->tags);
-    clear_names(&scanner->custom_directives);
-    clear_names(&scanner->inline_directives);
+    array_clear(&scanner->custom_directives);
+    array_clear(&scanner->inline_directives);
 
     if (length > 0) {
-        unsigned size = deserialize_names(&scanner->custom_directives, buffer, 0, length);
-        size = deserialize_names(&scanner->inline_directives, buffer, size, length);
+        unsigned size = deserialize_directive_names(&scanner->custom_directives, buffer, 0, length);
+        size = deserialize_directive_names(&scanner->inline_directives, buffer, size, length);
         uint16_t tag_count = 0;
         uint16_t serialized_tag_count = 0;
 
@@ -450,13 +452,150 @@ static inline void skip_blanks(TSLexer *lexer) {
     }
 }
 
-static bool contains_name(NameList *names, const char *name, unsigned length) {
-    for (unsigned i = 0; i < names->size; i++) {
-        if (name_eq(name, length, names->contents[i].contents, names->contents[i].size)) {
-            return true;
+// FNV-1a
+static uint32_t hash_name(const char *name, unsigned length) {
+    uint32_t hash = 2166136261u;
+    for (unsigned i = 0; i < length; i++) {
+        hash ^= (uint8_t)name[i];
+        hash *= 16777619u;
+    }
+    return hash;
+}
+
+static inline DirectiveName directive_name(const char *name, unsigned length) {
+    DirectiveName directive = {.hash = hash_name(name, length), .length = (uint8_t)length};
+    return directive;
+}
+
+static inline bool directive_name_eq(DirectiveName a, DirectiveName b) {
+    return a.hash == b.hash && a.length == b.length;
+}
+
+// `@enddisk` closing the innermost open custom directive
+static bool closes_open_custom_directive(Scanner *scanner, const char *name, unsigned length) {
+    if (scanner->custom_directives.size == 0 || length <= 3 || !has_prefix(name, length, "end")) {
+        return false;
+    }
+    DirectiveName *open = array_back(&scanner->custom_directives);
+    if (open->length == 0) {
+        return !is_builtin_directive(name + 3, length - 3);
+    }
+    return directive_name_eq(*open, directive_name(name + 3, length - 3));
+}
+
+// Returns the index of the cached inline directive, or -1
+static int find_inline_directive(Scanner *scanner, DirectiveName name) {
+    for (unsigned i = scanner->inline_directives.size; i > 0; i--) {
+        if (directive_name_eq(scanner->inline_directives.contents[i - 1], name)) {
+            return (int)(i - 1);
         }
     }
-    return false;
+    return -1;
+}
+
+// Moves the name to the most recently used end of the cache, evicting the
+// least recently used name when it is full
+static void remember_inline_directive(Scanner *scanner, DirectiveName name) {
+    int index = find_inline_directive(scanner, name);
+    if (index == (int)scanner->inline_directives.size - 1 && index >= 0) {
+        return;
+    }
+    if (index >= 0) {
+        array_erase(&scanner->inline_directives, (uint32_t)index);
+    } else if (scanner->inline_directives.size >= MAX_INLINE_DIRECTIVES) {
+        array_erase(&scanner->inline_directives, 0);
+    }
+    array_push(&scanner->inline_directives, name);
+}
+
+// Advances past `delimiter`, or to the end of the file
+static void skip_past(TSLexer *lexer, const char *delimiter, bool case_insensitive) {
+    unsigned length = strlen(delimiter);
+    char window[16] = {0};
+    unsigned seen = 0;
+
+    while (!lexer->eof(lexer)) {
+        int32_t c = lexer->lookahead;
+        if (case_insensitive && c >= 'A' && c <= 'Z') {
+            c += 'a' - 'A';
+        }
+        memmove(window, window + 1, length - 1);
+        window[length - 1] = c < 128 ? (char)c : 0;
+        advance(lexer);
+        if (++seen >= length && memcmp(window, delimiter, length) == 0) {
+            return;
+        }
+    }
+}
+
+// Advances past a directive parameter, balancing parentheses the same way as
+// the parameter rule of the grammar
+static void skip_parameter(TSLexer *lexer) {
+    unsigned depth = 0;
+    while (!lexer->eof(lexer)) {
+        if (lexer->lookahead == '(') {
+            depth++;
+        } else if (lexer->lookahead == ')' && --depth == 0) {
+            advance(lexer);
+            return;
+        }
+        advance(lexer);
+    }
+}
+
+// Advances past what follows a `<` when its content is never parsed as
+// blade: html comments, php tags and the raw text of script and style elements
+static void skip_after_open_angle(TSLexer *lexer) {
+    if (lexer->lookahead == '!') {
+        advance(lexer);
+        if (lexer->lookahead == '-') {
+            advance(lexer);
+            if (lexer->lookahead == '-') {
+                skip_past(lexer, "-->", false);
+            }
+        }
+        return;
+    }
+
+    if (lexer->lookahead == '?') {
+        skip_past(lexer, "?>", false);
+        return;
+    }
+
+    char tag_name[7];
+    unsigned length = 0;
+    while (is_directive_char(lexer->lookahead) && length < sizeof(tag_name)) {
+        int32_t c = lexer->lookahead;
+        tag_name[length++] = (char)(c >= 'A' && c <= 'Z' ? c + 'a' - 'A' : c);
+        advance(lexer);
+    }
+    if (is_directive_char(lexer->lookahead)) {
+        return;
+    }
+    if (name_eq(tag_name, length, "script", 6)) {
+        skip_past(lexer, "</script", true);
+    } else if (name_eq(tag_name, length, "style", 5)) {
+        skip_past(lexer, "</style", true);
+    }
+}
+
+// Advances past what follows a `{` when its content is never parsed as
+// blade: comments and echo statements
+static void skip_after_open_brace(TSLexer *lexer) {
+    if (lexer->lookahead == '{') {
+        advance(lexer);
+        if (lexer->lookahead == '-') {
+            advance(lexer);
+            skip_past(lexer, lexer->lookahead == '-' ? "-}}" : "}}", false);
+        } else {
+            skip_past(lexer, "}}", false);
+        }
+    } else if (lexer->lookahead == '!') {
+        advance(lexer);
+        if (lexer->lookahead == '!') {
+            skip_past(lexer, "!!}", false);
+        }
+    }
 }
 
 typedef enum {
@@ -467,20 +606,38 @@ typedef enum {
     CUSTOM_END_UNBALANCED,
 } CustomEnd;
 
-// Looks ahead for the `@end…` closing the custom directive that was just read,
-// skipping over nested directives with the same name.
+// Looks ahead for the `@end…` closing the custom directive whose parameter
+// starts at the lookahead, skipping over nested directives with the same
+// name. Only directives the parser would see are taken into account, so
+// comments, echo statements, raw php and directive parameters are skipped.
 static CustomEnd find_custom_directive_end(TSLexer *lexer, const char *base, unsigned base_length) {
     char name[MAX_DIRECTIVE_NAME_LENGTH];
     unsigned length = 0;
     unsigned depth = 1;
     bool has_end = false;
 
+    skip_parameter(lexer);
+
     while (!lexer->eof(lexer)) {
-        if (lexer->lookahead != '@') {
-            advance(lexer);
-            continue;
+        switch (lexer->lookahead) {
+            case '{':
+                advance(lexer);
+                skip_after_open_brace(lexer);
+                continue;
+
+            case '<':
+                advance(lexer);
+                skip_after_open_angle(lexer);
+                continue;
+
+            case '@':
+                advance(lexer);
+                break;
+
+            default:
+                advance(lexer);
+                continue;
         }
-        advance(lexer);
 
         // escaped directive e.g. @@enddisk
         if (lexer->lookahead == '@') {
@@ -498,11 +655,19 @@ static CustomEnd find_custom_directive_end(TSLexer *lexer, const char *base, uns
             if (--depth == 0) {
                 return CUSTOM_END_FOUND;
             }
-        } else if (opens_custom_directive(name, length, base, base_length)) {
-            skip_blanks(lexer);
-            if (lexer->lookahead == '(') {
+            continue;
+        }
+
+        skip_blanks(lexer);
+        if (lexer->lookahead == '(') {
+            if (opens_custom_directive(name, length, base, base_length)) {
                 depth++;
             }
+            skip_parameter(lexer);
+        } else if (name_eq(name, length, "php", 3)) {
+            skip_past(lexer, "@endphp", false);
+        } else if (name_eq(name, length, "setup", 5)) {
+            skip_past(lexer, "@endsetup", false);
         }
     }
 
@@ -525,15 +690,11 @@ static bool scan_custom_directive(Scanner *scanner, TSLexer *lexer, const bool *
         return false;
     }
 
-    if (valid_symbols[CUSTOM_DIRECTIVE_END] && scanner->custom_directives.size > 0) {
-        String *open = array_back(&scanner->custom_directives);
-        if (closes_custom_directive(name, length, open->contents, open->size)) {
-            String closed = array_pop(&scanner->custom_directives);
-            array_delete(&closed);
-            lexer->mark_end(lexer);
-            lexer->result_symbol = CUSTOM_DIRECTIVE_END;
-            return true;
-        }
+    if (valid_symbols[CUSTOM_DIRECTIVE_END] && closes_open_custom_directive(scanner, name, length)) {
+        array_pop(&scanner->custom_directives);
+        lexer->mark_end(lexer);
+        lexer->result_symbol = CUSTOM_DIRECTIVE_END;
+        return true;
     }
 
     if ((!valid_symbols[CUSTOM_DIRECTIVE_START] && !valid_symbols[CUSTOM_DIRECTIVE]) ||
@@ -562,21 +723,18 @@ static bool scan_custom_directive(Scanner *scanner, TSLexer *lexer, const bool *
         return false;
     }
 
-    if (valid_symbols[CUSTOM_DIRECTIVE_START] && !contains_name(&scanner->inline_directives, base, base_length)) {
+    DirectiveName directive = directive_name(base, base_length);
+    bool is_inline = find_inline_directive(scanner, directive) >= 0;
+
+    if (valid_symbols[CUSTOM_DIRECTIVE_START] && !is_inline) {
         switch (find_custom_directive_end(lexer, base, base_length)) {
-            case CUSTOM_END_FOUND: {
-                String open = array_new();
-                array_extend(&open, base_length, base);
-                array_push(&scanner->custom_directives, open);
+            case CUSTOM_END_FOUND:
+                array_push(&scanner->custom_directives, directive);
                 lexer->result_symbol = CUSTOM_DIRECTIVE_START;
                 return true;
-            }
-            case CUSTOM_END_NONE: {
-                String inline_name = array_new();
-                array_extend(&inline_name, base_length, base);
-                array_push(&scanner->inline_directives, inline_name);
+            case CUSTOM_END_NONE:
+                is_inline = true;
                 break;
-            }
             case CUSTOM_END_UNBALANCED:
                 break;
         }
@@ -586,6 +744,9 @@ static bool scan_custom_directive(Scanner *scanner, TSLexer *lexer, const bool *
         return false;
     }
 
+    if (is_inline) {
+        remember_inline_directive(scanner, directive);
+    }
     lexer->result_symbol = CUSTOM_DIRECTIVE;
     return true;
 }
@@ -669,9 +830,7 @@ void tree_sitter_blade_external_scanner_destroy(void *payload) {
         tag_free(&scanner->tags.contents[i]);
     }
     array_delete(&scanner->tags);
-    clear_names(&scanner->custom_directives);
     array_delete(&scanner->custom_directives);
-    clear_names(&scanner->inline_directives);
     array_delete(&scanner->inline_directives);
     ts_free(scanner);
 }
