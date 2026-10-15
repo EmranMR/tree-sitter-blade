@@ -12,7 +12,7 @@
   },
   "tasks": {
     "bundle": "deno -A ./main/bundle.ts",
-    "test": "deno test main/",
+    "test": "deno test --allow-read main/",
     "test-grammar": {
       "command": "npx tree-sitter test",
       "dependencies": [

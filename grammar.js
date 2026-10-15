@@ -327,6 +327,14 @@ var CONDITIONAL_SPECS = [
 var nodes = new NodeMap(CONDITIONAL_SPECS);
 var grammar_default = grammar(import_grammar.default, {
   name: "blade",
+  // The tree-sitter-html externals must stay first and in the same order,
+  // as src/scanner.c shares their TokenType enum
+  externals: ($, original) => [
+    ...original,
+    $._custom_directive,
+    $._custom_directive_start,
+    $._custom_directive_end
+  ],
   rules: {
     // The entire grammar
     _node: ($) => choice(
@@ -529,7 +537,11 @@ var grammar_default = grammar(import_grammar.default, {
           "@field",
           "@options",
           // WireUI
-          "@wireUiScripts"
+          "@wireUiScripts",
+          // Custom directives registered via Blade::directive(), e.g. @datetime($now)
+          // The external scanner emits it for unknown directives without a
+          // matching @end…, see $._custom
+          $._custom_directive
         ),
         $.directive
       ),
@@ -749,13 +761,15 @@ var grammar_default = grammar(import_grammar.default, {
       )
     ),
     // !Custom if Statements
+    // Registered via Blade::if(), e.g. @disk('local') ... @enddisk
+    // The external scanner only emits the start token (@disk or @unlessdisk)
+    // when a balanced @enddisk follows, and the end token only for the @end…
+    // matching the innermost open custom directive. Otherwise it is emitted
+    // as an inline $._custom_directive, see $._inline_directive
     _custom: ($) => seq(
-      choice(
-        alias(/@unless[a-zA-Z\d]+/, $.directive_start),
-        alias(token(prec(-1, /@[a-zA-Z\d]+/)), $.directive_start)
-      ),
+      alias($._custom_directive_start, $.directive_start),
       $._conditional_directive_body,
-      alias(token(prec(1, /@end[a-zA-Z\d]+/)), $.directive_end)
+      alias($._custom_directive_end, $.directive_end)
     ),
     // !switch
     switch: ($) => seq(

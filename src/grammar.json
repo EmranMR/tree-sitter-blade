@@ -1644,6 +1644,10 @@
               {
                 "type": "STRING",
                 "value": "@wireUiScripts"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_custom_directive"
               }
             ]
           },
@@ -3248,34 +3252,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "@unless[a-zA-Z\\d]+"
-              },
-              "named": true,
-              "value": "directive_start"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": -1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "@[a-zA-Z\\d]+"
-                  }
-                }
-              },
-              "named": true,
-              "value": "directive_start"
-            }
-          ]
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_custom_directive_start"
+          },
+          "named": true,
+          "value": "directive_start"
         },
         {
           "type": "SYMBOL",
@@ -3284,15 +3267,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "@end[a-zA-Z\\d]+"
-              }
-            }
+            "type": "SYMBOL",
+            "name": "_custom_directive_end"
           },
           "named": true,
           "value": "directive_end"
@@ -5021,6 +4997,18 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_custom_directive"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_custom_directive_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_custom_directive_end"
     }
   ],
   "inline": [],
